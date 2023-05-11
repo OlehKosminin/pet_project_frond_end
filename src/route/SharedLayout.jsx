@@ -8,6 +8,9 @@ const NotiesPage = lazy(() => import("../pages/NotiesPage/NotiesPage"));
 const LoginPage = lazy(() => import("../pages/LoginPage/LoginPage"));
 const UserPage = lazy(() => import("../pages/UserPage/UserPage"));
 const AddPetPage = lazy(() => import("../pages/AddPetPage/AddPetPage"));
+const NewsPage = lazy(() => import("../pages/NewsPage/NewsPage"));
+const OurFriends = lazy(() => import("../pages/OurFriendsPage/OurFriendsPage"));
+
 const SharedLayout = () => {
   return (
     <Suspense fallback={<p>...loading</p>}>
@@ -19,6 +22,9 @@ const SharedLayout = () => {
         <Route path="/noties/:categori" element={<NotiesPage />} />
         <Route path="user" element={<UserPage />} />
         <Route path="add-page" element={<AddPetPage />} />
+        <Route path="news" element={<NewsPage />} />
+        <Route path="our-frinds" element={<OurFriends />} />
+
         <Route path="*" element={<div>Not Found page</div>} />
       </Routes>
     </Suspense>
