@@ -48,7 +48,14 @@ export const RegisterForm = () => {
         onSubmit={onSubmit}
         validationSchema={registerSchema}
       >
-        {({ values, errors, touched, handleSubmit, handleChange }) => (
+        {({
+          values,
+          errors,
+          touched,
+          handleSubmit,
+          handleChange,
+          handleReset,
+        }) => (
           <Form className={styles.form} onSubmit={handleSubmit}>
             <h2 className={styles.title}>Registration</h2>
             <Box
@@ -87,6 +94,7 @@ export const RegisterForm = () => {
             >
               <TextField
                 name="email"
+                id="email"
                 type="email"
                 label="Email"
                 size="small"
@@ -109,9 +117,7 @@ export const RegisterForm = () => {
                         visibility: values.email ? "visible" : "hidden",
                         color: "#F43F5E",
                       }}
-                      onClick={() => {
-                        data.setFieldValue("email", "");
-                      }}
+                      onClick={handleReset}
                     >
                       <ClearIcon />
                     </IconButton>
