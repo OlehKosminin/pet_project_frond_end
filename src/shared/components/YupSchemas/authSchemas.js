@@ -3,7 +3,7 @@ import * as yup from "yup";
 const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/;
 
 export const registerSchema = yup.object().shape({
-  username: yup.string().required("Please enter a name"),
+  name: yup.string().required("Please enter a name"),
   email: yup
     .string()
     .email("Please enter a valid email")
@@ -15,7 +15,7 @@ export const registerSchema = yup.object().shape({
     .required("Please create a stronger password"),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref("password"), null])
+    .oneOf([yup.ref("password"), null], "Passwords must match")
     .required("Password must match"),
 });
 
