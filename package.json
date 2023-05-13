@@ -20,9 +20,6 @@
     "web-vitals": "^2.1.4",
     "yup": "^1.1.1"
   },
-  "engines": {
-    "node": ">=14.20 <15"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -34,6 +31,9 @@
       "react-app",
       "react-app/jest"
     ]
+  },
+  "engines": {
+    "node": ">=14.20 <15"
   },
   "browserslist": {
     "production": [
