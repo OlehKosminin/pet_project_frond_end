@@ -1,4 +1,4 @@
-import {css} from "./notiesCategoriesList.module.scss"
+// import {css} from "./notiesCategoriesList.module.scss"
 import items from "./pets"; 
 console.log(items)
 const NotiesCategoriesList = () => {
