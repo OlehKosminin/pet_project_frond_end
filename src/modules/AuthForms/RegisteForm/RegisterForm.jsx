@@ -38,200 +38,200 @@ export const RegisterForm = () => {
       password: password,
     };
 
+    if (data.name.trim() === "") {
+      throw alert("Name must fill out");
+    }
+
     dispatch(singup(data));
   };
 
   return (
-    <>
-      <Formik
-        initialValues={data}
-        onSubmit={onSubmit}
-        validationSchema={registerSchema}
-      >
-        {({
-          values,
-          errors,
-          touched,
-          handleSubmit,
-          handleChange,
-          handleReset,
-        }) => (
-          <Form className={styles.form} onSubmit={handleSubmit}>
-            <h2 className={styles.title}>Registration</h2>
-            <Box
+    <Formik
+      initialValues={data}
+      onSubmit={onSubmit}
+      validationSchema={registerSchema}
+    >
+      {({
+        values,
+        errors,
+        touched,
+        handleSubmit,
+        handleChange,
+        handleReset,
+      }) => (
+        <Form className={styles.form} onSubmit={handleSubmit}>
+          <h2 className={styles.title}>Registration</h2>
+          <Box
+            sx={{
+              marginBottom: "10px",
+              display: "flex",
+              alignItems: "flex-end",
+            }}
+          >
+            <TextField
+              name="name"
+              type="text"
+              label="Name"
+              size="small"
+              fullWidth
               sx={{
-                marginBottom: "10px",
-                display: "flex",
-                alignItems: "flex-end",
-              }}
-            >
-              <TextField
-                name="name"
-                type="text"
-                label="Name"
-                size="small"
-                fullWidth
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    "& fieldset": {
-                      borderRadius: 40,
-                      border: `1px solid #54ADFF`,
-                    },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderRadius: 40,
+                    border: `1px solid #54ADFF`,
                   },
-                }}
-                onChange={handleChange}
-                value={values.name}
-                error={touched.name && Boolean(errors.name)}
-                helperText={touched.name && errors.name}
-              />
-            </Box>
-            <Box
+                },
+              }}
+              onChange={handleChange}
+              value={values.name}
+              error={touched.name && Boolean(errors.name)}
+              helperText={touched.name && errors.name}
+            />
+          </Box>
+          <Box
+            sx={{
+              marginBottom: "10px",
+              display: "flex",
+              alignItems: "flex-end",
+            }}
+          >
+            <TextField
+              name="email"
+              id="email"
+              type="email"
+              label="Email"
+              size="small"
+              fullWidth
               sx={{
-                marginBottom: "10px",
-                display: "flex",
-                alignItems: "flex-end",
-              }}
-            >
-              <TextField
-                name="email"
-                id="email"
-                type="email"
-                label="Email"
-                size="small"
-                fullWidth
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    "& fieldset": {
-                      borderRadius: 40,
-                      border: `1px solid #54ADFF`,
-                    },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderRadius: 40,
+                    border: `1px solid #54ADFF`,
                   },
-                }}
-                InputProps={{
-                  endAdornment: (
-                    <IconButton
-                      aria-label="clear"
-                      edge="end"
-                      size="small"
-                      sx={{
-                        visibility: values.email ? "visible" : "hidden",
-                        color: "#F43F5E",
-                      }}
-                      onClick={handleReset}
-                    >
-                      <ClearIcon />
-                    </IconButton>
-                  ),
-                }}
-                onChange={handleChange}
-                value={values.email}
-                error={touched.email && Boolean(errors.email)}
-                helperText={touched.email && errors.email}
-              />
-            </Box>
-            <Box
+                },
+              }}
+              InputProps={{
+                endAdornment: (
+                  <IconButton
+                    aria-label="clear"
+                    edge="end"
+                    size="small"
+                    sx={{
+                      visibility: values.email ? "visible" : "hidden",
+                      color: "#F43F5E",
+                    }}
+                    onClick={handleReset}
+                  >
+                    {errors.email ? <ClearIcon /> : null}
+                  </IconButton>
+                ),
+              }}
+              onChange={handleChange}
+              value={values.email}
+              error={touched.email && Boolean(errors.email)}
+              helperText={touched.email && errors.email}
+            />
+          </Box>
+          <Box
+            sx={{
+              marginBottom: "10px",
+              display: "flex",
+              alignItems: "flex-end",
+            }}
+          >
+            <TextField
+              name="password"
+              type={showPassword ? "text" : "password"}
+              label="Password"
+              size="small"
+              fullWidth
               sx={{
-                marginBottom: "10px",
-                display: "flex",
-                alignItems: "flex-end",
-              }}
-            >
-              <TextField
-                name="password"
-                type={showPassword ? "text" : "password"}
-                label="Password"
-                size="small"
-                fullWidth
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    "& fieldset": {
-                      borderRadius: 40,
-                      border: `1px solid #54ADFF`,
-                    },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderRadius: 40,
+                    border: `1px solid #54ADFF`,
                   },
-                }}
-                InputProps={{
-                  endAdornment: (
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      edge="end"
-                      size="small"
-                    >
-                      {showPassword ? (
-                        <Visibility style={{ color: blue[300] }} />
-                      ) : (
-                        <VisibilityOff style={{ color: blue[300] }} />
-                      )}
-                    </IconButton>
-                  ),
-                }}
-                onChange={handleChange}
-                value={values.password}
-                error={touched.password && Boolean(errors.password)}
-                helperText={touched.password && errors.password}
-              />
-            </Box>
-            <Box
+                },
+              }}
+              InputProps={{
+                endAdornment: (
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    edge="end"
+                    size="small"
+                  >
+                    {showPassword ? (
+                      <Visibility style={{ color: blue[300] }} />
+                    ) : (
+                      <VisibilityOff style={{ color: blue[300] }} />
+                    )}
+                  </IconButton>
+                ),
+              }}
+              onChange={handleChange}
+              value={values.password}
+              error={touched.password && Boolean(errors.password)}
+              helperText={touched.password && errors.password}
+            />
+          </Box>
+          <Box
+            sx={{
+              marginBottom: "10px",
+              display: "flex",
+              alignItems: "flex-end",
+            }}
+          >
+            <TextField
+              name="confirmPassword"
+              type={showConfirmPassword ? "text" : "password"}
+              label="Confirm password"
+              size="small"
+              fullWidth
               sx={{
-                marginBottom: "10px",
-                display: "flex",
-                alignItems: "flex-end",
-              }}
-            >
-              <TextField
-                name="confirmPassword"
-                type={showConfirmPassword ? "text" : "password"}
-                label="Confirm password"
-                size="small"
-                fullWidth
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    "& fieldset": {
-                      borderRadius: 40,
-                      border: `1px solid #54ADFF`,
-                    },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderRadius: 40,
+                    border: `1px solid #54ADFF`,
                   },
-                }}
-                InputProps={{
-                  endAdornment: (
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowConfirmPassword}
-                      edge="end"
-                      size="small"
-                    >
-                      {showConfirmPassword ? (
-                        <Visibility style={{ color: blue[300] }} />
-                      ) : (
-                        <VisibilityOff style={{ color: blue[300] }} />
-                      )}
-                    </IconButton>
-                  ),
-                }}
-                onChange={handleChange}
-                value={values.confirmPassword}
-                error={
-                  touched.confirmPassword && Boolean(errors.confirmPassword)
-                }
-                helperText={touched.confirmPassword && errors.confirmPassword}
-              />
-            </Box>
-            <div className={styles.buttonContainer}>
-              <button type="submit" className={styles.button}>
-                Registration
-              </button>
-            </div>
-            <p className={styles.questionText}>
-              Already have an account?{" "}
-              <Link to="/login" className={styles.loginLink}>
-                Login
-              </Link>
-            </p>
-          </Form>
-        )}
-      </Formik>
-    </>
+                },
+              }}
+              InputProps={{
+                endAdornment: (
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowConfirmPassword}
+                    edge="end"
+                    size="small"
+                  >
+                    {showConfirmPassword ? (
+                      <Visibility style={{ color: blue[300] }} />
+                    ) : (
+                      <VisibilityOff style={{ color: blue[300] }} />
+                    )}
+                  </IconButton>
+                ),
+              }}
+              onChange={handleChange}
+              value={values.confirmPassword}
+              error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+              helperText={touched.confirmPassword && errors.confirmPassword}
+            />
+          </Box>
+          <div className={styles.buttonContainer}>
+            <button type="submit" className={styles.button}>
+              Registration
+            </button>
+          </div>
+          <p className={styles.questionText}>
+            Already have an account?{" "}
+            <Link to="/login" className={styles.loginLink}>
+              Login
+            </Link>
+          </p>
+        </Form>
+      )}
+    </Formik>
   );
 };
 
