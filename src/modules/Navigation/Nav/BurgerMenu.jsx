@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import Nav from './Nav';
 import MenuIcon from '@mui/icons-material/Menu';
-import useMatchMedia from 'hooks/useMatchMedia';
-import AuthNavigation from '../AuthNavigation/AuthNavigation';
-import { getIsLoggedIn } from 'redux/auth/authSelectors';
+import useMatchMedia from '../../../hooks/useMatchMedia';
+import AuthNavigation from '../AuthNav/AuthNav';
+import { isUserLogin } from '../../../redux/auth/auth-selector';
 import { useSelector } from 'react-redux';
 
 function BurgerMenu() {
   const { isMobile } = useMatchMedia();
   const { isTablet } = useMatchMedia();
 
-  const isLoggedIn = useSelector(getIsLoggedIn);
+  const isLoggedIn = useSelector(isUserLogin);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -53,7 +53,7 @@ function BurgerMenu() {
             '&:hover': { bgcolor: 'background.default' },
           }}
         >
-          {isMobile && !isLoggedIn && <AuthNavigation />}
+          {isMobile && !isLoggedIn && <AuthNavigation/>}
           {isMobile && <Nav />}
           {isTablet && <Nav />}
         </MenuItem>

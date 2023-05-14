@@ -1,17 +1,10 @@
 import React from 'react';
 import { Avatar, Box, IconButton } from '@mui/material';
 import { NavLink } from 'react-router-dom';
-import {
-  // useSelector,
-  useDispatch,
-} from 'react-redux';
-// import { getNameUser } from 'redux/user/userSelectors';
-import { getCurrentUser } from 'redux/user/userOperations';
-// import { getName } from 'redux/auth/authSelectors';
+import { useDispatch } from 'react-redux';
+import { current } from '../../../redux/auth/auth-operations';
 
 function UserNavigation() {
-  // const name = useSelector(getName);
-  // console.log(name);
   const dispatch = useDispatch();
   return (
     <Box
@@ -27,11 +20,10 @@ function UserNavigation() {
         size="large"
         aria-label="account of current user"
         color="inherit"
-        onClick={() => dispatch(getCurrentUser())}
+        onClick={() => dispatch(current())}
       >
         <NavLink to="/user">
           <Avatar />
-          {/* <p>{name}</p> */}
         </NavLink>
       </IconButton>
     </Box>
