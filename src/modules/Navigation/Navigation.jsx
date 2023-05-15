@@ -1,11 +1,11 @@
-import useMatchMedia from '../../hooks/useMatchMedia';
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { isUserLogin } from '../../redux/auth/auth-selector';
-import Nav from './Nav/Nav';
-import UserNavigation from './UserNav/UserNav';
-import AuthNavigation from './AuthNav/AuthNav';
-import BurgerMenu from './Nav/BurgerMenu';
+import useMatchMedia from "../../hooks/useMatchMedia";
+import React from "react";
+import { useSelector } from "react-redux";
+import { isUserLogin } from "../../redux/auth/auth-selector";
+import Nav from "./Nav/Nav";
+import UserNav from "./UserNav/UserNav";
+import AuthNav from "./AuthNav/AuthNav";
+import BurgerMenu from "./Nav/BurgerMenu";
 
 function Navigation() {
   const { isMobile } = useMatchMedia();
@@ -18,16 +18,16 @@ function Navigation() {
       {isDesktop && (
         <>
           <Nav />
-          {isLoggedIn ? <UserNavigation /> : <AuthNavigation />}
+          {isLoggedIn ? <UserNav /> : <AuthNav />}
         </>
       )}
       {isTablet && (
         <>
-          {isLoggedIn ? <UserNavigation /> : <AuthNavigation />}
+          {isLoggedIn ? <UserNav /> : <AuthNav />}
           <BurgerMenu />
         </>
       )}
-      {isMobile && isLoggedIn && <UserNavigation />}
+      {isMobile && !isLoggedIn && <UserNav />}
       {isMobile && <BurgerMenu />}
     </>
   );

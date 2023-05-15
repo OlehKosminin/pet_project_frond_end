@@ -1,19 +1,19 @@
-import React from 'react';
-import Logo from '../Logo/Logo';
-import Navigation from '../Navigation/Navigation';
-import { AppBar, Box, Toolbar } from '@mui/material';
+import React from "react";
+import Logo from "../Logo/Logo";
+import Navigation from "../Navigation/Navigation";
+import { AppBar, Box, Toolbar } from "@mui/material";
 
 function Header() {
   return (
-    <AppBar position="fixed" sx={{ bgcolor: 'background.default' }}>
+    <AppBar position="relative" sx={{ bgcolor: "background.default" }}>
       <Toolbar>
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            bgcolor: 'background.default',
-            flexDirection: 'row',
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            bgcolor: "background.default",
+            flexDirection: "row",
             width: 1,
           }}
         >
