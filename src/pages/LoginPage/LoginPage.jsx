@@ -1,9 +1,9 @@
 import LoginForm from "../../modules/AuthForms/LoginForm/LoginForm";
+import styles from "./login-page.module.scss";
 
 const LoginPage = () => {
   return (
-    <div>
-      LoginPage
+    <div className={styles.page}>
       <LoginForm />
     </div>
   );
