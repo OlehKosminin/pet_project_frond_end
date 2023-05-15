@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { IconButton, Menu, MenuItem } from '@mui/material';
-import Nav from './Nav';
-import MenuIcon from '@mui/icons-material/Menu';
-import useMatchMedia from '../../../hooks/useMatchMedia';
-import AuthNavigation from '../AuthNav/AuthNav';
-import { isUserLogin } from '../../../redux/auth/auth-selector';
-import { useSelector } from 'react-redux';
+import React, { useState } from "react";
+import { IconButton, Menu, MenuItem } from "@mui/material";
+import Nav from "./Nav";
+import MenuIcon from "@mui/icons-material/Menu";
+import useMatchMedia from "../../../hooks/useMatchMedia";
+import AuthNav from "../AuthNav/AuthNav";
+import { isUserLogin } from "../../../redux/auth/auth-selector";
+import { useSelector } from "react-redux";
 
 function BurgerMenu() {
   const { isMobile } = useMatchMedia();
@@ -15,7 +15,7 @@ function BurgerMenu() {
 
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleMenuOpen = event => {
+  const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -39,21 +39,21 @@ function BurgerMenu() {
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
         sx={{
-          '& .MuiPaper-root': {
-            width: '100vw',
-            height: '100vh',
+          "& .MuiPaper-root": {
+            width: "100vw",
+            height: "100vh",
           },
         }}
       >
         <MenuItem
           onClick={handleMenuClose}
           sx={{
-            flexDirection: 'column',
-            cursor: 'auto',
-            '&:hover': { bgcolor: 'background.default' },
+            flexDirection: "column",
+            cursor: "auto",
+            "&:hover": { bgcolor: "background.default" },
           }}
         >
-          {isMobile && !isLoggedIn && <AuthNavigation/>}
+          {isMobile && !isLoggedIn && <AuthNav />}
           {isMobile && <Nav />}
           {isTablet && <Nav />}
         </MenuItem>

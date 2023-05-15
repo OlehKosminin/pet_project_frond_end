@@ -1,11 +1,11 @@
-import { Box, Button } from '@mui/material';
-import React from 'react';
-import { NavLink as Routerlink } from 'react-router-dom';
+import { Box } from "@mui/material";
+import React from "react";
+import { NavLink as Routerlink } from "react-router-dom";
 
 function AuthNavigation() {
   return (
     <Box mr={1}>
-      <Button
+      <button
         component={Routerlink}
         to="/login"
         variant="outlined"
@@ -15,19 +15,19 @@ function AuthNavigation() {
           width: 165,
           borderRadius: 5,
           border: 2,
-          '&:hover': {
+          "&:hover": {
             border: 2,
           },
-          '&.active': {
-            backgroundColor: 'accent.main',
-            color: 'text.light',
-            borderColor: 'accent.main',
+          "&.active": {
+            backgroundColor: "accent.main",
+            color: "text.light",
+            borderColor: "accent.main",
           },
         }}
       >
         Log IN
-      </Button>
-      <Button
+      </button>
+      <button
         component={Routerlink}
         to="/register"
         variant="outlined"
@@ -37,18 +37,18 @@ function AuthNavigation() {
           width: 165,
           borderRadius: 5,
           border: 2,
-          '&:hover': {
+          "&:hover": {
             border: 2,
           },
-          '&.active': {
-            backgroundColor: 'accent.main',
-            color: 'text.light',
-            borderColor: 'accent.main',
+          "&.active": {
+            backgroundColor: "accent.main",
+            color: "text.light",
+            borderColor: "accent.main",
           },
         }}
       >
         Registration
-      </Button>
+      </button>
     </Box>
   );
 }
