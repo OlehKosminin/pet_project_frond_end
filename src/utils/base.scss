@@ -40,21 +40,21 @@ img {
   height: auto;
 }
 
-.container {
-  max-width: 480px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+// .container {
+//   max-width: 480px;
+//   margin-left: auto;
+//   margin-right: auto;
+//   padding-left: 15px;
+//   padding-right: 15px;
 
-  @media screen and (min-width: 768px) {
-    max-width: 768px;
-  }
+//   @media screen and (min-width: 768px) {
+//     max-width: 768px;
+//   }
 
-  @media screen and (min-width: 1200px) {
-    max-width: 1200px;
-  }
-}
+//   @media screen and (min-width: 1200px) {
+//     max-width: 1200px;
+//   }
+// }
 
 // .hidden {
 //   position: absolute;
@@ -77,29 +77,29 @@ img {
   align-items: center;
 }
 
-.BttonsWrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-}
+// .BttonsWrapper {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   gap: 20px;
+// }
 
-.container {
-  padding-left: 15px;
-  padding-right: 15px;
+// .container {
+//   padding-left: 15px;
+//   padding-right: 15px;
 
-  @media screen and (min-width: 480px) {
-    width: 480px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+//   @media screen and (min-width: 480px) {
+//     width: 480px;
+//     margin-left: auto;
+//     margin-right: auto;
+//   }
 
-  @media screen and (min-width: 768px) {
-    width: 768px;
-  }
+//   @media screen and (min-width: 768px) {
+//     width: 768px;
+//   }
 
-  @media screen and (min-width: 1200px) {
-    width: 1200px;
-  }
-}
+//   @media screen and (min-width: 1200px) {
+//     width: 1200px;
+//   }
+// }
