@@ -2,6 +2,7 @@ body {
   font-size: 14px;
   letter-spacing: 0.03em;
   margin: 0;
+  box-sizing: border-box;
 }
 
 button {
@@ -41,11 +42,11 @@ img {
 }
 
 .container {
-  max-width: 480px;
+  max-width: 280px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
 
   @media screen and (min-width: 768px) {
     max-width: 768px;

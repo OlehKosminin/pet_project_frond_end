@@ -32,6 +32,10 @@
       "react-app/jest"
     ]
   },
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
   "browserslist": {
     "production": [
       ">0.2%",
