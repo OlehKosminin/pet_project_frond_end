@@ -4,7 +4,10 @@ import styles from "./login-page.module.scss";
 const LoginPage = () => {
   return (
     <div className={styles.page}>
-      <LoginForm />
+      <div className={styles.background}></div>
+      <div className={styles.container}>
+        <LoginForm />
+      </div>
     </div>
   );
 };
