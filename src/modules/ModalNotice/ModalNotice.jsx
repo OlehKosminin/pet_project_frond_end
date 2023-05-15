@@ -1,11 +1,15 @@
 import css from "./ModalNotice.module.scss";
-const noticeAvatarImgSrc=
+import defaultNoticeAvatar from "../../assets/image/defaultNoticeAvatar.png";
 
-const ModalNotice = () => {
+const ModalNotice = ({ close, noticeAvatarImgSrc }) => {
   return (
     <div className={css.modalNotice}>
       <img
-        src={noticeAvatarImgSrc}
+        src={
+          noticeAvatarImgSrc === undefined
+            ? defaultNoticeAvatar
+            : noticeAvatarImgSrc
+        }
         alt="avatar"
         className={css.noticeAvatarImg}
       />
