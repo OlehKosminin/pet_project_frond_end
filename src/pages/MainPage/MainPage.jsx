@@ -1,27 +1,28 @@
-// import ModalCongrats from "../../modules/ModalCongrats/ModalCongrats";
-// // import ModalNotice from "../../modules/ModalNotice/ModalNotice";
-// import Modal from "../../shared/components/Modal/Modal";
+import React from "react";
+import { Container, Typography } from "@mui/material";
+import styled from "./styled";
+import useToggle from "../../hooks/useToggle";
+import Modal from "../../shared/components/Modal/Modal";
 
-// const { useToggle } = require("../../hooks/useToggle");
-
-const MainPage = () => {
-  // const { isOpen, open, close } = useToggle(false);
-
+function MainPage() {
+  const { isOpen, open, close } = useToggle(false);
   return (
-    <div>
-      MainPage
-      {/* <>
+    <>
+      <Container sx={styled.animal}>
+        <Typography variant="h3" sx={styled.title}>
+          Take good care of your small pets
+        </Typography>
         <button type="button" onClick={open}>
           Open Modal
         </button>
         {isOpen && (
           <Modal isOpen={isOpen} close={close}>
-            <ModalCongrats close={close} />
+            {/* <ModalCongrats close={close} /> */}
           </Modal>
         )}
-      </> */}
-    </div>
+      </Container>
+    </>
   );
-};
+}
 
 export default MainPage;
