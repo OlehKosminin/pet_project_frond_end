@@ -84,18 +84,26 @@ export const LoginForm = () => {
                     edge="end"
                     size="small"
                     sx={{
-                      visibility: values.email ? "visible" : "hidden",
+                      visibility:
+                        errors.email && values.email ? "visible" : "hidden",
                       color: "#F43F5E",
                     }}
-                    onClick={handleReset}
+                    onClick={() => {
+                      handleChange({
+                        target: {
+                          name: "email",
+                          value: "",
+                        },
+                      });
+                    }}
                   >
-                    {errors.email ? <ClearIcon /> : null}
+                    <ClearIcon />
                   </IconButton>
                 ),
               }}
               onChange={handleChange}
               value={values.email}
-              error={touched.email && Boolean(errors.email)}
+              error={touched.email && errors.email}
               helperText={touched.email && errors.email}
             />
           </Box>
