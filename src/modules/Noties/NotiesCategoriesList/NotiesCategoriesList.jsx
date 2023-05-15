@@ -1,9 +1,11 @@
+
 import { useState, useEffect } from "react";
 
 import NotiesCategotyItem from "../NotiesCategotyItem/NotiesCategotyItem";
 
 import css from "./notiesCategoriesList.module.scss";
 import items from "./pets";
+
 
 const NotiesCategoriesList = () => {
   const [pets, setPets] = useState([]);
