@@ -1,5 +1,5 @@
 @import "../../../utils/variable.scss";
-@import"../../../utils/base.scss";
+// @import"../../../utils/base.scss";
 // .example_card{
 //     display: block;
 // }
@@ -227,9 +227,8 @@
   line-height: 33px;
 
   color: $black-color;
-    @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1280px) {
     padding-right: 37px;
-    
   }
 }
 .more_info_btn {
@@ -258,7 +257,7 @@
   }
   @media screen and (min-width: 1280px) {
     margin-right: 20px;
-    
+
     margin-left: 20px;
   }
 }
