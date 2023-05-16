@@ -235,8 +235,9 @@ background: $active-blue-color;
   line-height: 33px;
 
   color: $black-color;
-  @media screen and (min-width: 1280px) {
+    @media screen and (min-width: 1280px) {
     padding-right: 37px;
+    
   }
 }
 .more_info_btn {
@@ -265,7 +266,7 @@ background: $active-blue-color;
   }
   @media screen and (min-width: 1280px) {
     margin-right: 20px;
-
+    
     margin-left: 20px;
   }
 }

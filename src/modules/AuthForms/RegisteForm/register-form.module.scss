@@ -1,5 +1,5 @@
 .form {
-  width: 280px;
+  width: 256px;
   margin: 0 auto;
   padding: 40px 12px;
   border-radius: 20px;
@@ -9,15 +9,9 @@
 
 @media screen and (min-width: 768px) {
   .form {
-    width: 608px;
-    padding: 60px 80px 40px 80px;
+    width: 458px;
+    padding: 60px 75px;
     border-radius: 40px;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .form {
-    padding: 60px 80px;
   }
 }
 
