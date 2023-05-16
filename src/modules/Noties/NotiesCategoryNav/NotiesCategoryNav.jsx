@@ -65,21 +65,36 @@ const NoticesCategoriesNavigation = () => {
   return (
     <Box sx={styles.navigationContainer}>
       <Box sx={styles.linksContainer}>
-        <StyledNavLink to="/notices/sell" activeClassName="active">
+        <StyledNavLink
+          to="/notices/sell"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
           sell
         </StyledNavLink>
-        <StyledNavLink to="/notices/lost-found" activeClassName="active">
+        <StyledNavLink
+          to="/notices/lost-found"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
           lost/found
         </StyledNavLink>
-        <StyledNavLink to="/notices/for-free" activeClassName="active">
+        <StyledNavLink
+          to="/notices/for-free"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
           in good hands
         </StyledNavLink>
         {userToken && (
           <>
-            <StyledNavLink to="/notices/favorite" activeClassName="active">
+            <StyledNavLink
+              to="/notices/favorite"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
               favorite ads
             </StyledNavLink>
-            <StyledNavLink to="/notices/owner" activeClassName="active">
+            <StyledNavLink
+              to="/notices/owner"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
               my ads
             </StyledNavLink>
           </>
