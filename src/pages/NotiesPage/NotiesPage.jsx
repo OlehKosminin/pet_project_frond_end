@@ -23,6 +23,7 @@ import css from "./notiesPage.module.scss";
 // import Typography from "@mui/material/Typography";
 
 function NoticesPage() {
+
   const [query, setQuery] = useState("");
 
   // useEffect(() => {
@@ -50,6 +51,7 @@ function NoticesPage() {
     setQuery("");
   };
 
+
   return (
     <Container>
       <div className={css.title}>Find your favorite pet</div>
@@ -63,6 +65,7 @@ function NoticesPage() {
       <NoticesCategoriesList />;
     </Container>
   );
+
   // {isLoading ? (
   //       <Loader />
   //     ) : (
@@ -75,4 +78,5 @@ function NoticesPage() {
   //   {/* <NoticesPagination /> */}
   // </>
 }
+
 export default NoticesPage;
