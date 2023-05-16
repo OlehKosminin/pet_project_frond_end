@@ -82,7 +82,7 @@ export const RegisterForm = () => {
                   },
                   "& input": {
                     fontSize: "16px",
-                    color: "#888888", // Set the text color
+                    color: "#888888",
                   },
                 },
               }}
