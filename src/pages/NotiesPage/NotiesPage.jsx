@@ -6,7 +6,6 @@ import NoticesCategoriesNav from "../../modules/Noties/NotiesCategoryNav/NotiesC
 import NoticesSearch from "../../modules/Noties/NotiesSeach/NotiesSeach";
 import React, { useState } from "react";
 import css from "./notiesPage.module.scss";
-
 // import { useDispatch, useSelector } from "react-redux";
 // import { useParams } from "react-router-dom";
 // import {
@@ -24,46 +23,9 @@ import css from "./notiesPage.module.scss";
 // import Typography from "@mui/material/Typography";
 
 function NoticesPage() {
-  // const { categoryName } = useParams();
-  // const notices = useSelector(getNotices);
-  // const isLoading = useSelector(getNoteceIsLoadig);
-  // const favoriteNotices = useSelector(isUserLogin);
-  // const favoriteAds = favoriteNotices?.user?.favorite || [];
-  // const ownNotices = useSelector(getOwnNotices);
-  // const dispatch = useDispatch();
 
-// function NoticesPage() {
-// const { categoryName } = useParams();
-// const notices = useSelector(getNotices);
-// const isLoading = useSelector(getNoteceIsLoadig);
-// const favoriteNotices = useSelector(isUserLogin);
-// const favoriteAds = favoriteNotices?.user?.favorite || [];
-// const ownNotices = useSelector(getOwnNotices);
-// const dispatch = useDispatch();
+  const [query, setQuery] = useState("");
 
-// const [query, setQuery] = useState("");
-
-// useEffect(() => {
-//   if (categoryName === "favorite") {
-//     dispatch(current());
-//   } else if (categoryName === "owner") {
-//     dispatch(getUserNotices());
-//   } else {
-//     dispatch(getNoticeByCategory({ category: categoryName }));
-//   }
-//   return () => dispatch(clearNotices([]));
-// }, [dispatch, categoryName]);
-
-// const dataToRender =
-//   categoryName === "favorite"
-//     ? favoriteAds
-//     : categoryName === "owner"
-//     ? ownNotices
-//     : notices.notices;
-
-// const handleSearch = (newQuery) => {
-//   setQuery(newQuery);
-// };
   // useEffect(() => {
   //   if (categoryName === "favorite") {
   //     dispatch(current());
@@ -85,10 +47,10 @@ function NoticesPage() {
   const handleSearch = (newQuery) => {
     setQuery(newQuery);
   };
-
   const handleClearQuery = () => {
     setQuery("");
   };
+
 
   return (
     <Container>
@@ -116,4 +78,5 @@ function NoticesPage() {
   //   {/* <NoticesPagination /> */}
   // </>
 }
-// export default NoticesPage;
+
+export default NoticesPage;
