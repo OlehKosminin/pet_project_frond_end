@@ -19,12 +19,10 @@ function Navigation() {
         <>
           <Nav />
           {isLoggedIn ? <UserNav /> : <AuthNav />}
-          {isLoggedIn ? <UserNav /> : <AuthNav />}
         </>
       )}
       {isTablet && (
         <>
-          {isLoggedIn ? <UserNav /> : <AuthNav />}
           {isLoggedIn ? <UserNav /> : <AuthNav />}
           <BurgerMenu />
         </>
