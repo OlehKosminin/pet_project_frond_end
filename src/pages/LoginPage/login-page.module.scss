@@ -16,7 +16,7 @@
 }
 
 .container {
-  margin-top: 80px;
+  margin-top: 44px;
 }
 
 @media screen and (min-device-pixel-ratio: 2) and (max-width: 767px),
@@ -30,6 +30,10 @@
 @media screen and (min-width: 767px) {
   .background {
     background-image: url("../../assets/image/background/bg-tablet@1x.png");
+  }
+
+  .container {
+    margin-top: 80px;
   }
 }
 
