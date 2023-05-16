@@ -32,8 +32,38 @@ function NoticesPage() {
   // const ownNotices = useSelector(getOwnNotices);
   // const dispatch = useDispatch();
 
-  const [query, setQuery] = useState("");
+// function NoticesPage() {
+// const { categoryName } = useParams();
+// const notices = useSelector(getNotices);
+// const isLoading = useSelector(getNoteceIsLoadig);
+// const favoriteNotices = useSelector(isUserLogin);
+// const favoriteAds = favoriteNotices?.user?.favorite || [];
+// const ownNotices = useSelector(getOwnNotices);
+// const dispatch = useDispatch();
 
+// const [query, setQuery] = useState("");
+
+// useEffect(() => {
+//   if (categoryName === "favorite") {
+//     dispatch(current());
+//   } else if (categoryName === "owner") {
+//     dispatch(getUserNotices());
+//   } else {
+//     dispatch(getNoticeByCategory({ category: categoryName }));
+//   }
+//   return () => dispatch(clearNotices([]));
+// }, [dispatch, categoryName]);
+
+// const dataToRender =
+//   categoryName === "favorite"
+//     ? favoriteAds
+//     : categoryName === "owner"
+//     ? ownNotices
+//     : notices.notices;
+
+// const handleSearch = (newQuery) => {
+//   setQuery(newQuery);
+// };
   // useEffect(() => {
   //   if (categoryName === "favorite") {
   //     dispatch(current());
@@ -85,6 +115,5 @@ function NoticesPage() {
   //   </Container>
   //   {/* <NoticesPagination /> */}
   // </>
-}
 
-export default NoticesPage;
+// export default NoticesPage;
