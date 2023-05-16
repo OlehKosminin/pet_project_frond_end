@@ -1,0 +1,15 @@
+@import "../../../index.scss";
+
+.list {
+  margin-top: 20px;
+  margin-bottom: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @media screen and (min-width: 1280px) {
+    margin-top: 24px;
+    gap: 24px;
+    width: 100%;
+  }
+}
