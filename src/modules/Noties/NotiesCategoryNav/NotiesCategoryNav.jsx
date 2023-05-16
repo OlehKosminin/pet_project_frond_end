@@ -9,6 +9,7 @@ import { Box } from "@mui/system";
 const styles = {
   navigationContainer: {
     marginTop: "43px",
+    marginBottom: "42px",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
