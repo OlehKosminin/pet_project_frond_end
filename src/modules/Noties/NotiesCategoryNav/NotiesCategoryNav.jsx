@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { getAuth } from "../../../redux/auth/auth-selector";
+import { getIsLoggedIn } from "../../../redux/auth/auth-selector";
 import { ReactComponent as SmallCross } from "../../../assets/image/icons/plus-small.svg";
 import { styled } from "@mui/system";
 import { Box } from "@mui/system";
@@ -61,7 +61,7 @@ const StyledNavLink = styled(NavLink)(styles.link);
 const StyledAddLink = styled(NavLink)(styles.addButton);
 
 const NoticesCategoriesNavigation = () => {
-  const userToken = useSelector(getAuth);
+  const userToken = useSelector(getIsLoggedIn);
 
   return (
     <Box sx={styles.navigationContainer}>
