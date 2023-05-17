@@ -1,7 +1,6 @@
 .form {
-  width: 280px;
+  width: 256px;
   margin: 0 auto;
-  align-items: center;
   padding: 40px 12px;
   border-radius: 20px;
   background-color: #ffffff;
@@ -10,32 +9,9 @@
 
 @media screen and (min-width: 768px) {
   .form {
-    width: 448px;
-    padding: 60px 80px 40px 80px;
+    width: 458px;
+    padding: 60px 75px;
     border-radius: 40px;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .form {
-    padding: 60px 80px;
-  }
-}
-
-.title {
-  text-align: center;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 1.38;
-  letter-spacing: 0.04em;
-  margin-bottom: 40px;
-  color: #111111;
-}
-
-@media screen and (min-width: 768px) {
-  .title {
-    font-size: 36px;
-    line-height: 1.36;
   }
 }
 
@@ -54,11 +30,18 @@
 }
 
 .buttonContainer {
-  margin-top: 40px;
+  margin-top: 80px;
   margin-bottom: 24px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+}
+
+@media screen and (min-width: 768px) {
+  .buttonContainer {
+    margin-top: 60px;
+    margin-bottom: 20px;
+  }
 }
 
 .button {

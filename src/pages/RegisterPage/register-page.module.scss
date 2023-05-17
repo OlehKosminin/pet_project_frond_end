@@ -49,6 +49,10 @@
   .background {
     background-image: url("../../assets/image/background/bg-desktop@1x.png");
   }
+
+  .container {
+    margin-top: 44px;
+  }
 }
 
 @media screen and (min-device-pixel-ratio: 2) and (min-width: 1200px),

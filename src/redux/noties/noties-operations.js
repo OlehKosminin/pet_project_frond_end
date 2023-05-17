@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 axios.defaults.baseURL = "https://yourpet-backend.onrender.com/api";
+
 export const getNoticeByCategory = createAsyncThunk(
   "notices/getNoticeByCategory",
   async ({ category, page = 1, limit = 10 }, { rejectWithValue }) => {
@@ -106,6 +107,34 @@ export const createNotice = createAsyncThunk(
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue();
+    }
+  }
+);
+
+export const getNoticesByQweryOwner = createAsyncThunk(
+  "notices/getNoticesByQweryOwner",
+  async ({ query, page = 1, limit = 0 }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(
+        `notices/owner?title=${query}&page=${page}&limit=${limit}`
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getNoticesByQweryFavorite = createAsyncThunk(
+  "notices/getNoticesByQweryFavorite",
+  async ({ query, page = 1, limit = 0 }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(
+        `notices/favorite?title=${query}&page=${page}&limit=${limit}`
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
   }
 );

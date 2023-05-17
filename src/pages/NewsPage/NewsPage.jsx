@@ -4,6 +4,10 @@ import news from "./allArticles.json";
 import baseStyles from "../../shared/components/sass/baseStyle.module.scss";
 import styles from "./newsPage.module.scss";
 import ArticleNews from "./ArticleNews/ArticleNews";
+
+import { ReactComponent as SearchIcon } from "../../assets/image/icons/search.svg";
+import { ReactComponent as ClearSearch } from "../../assets/image/icons/cross.svg";
+
 const NewsPage = () => {
   const [state, setState] = useState([]);
   const [searchState, setSearchState] = useState([]);
@@ -16,7 +20,7 @@ const NewsPage = () => {
       const newArrNews = news.slice(0, total);
       setState(newArrNews);
     }
-  }, [total]);
+  }, [total, searchState]);
 
   const loadNews = () => {
     setTotal((prev) => prev + 6);
@@ -59,13 +63,28 @@ const NewsPage = () => {
               value={search}
               onChange={handleSearch}
             />
-            <button type="submit" className={styles.search__button}>
-              submit
+            <button
+              type="submit"
+              className={
+                search === ""
+                  ? styles.search__buttonSearch
+                  : styles.search__buttonSearchFocus
+              }
+            >
+              <SearchIcon className={styles.search__buttonSearchIcon} />
+            </button>
+            <button
+              type="button"
+              onClick={clearSearch}
+              className={
+                search === ""
+                  ? styles.search__buttonClear
+                  : styles.search__buttonClearFocus
+              }
+            >
+              <ClearSearch className={styles.search__buttonClearIcon} />
             </button>
           </form>
-          <button type="button" onClick={clearSearch}>
-            Clear search
-          </button>
         </div>
         <div className={styles.containerNews}>
           {!searchNow

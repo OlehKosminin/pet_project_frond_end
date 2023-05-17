@@ -1,44 +1,13 @@
-// import { useState, useEffect } from "react";
-// import { useParams } from "react-router-dom";
 
-// import { getAnimalsByCategory } from "./fake-api";
+import { Container } from "@mui/material";
+// import Loader from "../UserPage/loader";
+import NoticesCategoriesList from "../../modules/Noties/NotiesCategoriesList/NotiesCategoriesList";
+import NoticesCategoriesNav from "../../modules/Noties/NotiesCategoryNav/NotiesCategoryNav";
+// import { NoticesPagination } from "components/Notices/NoticesPagination/NoticesPagination";
+import NoticesSearch from "../../modules/Noties/NotiesSeach/NotiesSeach";
+import React, { useState } from "react";
+import css from "./notiesPage.module.scss";
 
-// import NotiesCategoriesList from "../../modules/Noties/NotiesCategoriesList/NotiesCategoriesList";
-
-// const NotiesPage = () => {
-//   const [animalsList, setAnimalsList] = useState([]);
-//   const { category } = useParams();
-
-//   useEffect(() => {
-//     const fetchAnimalsByCategory = async () => {
-//       try {
-//         const result = await getAnimalsByCategory(category);
-//         setAnimalsList(result);
-//       } catch ({ response }) {
-//         console.log(response.data.message);
-//       }
-//     };
-//     fetchAnimalsByCategory();
-//   }, [category]);
-
-//   return (
-//     <div>
-//       {" "}
-//       NotiesPage
-//       <NotiesCategoriesList />
-//     </div>
-//   );
-// };
-
-// export default NotiesPage;
-
-// import { Container } from "@mui/material";
-// // import Loader from "";
-// import NoticesCategoriesList from "../../modules/Noties/NotiesCategoriesList/NotiesCategoriesList";
-// import NoticesCategoriesNav from "../../modules/Noties/NotiesCategoryNav/NotiesCategoryNav";
-// // import { NoticesPagination } from "components/Notices/NoticesPagination/NoticesPagination";
-// import NoticesSearch from "../../modules/Noties/NotiesSeach/NotiesSeach";
-// import React, { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { useParams } from "react-router-dom";
 // import {
@@ -53,93 +22,64 @@
 // import { clearNotices } from "../../redux/noties/noties-slice";
 // import { current } from "../../redux/auth/auth-operations";
 // import { isUserLogin } from "../../redux/auth/auth-selector";
-// // import Typography from "@mui/material/Typography";
+// import Typography from "@mui/material/Typography";
 
-// function NoticesPage() {
-//   const { categoryName } = useParams();
-//   const notices = useSelector(getNotices);
-//   const isLoading = useSelector(getNoteceIsLoadig);
-//   const favoriteNotices = useSelector(isUserLogin);
-//   const favoriteAds = favoriteNotices?.user?.favorite || [];
-//   const ownNotices = useSelector(getOwnNotices);
-//   const dispatch = useDispatch();
+function NoticesPage() {
 
-//   const [query, setQuery] = useState("");
+  const [query, setQuery] = useState("");
 
-//   useEffect(() => {
-//     if (categoryName === "favorite") {
-//       dispatch(current());
-//     } else if (categoryName === "owner") {
-//       dispatch(getUserNotices());
-//     } else {
-//       dispatch(getNoticeByCategory({ category: categoryName }));
-//     }
-//     return () => dispatch(clearNotices([]));
-//   }, [dispatch, categoryName]);
+  // useEffect(() => {
+  //   if (categoryName === "favorite") {
+  //     dispatch(current());
+  //   } else if (categoryName === "owner") {
+  //     dispatch(getUserNotices());
+  //   } else {
+  //     dispatch(getNoticeByCategory({ category: categoryName }));
+  //   }
+  //   return () => dispatch(clearNotices([]));
+  // }, [dispatch, categoryName]);
 
-//   const dataToRender =
-//     categoryName === "favorite"
-//       ? favoriteAds
-//       : categoryName === "owner"
-//       ? ownNotices
-//       : notices.notices;
+  // const dataToRender =
+  //   categoryName === "favorite"
+  //     ? favoriteAds
+  //     : categoryName === "owner"
+  //     ? ownNotices
+  //     : notices.notices;
 
-//   const handleSearch = (newQuery) => {
-//     setQuery(newQuery);
-//   };
+  const handleSearch = (newQuery) => {
+    setQuery(newQuery);
+  };
+  const handleClearQuery = () => {
+    setQuery("");
+  };
 
-//   const handleClearQuery = () => {
-//     setQuery("");
-//   };
 
-//   return (
-//     <>
-//       <Container>
-//         <div
-//           sx={{
-//             display: "flex",
-//             justifyContent: "center",
-//             marginTop: "148px",
-//             fontWeight: 700,
-//             fontSize: 48,
-//           }}
-//           variant="h1"
-//         >
-//           Find your favorite pet
-//         </div>
-
-//         <NoticesSearch
-//           query={query}
-//           onSearch={handleSearch}
-//           onClearQuery={handleClearQuery}
-//         />
-//         <NoticesCategoriesNav />
-
-//         {isLoading ? (
-//           // <Loader />
-//           <p>...Loading</p>
-//         ) : (
-//           <NoticesCategoriesList
-//             categoryName={categoryName}
-//             data={dataToRender}
-//           />
-//         )}
-//       </Container>
-//       {/* <NoticesPagination /> */}
-//     </>
-//   );
-// }
-
-// export default NoticesPage;
-import NotiesCategoriesList from "../../modules/Noties/NotiesCategoriesList/NotiesCategoriesList";
-const NotiesPage = () => {
   return (
-    <div>
-      {" "}
-      NotiesPage
-      <NotiesCategoriesList />
-    </div>
+    <Container>
+      <div className={css.title}>Find your favorite pet</div>
+      <NoticesSearch
+        className={css.input}
+        query={query}
+        onSearch={handleSearch}
+        onClearQuery={handleClearQuery}
+      />
+      <NoticesCategoriesNav />
+      <NoticesCategoriesList />;
+    </Container>
   );
-};
 
-export default NotiesPage;
+  // {isLoading ? (
+  //       <Loader />
+  //     ) : (
+  //       <NoticesCategoriesList
+  //         categoryName={categoryName}
+  //         data={dataToRender}
+  //       />
+  //     )}
+  //   </Container>
+  //   {/* <NoticesPagination /> */}
+  // </>
+}
+
+export default NoticesPage;
+
