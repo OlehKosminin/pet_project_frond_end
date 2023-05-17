@@ -5,6 +5,7 @@ const items = [
     text: "Сute dog looking for a home",
     favorite: true,
     category: "in good hands",
+    location: "Kropivnitsckiy-ппдщлмщщлщ",
   },
   {
     id: "YxhM4QDxPeA3SmPHcEZPJ",
@@ -12,6 +13,7 @@ const items = [
     text: "Сute dog looking for a home",
     favorite: false,
     category: "sell",
+    location: "Kropivnitsckiy",
   },
   {
     id: "zCd_RioNMOBaQwAXnc8Px",
@@ -19,6 +21,7 @@ const items = [
     text: "Сute dog looking for a home",
     favorite: false,
     category: "in good hands",
+    location: "Kropivnitsckiy",
   },
   {
     id: "ck89qe3HriUDHe09TBoJ8",
@@ -26,6 +29,7 @@ const items = [
     text: "Сute dog looking for a home",
     favorite: true,
     category: "sell",
+    location: "Kropivnitsckiy",
   },
   {
     id: "e1Tpn_I3wBkLREY6wG0lb",
@@ -33,6 +37,7 @@ const items = [
     text: "Сute dog looking for a home",
     favorite: false,
     category: "in good hands",
+    location: "Kropivnitsckiy",
   },
   {
     id: "Op8ApLTY0-Vn2cR0vDIwG",
@@ -40,6 +45,7 @@ const items = [
     text: "Сute dog looking for a home",
     favorite: true,
     category: "sell",
+    location: "Kropivnitsckiy",
   },
   {
     id: "dkJSszfrRVtLVR_MfRqcu",
@@ -47,6 +53,7 @@ const items = [
     text: "Сute dog looking for a home",
     favorite: false,
     category: "in good hands",
+    location: "Kropivnitsckiy",
   },
   {
     id: "CTHE0f1kkWwqS5sL2tI8_",
@@ -54,6 +61,7 @@ const items = [
     text: "Сute dog looking for a home",
     favorite: true,
     category: "sell",
+    location: "Kropivnitsckiy",
   },
   {
     id: "CTHE0f1kkWwqS5sL2tIcu",
@@ -61,6 +69,7 @@ const items = [
     text: "Сute dog looking for a home",
     favorite: false,
     category: "in good hands",
+    location: "Kropivnitsckiy",
   },
   {
     id: "CTHE0f1kkWwqS5sL2tI10",
@@ -68,6 +77,7 @@ const items = [
     text: "Сute dog looking for a home",
     favorite: true,
     category: "in good hands",
+    location: "Kropivnitsckiy",
   },
   {
     id: "CTHE0f1kkWwqS5sL2tI11",
@@ -75,6 +85,7 @@ const items = [
     text: "Сute dog looking for a home",
     favorite: false,
     category: "sell",
+    location: "Kropivnitsckiy",
   },
   {
     id: "CTHE0f1kkWwqS5sL2tI12",
@@ -82,6 +93,7 @@ const items = [
     text: "Сute dog looking for a home",
     favorite: true,
     category: "in good hands",
+    location: "Kropivnitsckiy",
   },
 ];
 
