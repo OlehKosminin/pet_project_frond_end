@@ -4,14 +4,14 @@ import Nav from "./Nav";
 import MenuIcon from "@mui/icons-material/Menu";
 import useMatchMedia from "../../../hooks/useMatchMedia";
 import AuthNav from "../AuthNav/AuthNav";
-import { isUserLogin } from "../../../redux/auth/auth-selector";
+import { getIsLoggedIn } from "../../../redux/auth/auth-selector";
 import { useSelector } from "react-redux";
 
 function BurgerMenu() {
   const { isMobile } = useMatchMedia();
   const { isTablet } = useMatchMedia();
 
-  const isLoggedIn = useSelector(isUserLogin);
+  const isLoggedIn = useSelector(getIsLoggedIn);
 
   const [anchorEl, setAnchorEl] = useState(null);
 

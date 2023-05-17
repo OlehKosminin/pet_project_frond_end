@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { getAuth } from "../../../redux/auth/auth-selector";
+import { getIsLoggedIn } from "../../../redux/auth/auth-selector";
 import { ReactComponent as SmallCross } from "../../../assets/image/icons/plus-small.svg";
 import { styled } from "@mui/system";
 import { Box } from "@mui/system";
@@ -9,6 +9,7 @@ import { Box } from "@mui/system";
 const styles = {
   navigationContainer: {
     marginTop: "43px",
+    marginBottom: "42px",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
@@ -60,26 +61,41 @@ const StyledNavLink = styled(NavLink)(styles.link);
 const StyledAddLink = styled(NavLink)(styles.addButton);
 
 const NoticesCategoriesNavigation = () => {
-  const userToken = useSelector(getAuth);
+  const userToken = useSelector(getIsLoggedIn);
 
   return (
     <Box sx={styles.navigationContainer}>
       <Box sx={styles.linksContainer}>
-        <StyledNavLink to="/notices/sell" activeClassName="active">
+        <StyledNavLink
+          to="/notices/sell"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
           sell
         </StyledNavLink>
-        <StyledNavLink to="/notices/lost-found" activeClassName="active">
+        <StyledNavLink
+          to="/notices/lost-found"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
           lost/found
         </StyledNavLink>
-        <StyledNavLink to="/notices/for-free" activeClassName="active">
+        <StyledNavLink
+          to="/notices/for-free"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
           in good hands
         </StyledNavLink>
         {userToken && (
           <>
-            <StyledNavLink to="/notices/favorite" activeClassName="active">
+            <StyledNavLink
+              to="/notices/favorite"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
               favorite ads
             </StyledNavLink>
-            <StyledNavLink to="/notices/owner" activeClassName="active">
+            <StyledNavLink
+              to="/notices/owner"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
               my ads
             </StyledNavLink>
           </>

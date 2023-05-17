@@ -1,7 +1,7 @@
 import useMatchMedia from "../../hooks/useMatchMedia";
 import React from "react";
 import { useSelector } from "react-redux";
-import { isUserLogin } from "../../redux/auth/auth-selector";
+import { getIsLoggedIn } from "../../redux/auth/auth-selector";
 import Nav from "./Nav/Nav";
 import UserNav from "./UserNav/UserNav";
 import AuthNav from "./AuthNav/AuthNav";
@@ -11,7 +11,7 @@ function Navigation() {
   const { isMobile } = useMatchMedia();
   const { isTablet } = useMatchMedia();
   const { isDesktop } = useMatchMedia();
-  const isLoggedIn = useSelector(isUserLogin);
+  const isLoggedIn = useSelector(getIsLoggedIn);
 
   return (
     <>

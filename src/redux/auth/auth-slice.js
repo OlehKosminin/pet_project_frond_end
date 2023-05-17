@@ -1,77 +1,85 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { singup, login, current, logout } from "./auth-operations";
+import { createSlice } from '@reduxjs/toolkit';
+import { login, logout, refreshToken, register } from './auth-operations';
 
-const initialState = {
+const authInitialState = {
   user: {},
-  token: "",
-  loading: false,
-  isLogin: false,
+  accessToken: null,
+  refreshToken: null,
+  isLoggedIn: false,
+  isLoading: false,
   error: null,
 };
 
+function registerFulfilled(state) {
+  state.isLoading = false;
+  state.error = null;
+}
+
+function loginFulfilled(state, { payload }) {
+  state.user = payload.user;
+  state.accessToken = payload.accessToken;
+  state.refreshToken = payload.refreshToken;
+
+  state.isLoading = false;
+  state.isLoggedIn = true;
+  state.error = null;
+}
+
+function logOutFulfilled(state) {
+  state.isLoading = false;
+  state.isLoggedIn = false;
+  state.user = {};
+  state.accessToken = null;
+  state.refreshToken = null;
+}
+
+function refreshTokenFulfilled(state, { payload }) {
+  state.accessToken = payload.accessToken;
+  state.refreshToken = payload.refreshToken;
+}
+
 const authSlice = createSlice({
-  name: "auth",
-  initialState,
-  extraReducers: (builder) => {
+  name: 'auth',
+  initialState: authInitialState,
+  extraReducers: builder => {
     builder
-      .addCase(singup.pending, (store) => {
-        store.loading = true;
-        store.error = null;
+      .addCase(register.pending, state => {
+        state.isLoading = true;
+        state.error = null;
       })
-      .addCase(singup.fulfilled, (store, { payload }) => {
-        const { user, token } = payload.data;
-        store.loading = false;
-        store.user = user;
-        store.token = token;
-        store.isLogin = true;
+      .addCase(register.fulfilled, registerFulfilled)
+      .addCase(register.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
       })
-      .addCase(singup.rejected, (store, { payload }) => {
-        store.loading = false;
-        store.error = payload;
+      .addCase(login.pending, state => {
+        state.isLoading = true;
+        state.error = null;
       })
-      .addCase(login.pending, (store) => {
-        store.loading = true;
-        store.error = null;
+      .addCase(login.fulfilled, loginFulfilled)
+      .addCase(login.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
       })
-      .addCase(login.fulfilled, (store, { payload }) => {
-        store.loading = false;
-        store.user = payload.user;
-        store.token = payload.token;
-        store.isLogin = true;
+      .addCase(logout.pending, state => {
+        state.isLoading = true;
+        state.error = null;
       })
-      .addCase(login.rejected, (store, { payload }) => {
-        store.loading = false;
-        store.error = payload;
+      .addCase(logout.fulfilled, logOutFulfilled)
+      .addCase(logout.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
       })
-      .addCase(current.pending, (store) => {
-        store.loading = true;
-        store.error = null;
+      .addCase(refreshToken.pending, state => {
+        state.isLoading = true;
+        state.error = null;
       })
-      .addCase(current.fulfilled, (store, { payload }) => {
-        const { name, email } = payload;
-        store.loading = false;
-        store.user.name = name;
-        store.user.email = email;
-        store.isLogin = true;
-      })
-      .addCase(current.rejected, (store, { payload }) => {
-        store.loading = false;
-        store.error = payload;
-      })
-      .addCase(logout.pending, (store) => {
-        store.loading = true;
-        store.error = null;
-      })
-      .addCase(logout.fulfilled, (store) => {
-        store.loading = false;
-        store.user = {};
-        store.token = "";
-        store.isLogin = false;
-      })
-      .addCase(logout.rejected, (store, { payload }) => {
-        store.loading = false;
-        store.error = payload;
+      .addCase(refreshToken.fulfilled, refreshTokenFulfilled)
+      .addCase(refreshToken.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
       });
   },
 });
+
 export default authSlice.reducer;
