@@ -1,3 +1,4 @@
+
 import { Container } from "@mui/material";
 // import Loader from "../UserPage/loader";
 import NoticesCategoriesList from "../../modules/Noties/NotiesCategoriesList/NotiesCategoriesList";
@@ -6,6 +7,7 @@ import NoticesCategoriesNav from "../../modules/Noties/NotiesCategoryNav/NotiesC
 import NoticesSearch from "../../modules/Noties/NotiesSeach/NotiesSeach";
 import React, { useState } from "react";
 import css from "./notiesPage.module.scss";
+
 // import { useDispatch, useSelector } from "react-redux";
 // import { useParams } from "react-router-dom";
 // import {
@@ -80,3 +82,4 @@ function NoticesPage() {
 }
 
 export default NoticesPage;
+
