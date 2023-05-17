@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 
 import NotiesCategotyItem from "../NotiesCategotyItem/NotiesCategotyItem";
 
@@ -9,6 +10,8 @@ import items from "./pets";
 
 const NotiesCategoriesList = () => {
   const [pets, setPets] = useState([]);
+  
+  console.log(pets)
   
 
   useEffect(() => {
@@ -58,11 +61,19 @@ const NotiesCategoriesList = () => {
   //   </li>
   // ));
   return (
-    <div className={css.container}>
-      {/* <ul className={css.wrapper}> */}
+    <>
+      {/* <NavLink to={`/noties/${category}`}> */}
+        <button>sell</button>
+      {/* </NavLink> */}
+      <NavLink>
+        <button>in good hands</button>
+      </NavLink>
+      <div className={css.container}>
+        {/* <ul className={css.wrapper}> */}
         <NotiesCategotyItem removePets={handlDelete} items={pets} />
-      {/* </ul> */}
-    </div>
+        {/* </ul> */}
+      </div>
+    </>
     // <div className={css.container}>
     //   <ul className={css.wrapper}>{pets}</ul>
     // </div>
