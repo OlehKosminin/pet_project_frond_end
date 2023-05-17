@@ -9,6 +9,8 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import ClearIcon from "@mui/icons-material/Clear";
 import { blue } from "@mui/material/colors";
 
+import Title from "../../../shared/components/Title/Title";
+
 import styles from "../../../shared/components/sass/authPages.module.scss";
 import { loginSchema } from "../../../shared/components/YupSchemas/authSchemas";
 
@@ -50,7 +52,7 @@ export const LoginForm = () => {
         handleReset,
       }) => (
         <Form className={styles.form} onSubmit={handleSubmit}>
-          <h2 className={styles.title}>Login</h2>
+          <Title text="Login" />
           <Box
             sx={{
               marginBottom: "32px",
