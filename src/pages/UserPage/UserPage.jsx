@@ -4,12 +4,12 @@ import { useSelector } from "react-redux";
 import UserData from "../../modules/User/UserData/UserData";
 import PetsData from "../../modules/User/PetsList/PetsList";
 import Loader from "./loader";
-import { isUserLogin } from "../../redux/auth/auth-selector";
+import { getIsLoggedIn } from "../../redux/auth/auth-selector";
 import styled from "./styledUser";
 import { Button } from "@mui/material";
 
 function UserPage() {
-  const Loading = useSelector(isUserLogin);
+  const Loading = useSelector(getIsLoggedIn);
   return (
     <div>
       <Container sx={styled.headlines}>
