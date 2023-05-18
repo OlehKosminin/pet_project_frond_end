@@ -1,60 +1,91 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { getCurrentUser } from '../user/user-operations';
+import { toast } from 'react-toastify';
 
-import * as api from "../../shared/services/auth";
+axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
 
-export const singup = createAsyncThunk(
-  "auth/singup",
-  async (data, { rejectWithValue }) => {
+export const accessToken = {
+  set(accessToken) {
+    axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+  },
+  unset() {
+    axios.defaults.headers.common.Authorization = '';
+  },
+};
+
+export const register = createAsyncThunk(
+  'auth/register',
+  async (credentials, { rejectWithValue, dispatch }) => {
     try {
-      const result = await api.singup(data);
-      return result;
-    } catch ({ responce }) {
-      return rejectWithValue(responce);
+      await axios.post('auth/register', credentials);
+      const { email, password } = credentials;
+      await dispatch(
+        login({
+          email,
+          password,
+        })
+      );
+    } catch (error) {
+      toast.error('Missing or not valid field password or email');
+      return rejectWithValue(error.message);
     }
   }
 );
 
 export const login = createAsyncThunk(
-  "auth/login",
-  async (data, { rejectWithValue }) => {
+  'auth/login',
+  async (credentials, { rejectWithValue, dispatch }) => {
     try {
-      const result = await api.login(data);
-      return result;
-    } catch ({ responce }) {
-      return rejectWithValue(responce);
+      const { data } = await axios.post('auth/login', credentials);
+      accessToken.set(data.accessToken);
+      dispatch(getCurrentUser());
+      return data;
+    } catch (error) {
+      toast.error('Missing or not valid field password');
+      return rejectWithValue(error.message);
     }
   }
 );
 
-export const current = createAsyncThunk(
-  "auth/current",
-  async (_, { rejectWithValue, getState }) => {
+export const loginWithGoogle = createAsyncThunk(
+  'auth/loginWithGoogle',
+  async (credentials, { rejectWithValue }) => {
     try {
-      const { auth } = getState();
-      const data = await api.getCurrent(auth.token);
+      const { data } = await axios.post('auth/google', credentials);
+      accessToken.set(data.accessToken);
       return data;
-    } catch ({ responce }) {
-      return rejectWithValue(responce);
+    } catch (error) {
+      toast.error('Missing or not valid field password');
+      return rejectWithValue(error.message);
     }
-  },
-  {
-    condition: (_, { getState }) => {
-      const { auth } = getState();
-      if (!auth.token) {
-        return false;
-      }
-    },
   }
 );
 
 export const logout = createAsyncThunk(
-  "auth/logout",
-  async (_, { rejectWithValue }) => {
+  'auth/logout',
+  async (_, { rejectWithValue, getState }) => {
     try {
-      const data = await api.logout();
+      const value = getState().auth.accessToken;
+      accessToken.set(value);
+      await axios.post('auth/logout');
+      accessToken.unset();
+    } catch (error) {
+      toast.error(error.response.data);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const refreshToken = createAsyncThunk(
+  'auth/refresh',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get('auth/refresh', credentials);
+      accessToken.set(data.accessToken);
       return data;
-    } catch ({ responce }) {
-      return rejectWithValue(responce);
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
   }
 );

@@ -1,0 +1,153 @@
+.sectionNews {
+    background: #CCCCCC;
+    box-sizing: border-box;
+}
+
+.namePage {
+    margin-top: 45px;
+    margin-bottom: 24px;
+    text-align: center;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 66px;
+    color: #111111;
+
+    @media screen and (min-width: 768px) {
+        margin-top: 82px;
+    }
+
+    @media screen and (min-width: 1200px) {
+        margin-top: 91px;
+    }
+}
+
+// 
+// --------Search news---------------
+.containerSearch {
+    margin-bottom: 44px;
+    position: relative;
+
+    @media screen and (min-width: 768px) {
+        max-width: 608px;
+        display: flex;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.search__form {
+    width: 100%;
+}
+
+.search__input {
+    width: 100%;
+    height: 44px;
+    padding: 14px 0 13px 20px;
+    background: #FFFFFF;
+    box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+    border-radius: 24px;
+    border: 0;
+    box-sizing: border-box;
+
+    &::placeholder {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: calc(24 / 20);
+        display: flex;
+        letter-spacing: 0.04em;
+        color: #888888;
+    }
+
+    @media screen and (min-width: 768px) {
+        max-width: 608px;
+    }
+
+}
+
+.search__buttonSearch {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    border: 0;
+    background: transparent;
+}
+
+.search__buttonSearchFocus {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    border: 0;
+    background: transparent;
+}
+
+.search__buttonClearIcon {
+    height: 17px;
+    width: 17px;
+}
+
+.search__buttonClear {
+    display: none;
+    position: absolute;
+    top: 13px;
+    right: 10px;
+    border: 0;
+    background: transparent;
+}
+
+.search__buttonClearFocus {
+    display: block;
+    position: absolute;
+    top: 13px;
+    right: 10px;
+    border: 0;
+    background: transparent;
+}
+
+// -------------Article news--------------------
+.containerNews {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 44px;
+    margin-bottom: 60px;
+
+    @media screen and (min-width: 768px) {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        row-gap: 46px;
+        column-gap: 32px;
+    }
+
+    @media screen and (min-width: 1200px) {
+        column-gap: 31px;
+    }
+}
+
+.btnContainer {
+    width: 256px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn__more {
+    width: 100%;
+    margin-bottom: 50px;
+    align-items: center;
+    padding: 10px 28px;
+    background: #54ADFF;
+    border: 0;
+    border-radius: 40px;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: calc(27 / 20);
+    letter-spacing: 0.04em;
+    color: #FFFFFF
+}

@@ -1,0 +1,41 @@
+@import "../../../index.scss";
+
+.wrapper {
+  width: 100%;
+  margin-left: 5px;
+  margin-top: 9px;
+
+  @media screen and (min-width: 768px) {
+    margin-top: 1px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-top: 9px;
+  }
+}
+
+.btn {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.text {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.375;
+  letter-spacing: 0.04em;
+  color: $grey-color;
+}
