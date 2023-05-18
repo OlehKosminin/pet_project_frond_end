@@ -1,10 +1,10 @@
 
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+
 
 import NotiesCategotyItem from "../NotiesCategotyItem/NotiesCategotyItem";
 
-import css from "./notiesCategoriesList.module.scss";
+// import css from "./notiesCategoriesList.module.scss";
 import items from "./pets";
 
 
@@ -62,13 +62,8 @@ const NotiesCategoriesList = () => {
   // ));
   return (
     <>
-      {/* <NavLink to={`/noties/${category}`}> */}
-        <button>sell</button>
-      {/* </NavLink> */}
-      <NavLink>
-        <button>in good hands</button>
-      </NavLink>
-      <div className={css.container}>
+     
+      <div >
         {/* <ul className={css.wrapper}> */}
         <NotiesCategotyItem removePets={handlDelete} items={pets} />
         {/* </ul> */}
