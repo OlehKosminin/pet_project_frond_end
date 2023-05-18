@@ -1,8 +1,8 @@
 
-import { Container } from "@mui/material";
+// import { Container } from "@mui/material";
 // import Loader from "../UserPage/loader";
 import NoticesCategoriesList from "../../modules/Noties/NotiesCategoriesList/NotiesCategoriesList";
-import NoticesCategoriesNav from "../../modules/Noties/NotiesCategoryNav/NotiesCategoryNav";
+import NoticesCategoriesNav from "../../modules/Noties/NotiesCategoryNav/NoticesCategoryNav";
 // import { NoticesPagination } from "components/Notices/NoticesPagination/NoticesPagination";
 import NoticesSearch from "../../modules/Noties/NotiesSeach/NotiesSeach";
 import React, { useState } from "react";
@@ -55,7 +55,7 @@ function NoticesPage() {
 
 
   return (
-    <Container>
+    <div className={css.container}>
       <div className={css.title}>Find your favorite pet</div>
       <NoticesSearch
         className={css.input}
@@ -65,7 +65,7 @@ function NoticesPage() {
       />
       <NoticesCategoriesNav />
       <NoticesCategoriesList />;
-    </Container>
+    </div>
   );
 
   // {isLoading ? (
