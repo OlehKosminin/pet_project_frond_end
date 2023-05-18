@@ -1,144 +1,75 @@
-import React, { useState, useEffect } from "react";
-import { Box, Input, InputAdornment, IconButton } from "@mui/material";
-import { ReactComponent as IconSearch } from "../../../assets/image/icons/search.svg";
-import { ReactComponent as IconCross } from "../../../assets/image//icons/cross.svg";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { ReactComponent as CrossIcon } from "../../../assets/image/icons/cross.svg";
+import { ReactComponent as SearchIcon } from "../../../assets/image/icons/search.svg";
+import styles from "./notiesSearch.module.scss";
 
-import {
-  getNoticesByQwery,
-  getNoticesByQweryFavorite,
-  getNoticesByQweryOwner,
-} from "../../../redux/noties/noties-operations";
-import { useParams } from "react-router-dom";
-import "../../../index.scss";
-import css from "./notiesSearch.module.scss";
+const initialState = {
+  query: "",
+};
 
-const NoticesSearch = ({ onSearch }) => {
-  const [query, setQuery] = useState("");
-  const dispatch = useDispatch();
-  const { categoryName } = useParams();
-
-  useEffect(() => {
-    dispatch(getNoticesByQwery());
-  }, [dispatch]);
-
-  const onSubmit = (event) => {
-    event.preventDefault();
-
-    const newQuery = event.target.elements.search.value.trim();
-    if (!newQuery) {
+const NoticesSearch = ({ onSubmit }) => {
+  const [state, setState] = useState({ ...initialState });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    // Change variation
+    if (!value) {
+      handleClear();
       return;
     }
-
-    const requestData = { query: newQuery, category: categoryName };
-
-    // eslint-disable-next-line no-unused-vars
-    let data = [];
-
-    if (categoryName === "favorite") {
-      dispatch(getNoticesByQweryFavorite(requestData))
-        .then((result) => {
-          data = result;
-          onSearch(newQuery);
-          setQuery("");
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } else if (categoryName === "owner") {
-      dispatch(getNoticesByQweryOwner(requestData))
-        .then((result) => {
-          data = result;
-          onSearch(newQuery);
-          setQuery("");
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } else {
-      dispatch(getNoticesByQwery(requestData))
-        .then((result) => {
-          data = result;
-          onSearch(newQuery);
-          setQuery("");
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
-
-  const handleQueryChange = (event) => {
-    const newQuery = event.target.value;
-    setQuery(newQuery);
-
-    if (
-      event.nativeEvent.inputType === "deleteContentBackward" &&
-      !newQuery.trim()
-    ) {
+  const handleClear = () => {
+    setState({ ...initialState });
+    onSubmit({ ...initialState });
+  };
+  // Blur variation
+  // const handleBlur = e => {
+  //     const { value } = e.target;
+  //     if (!value) {
+  //         handleClear();
+  //     }
+  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (state.query.trim() === "") {
+      // Notification for empty string
+      console.log("empty");
+      setState({ ...initialState });
       return;
     }
-
-    if (!newQuery.trim()) {
-      dispatch(getNoticesByQwery({ query: "", category: categoryName })).catch(
-        (error) => {
-          console.error(error);
-        }
-      );
-    }
+    onSubmit({ ...state });
   };
 
-  const handleClearQuery = () => {
-    setQuery("");
-  };
-
+  const { query } = state;
   return (
-    <Box
-      component="form"
-      onSubmit={onSubmit}
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: "40px",
-      }}
-    >
-      <Input
-        placeholder="Search"
-        name="search"
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="query"
+        required
         value={query}
-        onChange={handleQueryChange}
-        disableUnderline
-        sx={{
-          width: "608px",
-          height: "44px",
-          boxShadow: 2,
-          borderRadius: "20px",
-          paddingLeft: "12px",
-          paddingRight: "44px",
-          position: "relative",
-        }}
-        endAdornment={
-          <div>
-            {query && (
-              <InputAdornment position="end">
-                <IconButton onClick={handleClearQuery} size="small">
-                  <IconCross />
-                </IconButton>
-              </InputAdornment>
-            )}
-            <InputAdornment
-              position="end"
-              sx={{ position: "absolute", right: 0 }}
-            >
-              <IconButton className={css.close_icon} type="submit" size="small">
-                <IconSearch />
-              </IconButton>
-            </InputAdornment>
-          </div>
-        }
+        className={styles.input}
+        onChange={handleChange}
+        // onBlur={handleBlur}
+        placeholder="Search"
       />
-    </Box>
+      <button
+        type="submit"
+        className={
+          query ? `${styles.submitBtn} ${styles.active}` : styles.submitBtn
+        }
+      >
+        <SearchIcon width={24} height={24} />
+      </button>
+      {query && (
+        <button type="button" className={styles.clearBtn} onClick={handleClear}>
+          <CrossIcon className={styles.clearBtnIcon} width={24} height={24} />
+        </button>
+      )}
+    </form>
   );
 };
 

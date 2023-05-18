@@ -1,85 +1,119 @@
-
-// import { Container } from "@mui/material";
-// import Loader from "../UserPage/loader";
-import NoticesCategoriesList from "../../modules/Noties/NotiesCategoriesList/NotiesCategoriesList";
+import { useEffect, useState, useRef } from "react";
+import { Outlet, useLocation, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
+// import PageTitle from "shared/components/PageTitle";
+import NotiesSearch from "../../modules/Noties/NotiesSeach/NotiesSeach";
+import Pagination from "../../shared/components/Pagination/Pagination";
+import Loader from "../../shared/components/Loader/Loader";
 import NoticesCategoriesNav from "../../modules/Noties/NotiesCategoryNav/NoticesCategoryNav";
-// import { NoticesPagination } from "components/Notices/NoticesPagination/NoticesPagination";
-import NoticesSearch from "../../modules/Noties/NotiesSeach/NotiesSeach";
-import React, { useState } from "react";
-import css from "./notiesPage.module.scss";
-
-// import { useDispatch, useSelector } from "react-redux";
-// import { useParams } from "react-router-dom";
-// import {
-//   getNoticeByCategory,
-//   getUserNotices,
-// } from "../../redux/noties/noties-operations";
-// import {
-//   getNoteceIsLoadig,
-//   getNotices,
-//   getOwnNotices,
-// } from "../../redux/noties/noties-selector";
-// import { clearNotices } from "../../redux/noties/noties-slice";
-// import { current } from "../../redux/auth/auth-operations";
-// import { isUserLogin } from "../../redux/auth/auth-selector";
-// import Typography from "@mui/material/Typography";
-
-function NoticesPage() {
-
-  const [query, setQuery] = useState("");
-
-  // useEffect(() => {
-  //   if (categoryName === "favorite") {
-  //     dispatch(current());
-  //   } else if (categoryName === "owner") {
-  //     dispatch(getUserNotices());
-  //   } else {
-  //     dispatch(getNoticeByCategory({ category: categoryName }));
-  //   }
-  //   return () => dispatch(clearNotices([]));
-  // }, [dispatch, categoryName]);
-
-  // const dataToRender =
-  //   categoryName === "favorite"
-  //     ? favoriteAds
-  //     : categoryName === "owner"
-  //     ? ownNotices
-  //     : notices.notices;
-
-  const handleSearch = (newQuery) => {
-    setQuery(newQuery);
+import NoticesFilters from "../../shared/components/NoticesFilter/NoticesFilters";
+import AddPetButton from "../../shared/components/AddPetButton/AddPetButton";
+import SelectedFilters from "../../shared/components/SelectedFilters/SelectedFilters";
+import { filterByAge, getFilterValues } from "./filter";
+import { getNotices, applySearchParams, calcAge } from "../../shared/helpers";
+import styles from "./notiesPage.module.scss";
+const PER_PAGE = 12;
+const NoticesPage = () => {
+  const [items, setItems] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { pathname } = useLocation();
+  const prevPathname = useRef(pathname);
+  const query = searchParams.get("query");
+  const gender = searchParams.get("gender");
+  const age = searchParams.get("age");
+  useEffect(() => {
+    setIsLoading(true);
+    const path = pathname.split("/");
+    const category = path[path.length - 1];
+    if (prevPathname.current !== pathname) {
+      // reset pagination for category change
+      prevPathname.current = pathname;
+      setCurrentPage(0);
+    }
+    const getApiNotices = async () => {
+      try {
+        const notices = await getNotices(category, query, gender);
+        if (notices.length === 0) {
+          setItems(0);
+          setCurrentPage(0);
+          setPageCount(0);
+          setIsLoading(false);
+          return;
+        }
+        // Age formatting for cards
+        notices.map((notice) => {
+          notice.date = calcAge(notice.date);
+          return notice;
+        });
+        // Filter by age
+        const filteredNotices = filterByAge(notices, age);
+        // Frontend pagination logic, should become obsolete in the future
+        setPageCount(Math.ceil(filteredNotices.length / PER_PAGE));
+        const startOffset = (currentPage * PER_PAGE) % filteredNotices.length;
+        const endOffset = startOffset + PER_PAGE;
+        const paginatedNotices = filteredNotices.slice(startOffset, endOffset);
+        setItems(paginatedNotices);
+        setIsLoading(false);
+      } catch (error) {
+        toast.error(error.message);
+      }
+    };
+    getApiNotices();
+  }, [currentPage, pathname, query, gender, age]);
+  const handleFilterChange = (target) => {
+    applySearchParams(target, searchParams, setSearchParams);
   };
-  const handleClearQuery = () => {
-    setQuery("");
+  const handleFilterReset = (value) => {
+    if (value === "male" || value === "female") {
+      searchParams.delete("gender");
+      setSearchParams(searchParams);
+      return;
+    }
+    searchParams.delete("age");
+    setSearchParams(searchParams);
   };
-
-
+  const handleSubmit = ({ query }) => {
+    searchParams.set("query", query);
+    setSearchParams(searchParams);
+  };
+  const handlePageClick = (e) => {
+    setCurrentPage(e.selected);
+  };
+  const filters = getFilterValues(searchParams);
   return (
-    <div className={css.container}>
-      <div className={css.title}>Find your favorite pet</div>
-      <NoticesSearch
-        className={css.input}
-        query={query}
-        onSearch={handleSearch}
-        onClearQuery={handleClearQuery}
-      />
-      <NoticesCategoriesNav />
-      <NoticesCategoriesList />;
+    <div className={styles.container}>
+      <h1 className={styles.namePage}>Find your favorite pet</h1>
+      <div className={styles.formWrapper}>
+        <NotiesSearch onSubmit={handleSubmit} />
+      </div>
+      <div className={styles.controls}>
+        <NoticesCategoriesNav searchParams={searchParams} />
+        <div className={styles.wrapper}>
+          <div className={styles.buttonWrapper}>
+            <NoticesFilters filters={filters} onFilter={handleFilterChange} />
+            <AddPetButton />
+          </div>
+          {filters.length > 0 && (
+            <SelectedFilters
+              filters={filters}
+              handleReset={handleFilterReset}
+            />
+          )}
+        </div>
+      </div>
+      {isLoading && <Loader />}
+      <Outlet context={items} />
+      {pageCount > 1 && (
+        <Pagination
+          onPageClick={handlePageClick}
+          pageCount={pageCount}
+          currentPage={currentPage}
+        />
+      )}
     </div>
   );
-
-  // {isLoading ? (
-  //       <Loader />
-  //     ) : (
-  //       <NoticesCategoriesList
-  //         categoryName={categoryName}
-  //         data={dataToRender}
-  //       />
-  //     )}
-  //   </Container>
-  //   {/* <NoticesPagination /> */}
-  // </>
-}
-
+};
 export default NoticesPage;
-
