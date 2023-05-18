@@ -1,5 +1,4 @@
-@import "../../../utils/base.scss";
-@import "../../../utils/variable.scss";
+@import "../../../index.scss";
 
 .form {
   position: relative;
@@ -43,7 +42,7 @@
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.04em;
-  color: var(--grey-font);
+  color: $grey-color;
 }
 .clearBtn {
   width: 24px;

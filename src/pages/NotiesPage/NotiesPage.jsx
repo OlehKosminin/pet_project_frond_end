@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Outlet, useLocation, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
-// import PageTitle from "shared/components/PageTitle";
 import NotiesSearch from "../../modules/Noties/NotiesSeach/NotiesSeach";
 import Pagination from "../../shared/components/Pagination/Pagination";
 import Loader from "../../shared/components/Loader/Loader";
@@ -85,7 +84,7 @@ const NoticesPage = () => {
   const filters = getFilterValues(searchParams);
   return (
     <div className={styles.container}>
-      <h1 className={styles.namePage}>Find your favorite pet</h1>
+      <h1 className={styles.title}>Find your favorite pet</h1>
       <div className={styles.formWrapper}>
         <NotiesSearch onSubmit={handleSubmit} />
       </div>

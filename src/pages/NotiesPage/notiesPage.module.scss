@@ -1,4 +1,14 @@
 @import "../../utils/base.scss";
+
+.container {
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+
+.formWrapper {
+  margin-bottom: 20px;
+}
+
 .title {
   margin: 0px;
   font-family: Manrope, Inter;
@@ -30,17 +40,65 @@
   }
 }
 
-.input {
+.controls {
   display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  justify-content: center;
-  margin-top: 40px;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
 
-  @media (max-width: 380px) {
-    .input {
-      width: 208px;
-    }
+.wrapper {
+  position: relative;
+}
+
+@media screen and (max-width: 767px) {
+  .wrapper {
+    min-height: 70px;
+    min-width: 40px;
+  }
+
+  .controls {
+    width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    padding-top: 80px;
+    padding-bottom: 192px;
+  }
+
+  .formWrapper {
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .wrapper {
+    max-width: 320px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    gap: 12px;
+  }
+
+  .buttonWrapper {
+    display: flex;
+    gap: 12px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .container {
+    padding-bottom: 103px;
+  }
+
+  .wrapper {
+    max-width: 100%;
+    align-items: center;
+    flex-direction: row-reverse;
   }
 }

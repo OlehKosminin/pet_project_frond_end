@@ -1,3 +1,5 @@
+@import "../../../index.scss";
+
 .button {
   width: 80px;
   height: 80px;
@@ -5,9 +7,6 @@
   border: none;
 
   position: absolute;
-  z-index: 90;
-  right: 0;
-  bottom: -220px;
 
   display: flex;
   flex-direction: column;
@@ -15,10 +14,34 @@
   justify-content: center;
   gap: 4px;
 
-  background: var(--main-acc);
+  background-color: $active-blue-color;
+  transition: background-color 250ms cubic-bezier(0.215, 0.61, 0.355, 1);
 
-  &:hover {
-    background: var(--gradient);
+  &:hover,
+  &:focus {
+    background-color: transparent;
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  &::before {
+    content: "";
+
+    border-radius: inherit;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+
+    background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+    opacity: 0;
+
+    transition: opacity 250ms cubic-bezier(0.215, 0.61, 0.355, 1);
   }
 }
 
@@ -38,6 +61,14 @@
   color: #ffffff;
 }
 
+@media screen and (max-width: 767px) {
+  .button {
+    z-index: 90;
+    right: 0;
+    bottom: -220px;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .button {
     width: 129px;
@@ -45,7 +76,7 @@
     padding: 8px 15px;
     border-radius: 40px;
 
-    position: static;
+    position: relative;
 
     flex-direction: row;
     gap: 8px;

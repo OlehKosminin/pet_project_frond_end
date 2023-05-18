@@ -3,7 +3,7 @@ import style from "./addPetBtn.module.css";
 
 const AddPetButton = () => {
   return (
-    <Link className={style.a} to={"/add-pet"}>
+    <Link className={style.a} to="/add-pet">
       <p className={style.font}>Add Pet</p>
       <svg
         width="24"
