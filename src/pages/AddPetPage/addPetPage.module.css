@@ -1,0 +1,133 @@
+@font-face {
+  font-family: "Manrope Regular";
+  src: url("../../fonts/Manrope-Regular.ttf");
+}
+
+.bodyContainer {
+  width: 458px;
+  height: 648px;
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  /* background-color: teal; */
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  border-radius: 40px;
+  /* padding-left: 32px; */
+  outline: 2px solid teal;
+}
+
+.font {
+  margin: 0;
+  font-family: "Manrope Regular";
+  /* font-style: normal; */
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 38px;
+  letter-spacing: 0.04em;
+  color: #111111;
+  padding-top: 20px;
+  margin-left: 32px;
+}
+.choosenUl {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  list-style: none;
+  gap: 16px;
+  justify-content: center;
+
+  font-family: "Manrope Regular";
+  /* font-style: normal; */
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.choosenUnderline {
+  width: 120px;
+  height: 8px;
+  background-color: #54adff;
+  border-radius: 8px;
+}
+
+.ChoosenBtnContainer {
+  margin-left: 32px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  /* padding: 8px 16px; */
+  gap: 8px;
+}
+
+/* Buttons styles */
+.downSectionBtn {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 137px;
+}
+
+.wrapper {
+  display: inline-block;
+}
+.btnCancel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  color: #54adff;
+  border: none;
+  border-radius: 40px;
+  /* padding: 8px 16px; */
+  cursor: pointer;
+  font-family: "Manrope Regular";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.04em;
+  gap: 10px;
+
+  padding-top: 9px;
+  padding-bottom: 9px;
+}
+/* .btnCancel:hover {
+  outline: 2px solid #54adff;
+} */
+
+.btnNext {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #54adff;
+  color: #fef9f9;
+  border: none;
+  border-radius: 40px;
+  /* padding: 8px 16px; */
+  cursor: pointer;
+  font-family: "Manrope Regular";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.04em;
+  gap: 10px;
+
+  padding-top: 9px;
+  padding-bottom: 9px;
+  width: 248px;
+}
+.btnNext:hover {
+  background-color: #54adff;
+  color: #fef9f9;
+}
+
+/* Buttons styles/ */
+/* background: linear-gradient(to right, #cce4fb, #54adff); 
+  background-size: 200% 100%; 
+  background-position: left bottom; 
+  transition: background-position 0.3s ease-in-out; */
+
+/* background-position: right bottom; */
