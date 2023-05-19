@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container } from '@mui/material';
 import styled from './MainPage.module.scss';
+
 function MainPage() {
   return (
     <>

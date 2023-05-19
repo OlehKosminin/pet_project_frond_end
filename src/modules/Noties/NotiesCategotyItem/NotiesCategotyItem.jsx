@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 import NoticesCategoryItemSvgSelector from "./NoticesCategoryItemSvgSelector";
 import css from "./notiesCategoriItem.module.scss"
@@ -35,70 +36,69 @@ const NotiesCategotyItem = ({ removePets, items }) => {
   // const { id, animal, text, favorite, category } = items;
 const pet = items.map(({ id, animal, text, favorite, category, location }) => (
   <li className={css.example_card} key={id}>
-    <div>
-      <div className={css.animal}>
-        <p className={css.icon_category}>{category}</p>
-        <button
-          // className={`${css.favorite} ${
-          //   favorite ? css["favorite--active"] : css["favorite--inactive"]
-          // }`}
-          className={css.favorite}
-        >
-          {favorite ? (
-            <NoticesCategoryItemSvgSelector id="heart" />
-          ) : (
+    <div className={css.animal}>
+      <p className={css.icon_category}>{category}</p>
+      <button
+        // className={`${css.favorite} ${
+        //   favorite ? css["favorite--active"] : css["favorite--inactive"]
+        // }`}
+        className={css.favorite}
+      >
+        {favorite ? (
+          <NoticesCategoryItemSvgSelector id="heart-active" />
+        ) : (
+          <NoticesCategoryItemSvgSelector id="heart" />
+        )}
+      </button>
+      {/* <button className={css.favorite}>H</button> */}
+      <button
+        onClick={() => removePets(id)}
+        type="button"
+        className={css.deletion}
+      >
+        <NoticesCategoryItemSvgSelector id="trash" />
+      </button>
+      <NavLink className={css.add_pet} to="/add-pet">
+        Add pet
+      </NavLink>
+      {/* <button >Add pet</button> */}
+      {animal}
+      <ul className={css.animalsDataList}>
+        <li className={css.animalsData}>
+          <div
+            className={`${css.animalsDataText} ${
+              hoveredCardId === id ? css.expandedLocation : ""
+            }`}
+            // onMouseEnter={() => toggleLocation(id)}
+            // onMouseLeave={() => toggleLocation("")}
+            onMouseEnter={() => handleMouseEnter(id)}
+            onMouseLeave={handleMouseLeave}
+          >
+            <p className={css.locationTitle} title={location}>
+              <NoticesCategoryItemSvgSelector id="location" />
+              {location.length > 5 ? `${location.slice(0, 5)}...` : location}
+            </p>
+            {hoveredCardId && <p className={css.locationContent}>{location}</p>}
+          </div>
+        </li>
+        <li className={css.animalsData}>
+          <p className={css.animalsDataText}>
             <NoticesCategoryItemSvgSelector id="clock" />
-          )}
-        </button>
-        {/* <button className={css.favorite}>H</button> */}
-        <button
-          onClick={() => removePets(id)}
-          type="button"
-          className={css.deletion}
-        >
-          <NoticesCategoryItemSvgSelector id="trash" />
-        </button>
-        <button className={css.add_pet}>Add pet</button>
-        {animal}
-        <ul className={css.animalsDataList}>
-          <li className={css.animalsData}>
-            <div
-              className={`${css.animalsDataText} ${
-                hoveredCardId === id ? css.expandedLocation : ""
-              }`}
-              // onMouseEnter={() => toggleLocation(id)}
-              // onMouseLeave={() => toggleLocation("")}
-              onMouseEnter={() => handleMouseEnter(id)}
-              onMouseLeave={handleMouseLeave}
-            >
-              <p className={css.locationTitle} title={location}>
-                <NoticesCategoryItemSvgSelector id="location" />
-                {location.length > 5 ? `${location.slice(0, 5)}...` : location}
-              </p>
-              {hoveredCardId && (
-                <p className={css.locationContent}>{location}</p>
-              )}
-            </div>
-          </li>
-          <li className={css.animalsData}>
-            <p className={css.animalsDataText}>
-              <NoticesCategoryItemSvgSelector id="clock" />
-              gggggg
-            </p>
-          </li>
-          <li className={css.animalsData}>
-            <p className={css.animalsDataText}>
-              <NoticesCategoryItemSvgSelector id="female" />
-              female
-            </p>
-          </li>
-        </ul>
-      </div>
-
-      <p className={css.animal_description}>{text}</p>
-
-      <button className={css.more_info_btn}>Learn more</button>
+            gggggg
+          </p>
+        </li>
+        <li className={css.animalsData}>
+          <p className={css.animalsDataText}>
+            <NoticesCategoryItemSvgSelector id="female" />
+            female
+          </p>
+        </li>
+      </ul>
     </div>
+
+    <p className={css.animal_description}>{text}</p>
+
+    <button className={css.more_info_btn}>Learn more</button>
   </li>
 ));
 
