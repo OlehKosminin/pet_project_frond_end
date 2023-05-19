@@ -1,0 +1,62 @@
+.nav {
+  display: flex;
+}
+
+@media screen and (min-width: 767px) {
+  .nav {
+    margin-right: 8px;
+  }
+}
+
+.nav ul {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav ul li a {
+  display: flex;
+  align-items: center;
+  align-content: baseline;
+  text-decoration: none;
+}
+
+.icon {
+  margin-right: 12px;
+}
+
+.name,
+.backdrop_name {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  align-items: center;
+  letter-spacing: 0.04em;
+  color: #ffc107;
+}
+
+.backdrop_name {
+  display: none;
+}
+
+@media screen and (min-width: 767px) {
+  .nav {
+    margin-right: 22px;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .nav {
+    margin-right: 22px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .nav {
+    margin-right: 0px;
+  }
+}
