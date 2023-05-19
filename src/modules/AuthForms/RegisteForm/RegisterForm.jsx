@@ -14,7 +14,7 @@ import Title from "../../../shared/components/Title/Title";
 import styles from "../../../shared/components/sass/authPages.module.scss";
 import { registerSchema } from "../../../shared/components/YupSchemas/authSchemas";
 
-import { singup } from "../../../shared/services/auth";
+import { singup } from "../../../redux/auth/auth-operations";
 
 const data = {
   name: "",

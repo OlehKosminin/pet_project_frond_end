@@ -6,7 +6,7 @@ const RegisterPage = () => {
     <div className={styles.page}>
       <div className={styles.background}></div>
       <div className={styles.container}>
-        <RegisterForm />{" "}
+        <RegisterForm />
       </div>
     </div>
   );
