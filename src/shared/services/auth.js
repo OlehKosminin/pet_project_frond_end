@@ -26,9 +26,11 @@ export const login = async (data) => {
 };
 
 export const getCurrent = async (token) => {
+  console.log("token: ", token);
   try {
     setToken(token);
     const { data } = await instance.get("api/auth/current");
+    console.log("data: ", data);
     return data;
   } catch (error) {
     setToken();
