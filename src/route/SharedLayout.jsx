@@ -3,6 +3,9 @@ import { Routes, Route } from "react-router-dom";
 
 import Loader from "../shared/components/Loader/Loader";
 
+import PublicRoute from "./PublicRoute/PublicRoute";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
+
 const Header = lazy(() => import("../modules/Header/Header"));
 const MainPage = lazy(() => import("../pages/MainPage/MainPage"));
 const RegisterPage = lazy(() => import("../pages/RegisterPage/RegisterPage"));
@@ -19,11 +22,16 @@ const SharedLayout = () => {
       <Header></Header>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route element={<PublicRoute />}>
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Route>
+
         <Route path="/notices/:categori" element={<NotiesPage />} />
-        <Route path="user" element={<UserPage />} />
-        <Route path="add-pet" element={<AddPetPage />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="user" element={<UserPage />} />
+          <Route path="add-pet" element={<AddPetPage />} />
+        </Route>
         <Route path="news" element={<NewsPage />} />
         <Route path="our-frinds" element={<OurFriends />} />
         <Route path="*" element={<div>Not Found page</div>} />
