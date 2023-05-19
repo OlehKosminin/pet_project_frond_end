@@ -92,6 +92,9 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
       formData.append("name", date.name);
       formData.append("birthday", Date.parse(date.birthday));
       formData.append("breed", date.breed);
+      for (let value of formData.values()) {
+        console.log(value);
+      }
       await addMyPet(formData);
       setSubmitting(false);
     } catch (error) {

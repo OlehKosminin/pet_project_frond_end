@@ -29,6 +29,7 @@ const SharedLayout = () => {
       <Header></Header>
       <Routes>
         <Route path="/" element={<MainPage />} />
+        <Route path="/add-pet" element={<AddPetPage />} />
         <Route element={<PublicRoute />}>
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -37,7 +38,7 @@ const SharedLayout = () => {
         <Route path="/notices/:categori" element={<NotiesPage />} />
         <Route element={<PrivateRoute />}>
           <Route path="user" element={<UserPage />} />
-          <Route path="add-pet" element={<AddPetPage />} />
+          {/* <Route path="add-pet" element={<AddPetPage />} /> */}
         </Route>
         <Route path="news" element={<NewsPage />} />
         <Route path="our-frinds" element={<OurFriends />} />
