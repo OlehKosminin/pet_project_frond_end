@@ -49,6 +49,37 @@
   box-sizing: border-box;
   width: 100%;
 }
+.dataDiv {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 8px;
+  /* margin-bottom: 24px; */
+  /* padding: 12px 16px; */
+  border: 1px solid #54adff;
+  border-radius: 40px;
+  box-sizing: border-box;
+  width: 100%;
+}
+.dataDiv:focus-within {
+  outline: 2px solid black;
+  border: 1px solid #fff;
+}
+
+.dataInput {
+  outline: none;
+  padding: 12px 16px;
+  /* border: 1px solid #54adff; */
+  border: none;
+  /* outline: 1px solid; */
+  border-radius: 40px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.dataPicker {
+  padding-right: 10px;
+}
 
 .error {
   height: 24px;

@@ -9,6 +9,7 @@ import avatarInput from "../img/avatarInput.png";
 import { addMyPet } from "../petsApi/petsApi";
 
 const AddPetForSellInfo = ({ onClick, date, addr }) => {
+  const [isBtnSubmit, setIsBtnSubmit] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [avatarFile, setAvatarFile] = useState(null);
   // const [isMyPet, setIsMyPet] = useState(date);
@@ -52,9 +53,10 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
       case !values.location:
         errors.location = "Location field is required";
         break;
-      // case !values.price:
-      //   errors.price = "Price field is required";
-      //   break;
+      case !values.price && addr === "cell":
+        errors.price = "Price field is required";
+        break;
+
       case !values.comments:
         errors.comments = "Comments field is required";
         break;
@@ -80,7 +82,7 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
 
     try {
       const formData = new FormData();
-      formData.append("avatar", avatarFile); // change to  "photoURL"
+      formData.append("photoURL", avatarFile); // change to  "photoURL"
       formData.append("sex", values.sex);
       formData.append("location", values.location);
       formData.append("price", values.price);
@@ -88,11 +90,10 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
       formData.append("category", values.category);
       formData.append("title", date.title);
       formData.append("name", date.name);
-      formData.append("birthday", date.birthday);
+      formData.append("birthday", Date.parse(date.birthday));
       formData.append("breed", date.breed);
       await addMyPet(formData);
       setSubmitting(false);
-      console.log(values);
     } catch (error) {
       console.log(error.message);
     }
@@ -130,6 +131,13 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
                       onMouseLeave={() => colorToggle("")}
                       className={gender.genderBtn}
                       type="button"
+                      style={{
+                        color:
+                          isColorToggle === "female" ||
+                          isButtonCange === "female"
+                            ? "#54ADFF"
+                            : "#888888",
+                      }}
                       onClick={() => {
                         handleGenderToggle("female");
                         handleSexButton("female", setFieldValue);
@@ -151,6 +159,12 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
                       onMouseLeave={() => colorToggle("")}
                       className={gender.genderBtn}
                       type="button"
+                      style={{
+                        color:
+                          isColorToggle === "male" || isButtonCange === "male"
+                            ? "#54ADFF"
+                            : "#888888",
+                      }}
                       onClick={() => {
                         handleGenderToggle("male");
                         handleSexButton("male", setFieldValue);
@@ -168,7 +182,9 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
                     </button>
                   </div>
                   <div className={contactForm.error}>
-                    {errors.sex && touched.sex && <div>{errors.sex}</div>}
+                    {isBtnSubmit && errors.sex && touched.sex && (
+                      <div>{errors.sex}</div>
+                    )}
                   </div>
                 </div>
                 <div className={contactForm.avatarField}>
@@ -200,10 +216,14 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
                   type="text"
                   name="location"
                   placeholder="location"
-                  style={errors.location && touched.location ? borderStyle : {}}
+                  style={
+                    isBtnSubmit && errors.location && touched.location
+                      ? borderStyle
+                      : {}
+                  }
                 />
                 <div className={contactForm.error}>
-                  {errors.location && touched.location && (
+                  {isBtnSubmit && errors.location && touched.location && (
                     <div>{errors.location}</div>
                   )}
                 </div>
@@ -215,13 +235,17 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
                     <label className={contactForm.label}>Price</label>
                     <Field
                       className={contactForm.input}
-                      type="text"
+                      type="number"
                       name="price"
                       placeholder="price"
-                      style={errors.price && touched.price ? borderStyle : {}}
+                      style={
+                        isBtnSubmit && errors.price && touched.price
+                          ? borderStyle
+                          : {}
+                      }
                     />
                     <div className={contactForm.error}>
-                      {errors.price && touched.price && (
+                      {isBtnSubmit && errors.price && touched.price && (
                         <div>{errors.price}</div>
                       )}
                     </div>
@@ -235,10 +259,14 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
                   rows="5"
                   name="comments"
                   placeholder="Your comments"
-                  style={errors.comments && touched.comments ? borderStyle : {}}
+                  style={
+                    isBtnSubmit && errors.comments && touched.comments
+                      ? borderStyle
+                      : {}
+                  }
                 />
                 <div className={contactForm.error}>
-                  {errors.comments && touched.comments && (
+                  {isBtnSubmit && errors.comments && touched.comments && (
                     <div>{errors.comments}</div>
                   )}
                 </div>
@@ -253,11 +281,14 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
                   className={style.btnCancel}
                 >
                   <SvgSelector id="arrowLeft" />
-                  Cancel
+                  Back
                 </button>
               </div>
               <div className={style.wrapper}>
                 <button
+                  onClick={() => {
+                    setIsBtnSubmit(true);
+                  }}
                   type="submit"
                   disabled={isSubmitting}
                   className={style.btnNext}

@@ -5,6 +5,7 @@ const instance = axios.create({
 });
 
 export const addMyPet = async (data) => {
-  const { data: result } = await instance.patch("/api/auth/avatars", data);
+  const { data: result } = await instance.post("/api/", data);
   return result;
 };
+// .patch("https://pet-project-backend.onrender.com/api/add-pet/you-pet")
