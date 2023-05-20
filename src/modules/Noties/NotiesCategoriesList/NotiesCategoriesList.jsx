@@ -1,29 +1,51 @@
-
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
+import NotiesCategoryItem from "../NotiesCategotyItem/NotiesCategotyItem";
 
-import NotiesCategotyItem from "../NotiesCategotyItem/NotiesCategotyItem";
+// import { deleteNotices } from "../../../shared/services/noties";
 
-// import css from "./notiesCategoriesList.module.scss";
-import items from "./pets";
+import {} from "../../../redux/noties/noties-selector";
+import { fetchAllNotices } from "../../../redux/noties/noties-operations";
+import { async } from "q";
 
+const initialState = {
+  category: "sell",
+  page: 1,
+};
 
 const NotiesCategoriesList = () => {
-  const [pets, setPets] = useState([]);
-  
-  console.log(pets)
-  
+  const notices = useSelector((store) => store.noties.notices);
+  console.log("notices: ", notices);
+  const { state, setState } = useState();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const data = items;
-   setPets([...data])
-  }, [])
+    dispatch(fetchAllNotices(initialState));
+  }, [dispatch, state]);
+  const [pets, setPets] = useState([]);
+  // const[deletePetId, setDeletePetId]=useState("")
 
-  const handlDelete = (id) => {
-    const result = pets.filter((pet) => pet.id !== id);
-    setPets([...result])
-  }
+  // const { category } = useParams();
+  // console.log(category, "category");
 
+  //  useEffect(() => {
+  //    const deletePet = async () => {
+  //      const data = await deleteNotices(deletePetId);
+  //      console.log(data, "useeffdata");
+  //      //  setPets(data.result);
+  //    };
+  //    deletePet();
+  //  }, [deletePetId]);
+  //  const deletePet = async () => {
+  //        const data = await deleteNotices(deletePetId);
+  //        console.log(data, "useeffdata");
+  // const handlDelete = async (id) => {
+  //   await deleteNotices(id);
+  //   const result = pets.filter((pet) => pet.id === id);
+  //   setPets([...result]);
+  // setDeletePetId(_id)
+  // }
   // const { id, animal, text } = items;
   // const pets = items.map(({ id, animal, text, favorite, category }) => (
   //   <li className={css.example_card} key={id}>
@@ -60,12 +82,12 @@ const NotiesCategoriesList = () => {
   //     </div>
   //   </li>
   // ));
+  console.log("LKGJLDFJG;SD");
   return (
     <>
-     
-      <div >
+      <div>
         {/* <ul className={css.wrapper}> */}
-        <NotiesCategotyItem removePets={handlDelete} items={pets} />
+        <NotiesCategoryItem items={notices} />
         {/* </ul> */}
       </div>
     </>
