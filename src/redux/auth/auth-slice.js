@@ -77,7 +77,7 @@ const authSlice = createSlice({
         store.error = null;
       })
       .addCase(updUserInfo.fulfilled, (store, { payload }) => {
-        console.log("payload: ", payload);
+        console.log("payload : ", payload);
         store.loading = false;
         store.user = payload.data;
         store.token = payload.data.token;

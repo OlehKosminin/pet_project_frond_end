@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
+import instance from "../../shared/services/auth";
 import * as api from "../../shared/services/auth";
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3000";
+// axios.defaults.baseURL = "http://localhost:3000/";
 
 export const singup = createAsyncThunk(
   "auth/singup",
@@ -67,7 +67,6 @@ export const updUserInfo = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     const { token, avatar } = data;
     console.log("avatar: ", avatar);
-    console.log("data: ", data);
     try {
       const formData = new FormData();
       formData.append("image", avatar);
@@ -78,12 +77,13 @@ export const updUserInfo = createAsyncThunk(
           "Content-Type": "multipart/form-data",
         },
       };
-      const result = await axios.patch(
-        "/api/auth/user-upd",
+      const result = await instance.patch(
+        "api/auth/user-upd",
         { ...data, avatar },
         header
       );
       console.log("result auth operation: ", result);
+      console.log("auth operation: ", result);
 
       return result;
     } catch ({ responce }) {

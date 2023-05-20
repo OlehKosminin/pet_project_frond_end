@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const instance = axios.create({
-  // baseURL: "http://localhost:3000/",
+  baseURL: "http://localhost:3000/",
 
-  baseURL: "https://pet-project-backend.onrender.com",
+  // baseURL: "https://pet-project-backend.onrender.com",
 });
 
 const setToken = (token) => {
@@ -42,28 +42,28 @@ export const logout = async () => {
   return data;
 };
 
-export const updUserInfo = async (data) => {
-  console.log("data auth: ", data);
-  const { token, avatar } = data;
-  const formData = new FormData();
-  formData.append("avatar", avatar);
-  const header = {
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "multipart/form-data",
-    },
-  };
-  const result = await instance.patch(
-    "api/auth/user-upd",
-    {
-      ...data,
-      avatar: formData,
-    },
-    header
-  );
+// export const updUserInfo = async (data) => {
+//   console.log("data auth: ", data);
+//   const { token, avatar } = data;
+//   const formData = new FormData();
+//   formData.append("avatar", avatar);
+//   const header = {
+//     headers: {
+//       Accept: "application/json",
+//       Authorization: `Bearer ${token}`,
+//       "Content-Type": "multipart/form-data",
+//     },
+//   };
+//   const result = await instance.patch(
+//     "api/auth/user-upd",
+//     {
+//       ...data,
+//       avatar: formData,
+//     },
+//     header
+//   );
 
-  return result;
-};
+//   return result;
+// };
 
 export default instance;

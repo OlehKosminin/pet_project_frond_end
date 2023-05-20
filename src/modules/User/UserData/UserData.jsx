@@ -17,8 +17,6 @@ const UserData = () => {
       return state.auth.user;
     }
   );
-  // console.log("token: ", token);
-  // console.log("_id: ", _id);
 
   const [user, setUser] = useState({
     name,
@@ -44,7 +42,6 @@ const UserData = () => {
 
   const photoPrewiew = (e) => {
     const imageFile = e.target.files[0];
-    // const imageURL = URL.createObjectURL(imageFile);
     setUser({ ...user, avatar: imageFile });
     setPhotoEdit(true);
   };
