@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import * as api from "../../shared/services/auth";
 import axios from "axios";
-axios.defaults.baseURL = "https://pet-project-backend.onrender.com";
+axios.defaults.baseURL = "http://localhost:3000";
 
 export const singup = createAsyncThunk(
   "auth/singup",
@@ -61,14 +61,16 @@ export const logout = createAsyncThunk(
     }
   }
 );
+
 export const updUserInfo = createAsyncThunk(
   "auth/user-upd",
   async (data, { rejectWithValue }) => {
     const { token, avatar } = data;
+    console.log("avatar: ", avatar);
     console.log("data: ", data);
     try {
       const formData = new FormData();
-      formData.append("avatar", avatar);
+      formData.append("image", avatar);
       const header = {
         headers: {
           Accept: "application/json",
@@ -76,9 +78,9 @@ export const updUserInfo = createAsyncThunk(
           "Content-Type": "multipart/form-data",
         },
       };
-      const result = await axios.post(
+      const result = await axios.patch(
         "/api/auth/user-upd",
-        { ...data, formData },
+        { ...data, avatar },
         header
       );
       console.log("result auth operation: ", result);

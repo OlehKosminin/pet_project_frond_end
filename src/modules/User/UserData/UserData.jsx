@@ -44,8 +44,8 @@ const UserData = () => {
 
   const photoPrewiew = (e) => {
     const imageFile = e.target.files[0];
-    const imageURL = URL.createObjectURL(imageFile);
-    setUser({ ...user, avatar: imageURL });
+    // const imageURL = URL.createObjectURL(imageFile);
+    setUser({ ...user, avatar: imageFile });
     setPhotoEdit(true);
   };
 

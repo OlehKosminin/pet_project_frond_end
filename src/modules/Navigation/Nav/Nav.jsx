@@ -1,5 +1,5 @@
-import { NavLink } from 'react-router-dom';
-import css from './Nav.module.css';
+import { NavLink } from "react-router-dom";
+import css from "./Nav.module.css";
 
 function Nav({ handleLinkClick }) {
   const handleClick = () => {
@@ -12,7 +12,7 @@ function Nav({ handleLinkClick }) {
     <ul className={css.nav}>
       <li className={css.nav_item}>
         <NavLink
-          className={({ isActive }) => (isActive ? css.active : '')}
+          className={({ isActive }) => (isActive ? css.active : "")}
           to="/news"
           onClick={handleClick}
         >
@@ -21,7 +21,7 @@ function Nav({ handleLinkClick }) {
       </li>
       <li className={css.nav_item}>
         <NavLink
-          className={({ isActive }) => (isActive ? css.active : '')}
+          className={({ isActive }) => (isActive ? css.active : "")}
           to="/notices/sell"
           onClick={handleClick}
         >
@@ -30,8 +30,8 @@ function Nav({ handleLinkClick }) {
       </li>
       <li className={css.nav_item}>
         <NavLink
-          className={({ isActive }) => (isActive ? css.active : '')}
-          to="/friends"
+          className={({ isActive }) => (isActive ? css.active : "")}
+          to="/our-friends"
           onClick={handleClick}
         >
           Our Friends
