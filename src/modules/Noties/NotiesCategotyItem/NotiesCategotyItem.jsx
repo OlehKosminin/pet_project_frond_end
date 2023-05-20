@@ -2,22 +2,25 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import NoticesCategoryItemSvgSelector from "./NoticesCategoryItemSvgSelector";
-import css from "./notiesCategoriItem.module.scss"
+import css from "./notiesCategoriItem.module.scss";
 
-
-const NotiesCategotyItem = ({ removePets, items }) => {
+const NotiesCategotyItem = (notices) => {
+  console.log("notices.items: ", notices.items);
   // const [expandedLocation, setExpandedLocation] = useState(false);
-  
-    const [hoveredCardId, setHoveredCardId] = useState(null);
+  const [hoveredCardId, setHoveredCardId] = useState(null);
 
-    const handleMouseEnter = (id) => {
-      setHoveredCardId(id);
-    };
+  // if (!notices.length) {
+  //   return;
+  // }
 
-    const handleMouseLeave = () => {
-      setHoveredCardId(null);
-    };
-  
+  const handleMouseEnter = (id) => {
+    setHoveredCardId(id);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredCardId(null);
+  };
+
   // const toggleLocation = (e) => {
   //   console.log(e, "event");
   //   const cardId = items.filter((items) => items.id === e);
@@ -26,7 +29,7 @@ const NotiesCategotyItem = ({ removePets, items }) => {
   //   // setExpandedLocation(!expandedLocation);
   //   // const cardId = items.map(({ id }) => {
   //   //   return id;
-      
+
   //   // })
   //   //  if (e === cardId) {
   //   //    setExpandedLocation(!expandedLocation);
@@ -34,78 +37,106 @@ const NotiesCategotyItem = ({ removePets, items }) => {
   //   // console.log(cardId, "cardid");
   // };
   // const { id, animal, text, favorite, category } = items;
-const pet = items.map(({ id, animal, text, favorite, category, location }) => (
-  <li className={css.example_card} key={id}>
-    <div className={css.animal}>
-      <p className={css.icon_category}>{category}</p>
-      <button
-        // className={`${css.favorite} ${
-        //   favorite ? css["favorite--active"] : css["favorite--inactive"]
-        // }`}
-        className={css.favorite}
-      >
-        {favorite ? (
-          <NoticesCategoryItemSvgSelector id="heart-active" />
-        ) : (
-          <NoticesCategoryItemSvgSelector id="heart" />
-        )}
-      </button>
-      {/* <button className={css.favorite}>H</button> */}
-      <button
-        onClick={() => removePets(id)}
-        type="button"
-        className={css.deletion}
-      >
-        <NoticesCategoryItemSvgSelector id="trash" />
-      </button>
-      <NavLink className={css.add_pet} to="/add-pet">
-        Add pet
-      </NavLink>
-      {/* <button >Add pet</button> */}
-      {animal}
-      <ul className={css.animalsDataList}>
-        <li className={css.animalsData}>
-          <div
-            className={`${css.animalsDataText} ${
-              hoveredCardId === id ? css.expandedLocation : ""
-            }`}
-            // onMouseEnter={() => toggleLocation(id)}
-            // onMouseLeave={() => toggleLocation("")}
-            onMouseEnter={() => handleMouseEnter(id)}
-            onMouseLeave={handleMouseLeave}
+  console.log("fjsdklfjl;");
+  const pet = notices.items.map(
+    ({
+      // birthday,
+      // breed,
+      category,
+      comments,
+      favorite,
+      location,
+      // name,
+      // owner,
+      photoUrl,
+      // price,
+      // public_id,
+      // sex,
+      // title,
+      _id,
+    }) => (
+      <li className={css.example_card} key={_id}>
+        <div className={css.animal}>
+          <p className={css.icon_category}>{category}</p>
+          <button
+            // className={`${css.favorite} ${
+            //   favorite ? css["favorite--active"] : css["favorite--inactive"]
+            // }`}
+            className={css.favorite}
           >
-            <p className={css.locationTitle} title={location}>
-              <NoticesCategoryItemSvgSelector id="location" />
-              {location.length > 5 ? `${location.slice(0, 5)}...` : location}
-            </p>
-            {hoveredCardId && <p className={css.locationContent}>{location}</p>}
-          </div>
-        </li>
-        <li className={css.animalsData}>
-          <p className={css.animalsDataText}>
-            <NoticesCategoryItemSvgSelector id="clock" />
-            gggggg
-          </p>
-        </li>
-        <li className={css.animalsData}>
-          <p className={css.animalsDataText}>
-            <NoticesCategoryItemSvgSelector id="female" />
-            female
-          </p>
-        </li>
-      </ul>
-    </div>
+            {favorite ? (
+              <NoticesCategoryItemSvgSelector id="heart-active" />
+            ) : (
+              <NoticesCategoryItemSvgSelector id="heart" />
+            )}
+          </button>
+          {/* <button className={css.favorite}>H</button> */}
+          <button
+            // onClick={() => removePets(_id)}
+            type="button"
+            className={css.deletion}
+          >
+            <NoticesCategoryItemSvgSelector id="trash" />
+          </button>
+          <NavLink className={css.add_pet} to="/add-pet">
+            Add pet
+          </NavLink>
+          {/* <button >Add pet</button> */}
+          {photoUrl}
+          <ul className={css.animalsDataList}>
+            <li className={css.animalsData}>
+              <div
+                className={`${css.animalsDataText} ${
+                  hoveredCardId === _id ? css.expandedLocation : ""
+                }`}
+                // onMouseEnter={() => toggleLocation(id)}
+                // onMouseLeave={() => toggleLocation("")}
+                onMouseEnter={() => handleMouseEnter(_id)}
+                onMouseLeave={handleMouseLeave}
+              >
+                <p className={css.locationTitle} title={location}>
+                  <NoticesCategoryItemSvgSelector id="location" />
+                  {location.length > 5
+                    ? `${location.slice(0, 5)}...`
+                    : location}
+                </p>
+                {hoveredCardId && (
+                  <p className={css.locationContent}>{location}</p>
+                )}
+              </div>
+            </li>
+            <li className={css.animalsData}>
+              <p className={css.animalsDataText}>
+                <NoticesCategoryItemSvgSelector id="clock" />
+                gggggg
+              </p>
+            </li>
+            <li className={css.animalsData}>
+              <p className={css.animalsDataText}>
+                <NoticesCategoryItemSvgSelector id="female" />
+                female
+              </p>
+            </li>
+          </ul>
+        </div>
 
-    <p className={css.animal_description}>{text}</p>
+        <p className={css.animal_description}>{comments}</p>
 
-    <button className={css.more_info_btn}>Learn more</button>
-  </li>
-));
-
+        <button className={css.more_info_btn}>Learn more</button>
+      </li>
+    )
+  );
+  console.log("flksjdl;fs");
   return (
-    <div>
-      <ul className={css.wrapper}> {pet}</ul>
-    </div>
+    <>
+      {!pet ? (
+        <div></div>
+      ) : (
+        <div>
+          <ul className={css.wrapper}> {pet}</ul>
+        </div>
+      )}
+    </>
   );
 };
 
@@ -134,7 +165,7 @@ export default NotiesCategotyItem;
 //     : categoryName === "owner"
 //     ? ownNotices
 //       : notices.notices;
-    
+
 // import React, { useEffect, useState } from "react";
 // import { NavigationContainer } from "@react-navigation/native";
 

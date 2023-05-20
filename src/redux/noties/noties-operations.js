@@ -2,8 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 import * as api from "../../shared/services/noties";
-// axios.defaults.baseURL = "https://pet-project-backend.onrender.com/api";
-// import instance from "../../shared/services/auth";
+
 export const fetchAllNotices = createAsyncThunk(
   "notice/fetch-all",
   async (data, thunkAPI) => {
