@@ -68,7 +68,15 @@
   gap: 15px;
   align-items: center;
   justify-content: center;
-  background-color: $active-blue-color;
+  background: $active-blue-color;
+  stroke: $default-white-color;
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+    color: $default-white-color;
+    stroke: $default-white-color;
+  }
 }
 
 .btnText {
