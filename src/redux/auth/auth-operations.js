@@ -1,6 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import * as api from "../../shared/services/auth";
+import axios from "axios";
+axios.defaults.baseURL = "http://localhost:3000/";
 
 export const singup = createAsyncThunk(
   "auth/singup",
@@ -32,7 +34,6 @@ export const current = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     try {
       const { auth } = getState();
-      console.log("auth: ", auth);
       const data = await api.getCurrent(auth.token);
       return data;
     } catch ({ responce }) {
@@ -62,12 +63,44 @@ export const logout = createAsyncThunk(
 );
 export const updUserInfo = createAsyncThunk(
   "auth/user-upd",
-  async (_, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
+    const { token, avatar } = data;
+    console.log("data: ", data);
     try {
-      const data = await api.updUserInfo();
-      return data;
+      const formData = new FormData();
+      formData.append("avatar", avatar);
+      const header = {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      const result = await axios.post(
+        "/api/auth/user-upd",
+        { ...data, formData },
+        header
+      );
+      console.log("result auth operation: ", result);
+
+      return result;
     } catch ({ responce }) {
       return rejectWithValue(responce);
     }
   }
 );
+// export const updUserInfo = async (data) => {
+//   console.log("data auth: ", data);
+// const { token, avatar } = data;
+
+//   const result = await instance.post(
+//     "api/auth/user-upd",
+//     {
+//       ...data,
+//       avatar: formData,
+//     },
+//     header
+//   );
+
+//   return result;
+// };
