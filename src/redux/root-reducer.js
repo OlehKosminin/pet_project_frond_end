@@ -1,25 +1,25 @@
-import { combineReducers } from "@reduxjs/toolkit";
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+// import { combineReducers } from "@reduxjs/toolkit";
+// import { persistReducer } from "redux-persist";
+// import storage from "redux-persist/lib/storage";
 
-import authReducer from "./auth/auth-slice";
-import { noticesReducer } from "./noties/noties-slice";
-// import petsReduser from "./pets/pets-selector";
+// import authReducer from "./auth/auth-slice";
+// import { noticesReducer } from "./noties/noties-slice";
+// // import petsReduser from "./pets/pets-selector";
 
-const persistConfig = {
-  key: "root",
-  storage,
-  whitelist: ["token"],
-};
+// const persistConfig = {
+//   key: "root",
+//   storage,
+//   whitelist: ["token"],
+// };
 
-const persistedAuthReducer = persistReducer(persistConfig, authReducer);
-const persistNotiesReducer = persistReducer(persistConfig, noticesReducer);
-// const persistPetsReduser = persistReducer(persistConfig, petsReduser);
+// const persistedAuthReducer = persistReducer(persistConfig, authReducer);
+// const persistNotiesReducer = persistReducer(persistConfig, noticesReducer);
+// // const persistPetsReduser = persistReducer(persistConfig, petsReduser);
 
-const rootReducer = combineReducers({
-  auth: persistedAuthReducer,
-  noties: persistNotiesReducer,
-  // pets: persistPetsReduser,
-});
+// const rootReducer = combineReducers({
+//   auth: persistedAuthReducer,
+//   noties: persistNotiesReducer,
+//   // pets: persistPetsReduser,
+// });
 
-export default rootReducer;
+// export default rootReducer;

@@ -1,22 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  addNotices,
-  deleteNotice,
-  getNewNotice,
-  getNoticeByCategory,
-  getNoticesByQwery,
-  getSingleNotice,
-  createNotice,
-  getUserNotices,
+  // addNotices,
+  // deleteNotice,
+  // getNewNotice,
+  fetchAllNotices,
+  // getNoticeByCategory,
+  // getNoticesByQwery,
+  // getSingleNotice,
+  // createNotice,
+  // getUserNotices,
 } from "./noties-operations";
 
 const noticesInitialState = {
-  notices: [],
-  user: {},
-  pets: [],
-  oneNotice: null,
-  favorite: [],
-  own: [],
+  items: [],
+  // user: {},
+  // pets: [],
+  // oneNotice: null,
+  // favorite: [],
+  // own: [],
   error: null,
   isLoading: false,
 };
@@ -24,7 +25,7 @@ const handlePending = (state) => {
   state.isLoading = true;
 };
 const handleReject = (state, action) => {
-  state.notices = [];
+  state.items = [];
   state.isLoading = false;
   state.error = action.payload;
 };
@@ -33,85 +34,86 @@ const noticesSlice = createSlice({
   initialState: noticesInitialState,
   extraReducers: (builder) => {
     builder
-      .addCase(getNoticeByCategory.pending, (state) => {
+      .addCase(fetchAllNotices.pending, (state) => {
         handlePending(state);
       })
-      .addCase(getNoticeByCategory.fulfilled, (state, { payload }) => {
+      .addCase(fetchAllNotices.fulfilled, (state, { payload }) => {
+        console.log(payload, "payload");
         state.isLoading = false;
-        state.notices = payload;
+        state.items = payload;
         state.error = null;
       })
-      .addCase(getNoticeByCategory.rejected, (state, action) => {
+      .addCase(fetchAllNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
-      .addCase(getSingleNotice.fulfilled, (state, { payload }) => {
-        state.oneNotice = payload;
-        state.isLoading = false;
-        state.error = null;
-      })
-      .addCase(getSingleNotice.rejected, (state, action) => {
-        handleReject(state, action);
-      })
-      .addCase(getNewNotice.fulfilled, (state, { payload }) => {
-        state.notices.push(payload);
-        state.isLoading = false;
-      })
-      .addCase(getNewNotice.rejected, (state, action) => {
-        handleReject(state, action);
-      })
-      .addCase(addNotices.fulfilled, (state, { payload }) => {
-        state.notices.push(payload);
-        state.isLoading = false;
-      })
-      .addCase(addNotices.rejected, (state, action) => {
-        handleReject(state, action);
-      })
-      .addCase(deleteNotice.fulfilled, (state, { payload }) => {
-        state.notices = state.notices.filter(({ _id }) => _id !== payload);
-        state.isLoading = false;
-      })
-      .addCase(deleteNotice.rejected, (state, { payload }) => {
-        handleReject(state, payload);
-      })
-      // додає оголошення
-      .addCase(createNotice.pending, (state) => {
-        handlePending(state);
-      })
-      .addCase(createNotice.fulfilled, (state, { payload }) => {
-        state.notices.push(payload);
-        state.isLoading = false;
-        state.error = null;
-      })
-      .addCase(createNotice.rejected, (state, { payload }) => {
-        handleReject(state, payload);
-      })
-      .addCase(getUserNotices.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.error = null;
-        state.own = payload;
-      })
-      .addCase(getUserNotices.rejected, (state, action) => {
-        handleReject(state, action);
-      })
-      .addCase(getNoticesByQwery.pending, (state) => {
-        handlePending(state);
-      })
-      .addCase(getNoticesByQwery.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.notices = payload;
-        state.error = null;
-      })
-      .addCase(getNoticesByQwery.rejected, (state, action) => {
-        handleReject(state, action);
-      });
-  },
-  reducers: {
-    clearNotices(state, { payload }) {
-      state.notices = payload;
-    },
-    changeFavoritesNotices(state, { payload }) {
-      state.notices = state.notices.filter((notice) => notice._id !== payload);
-    },
+  //     .addCase(getSingleNotice.fulfilled, (state, { payload }) => {
+  //       state.oneNotice = payload;
+  //       state.isLoading = false;
+  //       state.error = null;
+  //     })
+  //     .addCase(getSingleNotice.rejected, (state, action) => {
+  //       handleReject(state, action);
+  //     })
+  //     .addCase(getNewNotice.fulfilled, (state, { payload }) => {
+  //       state.notices.push(payload);
+  //       state.isLoading = false;
+  //     })
+  //     .addCase(getNewNotice.rejected, (state, action) => {
+  //       handleReject(state, action);
+  //     })
+  //     .addCase(addNotices.fulfilled, (state, { payload }) => {
+  //       state.notices.push(payload);
+  //       state.isLoading = false;
+  //     })
+  //     .addCase(addNotices.rejected, (state, action) => {
+  //       handleReject(state, action);
+  //     })
+  //     .addCase(deleteNotice.fulfilled, (state, { payload }) => {
+  //       state.notices = state.notices.filter(({ _id }) => _id !== payload);
+  //       state.isLoading = false;
+  //     })
+  //     .addCase(deleteNotice.rejected, (state, { payload }) => {
+  //       handleReject(state, payload);
+  //     })
+  //     // додає оголошення
+  //     .addCase(createNotice.pending, (state) => {
+  //       handlePending(state);
+  //     })
+  //     .addCase(createNotice.fulfilled, (state, { payload }) => {
+  //       state.notices.push(payload);
+  //       state.isLoading = false;
+  //       state.error = null;
+  //     })
+  //     .addCase(createNotice.rejected, (state, { payload }) => {
+  //       handleReject(state, payload);
+  //     })
+  //     .addCase(getUserNotices.fulfilled, (state, { payload }) => {
+  //       state.isLoading = false;
+  //       state.error = null;
+  //       state.own = payload;
+  //     })
+  //     .addCase(getUserNotices.rejected, (state, action) => {
+  //       handleReject(state, action);
+  //     })
+  //     .addCase(getNoticesByQwery.pending, (state) => {
+  //       handlePending(state);
+  //     })
+  //     .addCase(getNoticesByQwery.fulfilled, (state, { payload }) => {
+  //       state.isLoading = false;
+  //       state.notices = payload;
+  //       state.error = null;
+  //     })
+  //     .addCase(getNoticesByQwery.rejected, (state, action) => {
+  //       handleReject(state, action);
+  //     });
+  // // },
+  // reducers: {
+  //   clearNotices(state, { payload }) {
+  //     state.notices = payload;
+  //   },
+  //   changeFavoritesNotices(state, { payload }) {
+  //     state.notices = state.notices.filter((notice) => notice._id !== payload);
+  //   },
   },
 });
 export const noticesReducer = noticesSlice.reducer;

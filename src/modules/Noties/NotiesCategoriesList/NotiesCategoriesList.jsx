@@ -1,27 +1,60 @@
 
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// import { getNotices } from "../../../redux/noties/noties-selector";
 
 
-import NotiesCategotyItem from "../NotiesCategotyItem/NotiesCategotyItem";
+import NotiesCategoryItem from "../NotiesCategotyItem/NotiesCategotyItem";
 
 // import css from "./notiesCategoriesList.module.scss";
-import items from "./pets";
+// import items from "./pets";
+import { getAllNotices, deleteNotices } from "../../../shared/services/noties";
 
+// import { useParams } from "react-router";
+// import { getNotices } from "../../../redux/noties/noties-selector";
 
+// console.log(getNotices, "getAllNoticesPet");
 const NotiesCategoriesList = () => {
+  const dispatch = useDispatch();
+  const noticesCategori = useSelector(getNotices);
+    const noticesCategori = () => {
+      dispatch(getNotices("sell"));
+    };
+  
   const [pets, setPets] = useState([]);
-  
-  console.log(pets)
+  // const[deletePetId, setDeletePetId]=useState("")
+  // console.log(noticesCategori, "reduxCategory")
+
+  // const { category } = useParams();
+  // console.log(category, "category");
   
 
-  useEffect(() => {
-    const data = items;
-   setPets([...data])
-  }, [])
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     const data = await getAllNotices();
+  //     console.log(data, "useeffdata");
+  //      setPets(data.result)
+  //   }
+  //   fetch();
+  
+  // }, [])
 
-  const handlDelete = (id) => {
-    const result = pets.filter((pet) => pet.id !== id);
-    setPets([...result])
+  //  useEffect(() => {
+  //    const deletePet = async () => {
+  //      const data = await deleteNotices(deletePetId);
+  //      console.log(data, "useeffdata");
+  //      //  setPets(data.result);
+  //    };
+  //    deletePet();
+  //  }, [deletePetId]);
+//  const deletePet = async () => {
+//        const data = await deleteNotices(deletePetId);
+//        console.log(data, "useeffdata");
+  //  const handlDelete = async(id) => {
+  //   await deleteNotices(id);
+    // const result = pets.filter((pet) => pet.id === id);
+    // setPets([...result])
+    // setDeletePetId(_id)
   }
 
   // const { id, animal, text } = items;
@@ -62,10 +95,9 @@ const NotiesCategoriesList = () => {
   // ));
   return (
     <>
-     
-      <div >
+      <div>
         {/* <ul className={css.wrapper}> */}
-        <NotiesCategotyItem removePets={handlDelete} items={pets} />
+        <NotiesCategoryItem removePets={handlDelete} items={pets} />
         {/* </ul> */}
       </div>
     </>

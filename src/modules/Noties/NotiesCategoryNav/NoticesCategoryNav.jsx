@@ -16,7 +16,7 @@ const NoticesCategoriesNavigation = () => {
           <NavLink className={css.buttonCategory} to="/notices/lost-found">
             lost/found
           </NavLink>
-          <NavLink className={css.buttonCategory} to="/notices/for-free">
+          <NavLink className={css.buttonCategory} to="/notices/in good hands">
             in good hands
           </NavLink>
           <>
