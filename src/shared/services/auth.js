@@ -26,11 +26,9 @@ export const login = async (data) => {
 };
 
 export const getCurrent = async (token) => {
-  console.log("token: ", token);
   try {
     setToken(token);
     const { data } = await instance.get("api/auth/current");
-    console.log("data: ", data);
     return data;
   } catch (error) {
     setToken();
@@ -44,9 +42,28 @@ export const logout = async () => {
   return data;
 };
 
-export const updUserInfo = async (data) => {
-  const result = await instance.post("api/auth/user-upd", data);
-  return result;
-};
+// export const updUserInfo = async (data) => {
+//   console.log("data auth: ", data);
+//   const { token, avatar } = data;
+//   const formData = new FormData();
+//   formData.append("avatar", avatar);
+//   const header = {
+//     headers: {
+//       Accept: "application/json",
+//       Authorization: `Bearer ${token}`,
+//       "Content-Type": "multipart/form-data",
+//     },
+//   };
+//   const result = await instance.post(
+//     "api/auth/user-upd",
+//     {
+//       ...data,
+//       avatar: formData,
+//     },
+//     header
+//   );
+
+//   return result;
+// };
 
 export default instance;
