@@ -18,6 +18,7 @@ const UserPage = lazy(() => import("../pages/UserPage/UserPage"));
 const AddPetPage = lazy(() => import("../pages/AddPetPage/AddPetPage"));
 const NewsPage = lazy(() => import("../pages/NewsPage/NewsPage"));
 const OurFriends = lazy(() => import("../pages/OurFriendsPage/OurFriendsPage"));
+const NotFoundPage = lazy(() => import("../pages/NotFoundPage/NotFoundPage"));
 
 const SharedLayout = () => {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ const SharedLayout = () => {
         </Route>
         <Route path="news" element={<NewsPage />} />
         <Route path="our-frinds" element={<OurFriends />} />
-        <Route path="*" element={<div>Not Found page</div>} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
   );
