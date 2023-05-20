@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { singup, login, current, logout } from "./auth-operations";
+import { singup, login, current, logout, updUserInfo } from "./auth-operations";
 
 const initialState = {
   user: {},
@@ -19,9 +19,9 @@ const authSlice = createSlice({
         store.error = null;
       })
       .addCase(singup.fulfilled, (store, { payload }) => {
-        const { user, token } = payload.data;
+        const { token } = payload.data;
         store.loading = false;
-        store.user = user;
+        store.user = payload.data.data;
         store.token = token;
         store.isLogin = true;
       })
@@ -34,9 +34,10 @@ const authSlice = createSlice({
         store.error = null;
       })
       .addCase(login.fulfilled, (store, { payload }) => {
+        const { token } = payload;
         store.loading = false;
-        store.user = payload.user;
-        store.token = payload.token;
+        store.user = payload.result;
+        store.token = token;
         store.isLogin = true;
       })
       .addCase(login.rejected, (store, { payload }) => {
@@ -48,10 +49,9 @@ const authSlice = createSlice({
         store.error = null;
       })
       .addCase(current.fulfilled, (store, { payload }) => {
-        const { name, email } = payload;
+        // console.log("payload: ", payload);
         store.loading = false;
-        store.user.name = name;
-        store.user.email = email;
+        store.user = payload;
         store.isLogin = true;
       })
       .addCase(current.rejected, (store, { payload }) => {
@@ -69,6 +69,20 @@ const authSlice = createSlice({
         store.isLogin = false;
       })
       .addCase(logout.rejected, (store, { payload }) => {
+        store.loading = false;
+        store.error = payload;
+      })
+      .addCase(updUserInfo.pending, (store) => {
+        store.loading = true;
+        store.error = null;
+      })
+      .addCase(updUserInfo.fulfilled, (store, { payload }) => {
+        console.log("payload : ", payload);
+        store.loading = false;
+        store.user = payload.data;
+        store.token = payload.data.token;
+      })
+      .addCase(updUserInfo.rejected, (store, { payload }) => {
         store.loading = false;
         store.error = payload;
       });

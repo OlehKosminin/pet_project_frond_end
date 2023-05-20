@@ -9,10 +9,12 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import ClearIcon from "@mui/icons-material/Clear";
 import { blue } from "@mui/material/colors";
 
-import styles from "./register-form.module.scss";
+import Title from "../../../shared/components/Title/Title";
+
+import styles from "../../../shared/components/sass/authPages.module.scss";
 import { registerSchema } from "../../../shared/components/YupSchemas/authSchemas";
 
-import { singup } from "../../../shared/services/auth";
+import { singup } from "../../../redux/auth/auth-operations";
 
 const data = {
   name: "",
@@ -60,10 +62,10 @@ export const RegisterForm = () => {
         handleReset,
       }) => (
         <Form className={styles.form} onSubmit={handleSubmit}>
-          <h2 className={styles.title}>Registration</h2>
+          <Title text="Registration" />
           <Box
             sx={{
-              marginBottom: "10px",
+              marginBottom: "32px",
               display: "flex",
               alignItems: "flex-end",
             }}
@@ -72,7 +74,7 @@ export const RegisterForm = () => {
               name="name"
               type="text"
               label="Name"
-              size="small"
+              size="medium"
               fullWidth
               sx={{
                 "& .MuiOutlinedInput-root": {
@@ -80,17 +82,28 @@ export const RegisterForm = () => {
                     borderRadius: 40,
                     border: `1px solid #54ADFF`,
                   },
+                  "& input": {
+                    fontSize: "16px",
+                    color: "#888888",
+                  },
                 },
               }}
               onChange={handleChange}
               value={values.name}
               error={touched.name && Boolean(errors.name)}
               helperText={touched.name && errors.name}
+              FormHelperTextProps={{
+                sx: {
+                  position: "absolute",
+                  bottom: -20,
+                  left: 0,
+                },
+              }}
             />
           </Box>
           <Box
             sx={{
-              marginBottom: "10px",
+              marginBottom: "32px",
               display: "flex",
               alignItems: "flex-end",
             }}
@@ -100,13 +113,17 @@ export const RegisterForm = () => {
               id="email"
               type="email"
               label="Email"
-              size="small"
+              size="medium"
               fullWidth
               sx={{
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
                     borderRadius: 40,
                     border: `1px solid #54ADFF`,
+                  },
+                  "& input": {
+                    fontSize: "16px",
+                    color: "#888888",
                   },
                 },
               }}
@@ -117,24 +134,39 @@ export const RegisterForm = () => {
                     edge="end"
                     size="small"
                     sx={{
-                      visibility: values.email ? "visible" : "hidden",
+                      visibility:
+                        errors.email && values.email ? "visible" : "hidden",
                       color: "#F43F5E",
                     }}
-                    onClick={handleReset}
+                    onClick={() => {
+                      handleChange({
+                        target: {
+                          name: "email",
+                          value: "",
+                        },
+                      });
+                    }}
                   >
-                    {errors.email ? <ClearIcon /> : null}
+                    <ClearIcon />
                   </IconButton>
                 ),
               }}
               onChange={handleChange}
               value={values.email}
-              error={touched.email && Boolean(errors.email)}
+              error={touched.email && errors.email}
               helperText={touched.email && errors.email}
+              FormHelperTextProps={{
+                sx: {
+                  position: "absolute",
+                  bottom: -20,
+                  left: 0,
+                },
+              }}
             />
           </Box>
           <Box
             sx={{
-              marginBottom: "10px",
+              marginBottom: "32px",
               display: "flex",
               alignItems: "flex-end",
             }}
@@ -143,13 +175,17 @@ export const RegisterForm = () => {
               name="password"
               type={showPassword ? "text" : "password"}
               label="Password"
-              size="small"
+              size="medium"
               fullWidth
               sx={{
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
                     borderRadius: 40,
                     border: `1px solid #54ADFF`,
+                  },
+                  "& input": {
+                    fontSize: "16px",
+                    color: "#888888",
                   },
                 },
               }}
@@ -173,11 +209,17 @@ export const RegisterForm = () => {
               value={values.password}
               error={touched.password && Boolean(errors.password)}
               helperText={touched.password && errors.password}
+              FormHelperTextProps={{
+                sx: {
+                  position: "absolute",
+                  bottom: -20,
+                  left: 0,
+                },
+              }}
             />
           </Box>
           <Box
             sx={{
-              marginBottom: "10px",
               display: "flex",
               alignItems: "flex-end",
             }}
@@ -186,13 +228,17 @@ export const RegisterForm = () => {
               name="confirmPassword"
               type={showConfirmPassword ? "text" : "password"}
               label="Confirm password"
-              size="small"
+              size="medium"
               fullWidth
               sx={{
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
                     borderRadius: 40,
                     border: `1px solid #54ADFF`,
+                  },
+                  "& input": {
+                    fontSize: "16px",
+                    color: "#888888",
                   },
                 },
               }}
@@ -216,6 +262,13 @@ export const RegisterForm = () => {
               value={values.confirmPassword}
               error={touched.confirmPassword && Boolean(errors.confirmPassword)}
               helperText={touched.confirmPassword && errors.confirmPassword}
+              FormHelperTextProps={{
+                sx: {
+                  position: "absolute",
+                  bottom: -20,
+                  left: 0,
+                },
+              }}
             />
           </Box>
           <div className={styles.buttonContainer}>

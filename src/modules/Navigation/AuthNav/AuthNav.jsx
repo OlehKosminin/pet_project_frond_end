@@ -1,56 +1,31 @@
-import { Box, Button } from '@mui/material';
 import React from 'react';
-import { NavLink as Routerlink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import css from './AuthNav.module.css';
+import { ReactComponent as Paw } from '../../../assets/image/icons/pawprint.svg';
 
-function AuthNavigation() {
+const isAuth = true;
+
+function AuthNav({ handleLinkClick }) {
+  const handleClick = () => {
+    if (handleLinkClick) {
+      handleLinkClick();
+    }
+  };
   return (
-    <Box mr={1}>
-      <Button
-        component={Routerlink}
-        to="/login"
-        variant="outlined"
-        color="accent"
-        sx={{
-          height: 40,
-          width: 165,
-          borderRadius: 5,
-          border: 2,
-          '&:hover': {
-            border: 2,
-          },
-          '&.active': {
-            backgroundColor: 'accent.main',
-            color: 'text.light',
-            borderColor: 'accent.main',
-          },
-        }}
-      >
-        Log IN
-      </Button>
-      <Button
-        component={Routerlink}
-        to="/register"
-        variant="outlined"
-        color="accent"
-        sx={{
-          height: 40,
-          width: 165,
-          borderRadius: 5,
-          border: 2,
-          '&:hover': {
-            border: 2,
-          },
-          '&.active': {
-            backgroundColor: 'accent.main',
-            color: 'text.light',
-            borderColor: 'accent.main',
-          },
-        }}
-      >
-        Registration
-      </Button>
-    </Box>
+    <>
+      {!isAuth ? null : (
+        <div className={css.auth}>
+          <Link to="/login" className={css.authButton} onClick={handleClick}>
+            <span className={css.auth_text}>Log IN</span>
+            <Paw className={css.svg} />
+          </Link>
+          <Link to="/register" className={css.authButton} onClick={handleClick}>
+            <span className={css.auth_text}>Registration</span>
+          </Link>
+        </div>
+      )}
+    </>
   );
 }
 
-export default AuthNavigation;
+export default AuthNav;

@@ -1,11 +1,55 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {} from "./pets-operations";
+import { getPets, addPet, deletePet } from "./pets-operations";
 
-const initialState = {};
+const petsInitialState = {
+  items: [],
+  isLoading: false,
+  error: null,
+};
 
 const petsSlice = createSlice({
-  name: "noties",
-  initialState,
-  extraReducers: (builder) => {},
+  name: "pets",
+  initialState: petsInitialState,
+  extraReducers: (builder) => {
+    builder
+      .addCase(getPets.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getPets.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.items = action.payload;
+      })
+      .addCase(getPets.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(addPet.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addPet.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.items.push(action.payload);
+      })
+      .addCase(addPet.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(deletePet.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deletePet.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        state.items = state.items.filter(({ _id }) => _id !== payload);
+
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(deletePet.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
+  },
 });
-export default petsSlice.reducer;
+export const petsReducer = petsSlice.reducer;

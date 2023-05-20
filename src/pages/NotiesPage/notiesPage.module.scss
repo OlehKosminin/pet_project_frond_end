@@ -1,0 +1,46 @@
+@import "../../utils/base.scss";
+.title {
+  margin: 0px;
+  font-family: Manrope, Inter;
+  font-size: 6rem;
+  line-height: 1.167;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  font-weight: 700;
+}
+@media (min-width: 280px) {
+  .title {
+    margin-top: 40px;
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .title {
+    margin-top: 80px;
+    font-size: 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .title {
+    margin-top: 80px;
+    font-size: 48px;
+  }
+}
+
+.input {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  margin-top: 40px;
+
+  @media (max-width: 380px) {
+    .input {
+      width: 208px;
+    }
+  }
+}

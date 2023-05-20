@@ -1,5 +1,25 @@
+import PetsItem from "../PetsItem/PetsItem";
+import css from "./PetsList.module.scss";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllPets } from "../../../redux/pets/pets-selector";
+import { getPets } from "../../../redux/pets/pets-operations";
+
 const PetsList = () => {
-  return <div> PetsList</div>;
+  const pets = useSelector(getAllPets);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log("xxx");
+    dispatch(getPets());
+  }, [dispatch]);
+
+  return (
+    <ul className={css.list}>
+      {pets.map((pet) => {
+        return <PetsItem key={pet._id} pet={pet} />;
+      })}
+    </ul>
+  );
 };
 
 export default PetsList;

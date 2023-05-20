@@ -1,0 +1,42 @@
+.nav {
+  list-style: none;
+  display: flex;
+  margin: 0px;
+  padding: 0px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: black;
+}
+
+.nav a:hover,
+.nav a:focus {
+  color: #ffc107;
+}
+
+a.active {
+  color: #ffc107;
+}
+
+.nav_item {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 27px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+}
+
+.nav_item:not(:last-child) {
+  margin-right: 20px;
+}
+
+@media screen and (min-width: 1280px) {
+  .nav {
+    margin-right: auto;
+    margin-left: 159px;
+  }
+}
