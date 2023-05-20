@@ -30,8 +30,8 @@ export const LoginForm = () => {
 
   const onSubmit = ({ email, password }) => {
     const data = {
-      email: email,
-      password: password,
+      email,
+      password,
     };
 
     dispatch(login(data));
@@ -105,7 +105,7 @@ export const LoginForm = () => {
               }}
               onChange={handleChange}
               value={values.email}
-              error={touched.email && errors.email}
+              error={touched.email && Boolean(errors.email)}
               helperText={touched.email && errors.email}
               FormHelperTextProps={{
                 sx: {
