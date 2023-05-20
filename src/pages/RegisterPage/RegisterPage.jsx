@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 const RegisterPage = () => {
   const navigate = useNavigate();
   const getIsLogin = useSelector((state) => state.auth.isLogin);
-  console.log("isLogin: ", getIsLogin);
 
   if (getIsLogin) {
     navigate("/user", { replace: true });

@@ -3,11 +3,18 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import css from "./UserData.module.scss";
 import Logout from "../LogoutBtn/LogoutBtn";
-import cameraIcon from "../../../assets/image/icons/camera.svg";
-import checkIcon from "../../../assets/image/icons/check.svg";
-import editIcon from "../../../assets/image/icons/edit.svg";
+import Icon from "../components/Icons";
 
 const UserData = () => {
+  const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
+  const { name, email, birthday, phone, city, avatar, _id } = useSelector(
+    (state) => {
+      return state.auth.user;
+    }
+  );
+
+
   const [user, setUser] = useState({
     name: "Andy",
     email: "anna00@gmail.com",
@@ -28,8 +35,8 @@ const UserData = () => {
 
   const photoPrewiew = (e) => {
     const imageFile = e.target.files[0];
-    const imageURL = URL.createObjectURL(imageFile);
-    setUser({ ...user, photo: imageURL });
+    setUser({ ...user, avatar: imageFile });
+
     setPhotoEdit(true);
   };
 
@@ -97,7 +104,9 @@ const UserData = () => {
                   className={css.photoInput}
                   onChange={photoPrewiew}
                 />
-                <img src={cameraIcon} alt="camera icon" />
+                <div className={css.cameraIcon}>
+                  <Icon id="camera" />
+                </div>
               </label>
             </div>
 
@@ -108,10 +117,10 @@ const UserData = () => {
             <div className={css.photoInputWrapper}>
               <button
                 type="button"
-                className={css.userImgBtn}
+                className={css.userInfoCheckBtn}
                 onClick={changePhoto}
               >
-                <img src={checkIcon} alt="check icon" />
+                <Icon id="check" />
               </button>
             </div>
 
@@ -132,8 +141,8 @@ const UserData = () => {
                     defaultValue={user.name}
                     className={css.userInfoItemText}
                   />
-                  <button type="submit" className={css.userInfoItemBtn}>
-                    <img src={checkIcon} alt="check icon" />
+                  <button type="submit" className={css.userInfoCheckBtn}>
+                    <Icon id="check" />
                   </button>
                 </div>
               </label>
@@ -148,7 +157,7 @@ const UserData = () => {
                   className={css.userInfoItemBtn}
                   onClick={() => setNameEdit(true)}
                 >
-                  <img src={editIcon} alt="edit icon" />
+                  <Icon id="edit" />
                 </button>
               </div>
             </div>
@@ -166,8 +175,8 @@ const UserData = () => {
                     defaultValue={user.email}
                     className={css.userInfoItemText}
                   />
-                  <button type="submit" className={css.userInfoItemBtn}>
-                    <img src={checkIcon} alt="check icon" />
+                  <button type="submit" className={css.userInfoCheckBtn}>
+                    <Icon id="check" />
                   </button>
                 </div>
               </label>
@@ -182,7 +191,7 @@ const UserData = () => {
                   className={css.userInfoItemBtn}
                   onClick={() => setEmailEdit(true)}
                 >
-                  <img src={editIcon} alt="edit icon" />
+                  <Icon id="edit" />
                 </button>
               </div>
             </div>
@@ -201,10 +210,10 @@ const UserData = () => {
                 />
                 <button
                   type="button"
-                  className={css.userInfoItemBtn}
+                  className={css.userInfoCheckBtn}
                   onClick={() => setBirthdayEdit(false)}
                 >
-                  <img src={checkIcon} alt="check icon" />
+                  <Icon id="check" />
                 </button>
               </div>
             </div>
@@ -218,7 +227,7 @@ const UserData = () => {
                   className={css.userInfoItemBtn}
                   onClick={() => setBirthdayEdit(true)}
                 >
-                  <img src={editIcon} alt="edit icon" />
+                  <Icon id="edit" />
                 </button>
               </div>
             </div>
@@ -237,8 +246,8 @@ const UserData = () => {
                     defaultValue={user.phone}
                     className={css.userInfoItemText}
                   />
-                  <button type="submit" className={css.userInfoItemBtn}>
-                    <img src={checkIcon} alt="check icon" />
+                  <button type="submit" className={css.userInfoCheckBtn}>
+                    <Icon id="check" />
                   </button>
                 </div>
               </label>
@@ -253,7 +262,7 @@ const UserData = () => {
                   className={css.userInfoItemBtn}
                   onClick={() => setPhoneEdit(true)}
                 >
-                  <img src={editIcon} alt="edit icon" />
+                  <Icon id="edit" />
                 </button>
               </div>
             </div>
@@ -271,8 +280,8 @@ const UserData = () => {
                     defaultValue={user.city}
                     className={css.userInfoItemText}
                   />
-                  <button type="submit" className={css.userInfoItemBtn}>
-                    <img src={checkIcon} alt="check icon" />
+                  <button type="submit" className={css.userInfoCheckBtn}>
+                    <Icon id="check" />
                   </button>
                 </div>
               </label>
@@ -287,7 +296,7 @@ const UserData = () => {
                   className={css.userInfoItemBtn}
                   onClick={() => setCityEdit(true)}
                 >
-                  <img src={editIcon} alt="edit icon" />
+                  <Icon id="edit" />
                 </button>
               </div>
             </div>

@@ -31,11 +31,21 @@
 .closeBtn {
   margin: 0;
   padding: 0;
+  width: 24px;
+  height: 24px;
   border: none;
+  border-radius: 50%;
   background-color: transparent;
   position: absolute;
   right: 24px;
   top: 24px;
+  stroke: $active-blue-color;
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+    stroke: $default-white-color;
+  }
 }
 
 .title {
@@ -73,6 +83,13 @@
   align-items: center;
   justify-content: center;
   background-color: $default-white-color;
+  color: $active-blue-color;
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+    color: $default-white-color;
+  }
 }
 
 .cancelBtnText {
@@ -81,7 +98,6 @@
   font-size: 16px;
   line-height: 1.375;
   letter-spacing: 0.04em;
-  color: $active-blue-color;
 }
 
 .actionBtn {
@@ -94,6 +110,14 @@
   align-items: center;
   justify-content: center;
   background-color: $active-blue-color;
+  color: $default-white-color;
+  stroke: $default-white-color;
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+    color: $default-white-color;
+  }
 }
 
 .actionBtnText {
@@ -102,5 +126,4 @@
   font-size: 16px;
   line-height: 1.375;
   letter-spacing: 0.04em;
-  color: $default-white-color;
 }
