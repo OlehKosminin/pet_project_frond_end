@@ -6,6 +6,15 @@ import Logout from "../LogoutBtn/LogoutBtn";
 import Icon from "../components/Icons";
 
 const UserData = () => {
+  const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
+  const { name, email, birthday, phone, city, avatar, _id } = useSelector(
+    (state) => {
+      return state.auth.user;
+    }
+  );
+
+
   const [user, setUser] = useState({
     name: "Andy",
     email: "anna00@gmail.com",
