@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import { Formik, Form, Field } from "formik";
 import initialState from "./initialState";
 import contactForm from "./addPetForSell.module.css";
-import style from "../addPetPage.module.css";
+import style from "../addPetPage.module.scss";
 import { SvgSelector } from "../cvgSelector/SvgSelector";
 import { yyyymmdd } from "../utils/formattedDate";
 import DatePicker from "react-datepicker";

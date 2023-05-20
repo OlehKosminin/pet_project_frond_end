@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import { Formik, Form, Field } from "formik";
 
 import contactForm from "./addMyPet.module.css";
-import style from "../addPetPage.module.css";
+import style from "../addPetPage.module.scss";
 import { SvgSelector } from "../cvgSelector/SvgSelector";
 
 import avatarInput from "../img/avatarInput.png";

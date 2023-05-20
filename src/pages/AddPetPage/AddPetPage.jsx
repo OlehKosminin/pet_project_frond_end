@@ -1,4 +1,4 @@
-import style from "./addPetPage.module.css";
+import style from "./addPetPage.module.scss";
 import styleBtn from "./choosenBtn.module.css";
 
 import { SvgSelector } from "./cvgSelector/SvgSelector";

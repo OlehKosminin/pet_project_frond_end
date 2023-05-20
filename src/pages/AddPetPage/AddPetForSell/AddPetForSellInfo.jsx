@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { Formik, Form, Field } from "formik";
 import contactForm from "./addPetForSell.module.css";
-import style from "../addPetPage.module.css";
+import style from "../addPetPage.module.scss";
 import gender from "./addPetForSellInfo.module.css";
 
 import { SvgSelector } from "../cvgSelector/SvgSelector";

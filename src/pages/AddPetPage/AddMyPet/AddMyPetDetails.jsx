@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import initialState from "./initialState";
 
 import contactForm from "./addMyPet.module.css";
-import style from "../addPetPage.module.css";
+import style from "../addPetPage.module.scss";
 
 import { SvgSelector } from "../cvgSelector/SvgSelector";
 import { yyyymmdd } from "../utils/formattedDate";
