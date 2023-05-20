@@ -1,5 +1,5 @@
 import LoginForm from "../../modules/AuthForms/LoginForm/LoginForm";
-import styles from "./login-page.module.scss";
+import styles from "../../shared/components/sass/authPages.module.scss";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
