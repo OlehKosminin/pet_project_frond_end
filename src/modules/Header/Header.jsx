@@ -5,14 +5,14 @@ import { AppBar, Box, Toolbar } from "@mui/material";
 
 function Header() {
   return (
-    <AppBar position="relative" sx={{ bgcolor: "background.default" }}>
+    <AppBar elevation={0} position="relative" sx={{ bgcolor: "#fef9f9" }}>
       <Toolbar>
         <Box
           sx={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            bgcolor: "background.default",
+            bgcolor: "#fef9f9",
             flexDirection: "row",
             width: 1,
           }}
