@@ -77,10 +77,11 @@ const authSlice = createSlice({
         store.error = null;
       })
       .addCase(updUserInfo.fulfilled, (store, { payload }) => {
-        console.log("payload : ", payload);
+        // console.log("payload : ", payload);
         store.loading = false;
         store.user = payload.data;
         store.token = payload.data.token;
+        // console.log("store: ", store.user);
       })
       .addCase(updUserInfo.rejected, (store, { payload }) => {
         store.loading = false;

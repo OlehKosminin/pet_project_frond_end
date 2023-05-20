@@ -1,8 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import instance from "../../shared/services/auth";
 import * as api from "../../shared/services/auth";
-import axios from "axios";
-// axios.defaults.baseURL = "http://localhost:3000/";
 
 export const singup = createAsyncThunk(
   "auth/singup",
@@ -65,8 +63,8 @@ export const logout = createAsyncThunk(
 export const updUserInfo = createAsyncThunk(
   "auth/user-upd",
   async (data, { rejectWithValue }) => {
+    console.log("data: ", data);
     const { token, avatar } = data;
-    console.log("avatar: ", avatar);
     try {
       const formData = new FormData();
       formData.append("image", avatar);
@@ -82,8 +80,6 @@ export const updUserInfo = createAsyncThunk(
         { ...data, avatar },
         header
       );
-      console.log("result auth operation: ", result);
-      console.log("auth operation: ", result);
 
       return result;
     } catch ({ responce }) {
