@@ -5,12 +5,10 @@ import css from "./UserData.module.scss";
 import Logout from "../LogoutBtn/LogoutBtn";
 import Icon from "../components/Icons";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getCurrentUser } from "../../../redux/user/user-selectors";
 import { updateUser } from "../../../redux/user/user-operations";
 
 const UserData = () => {
-  const user = useSelector(getCurrentUser);
+  // const user = useSelector(getCurrentUser);
   const dispatch = useDispatch();
 
   const { token } = useSelector((state) => state.auth);
@@ -38,10 +36,9 @@ const UserData = () => {
   const [photoEdit, setPhotoEdit] = useState(false);
   const [newAvatar, setNewAvatar] = useState(false);
 
-
   const sendInfo = (user) => {
     console.log("user: ", user);
-    dispatch(updUserInfo(user));
+    dispatch(updateUser(user));
   };
 
   const photoPrewiew = (e) => {
@@ -49,305 +46,304 @@ const UserData = () => {
     const imageURL = URL.createObjectURL(imageFile);
     setPhotoLoaded(imageURL);
     setUser({ ...user, avatar: imageFile });
-    setNewAvatar(imageFile)
-    
-  const [photoLoaded, setPhotoLoaded] = useState(false);
-  const photoPrewiew = (e) => {
-  const imageFile = e.target.files[0];
-    setPhotoEdit(true);
-  };
+    setNewAvatar(imageFile);
 
-  const changePhoto = () => {
-    dispatch(updateUser({ ...user, avatar: newAvatar }));
-    setPhotoEdit(false);
-  };
+    const photoPrewiew = (e) => {
+      const imageFile = e.target.files[0];
+      setPhotoEdit(true);
+    };
 
-  const changeName = (e) => {
-    e.preventDefault();
+    const changePhoto = () => {
+      dispatch(updateUser({ ...user, avatar: newAvatar }));
+      setPhotoEdit(false);
+    };
 
-    setUser({ ...user, name: e.currentTarget.name.value });
-    sendInfo({ ...user, name: e.currentTarget.name.value });
+    const changeName = (e) => {
+      e.preventDefault();
 
-    setNameEdit(false);
-  };
+      setUser({ ...user, name: e.currentTarget.name.value });
+      sendInfo({ ...user, name: e.currentTarget.name.value });
 
-  const changeEmail = (e) => {
-    e.preventDefault();
+      setNameEdit(false);
+    };
 
-    setUser({ ...user, email: e.currentTarget.email.value });
-    sendInfo({ ...user, email: e.currentTarget.email.value });
+    const changeEmail = (e) => {
+      e.preventDefault();
 
-    setEmailEdit(false);
-  };
+      setUser({ ...user, email: e.currentTarget.email.value });
+      sendInfo({ ...user, email: e.currentTarget.email.value });
 
-  const formattedDate = (newDate) => {
-    let date = new Date(newDate);
-    let day = date.getDate();
-    let month = date.getMonth() + 1;
-    let year = date.getFullYear();
-    if (day < 10) {
-      day = "0" + day;
-    }
-    if (month < 10) {
-      month = "0" + month;
-    }
-    let formattedDate = day + "." + month + "." + year;
-    return formattedDate;
-  };
+      setEmailEdit(false);
+    };
 
-  const changeBirthday = (e) => {
-    const bday = formattedDate(e);
-    setUser({ ...user, birthday: bday });
-    sendInfo({ ...user, birthday: bday });
+    const formattedDate = (newDate) => {
+      let date = new Date(newDate);
+      let day = date.getDate();
+      let month = date.getMonth() + 1;
+      let year = date.getFullYear();
+      if (day < 10) {
+        day = "0" + day;
+      }
+      if (month < 10) {
+        month = "0" + month;
+      }
+      let formattedDate = day + "." + month + "." + year;
+      return formattedDate;
+    };
 
-    setBirthdayEdit(false);
-  };
+    const changeBirthday = (e) => {
+      const bday = formattedDate(e);
+      setUser({ ...user, birthday: bday });
+      sendInfo({ ...user, birthday: bday });
 
-  const changePhone = (e) => {
-    e.preventDefault();
+      setBirthdayEdit(false);
+    };
 
-    setUser({ ...user, phone: e.currentTarget.phone.value });
-    sendInfo({ ...user, phone: e.currentTarget.phone.value });
+    const changePhone = (e) => {
+      e.preventDefault();
 
-    dispatch(updateUser({ ...user, phone: e.currentTarget.phone.value }));
+      setUser({ ...user, phone: e.currentTarget.phone.value });
+      sendInfo({ ...user, phone: e.currentTarget.phone.value });
 
-    setPhoneEdit(false);
-  };
+      dispatch(updateUser({ ...user, phone: e.currentTarget.phone.value }));
 
-  const changeCity = (e) => {
-    e.preventDefault();
+      setPhoneEdit(false);
+    };
 
-    setUser({ ...user, city: e.currentTarget.city.value });
-    sendInfo({ ...user, city: e.currentTarget.city.value });
+    const changeCity = (e) => {
+      e.preventDefault();
 
-    setCityEdit(false);
-  };
+      setUser({ ...user, city: e.currentTarget.city.value });
+      sendInfo({ ...user, city: e.currentTarget.city.value });
 
-  return (
-    <div className={css.userData}>
-      <div className={css.userImgWrapper}>
-        <img
-          className={css.userImg}
-          src={
-            !avatarUrl
-              ? "https://res.cloudinary.com/dpzseqln4/image/upload/v1684607125/user-avatars/yjcbinzs0prjdk2k8qnd.png"
-              : avatarUrl
-          }
+      setCityEdit(false);
+    };
 
-          alt="user"
-        />
-        {!photoEdit ? (
-          <div className={css.btnWrapper}>
-            <div className={css.photoInputWrapper}>
-              <label htmlFor="photo" className={css.photoInputBtn}>
-                <input
-                  name="photo"
-                  type="file"
-                  className={css.photoInput}
-                  onChange={photoPrewiew}
-                />
-                <div className={css.cameraIcon}>
-                  <Icon id="camera" />
-                </div>
-              </label>
-            </div>
-
-            <span className={css.userImgBtnText}>Edit photo</span>
-          </div>
-        ) : (
-          <div className={css.btnWrapper}>
-            <div className={css.photoInputWrapper}>
-              <button
-                type="button"
-                className={css.userInfoCheckBtn}
-                onClick={changePhoto}
-              >
-                <Icon id="check" />
-              </button>
-            </div>
-
-            <span className={css.userImgBtnText}>Confirm</span>
-          </div>
-        )}
-      </div>
-      <ul className={css.userInfoList}>
-        <li className={css.userInfoItem}>
-          {nameEdit ? (
-            <form onSubmit={changeName}>
-              <label className={css.userInfo} htmlFor="name">
-                <span className={css.userInfoItemTitle}>Name:</span>
-                <div className={css.userInfoItemData}>
+    return (
+      <div className={css.userData}>
+        <div className={css.userImgWrapper}>
+          <img
+            className={css.userImg}
+            src={
+              !avatarUrl
+                ? "https://res.cloudinary.com/dpzseqln4/image/upload/v1684607125/user-avatars/yjcbinzs0prjdk2k8qnd.png"
+                : avatarUrl
+            }
+            alt="user"
+          />
+          {!photoEdit ? (
+            <div className={css.btnWrapper}>
+              <div className={css.photoInputWrapper}>
+                <label htmlFor="photo" className={css.photoInputBtn}>
                   <input
-                    type="text"
-                    name="name"
-                    defaultValue={user.name}
-                    className={css.userInfoItemText}
+                    name="photo"
+                    type="file"
+                    className={css.photoInput}
+                    onChange={photoPrewiew}
                   />
-                  <button type="submit" className={css.userInfoCheckBtn}>
-                    <Icon id="check" />
-                  </button>
-                </div>
-              </label>
-            </form>
-          ) : (
-            <div className={css.userInfo}>
-              <span className={css.userInfoItemTitle}>Name:</span>
-              <div className={css.userInfoItemData}>
-                <div className={css.userInfoItemText}>{user.name}</div>
-                <button
-                  type="button"
-                  className={css.userInfoItemBtn}
-                  onClick={() => setNameEdit(true)}
-                >
-                  <Icon id="edit" />
-                </button>
+                  <div className={css.cameraIcon}>
+                    <Icon id="camera" />
+                  </div>
+                </label>
               </div>
+
+              <span className={css.userImgBtnText}>Edit photo</span>
             </div>
-          )}
-        </li>
-        <li className={css.userInfoItem}>
-          {emailEdit ? (
-            <form onSubmit={changeEmail}>
-              <label className={css.userInfo} htmlFor="email">
-                <span className={css.userInfoItemTitle}>Email:</span>
-                <div className={css.userInfoItemData}>
-                  <input
-                    type="email"
-                    name="email"
-                    defaultValue={user.email}
-                    className={css.userInfoItemText}
-                  />
-                  <button type="submit" className={css.userInfoCheckBtn}>
-                    <Icon id="check" />
-                  </button>
-                </div>
-              </label>
-            </form>
           ) : (
-            <div className={css.userInfo}>
-              <span className={css.userInfoItemTitle}>Email:</span>
-              <div className={css.userInfoItemData}>
-                <div className={css.userInfoItemText}>{user.email}</div>
-                <button
-                  type="button"
-                  className={css.userInfoItemBtn}
-                  onClick={() => setEmailEdit(true)}
-                >
-                  <Icon id="edit" />
-                </button>
-              </div>
-            </div>
-          )}
-        </li>
-        <li className={css.userInfoItem}>
-          {birthdayEdit ? (
-            <div className={css.userInfo}>
-              <span className={css.userInfoItemTitle}>Birthday:</span>
-              <div className={css.userInfoItemData}>
-                <DatePicker
-                  inline
-                  dateFormat="dd.MM.yyyy"
-                  onChange={changeBirthday}
-                  calendarClassName={css.datepicker}
-                />
+            <div className={css.btnWrapper}>
+              <div className={css.photoInputWrapper}>
                 <button
                   type="button"
                   className={css.userInfoCheckBtn}
-                  onClick={() => setBirthdayEdit(false)}
+                  onClick={changePhoto}
                 >
                   <Icon id="check" />
                 </button>
               </div>
-            </div>
-          ) : (
-            <div className={css.userInfo}>
-              <span className={css.userInfoItemTitle}>Birthday:</span>
-              <div className={css.userInfoItemData}>
-                <div className={css.userInfoItemText}>{user.birthday}</div>
-                <button
-                  type="button"
-                  className={css.userInfoItemBtn}
-                  onClick={() => setBirthdayEdit(true)}
-                >
-                  <Icon id="edit" />
-                </button>
-              </div>
+
+              <span className={css.userImgBtnText}>Confirm</span>
             </div>
           )}
-        </li>
-        <li className={css.userInfoItem}>
-          {phoneEdit ? (
-            <form onSubmit={changePhone}>
-              <label className={css.userInfo} htmlFor="phone">
+        </div>
+        <ul className={css.userInfoList}>
+          <li className={css.userInfoItem}>
+            {nameEdit ? (
+              <form onSubmit={changeName}>
+                <label className={css.userInfo} htmlFor="name">
+                  <span className={css.userInfoItemTitle}>Name:</span>
+                  <div className={css.userInfoItemData}>
+                    <input
+                      type="text"
+                      name="name"
+                      defaultValue={user.name}
+                      className={css.userInfoItemText}
+                    />
+                    <button type="submit" className={css.userInfoCheckBtn}>
+                      <Icon id="check" />
+                    </button>
+                  </div>
+                </label>
+              </form>
+            ) : (
+              <div className={css.userInfo}>
+                <span className={css.userInfoItemTitle}>Name:</span>
+                <div className={css.userInfoItemData}>
+                  <div className={css.userInfoItemText}>{user.name}</div>
+                  <button
+                    type="button"
+                    className={css.userInfoItemBtn}
+                    onClick={() => setNameEdit(true)}
+                  >
+                    <Icon id="edit" />
+                  </button>
+                </div>
+              </div>
+            )}
+          </li>
+          <li className={css.userInfoItem}>
+            {emailEdit ? (
+              <form onSubmit={changeEmail}>
+                <label className={css.userInfo} htmlFor="email">
+                  <span className={css.userInfoItemTitle}>Email:</span>
+                  <div className={css.userInfoItemData}>
+                    <input
+                      type="email"
+                      name="email"
+                      defaultValue={user.email}
+                      className={css.userInfoItemText}
+                    />
+                    <button type="submit" className={css.userInfoCheckBtn}>
+                      <Icon id="check" />
+                    </button>
+                  </div>
+                </label>
+              </form>
+            ) : (
+              <div className={css.userInfo}>
+                <span className={css.userInfoItemTitle}>Email:</span>
+                <div className={css.userInfoItemData}>
+                  <div className={css.userInfoItemText}>{user.email}</div>
+                  <button
+                    type="button"
+                    className={css.userInfoItemBtn}
+                    onClick={() => setEmailEdit(true)}
+                  >
+                    <Icon id="edit" />
+                  </button>
+                </div>
+              </div>
+            )}
+          </li>
+          <li className={css.userInfoItem}>
+            {birthdayEdit ? (
+              <div className={css.userInfo}>
+                <span className={css.userInfoItemTitle}>Birthday:</span>
+                <div className={css.userInfoItemData}>
+                  <DatePicker
+                    inline
+                    dateFormat="dd.MM.yyyy"
+                    onChange={changeBirthday}
+                    calendarClassName={css.datepicker}
+                  />
+                  <button
+                    type="button"
+                    className={css.userInfoCheckBtn}
+                    onClick={() => setBirthdayEdit(false)}
+                  >
+                    <Icon id="check" />
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className={css.userInfo}>
+                <span className={css.userInfoItemTitle}>Birthday:</span>
+                <div className={css.userInfoItemData}>
+                  <div className={css.userInfoItemText}>{user.birthday}</div>
+                  <button
+                    type="button"
+                    className={css.userInfoItemBtn}
+                    onClick={() => setBirthdayEdit(true)}
+                  >
+                    <Icon id="edit" />
+                  </button>
+                </div>
+              </div>
+            )}
+          </li>
+          <li className={css.userInfoItem}>
+            {phoneEdit ? (
+              <form onSubmit={changePhone}>
+                <label className={css.userInfo} htmlFor="phone">
+                  <span className={css.userInfoItemTitle}>Phone:</span>
+                  <div className={css.userInfoItemData}>
+                    <input
+                      type="tel"
+                      name="phone"
+                      pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+                      defaultValue={user.phone}
+                      className={css.userInfoItemText}
+                    />
+                    <button type="submit" className={css.userInfoCheckBtn}>
+                      <Icon id="check" />
+                    </button>
+                  </div>
+                </label>
+              </form>
+            ) : (
+              <div className={css.userInfo}>
                 <span className={css.userInfoItemTitle}>Phone:</span>
                 <div className={css.userInfoItemData}>
-                  <input
-                    type="tel"
-                    name="phone"
-                    pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-                    defaultValue={user.phone}
-                    className={css.userInfoItemText}
-                  />
-                  <button type="submit" className={css.userInfoCheckBtn}>
-                    <Icon id="check" />
+                  <div className={css.userInfoItemText}>{user.phone}</div>
+                  <button
+                    type="button"
+                    className={css.userInfoItemBtn}
+                    onClick={() => setPhoneEdit(true)}
+                  >
+                    <Icon id="edit" />
                   </button>
                 </div>
-              </label>
-            </form>
-          ) : (
-            <div className={css.userInfo}>
-              <span className={css.userInfoItemTitle}>Phone:</span>
-              <div className={css.userInfoItemData}>
-                <div className={css.userInfoItemText}>{user.phone}</div>
-                <button
-                  type="button"
-                  className={css.userInfoItemBtn}
-                  onClick={() => setPhoneEdit(true)}
-                >
-                  <Icon id="edit" />
-                </button>
               </div>
-            </div>
-          )}
-        </li>
-        <li className={css.userInfoItem}>
-          {cityEdit ? (
-            <form onSubmit={changeCity}>
-              <label className={css.userInfo} htmlFor="city">
+            )}
+          </li>
+          <li className={css.userInfoItem}>
+            {cityEdit ? (
+              <form onSubmit={changeCity}>
+                <label className={css.userInfo} htmlFor="city">
+                  <span className={css.userInfoItemTitle}>City:</span>
+                  <div className={css.userInfoItemData}>
+                    <input
+                      type="text"
+                      name="city"
+                      defaultValue={user.city}
+                      className={css.userInfoItemText}
+                    />
+                    <button type="submit" className={css.userInfoCheckBtn}>
+                      <Icon id="check" />
+                    </button>
+                  </div>
+                </label>
+              </form>
+            ) : (
+              <div className={css.userInfo}>
                 <span className={css.userInfoItemTitle}>City:</span>
                 <div className={css.userInfoItemData}>
-                  <input
-                    type="text"
-                    name="city"
-                    defaultValue={user.city}
-                    className={css.userInfoItemText}
-                  />
-                  <button type="submit" className={css.userInfoCheckBtn}>
-                    <Icon id="check" />
+                  <div className={css.userInfoItemText}>{user.city}</div>
+                  <button
+                    type="button"
+                    className={css.userInfoItemBtn}
+                    onClick={() => setCityEdit(true)}
+                  >
+                    <Icon id="edit" />
                   </button>
                 </div>
-              </label>
-            </form>
-          ) : (
-            <div className={css.userInfo}>
-              <span className={css.userInfoItemTitle}>City:</span>
-              <div className={css.userInfoItemData}>
-                <div className={css.userInfoItemText}>{user.city}</div>
-                <button
-                  type="button"
-                  className={css.userInfoItemBtn}
-                  onClick={() => setCityEdit(true)}
-                >
-                  <Icon id="edit" />
-                </button>
               </div>
-            </div>
-          )}
-        </li>
-        <Logout />
-      </ul>
-    </div>
-  );
+            )}
+          </li>
+          <Logout />
+        </ul>
+      </div>
+    );
+  };
 };
 
 export default UserData;
