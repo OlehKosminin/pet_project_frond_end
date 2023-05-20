@@ -2,9 +2,8 @@ import { Link } from "react-router-dom";
 import styles from "./modal-congras.module.scss";
 import { SvgSelector } from "../../pages/AddPetPage/cvgSelector/SvgSelector";
 import Icon from "../User/components/Icons";
-// import { useNavigate } from "react-router-dom";
 
-const ModalCongras = ({ close }) => {
+const ModalCongras = () => {
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
