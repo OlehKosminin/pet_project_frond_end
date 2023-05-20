@@ -57,10 +57,20 @@
 .petItemBtn {
   margin: 0;
   padding: 0;
+  width: 24px;
+  height: 24px;
   border: none;
-  background-color: transparent;
+  background: transparent;
   position: absolute;
   right: 24px;
   top: 24px;
   cursor: pointer;
+  stroke: $active-blue-color;
+  border-radius: 24px;
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+    stroke: $default-white-color;
+  }
 }

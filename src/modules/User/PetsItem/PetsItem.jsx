@@ -1,15 +1,18 @@
 import css from "./PetsItem.module.scss";
-import trashIcon from "../../../assets/image/icons/trash.svg";
+import Icon from "../components/Icons";
+import { useDispatch } from "react-redux";
+import { deletePet } from "../../../redux/pets/pets-operations";
 
 const PetsItem = ({ pet }) => {
-  const { id, photo, name, birthday, breed, comments } = pet;
+  const { _id, image, name, birthday, breed, comments } = pet;
+  const dispatch = useDispatch();
 
   const deletePetItem = () => {
-    console.log(id);
+    dispatch(deletePet(_id));
   };
   return (
     <li className={css.petItem}>
-      <img src={photo} alt={name} className={css.petPhoto} />
+      <img src={image} alt={name} className={css.petPhoto} />
       <ul className={css.petInfo}>
         <li className={css.petInfoField}>
           <span className={css.petInfoTitle}>Name:&#32;</span>
@@ -29,7 +32,7 @@ const PetsItem = ({ pet }) => {
         </li>
       </ul>
       <button type="button" className={css.petItemBtn} onClick={deletePetItem}>
-        <img src={trashIcon} alt="trash icon" style={{ stroke: "white" }} />
+        <Icon id="trash" />
       </button>
     </li>
   );
