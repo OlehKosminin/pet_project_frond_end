@@ -11,11 +11,14 @@ import { updUserInfo } from "../../../redux/auth/auth-operations";
 
 const UserData = () => {
   const dispatch = useDispatch();
-
-  const { name, email, birthday, phone, city, avatarUrl, token, _id } =
-    useSelector((state) => {
+  const { token } = useSelector((state) => state.auth);
+  const { name, email, birthday, phone, city, avatar, _id } = useSelector(
+    (state) => {
       return state.auth.user;
-    });
+    }
+  );
+  // console.log("token: ", token);
+  // console.log("_id: ", _id);
 
   const [user, setUser] = useState({
     name,
@@ -23,7 +26,7 @@ const UserData = () => {
     birthday,
     phone,
     city,
-    avatarUrl,
+    avatar,
     token,
     _id,
   });
@@ -42,7 +45,7 @@ const UserData = () => {
   const photoPrewiew = (e) => {
     const imageFile = e.target.files[0];
     const imageURL = URL.createObjectURL(imageFile);
-    setUser({ ...user, avatarUrl: imageURL });
+    setUser({ ...user, avatar: imageURL });
     setPhotoEdit(true);
   };
 
