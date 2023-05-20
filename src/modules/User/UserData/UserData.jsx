@@ -43,15 +43,12 @@ const UserData = () => {
   const photoPrewiew = (e) => {
     const imageFile = e.target.files[0];
     setUser({ ...user, avatar: imageFile });
-    console.log("{ ...user, avatar: imageFile }: ", {
-      ...user,
-      avatar: imageFile,
-    });
+    changePhoto(imageFile);
     setPhotoEdit(true);
   };
 
-  const changePhoto = () => {
-    sendInfo();
+  const changePhoto = (photo) => {
+    sendInfo(photo);
     setPhotoEdit(false);
   };
 
