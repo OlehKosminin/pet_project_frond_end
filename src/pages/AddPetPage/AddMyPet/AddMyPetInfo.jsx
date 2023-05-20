@@ -1,9 +1,12 @@
 import React, { useState, useCallback } from "react";
 import { Formik, Form, Field } from "formik";
+
 import contactForm from "./addMyPet.module.css";
-import style from "../addPetPage.module.css";
+import style from "../addPetPage.module.scss";
 import { SvgSelector } from "../cvgSelector/SvgSelector";
+
 import avatarInput from "../img/avatarInput.png";
+
 import { addMyPet } from "../petsApi/petsApi";
 
 const AddMyPetInfo = ({ onClick, date }) => {
@@ -13,6 +16,7 @@ const AddMyPetInfo = ({ onClick, date }) => {
 
   const [imageUrl, setImageUrl] = useState("");
   const [avatarFile, setAvatarFile] = useState(null);
+  const [isBtnSubmit, setIsBtnSubmit] = useState(false);
   // const [isMyPet, setIsMyPet] = useState(date);
 
   const handleAvatarChange = (e) => {
@@ -46,11 +50,11 @@ const AddMyPetInfo = ({ onClick, date }) => {
     try {
       const formData = new FormData();
       if (avatarFile) {
-        formData.append("avatar", avatarFile);
+        formData.append("photoURL", avatarFile);
       } // change to  "photoURL"
       formData.append("comments", values.comments);
       formData.append("name", date.name);
-      formData.append("data", date.birthday);
+      formData.append("data", Date.parse(date.birthday));
       formData.append("breed", date.breed);
       formData.append("category", "your pet");
       for (let value of formData.values()) {
@@ -102,10 +106,14 @@ const AddMyPetInfo = ({ onClick, date }) => {
               rows="3"
               name="comments"
               placeholder="Your comments"
-              style={errors.comments && touched.comments ? borderStyle : {}}
+              style={
+                isBtnSubmit && errors.comments && touched.comments
+                  ? borderStyle
+                  : {}
+              }
             />
             <div className={contactForm.error}>
-              {errors.comments && touched.comments && (
+              {isBtnSubmit && errors.comments && touched.comments && (
                 <div>{errors.comments}</div>
               )}
             </div>
@@ -118,11 +126,14 @@ const AddMyPetInfo = ({ onClick, date }) => {
                   className={style.btnCancel}
                 >
                   <SvgSelector id="arrowLeft" />
-                  Cancel
+                  Back
                 </button>
               </div>
               <div className={style.wrapper}>
                 <button
+                  onClick={() => {
+                    setIsBtnSubmit(true);
+                  }}
                   type="submit"
                   disabled={isSubmitting}
                   className={style.btnNext}

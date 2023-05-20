@@ -1,9 +1,10 @@
-import style from "./addPetPage.module.css";
+import style from "./addPetPage.module.scss";
 import styleBtn from "./choosenBtn.module.css";
 
 import { SvgSelector } from "./cvgSelector/SvgSelector";
 
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import { activeColor, activeTitle } from "./utils/activeColor";
 
@@ -212,13 +213,15 @@ const AddPetPage = () => {
       {activeForm === "" && (
         <div className={style.downSectionBtn}>
           <div className={style.wrapper}>
-            <button
+            <Link
+              to={"/"}
               onClick={() => setActiveForm("")}
               className={style.btnCancel}
             >
               <SvgSelector id="arrowLeft" />
-              Back
-            </button>
+              {/* Back */}
+              Cancel
+            </Link>
           </div>
           <div className={style.wrapper}>
             <button
