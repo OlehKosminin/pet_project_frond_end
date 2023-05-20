@@ -1,21 +1,48 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-axios.defaults.baseURL = "https://yourpet-backend.onrender.com/api";
 
-export const getNoticeByCategory = createAsyncThunk(
-  "notices/getNoticeByCategory",
-  async ({ category, page = 1, limit = 10 }, { rejectWithValue }) => {
+import * as api from "../../shared/services/noties";
+// axios.defaults.baseURL = "https://pet-project-backend.onrender.com/api";
+// import instance from "../../shared/services/auth";
+export const fetchAllNotices = createAsyncThunk(
+  "notice/fetch-all",
+  async (data, thunkAPI) => {
     try {
-      const { data } = await axios.get(
-        `/notices?category=${category}&page=${page}&limit=${limit}`
-      );
-      console.log(data);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
+      const result = await api.getAllNotices(data);
+      console.log(result, "resultOperation");
+      return result;
+    } catch ({ response }) {
+      return thunkAPI.rejectWithValue(response.data);
     }
   }
 );
+
+// export const getNoticeByCategory = createAsyncThunk(
+//   "notices/getNoticeByCategory",
+//   async ({ category, page = 1, limit = 10 }, { rejectWithValue }) => {
+//     try {
+//       const { data } = await axios.get(
+//         `/notices?category=${category}&page=${page}&limit=${limit}`
+//       );
+//       console.log(data, "dataOperation");
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
+// export const fetchNoticesByCategory = createAsyncThunk(
+//   'notices/category',
+//   async (category, thunkAPI) => {
+//     try {
+//       const response = await instance.get(`/notices/category/${category}`);
+//       console.log(response.data, "respDataOperation")
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 export const getSingleNotice = createAsyncThunk(
   "notices/getSingleNotice",
   async (id, { rejectWithValue }) => {
