@@ -4,27 +4,19 @@ import "react-datepicker/dist/react-datepicker.css";
 import css from "./UserData.module.scss";
 import Logout from "../LogoutBtn/LogoutBtn";
 import Icon from "../components/Icons";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getCurrentUser } from "../../../redux/user/user-selectors";
+import { updateUser } from "../../../redux/user/user-operations";
 
 const UserData = () => {
+  const user = useSelector(getCurrentUser);
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
-  const { name, email, birthday, phone, city, avatar, _id } = useSelector(
-    (state) => {
-      return state.auth.user;
-    }
-  );
+  // useEffect(() => {
+  //   dispatch(updateUser());
+  // }, [dispatch]);
 
-
-  const [user, setUser] = useState({
-    name: "Andy",
-    email: "anna00@gmail.com",
-    birthday: "01.01.2010",
-    phone: "",
-
-    // phone: "+380979336571",
-    city: "Kyiv",
-    photo: "",
-  });
+  // console.log(user);
 
   const [nameEdit, setNameEdit] = useState(false);
   const [emailEdit, setEmailEdit] = useState(false);
@@ -32,28 +24,32 @@ const UserData = () => {
   const [phoneEdit, setPhoneEdit] = useState(false);
   const [cityEdit, setCityEdit] = useState(false);
   const [photoEdit, setPhotoEdit] = useState(false);
+  const [newAvatar, setNewAvatar] = useState(false);
+
+  const [photoLoaded, setPhotoLoaded] = useState(false);
 
   const photoPrewiew = (e) => {
     const imageFile = e.target.files[0];
-    setUser({ ...user, avatar: imageFile });
-
+    const imageURL = URL.createObjectURL(imageFile);
+    setPhotoLoaded(imageURL);
+    setNewAvatar(imageFile);
     setPhotoEdit(true);
   };
 
   const changePhoto = () => {
-    // setUser({ ...user, photo: photoEdit });
+    dispatch(updateUser({ ...user, avatar: newAvatar }));
     setPhotoEdit(false);
   };
 
   const changeName = (e) => {
     e.preventDefault();
-    setUser({ ...user, name: e.currentTarget.name.value });
+    dispatch(updateUser({ ...user, name: e.currentTarget.name.value }));
     setNameEdit(false);
   };
 
   const changeEmail = (e) => {
     e.preventDefault();
-    setUser({ ...user, email: e.currentTarget.email.value });
+    dispatch(updateUser({ ...user, email: e.currentTarget.email.value }));
     setEmailEdit(false);
   };
 
@@ -74,26 +70,30 @@ const UserData = () => {
 
   const changeBirthday = (e) => {
     const bday = formattedDate(e);
-    setUser({ ...user, birthday: bday });
+    dispatch(updateUser({ ...user, birthday: bday }));
     setBirthdayEdit(false);
   };
 
   const changePhone = (e) => {
     e.preventDefault();
-    setUser({ ...user, phone: e.currentTarget.phone.value });
+    dispatch(updateUser({ ...user, phone: e.currentTarget.phone.value }));
     setPhoneEdit(false);
   };
 
   const changeCity = (e) => {
     e.preventDefault();
-    setUser({ ...user, city: e.currentTarget.city.value });
+    dispatch(updateUser({ ...user, city: e.currentTarget.city.value }));
     setCityEdit(false);
   };
 
   return (
     <div className={css.userData}>
       <div className={css.userImgWrapper}>
-        <img className={css.userImg} src={user.photo} alt="user" />
+        <img
+          className={css.userImg}
+          src={!photoLoaded ? user.avatarUrl : photoLoaded}
+          alt="user"
+        />
         {!photoEdit ? (
           <div className={css.btnWrapper}>
             <div className={css.photoInputWrapper}>
@@ -309,3 +309,21 @@ const UserData = () => {
 };
 
 export default UserData;
+
+// const { token } = useSelector((state) => state.auth);
+// const { name, email, birthday, phone, city, avatar, _id } = useSelector(
+//   (state) => {
+//     return state.auth.user;
+//   }
+// );
+
+// const [user, setUser] = useState({
+//   name: "Andy",
+//   email: "anna00@gmail.com",
+//   birthday: "01.01.2010",
+//   phone: "",
+
+//   // phone: "+380979336571",
+//   city: "Kyiv",
+//   photo: "",
+// });

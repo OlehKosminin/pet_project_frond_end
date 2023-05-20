@@ -1,19 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 import {
   getCurrentUser,
   addToFavorites,
   getFavorite,
   deleteFromFavorite,
-  updateInfoUser,
+  updateUser,
   updateAvatar,
   deletePets,
-} from './user-operations';
+} from "./user-operations";
 
 const userInitialState = {
   user: {},
-  userName: '',
+  userName: "",
   pets: null,
-  image: '',
+  image: "",
   notices: [],
   favorite: [],
   error: null,
@@ -30,7 +30,7 @@ function UserFulfilled(state, { payload }) {
 }
 
 const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState: userInitialState,
   reducers: {
     deletePet: (state, { payload }) => {
@@ -39,12 +39,12 @@ const userSlice = createSlice({
       // state.startDate = payload;
     },
     deleteFavoriteObj: (state, { payload }) => {
-      state.favorite = state.favorite.filter(item => item._id !== payload);
+      state.favorite = state.favorite.filter((item) => item._id !== payload);
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-      .addCase(getCurrentUser.pending, state => {
+      .addCase(getCurrentUser.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(getCurrentUser.fulfilled, UserFulfilled)
@@ -62,7 +62,7 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.error = payload.message;
       })
-      .addCase(getFavorite.pending, state => {
+      .addCase(getFavorite.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(getFavorite.fulfilled, (state, { payload }) => {
@@ -78,7 +78,7 @@ const userSlice = createSlice({
       .addCase(deleteFromFavorite.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         if (Array.isArray(state.favorite)) {
-          state.favorite = state.favorite.filter(id => id !== payload.id);
+          state.favorite = state.favorite.filter((id) => id !== payload.id);
         }
       })
       .addCase(deleteFromFavorite.rejected, (state, { payload }) => {
@@ -86,33 +86,19 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.error = payload;
       })
-      .addCase(updateInfoUser.pending, state => {
+      .addCase(updateUser.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(updateInfoUser.fulfilled, (state, { payload }) => {
-        console.log(payload);
+      .addCase(updateUser.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.user = payload;
         state.error = null;
       })
-      .addCase(updateInfoUser.rejected, (state, { payload }) => {
+      .addCase(updateUser.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
       })
-      .addCase(updateAvatar.pending, state => {
-        state.isLoading = true;
-      })
-      .addCase(updateAvatar.fulfilled, (state, { payload }) => {
-        console.log(payload);
-        state.isLoading = false;
-        state.user.image = payload.image;
-        state.error = null;
-      })
-      .addCase(updateAvatar.rejected, state => {
-        state.isLoading = false;
-        // state.error = payload;
-      })
-      .addCase(deletePets.pending, state => {
+      .addCase(deletePets.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(deletePets.fulfilled, (state, { payload }) => {
@@ -129,3 +115,17 @@ const userSlice = createSlice({
 
 export const userReducer = userSlice.reducer;
 export const { deletePet, deleteFavoriteObj } = userSlice.actions;
+
+// .addCase(updateAvatar.pending, (state) => {
+//   state.isLoading = true;
+// })
+// .addCase(updateAvatar.fulfilled, (state, { payload }) => {
+//   console.log(payload);
+//   state.isLoading = false;
+//   state.user.image = payload.image;
+//   state.error = null;
+// })
+//       .addCase(updateAvatar.rejected, (state) => {
+//   state.isLoading = false;
+//   // state.error = payload;
+// })
