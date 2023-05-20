@@ -2,7 +2,7 @@ import css from "./LogoutBtn.module.scss";
 import Modal from "../../../shared/components/Modal/Modal";
 import ModalApproveAction from "../ModalApproveAction/ModalApproveAction";
 import { useState } from "react";
-import logoutIcon from "../../../assets/image/icons/logout.svg";
+import Icon from "../components/Icons";
 
 const Logout = () => {
   const [showModal, setShowModal] = useState(false);
@@ -18,7 +18,7 @@ const Logout = () => {
   return (
     <div className={css.wrapper}>
       <button type="button" className={css.btn} onClick={showModalWindow}>
-        <img className={css.icon} src={logoutIcon} alt="logout icon" />
+        <Icon id="logout" />
         <span className={css.text}>Log Out</span>
       </button>
       {showModal && (

@@ -16,18 +16,21 @@
 
 .btn {
   margin: 0;
-  padding: 0;
+  padding: 0, 16;
+  stroke: $active-blue-color;
+  color: $grey-color;
   border: none;
-  background-color: transparent;
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 16px;
-}
+  border-radius: 40px;
 
-.icon {
-  width: 24px;
-  height: 24px;
+  &:hover,
+  &:focus {
+    background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+    color: $default-white-color;
+    stroke: $default-white-color;
+  }
 }
 
 .text {
@@ -37,5 +40,5 @@
   font-size: 16px;
   line-height: 1.375;
   letter-spacing: 0.04em;
-  color: $grey-color;
+  padding-left: 16px;
 }
