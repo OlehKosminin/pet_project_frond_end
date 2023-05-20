@@ -36,7 +36,7 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (store, { payload }) => {
         const { token } = payload;
         store.loading = false;
-        store.user = payload.result;
+        store.user = payload.user;
         store.token = token;
         store.isLogin = true;
       })
@@ -49,11 +49,8 @@ const authSlice = createSlice({
         store.error = null;
       })
       .addCase(current.fulfilled, (store, { payload }) => {
-        console.log("payload: ", payload);
-        const { name, email } = payload;
         store.loading = false;
-        store.user.name = name;
-        store.user.email = email;
+        store.user = payload;
         store.isLogin = true;
       })
       .addCase(current.rejected, (store, { payload }) => {

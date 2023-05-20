@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const instance = axios.create({
-  // baseURL: "http://localhost:3000/",
+  baseURL: "http://localhost:3000/",
 
-  baseURL: "https://pet-project-backend.onrender.com",
+  // baseURL: "https://pet-project-backend.onrender.com",
 });
 
 const setToken = (token) => {
@@ -26,11 +26,9 @@ export const login = async (data) => {
 };
 
 export const getCurrent = async (token) => {
-  console.log("token: ", token);
   try {
     setToken(token);
     const { data } = await instance.get("api/auth/current");
-    console.log("data: ", data);
     return data;
   } catch (error) {
     setToken();
@@ -45,7 +43,26 @@ export const logout = async () => {
 };
 
 export const updUserInfo = async (data) => {
-  const result = await instance.post("api/auth/user-upd", data);
+  console.log("data: ", data);
+  const { token, avatarUrl } = data;
+  const formData = new FormData();
+  formData.append("image", avatarUrl);
+  const header = {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  const result = await instance.patch(
+    "api/auth/user-upd",
+    {
+      ...data,
+      avatarUrl: formData,
+    },
+    header
+  );
+
   return result;
 };
 

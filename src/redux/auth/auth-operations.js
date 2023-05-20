@@ -32,7 +32,6 @@ export const current = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     try {
       const { auth } = getState();
-      console.log("auth: ", auth);
       const data = await api.getCurrent(auth.token);
       return data;
     } catch ({ responce }) {
@@ -62,10 +61,20 @@ export const logout = createAsyncThunk(
 );
 export const updUserInfo = createAsyncThunk(
   "auth/user-upd",
-  async (_, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
-      const data = await api.updUserInfo();
-      return data;
+      // const formData = new FormData();
+      // formData.append("image", image);
+      // const header = {
+      //   headers: {
+      //     Accept: "application/json",
+      //     Authorization: `Bearer ${token}`,
+      //     "Content-Type": "multipart/form-data",
+      //   },
+      // };
+      const result = await api.updUserInfo(data);
+      console.log("data: ", data);
+      return result;
     } catch ({ responce }) {
       return rejectWithValue(responce);
     }
