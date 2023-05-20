@@ -63,7 +63,7 @@ export const logout = createAsyncThunk(
 export const updUserInfo = createAsyncThunk(
   "auth/user-upd",
   async (data, { rejectWithValue }) => {
-    console.log("data: ", data);
+    console.log("data operation: ", data);
     const { token, avatar } = data;
     try {
       const formData = new FormData();
