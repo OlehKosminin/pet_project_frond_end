@@ -42,6 +42,11 @@ export const logout = async () => {
   return data;
 };
 
+export const updUserInfo = async (data) => {
+  const result = await instance.get("/api/auth/user-upd");
+  return result;
+};
+
 // export const updUserInfo = async (data) => {
 //   console.log("data auth: ", data);
 //   const { token, avatar } = data;

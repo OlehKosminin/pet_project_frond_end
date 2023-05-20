@@ -11,7 +11,7 @@ import { blue } from "@mui/material/colors";
 
 import Title from "../../../shared/components/Title/Title";
 
-import styles from "../../../shared/components/sass/authPages.module.scss";
+import styles from "../../../shared/components/sass/authForm.module.scss";
 import { loginSchema } from "../../../shared/components/YupSchemas/authSchemas";
 
 import { login } from "../../../redux/auth/auth-operations";

@@ -1,49 +1,40 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
+import * as api from "../../shared/services/pets";
 
-export const accessToken = {
-  set(accessToken) {
-    axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-  },
-  unset() {
-    axios.defaults.headers.common.Authorization = '';
-  },
-};
-// змінила назву з getPet на getFriends
-export const getFriends = createAsyncThunk(
-  'current/user',
-  async (credentials, { rejectWithValue }) => {
+export const getPets = createAsyncThunk(
+  "pets/getAll",
+  async (_, { rejectWithValue }) => {
     try {
-      await axios.get('/pets/current', credentials);
-    } catch (error) {
-      return rejectWithValue(error.message);
+      const result = await api.getAll();
+      return result;
+    } catch ({ responce }) {
+      return rejectWithValue(responce);
     }
   }
 );
 
-// додає картку улюбленця
-export const createPet = createAsyncThunk(
-  'pets/create',
-  async ({ values, accessToken, avatar }, thunkAPI) => {
+export const addPet = createAsyncThunk(
+  "pets/add",
+  async (data, { rejectWithValue }) => {
     try {
-      const formData = new FormData();
-      formData.append('avatar', avatar);
-      formData.append('name', values.name);
-      formData.append('birthday', values.birthday);
-      formData.append('breed', values.breed);
-      formData.append('comments', values.comments);
-      const header = {
-        headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${accessToken}`,
-        },
-      };
-      const { data } = await axios.post('/pets', formData, avatar, header);
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue();
+      const result = await api.addPet(data);
+      return result;
+    } catch ({ responce }) {
+      return rejectWithValue(responce);
+    }
+  }
+);
+
+export const deletePet = createAsyncThunk(
+  "pets/delete",
+  async (data, { rejectWithValue }) => {
+    try {
+      await api.deletePet(data);
+      const result = await api.getAll();
+      return result;
+    } catch ({ responce }) {
+      return rejectWithValue(responce);
     }
   }
 );

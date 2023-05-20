@@ -1,9 +1,8 @@
 import css from "./ModalApproveAction.module.scss";
-import crossIcon from "../../../assets/image/icons/cross.svg";
-import logoutIcon from "../../../assets/image/icons/logout-white.svg";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../redux/auth/auth-operations";
+import Icon from "../components/Icons";
 
 const ModalApproveAction = ({ close }) => {
   const dispatch = useDispatch();
@@ -17,7 +16,7 @@ const ModalApproveAction = ({ close }) => {
   return (
     <div className={css.modal}>
       <button type="button" className={css.closeBtn} onClick={close}>
-        <img className={css.icon} src={crossIcon} alt="cross icon" />
+        <Icon id="cross" />
       </button>
       <h2 className={css.title}>Already leaving?</h2>
       <div className={css.btnWrapper}>
@@ -26,7 +25,7 @@ const ModalApproveAction = ({ close }) => {
         </button>
         <button type="button" className={css.actionBtn} onClick={handleLogOut}>
           <span className={css.actionBtnText}>Yes</span>
-          <img src={logoutIcon} alt="logout icon" style={{ stroke: "white" }} />
+          <Icon id="logout" />
         </button>
       </div>
     </div>

@@ -1,5 +1,5 @@
-import RegisterForm from "../../modules/AuthForms/RegisteForm/RegisterForm";
-import styles from "./register-page.module.scss";
+import RegisterForm from "../../modules/AuthForms/RegisterForm/RegisterForm";
+import styles from "../../shared/components/sass/authPages.module.scss";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
