@@ -2,8 +2,8 @@
 import css from "./UserPage.module.scss";
 import UserData from "../UserData/UserData";
 import PetList from "../PetsList/PetsList";
-import plusIcon from "../../../assets/image/icons/plus-small-white.svg";
 import { useNavigate } from "react-router-dom";
+import Icon from "../components/Icons";
 
 const User = () => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const User = () => {
           <h2 className={css.title}>My pets:</h2>
           <button type="button" className={css.btn} onClick={handleAddPet}>
             <span className={css.btnText}>AddPet</span>
-            <img className={css.icon} src={plusIcon} alt="plus icon" />
+            <Icon id="plus" />
           </button>
         </div>
         <PetList />

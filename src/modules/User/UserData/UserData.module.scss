@@ -74,6 +74,13 @@ button {
   width: 24px;
 }
 
+.cameraIcon {
+  width: 254px;
+  height: 24px;
+  border-radius: 50%;
+  stroke: $active-blue-color;
+}
+
 .photoInputBtn {
   position: relative;
   display: flex;
@@ -178,11 +185,34 @@ button {
   border-color: transparent;
   padding: 0;
   margin: 0;
+  width: 24px;
+  height: 24px;
+  fill: $active-blue-color;
+  border-radius: 50%;
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+    fill: $default-white-color;
+  }
 }
 
-// input[type="date"]::-webkit-calendar-picker-indicator {
-//   display: none;
-// }
+.userInfoCheckBtn {
+  border: none;
+  border-color: transparent;
+  padding: 0;
+  margin: 0;
+  width: 24px;
+  height: 24px;
+  stroke: $green-color;
+  border-radius: 50%;
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+    stroke: $default-white-color;
+  }
+}
 
 .datepicker {
   position: absolute;
