@@ -1,10 +1,299 @@
-.modalNotice{}
+@import "../../index.scss";
 
-.noticeAvatarImg{}
+.modalNotice{
+  padding: 44px 12px 16px 12px;
 
-.modalNoticeTitle{}
+  @media screen and (min-width: 768px) {
+    padding: 32px 31px 24px 32px;
+  }
+  
+  @media screen and (min-width: 1200px) {
+   
+  }
+}
+.modalNoticeBody{
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
+  
+  @media screen and (min-width: 1200px) {
+    display: flex;
+  }
+}
 
-.petInfoList{}
+.noticeWrapper{
 
-.petInfoListItem{}
+  @media screen and (min-width: 768px) {
+    margin-bottom: 28px;
+  }
+  
+  @media screen and (min-width: 1200px) {
+   
+  }
+}
 
+.noticeAvatarImg{
+align-items: center;
+margin-left: 8px;
+margin-bottom: 12px;
+
+width: 240px;
+height: 240px;
+border-radius: 0px 0px 40px 40px;
+
+@media screen and (min-width: 768px) {
+  width: 262px;
+height: 298px;
+
+margin-right: 24px;
+}
+
+@media screen and (min-width: 1200px) {
+ 
+}
+}
+
+.modalNoticeTitle{
+  font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 24px;
+line-height: 33px;
+letter-spacing: -0.01em;
+
+margin-bottom: 22px;
+
+color: $black-color;
+
+@media screen and (min-width: 768px) {
+  font-size: 28px;
+  line-height: 38px;
+
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 1200px) {
+ 
+}
+}
+
+.petInfoList{
+  margin-bottom: 12px;
+}
+
+.petInfoListItem{
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.petInfoListItemTitle{
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  
+
+  width: 30%;
+  
+  color: $black-color;
+
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    line-height: 22px;
+  }
+  
+  @media screen and (min-width: 1200px) {
+   
+  }
+}
+
+.petInfoListItemValue{
+  font-family: 'Manrope';
+font-style: normal;
+font-weight: 500;
+font-size: 12px;
+line-height: 16px;
+
+width: 70%;
+
+color: $black-color;
+
+@media screen and (min-width: 768px) {
+  font-size: 16px;
+  line-height: 22px;
+}
+
+@media screen and (min-width: 1200px) {
+ 
+}
+}
+
+.petContact{
+  font-family: 'Manrope';
+font-style: normal;
+font-weight: 500;
+font-size: 12px;
+line-height: 16px;
+display: flex;
+align-items: center;
+text-decoration-line: underline;
+
+color: $accent-yelow-color;
+
+@media screen and (min-width: 768px) {
+  font-size: 16px;
+  line-height: 22px;
+}
+
+@media screen and (min-width: 1200px) {
+ 
+}
+}
+
+.comments{
+  margin-bottom: 12px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 70px;
+  }
+  
+  @media screen and (min-width: 1200px) {
+   
+  }
+}
+
+.commentsTitle{
+  display: inline;
+
+  font-family: 'Manrope';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 19px;
+letter-spacing: 0.04em;
+
+color: $black-color;
+
+@media screen and (min-width: 768px) {
+  font-size: 16px;
+  line-height: 22px;
+}
+
+@media screen and (min-width: 1200px) {
+ 
+}
+}
+
+.commentsText{
+display: inline;
+
+font-family: "Manrope Medium";
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 19px;
+letter-spacing: 0.04em;
+
+color: $black-color;
+
+@media screen and (min-width: 768px) {
+  font-size: 16px;
+  line-height: 22px;
+}
+
+@media screen and (min-width: 1200px) {
+ 
+}
+}
+
+.modalNoticeBtns{
+  @media screen and (min-width: 768px) {
+  display: flex;
+  justify-content: end;
+  }
+  
+  @media screen and (min-width: 1200px) {
+   
+  }
+}
+
+.modalNoticeBtnContact{
+  display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+
+width: 256px;
+padding: 8px 20px;
+gap: 8px;
+
+font-family: "Manrope Bold";
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 22px;
+
+color: $active-blue-color;
+
+border: 2px solid $active-blue-color;
+border-radius: 40px;
+
+@media screen and (min-width: 768px) {
+  width: 129px;
+  margin-left: 17px;
+  
+}
+
+@media screen and (min-width: 1200px) {
+ 
+}
+}
+
+.modalNoticeBtnAdd{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 256px;
+  padding: 8px 20px;
+  gap: 8px;  
+  
+  background: #54ADFF;
+  border-radius: 40px;
+  border: none;
+
+  font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 22px;
+
+letter-spacing: 0.04em;
+
+color: $bg-color;
+
+@media screen and (min-width: 768px) {
+  width: 129px;
+  
+ 
+}
+
+@media screen and (min-width: 1200px) {
+ 
+}
+}
+
+.heartSvg{
+width: 18px;
+height: 16px;
+}
+
+@media screen and (min-width: 768px) {
+ 
+}
+
+@media screen and (min-width: 1200px) {
+ 
+}
