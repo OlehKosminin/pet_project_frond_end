@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+
 import {getCurrent} from "../../shared/services/friends"
 
 export const getFriends = createAsyncThunk(
