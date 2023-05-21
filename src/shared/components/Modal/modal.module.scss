@@ -12,7 +12,6 @@
 .modal {
   margin-left: 20px;
   margin-right: 20px;
-  width: 280px;
   border-radius: 20px;
 
   position: absolute;
@@ -23,7 +22,6 @@
   background-color: $default-white-color  ;
 
   @media screen and (min-width: 768px) {
-  width: 681px;
 
   margin-left: 43px;
   margin-right: 44px;
@@ -41,8 +39,8 @@
   border-radius: 50%;
   cursor: pointer;
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: 17px;
+  right: 17px;
   transition: box-shadow linear 350ms;
   
 
@@ -51,6 +49,16 @@
   &:hover {
   background: #FDF7F2;
   box-shadow: 7px 13px 14px rgba(116, 177, 232, 0.24);
+  }
+
+  @media screen and (min-width: 768px) {
+    top: 28px;
+  right: 28px;
+  }
+  
+  @media screen and (min-width: 1200px) {
+    top: 29px;
+  right: 29px;
   }
 }
 

@@ -7,6 +7,9 @@ const ModalNotice = ({ close, noticeAvatarImgSrc }) => {
   return (
     <div className={css.modalNotice}>
       <div className={css.modalNoticeBody}>
+        <div className={css.flagWrapper}>
+          <span className={css.categoryFlag}>In good hands</span>
+        </div>
         <img
           src={
             noticeAvatarImgSrc === undefined

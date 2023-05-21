@@ -48,3 +48,16 @@ Modal.propTypes = {
   children: PropTypes.element,
   close: PropTypes.func.isRequired,
 };
+
+// import ModalNotice from "../../modules/ModalNotice/ModalNotice";
+// import ModalCongrats from "../../modules/ModalCongrats/ModalCongrats";
+// import { useToggle } from "../../hooks/useToggle";
+// import Modal from "../../shared/components/Modal/Modal";
+
+// const { isOpen, open, close } = useToggle(false);
+
+// {isOpen && (
+//   <Modal isOpen={isOpen} close={close}>
+//     <ModalNotice close={close} />
+//   </Modal>
+// )}
