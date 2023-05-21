@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import instance from "../../shared/services/auth";
 import * as api from "../../shared/services/auth";
 import axios from "axios";
-// axios.defaults.baseURL = "http://localhost:3000/";
+// axios.defaults.baseURL = "'https://yourpet-backend.onrender.com/api'";
 
 export const singup = createAsyncThunk(
   "auth/singup",

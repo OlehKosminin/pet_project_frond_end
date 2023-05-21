@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import css from "./UserData.module.scss";
@@ -13,7 +14,6 @@ const UserData = () => {
       return state.auth.user;
     }
   );
-
 
   const [user, setUser] = useState({
     name: "Andy",

@@ -29,7 +29,7 @@ const AddPetPage = () => {
       setActiveForm("yourPet");
     } else if (message === "toForSellInfo") {
       setActiveForm("sellPetInfo");
-    } else if (message === "cell") {
+    } else if (message === "sell") {
       setActiveForm("sell");
     } else if (message === "lost/found") {
       setActiveForm("lost");
@@ -185,7 +185,7 @@ const AddPetPage = () => {
         <AddPetForSellDetails onClick={backClick} addr={"toForSellInfo"} />
       )}
       {activeForm === "sellPetInfo" && (
-        <AddPetForSellInfo onClick={backClick} date={date} addr={"cell"} />
+        <AddPetForSellInfo onClick={backClick} date={date} addr={"sell"} />
       )}
 
       {activeForm === "lost" && (
@@ -214,7 +214,7 @@ const AddPetPage = () => {
         <div className={style.downSectionBtn}>
           <div className={style.wrapper}>
             <Link
-              to={"/"}
+              to={"/notices/:categori"}
               onClick={() => setActiveForm("")}
               className={style.btnCancel}
             >

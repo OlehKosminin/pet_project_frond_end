@@ -4,9 +4,11 @@ import contactForm from "./addPetForSell.module.css";
 import style from "../addPetPage.module.scss";
 import gender from "./addPetForSellInfo.module.css";
 
+import { useDispatch } from "react-redux";
+import { addNotices } from "../../../redux/noties/noties-operations";
+
 import { SvgSelector } from "../cvgSelector/SvgSelector";
 import avatarInput from "../img/avatarInput.png";
-import { addMyPet } from "../petsApi/petsApi";
 
 const AddPetForSellInfo = ({ onClick, date, addr }) => {
   const [isBtnSubmit, setIsBtnSubmit] = useState(false);
@@ -20,6 +22,8 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
   const borderStyle = {
     borderColor: "#f43f5e",
   };
+
+  const dispatch = useDispatch();
 
   const colorToggle = (male) => {
     setIsColorToggle(male);
@@ -36,9 +40,6 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
       setAvatarFile(file);
     }
   };
-  // const handleGenderCange = (e) => {
-  //   setIsValueSex(e.target.value);
-  // };
 
   const backClick = useCallback(
     (addr) => {
@@ -53,7 +54,7 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
       case !values.location:
         errors.location = "Location field is required";
         break;
-      case !values.price && addr === "cell":
+      case !values.price && addr === "sell":
         errors.price = "Price field is required";
         break;
 
@@ -78,24 +79,20 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
   };
 
   const handleSubmit = async (values, { setSubmitting }) => {
-    console.log(isButtonCange);
-
     try {
       const formData = new FormData();
-      formData.append("photoURL", avatarFile); // change to  "photoURL"
       formData.append("sex", values.sex);
       formData.append("location", values.location);
-      formData.append("price", values.price);
       formData.append("comments", values.comments);
       formData.append("category", values.category);
       formData.append("title", date.title);
-      formData.append("name", date.name);
-      formData.append("birthday", Date.parse(date.birthday));
+      formData.append("image", avatarFile);
+      formData.append("birthday", Date.parse(date.birthday.toString()));
       formData.append("breed", date.breed);
-      for (let value of formData.values()) {
-        console.log(value);
-      }
-      await addMyPet(formData);
+      formData.append("name", date.name);
+      formData.append("price", values.price.toString());
+
+      dispatch(addNotices(formData));
       setSubmitting(false);
     } catch (error) {
       console.log(error.message);
@@ -233,7 +230,7 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
                 {/* {addr === "cell" && (
                   <div style={{ height: "40px", paddingBottom: "40px" }}></div>
                 )} */}
-                {addr === "cell" && (
+                {addr === "sell" && (
                   <>
                     <label className={contactForm.label}>Price</label>
                     <Field

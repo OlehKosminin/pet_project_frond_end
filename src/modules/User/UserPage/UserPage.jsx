@@ -9,7 +9,7 @@ const User = () => {
   const navigate = useNavigate();
 
   const handleAddPet = () => {
-    navigate("/add-page");
+    navigate("/add-pet");
   };
   return (
     <div className={css.container}>

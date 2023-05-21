@@ -12,7 +12,6 @@ import "react-datepicker/dist/react-datepicker.css";
 const AddPetForSellDetails = ({ onClick, addr }) => {
   const [isBtnSubmit, setIsBtnSubmit] = useState(false);
 
-  console.log(addr);
   const borderStyle = {
     borderColor: "#f43f5e",
   };
@@ -173,7 +172,7 @@ const AddPetForSellDetails = ({ onClick, addr }) => {
                   maxDate={new Date()}
                   onChange={(date) => {
                     handleBirthdayChange(setFieldValue, null, yyyymmdd(date));
-                    console.log("yyyymmdd", yyyymmdd(date));
+                    // console.log("yyyymmdd", yyyymmdd(date));
                   }}
                 />
               </div>

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  // addNotices,
+  addNotices,
   // deleteNotice,
   // getNewNotice,
   fetchAllNotices,
@@ -43,29 +43,29 @@ const noticesSlice = createSlice({
       })
       .addCase(fetchAllNotices.rejected, (state, action) => {
         handleReject(state, action);
+      })
+      // .addCase(getSingleNotice.fulfilled, (state, { payload }) => {
+      //   state.oneNotice = payload;
+      //   state.isLoading = false;
+      //   state.error = null;
+      // })
+      // .addCase(getSingleNotice.rejected, (state, action) => {
+      //   handleReject(state, action);
+      // })
+      // .addCase(getNewNotice.fulfilled, (state, { payload }) => {
+      //   state.notices.push(payload);
+      //   state.isLoading = false;
+      // })
+      // .addCase(getNewNotice.rejected, (state, action) => {
+      //   handleReject(state, action);
+      // })
+      .addCase(addNotices.fulfilled, (state, { payload }) => {
+        state.notices.push(payload);
+        state.isLoading = false;
+      })
+      .addCase(addNotices.rejected, (state, action) => {
+        handleReject(state, action);
       });
-    // .addCase(getSingleNotice.fulfilled, (state, { payload }) => {
-    //   state.oneNotice = payload;
-    //   state.isLoading = false;
-    //   state.error = null;
-    // })
-    // .addCase(getSingleNotice.rejected, (state, action) => {
-    //   handleReject(state, action);
-    // })
-    // .addCase(getNewNotice.fulfilled, (state, { payload }) => {
-    //   state.notices.push(payload);
-    //   state.isLoading = false;
-    // })
-    // .addCase(getNewNotice.rejected, (state, action) => {
-    //   handleReject(state, action);
-    // })
-    // .addCase(addNotices.fulfilled, (state, { payload }) => {
-    //   state.notices.push(payload);
-    //   state.isLoading = false;
-    // })
-    // .addCase(addNotices.rejected, (state, action) => {
-    //   handleReject(state, action);
-    // })
     // .addCase(deleteNotice.fulfilled, (state, { payload }) => {
     //   state.notices = state.notices.filter(({ _id }) => _id !== payload);
     //   state.isLoading = false;
