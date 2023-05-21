@@ -13,22 +13,6 @@ import { getCurrentUser } from "../../../redux/user/user-selectors";
 const UserData = () => {
   const user = useSelector(getCurrentUser);
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
-  const { name, email, birthday, phone, city, _id, avatarUrl, avatar } =
-    useSelector((state) => {
-      return state.auth.user;
-    });
-
-  const [user, setUser] = useState({
-    name,
-    email,
-    birthday,
-    phone,
-    city,
-    token,
-    avatar,
-    _id,
-  });
 
   const [nameEdit, setNameEdit] = useState(false);
   const [emailEdit, setEmailEdit] = useState(false);

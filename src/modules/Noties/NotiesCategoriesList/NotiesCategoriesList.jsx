@@ -9,7 +9,6 @@ import NotiesCategoryItem from "../NotiesCategotyItem/NotiesCategotyItem";
 import {} from "../../../redux/noties/noties-selector";
 import { fetchAllNotices } from "../../../redux/noties/noties-operations";
 
-
 // const initialState = {
 //   category: "sell",
 //   page: 1,
@@ -20,11 +19,9 @@ const NotiesCategoriesList = () => {
   const [page, setPage] = useState(1);
   // const [categor, setCategor] = useState(category);
   const notices = useSelector((store) => store.noties.notices);
-  
+
   // const [ state, setState ] = useState();
   const dispatch = useDispatch();
-
-  
 
   // useEffect(() => {
   //   setCategor(category);
@@ -35,7 +32,6 @@ const NotiesCategoriesList = () => {
     dispatch(fetchAllNotices(category, page));
   }, [dispatch, category, page]);
   // const [pets, setPets] = useState([]);
-
 
   // const[deletePetId, setDeletePetId]=useState("")
 
@@ -95,7 +91,7 @@ const NotiesCategoriesList = () => {
   //     </div>
   //   </li>
   // ));
- 
+
   return (
     <>
       <div>

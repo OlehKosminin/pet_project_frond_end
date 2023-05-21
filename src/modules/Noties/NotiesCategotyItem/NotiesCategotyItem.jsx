@@ -1,13 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { useSwitch } from "../../../hooks/useSwitch";
+
+import ModalNotice from "../../ModalNotice/ModalNotice";
+import Modal from "../../../shared/components/Modal/Modal";
 
 import NoticesCategoryItemSvgSelector from "./NoticesCategoryItemSvgSelector";
 import css from "./notiesCategoriItem.module.scss";
 
 const NotiesCategotyItem = (notices) => {
   console.log("notices.items: ", notices.items);
+  const { isOpen, open, close } = useSwitch(false);
   // const [expandedLocation, setExpandedLocation] = useState(false);
   const [hoveredCardId, setHoveredCardId] = useState(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflowY = "hidden";
+    }
+    return () => {
+      document.body.style.overflowY = "auto";
+    };
+  }, [isOpen]);
 
   // if (!notices.length) {
   //   return;
@@ -46,15 +60,13 @@ const NotiesCategotyItem = (notices) => {
     const year = date.getFullYear();
     if (year === 1970) {
       const month = String(date.getMonth() + 1).padStart(2, "0");
-      console.log(month, "mesyaz")
+      console.log(month, "mesyaz");
       return `${month} mth`;
     }
-    
-    return `${year - 1970} year`;
-    
-};
 
- 
+    return `${year - 1970} year`;
+  };
+
   const pet = notices.items.map(
     ({
       birthday,
@@ -90,7 +102,7 @@ const NotiesCategotyItem = (notices) => {
           </button>
           {/* <button className={css.favorite}>H</button> */}
           <button
-            // onClick={() => removePets(_id)}
+            onClick={() => removePets(_id)}
             type="button"
             className={css.deletion}
           >
@@ -141,7 +153,9 @@ const NotiesCategotyItem = (notices) => {
 
         <p className={css.animal_description}>{comments}</p>
 
-        <button className={css.more_info_btn}>Learn more</button>
+        <button className={css.more_info_btn} onClick={open}>
+          Learn more
+        </button>
       </li>
     )
   );
@@ -153,6 +167,11 @@ const NotiesCategotyItem = (notices) => {
       ) : (
         <div>
           <ul className={css.wrapper}> {pet}</ul>
+          {isOpen && (
+            <Modal isOpen={isOpen} close={close}>
+              <ModalNotice close={close} />
+            </Modal>
+          )}
         </div>
       )}
     </>
