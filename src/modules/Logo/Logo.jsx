@@ -1,7 +1,7 @@
 import React from 'react';
 import  LogoSvg  from '../../assets/image/logo/logo.svg';
 import { Link } from 'react-router-dom';
-import css from './Logo.module.css';
+import scss from './Logo.module.scss';
 
 function Logo({ handleLinkClick }) {
   const handleClick = () => {
@@ -11,7 +11,7 @@ function Logo({ handleLinkClick }) {
   };
   return (
     <Link to="/main" onClick={handleClick}>
-      <img className={css.logo} src={LogoSvg} alt="YourPetLogo" />
+      <img className={scss.logo} src={LogoSvg} alt="YourPetLogo" />
     </Link>
   );
 }
