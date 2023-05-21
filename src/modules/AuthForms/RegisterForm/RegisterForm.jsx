@@ -11,7 +11,7 @@ import { blue } from "@mui/material/colors";
 
 import Title from "../../../shared/components/Title/Title";
 
-import styles from "../../../shared/components/sass/authPages.module.scss";
+import styles from "../../../shared/components/sass/authForm.module.scss";
 import { registerSchema } from "../../../shared/components/YupSchemas/authSchemas";
 
 import { singup } from "../../../redux/auth/auth-operations";
@@ -35,9 +35,9 @@ export const RegisterForm = () => {
 
   const onSubmit = ({ name, email, password }) => {
     const data = {
-      name: name,
-      email: email,
-      password: password,
+      name,
+      email,
+      password,
     };
 
     if (data.name.trim() === "") {
@@ -153,7 +153,7 @@ export const RegisterForm = () => {
               }}
               onChange={handleChange}
               value={values.email}
-              error={touched.email && errors.email}
+              error={touched.email && Boolean(errors.email)}
               helperText={touched.email && errors.email}
               FormHelperTextProps={{
                 sx: {

@@ -1,12 +1,8 @@
 import instance from "./auth";
 
 export const getAllNotices = async (category = "sell", page = 1, limit = 6) => {
-  console.log(
-    'category = "sell", page = 1, limit = 6: ',
-    (category = "sell"),
-    (page = 1),
-    (limit = 6)
-  );
+
+    console.log(category, page, limit, "test back")
   const { data } = await instance.get(
     `api/notices/category?category=${category}&page=${page}&limit=${limit}`
   );
@@ -29,3 +25,4 @@ export const addNotice = async (data) => {
   const result = await instance.post("api/notices", data, header);
   return result;
 };
+

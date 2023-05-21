@@ -44,22 +44,8 @@ const noticesSlice = createSlice({
       .addCase(fetchAllNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
-      // .addCase(getSingleNotice.fulfilled, (state, { payload }) => {
-      //   state.oneNotice = payload;
-      //   state.isLoading = false;
-      //   state.error = null;
-      // })
-      // .addCase(getSingleNotice.rejected, (state, action) => {
-      //   handleReject(state, action);
-      // })
-      // .addCase(getNewNotice.fulfilled, (state, { payload }) => {
-      //   state.notices.push(payload);
-      //   state.isLoading = false;
-      // })
-      // .addCase(getNewNotice.rejected, (state, action) => {
-      //   handleReject(state, action);
-      // })
-      .addCase(addNotices.fulfilled, (state, { payload }) => {
+
+     .addCase(addNotices.fulfilled, (state, { payload }) => {
         state.notices.push(payload);
         state.isLoading = false;
       })

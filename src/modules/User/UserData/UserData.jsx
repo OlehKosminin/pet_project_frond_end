@@ -4,27 +4,16 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import css from "./UserData.module.scss";
 import Logout from "../LogoutBtn/LogoutBtn";
-import Icon from "../components/Icons";
+import cameraIcon from "../../../assets/image/icons/camera.svg";
+import checkIcon from "../../../assets/image/icons/check.svg";
+import editIcon from "../../../assets/image/icons/edit.svg";
+import { updUserInfo } from "../../../redux/auth/auth-operations";
+import { getCurrentUser } from "../../../redux/user/user-selectors";
 
 const UserData = () => {
+  const user = useSelector(getCurrentUser);
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
-  const { name, email, birthday, phone, city, avatar, _id } = useSelector(
-    (state) => {
-      return state.auth.user;
-    }
-  );
 
-  const [user, setUser] = useState({
-    name: "Andy",
-    email: "anna00@gmail.com",
-    birthday: "01.01.2010",
-    phone: "",
-
-    // phone: "+380979336571",
-    city: "Kyiv",
-    photo: "",
-  });
 
   const [nameEdit, setNameEdit] = useState(false);
   const [emailEdit, setEmailEdit] = useState(false);
@@ -32,28 +21,29 @@ const UserData = () => {
   const [phoneEdit, setPhoneEdit] = useState(false);
   const [cityEdit, setCityEdit] = useState(false);
   const [photoEdit, setPhotoEdit] = useState(false);
+  const [photoLoaded, setPhotoLoaded] = useState(false);
 
   const photoPrewiew = (e) => {
     const imageFile = e.target.files[0];
-    setUser({ ...user, avatar: imageFile });
-
-    setPhotoEdit(true);
+    const imageURL = URL.createObjectURL(imageFile);
+    setPhotoLoaded(imageURL);
+    setPhotoEdit(imageFile);
   };
 
   const changePhoto = () => {
-    // setUser({ ...user, photo: photoEdit });
+    dispatch(updUserInfo({ ...user, avatar: photoEdit }));
     setPhotoEdit(false);
   };
 
   const changeName = (e) => {
     e.preventDefault();
-    setUser({ ...user, name: e.currentTarget.name.value });
+    dispatch(updUserInfo({ ...user, name: e.currentTarget.name.value }));
     setNameEdit(false);
   };
 
   const changeEmail = (e) => {
     e.preventDefault();
-    setUser({ ...user, email: e.currentTarget.email.value });
+    dispatch(updUserInfo({ ...user, email: e.currentTarget.email.value }));
     setEmailEdit(false);
   };
 
@@ -74,26 +64,30 @@ const UserData = () => {
 
   const changeBirthday = (e) => {
     const bday = formattedDate(e);
-    setUser({ ...user, birthday: bday });
+    dispatch(updUserInfo({ ...user, birthday: bday }));
     setBirthdayEdit(false);
   };
 
   const changePhone = (e) => {
     e.preventDefault();
-    setUser({ ...user, phone: e.currentTarget.phone.value });
+    dispatch(updUserInfo({ ...user, phone: e.currentTarget.phone.value }));
     setPhoneEdit(false);
   };
 
   const changeCity = (e) => {
     e.preventDefault();
-    setUser({ ...user, city: e.currentTarget.city.value });
+    dispatch(updUserInfo({ ...user, city: e.currentTarget.city.value }));
     setCityEdit(false);
   };
 
   return (
     <div className={css.userData}>
       <div className={css.userImgWrapper}>
-        <img className={css.userImg} src={user.photo} alt="user" />
+        <img
+          className={css.userImg}
+          src={!photoLoaded ? user.avatarUrl : photoLoaded}
+          alt="user"
+        />
         {!photoEdit ? (
           <div className={css.btnWrapper}>
             <div className={css.photoInputWrapper}>
@@ -104,9 +98,7 @@ const UserData = () => {
                   className={css.photoInput}
                   onChange={photoPrewiew}
                 />
-                <div className={css.cameraIcon}>
-                  <Icon id="camera" />
-                </div>
+                <img src={cameraIcon} alt="camera icon" />
               </label>
             </div>
 
@@ -117,10 +109,10 @@ const UserData = () => {
             <div className={css.photoInputWrapper}>
               <button
                 type="button"
-                className={css.userInfoCheckBtn}
+                className={css.userImgBtn}
                 onClick={changePhoto}
               >
-                <Icon id="check" />
+                <img src={checkIcon} alt="check icon" />
               </button>
             </div>
 
@@ -141,8 +133,8 @@ const UserData = () => {
                     defaultValue={user.name}
                     className={css.userInfoItemText}
                   />
-                  <button type="submit" className={css.userInfoCheckBtn}>
-                    <Icon id="check" />
+                  <button type="submit" className={css.userInfoItemBtn}>
+                    <img src={checkIcon} alt="check icon" />
                   </button>
                 </div>
               </label>
@@ -157,7 +149,7 @@ const UserData = () => {
                   className={css.userInfoItemBtn}
                   onClick={() => setNameEdit(true)}
                 >
-                  <Icon id="edit" />
+                  <img src={editIcon} alt="edit icon" />
                 </button>
               </div>
             </div>
@@ -175,8 +167,8 @@ const UserData = () => {
                     defaultValue={user.email}
                     className={css.userInfoItemText}
                   />
-                  <button type="submit" className={css.userInfoCheckBtn}>
-                    <Icon id="check" />
+                  <button type="submit" className={css.userInfoItemBtn}>
+                    <img src={checkIcon} alt="check icon" />
                   </button>
                 </div>
               </label>
@@ -191,7 +183,7 @@ const UserData = () => {
                   className={css.userInfoItemBtn}
                   onClick={() => setEmailEdit(true)}
                 >
-                  <Icon id="edit" />
+                  <img src={editIcon} alt="edit icon" />
                 </button>
               </div>
             </div>
@@ -210,10 +202,10 @@ const UserData = () => {
                 />
                 <button
                   type="button"
-                  className={css.userInfoCheckBtn}
+                  className={css.userInfoItemBtn}
                   onClick={() => setBirthdayEdit(false)}
                 >
-                  <Icon id="check" />
+                  <img src={checkIcon} alt="check icon" />
                 </button>
               </div>
             </div>
@@ -227,7 +219,7 @@ const UserData = () => {
                   className={css.userInfoItemBtn}
                   onClick={() => setBirthdayEdit(true)}
                 >
-                  <Icon id="edit" />
+                  <img src={editIcon} alt="edit icon" />
                 </button>
               </div>
             </div>
@@ -246,8 +238,8 @@ const UserData = () => {
                     defaultValue={user.phone}
                     className={css.userInfoItemText}
                   />
-                  <button type="submit" className={css.userInfoCheckBtn}>
-                    <Icon id="check" />
+                  <button type="submit" className={css.userInfoItemBtn}>
+                    <img src={checkIcon} alt="check icon" />
                   </button>
                 </div>
               </label>
@@ -262,7 +254,7 @@ const UserData = () => {
                   className={css.userInfoItemBtn}
                   onClick={() => setPhoneEdit(true)}
                 >
-                  <Icon id="edit" />
+                  <img src={editIcon} alt="edit icon" />
                 </button>
               </div>
             </div>
@@ -280,8 +272,8 @@ const UserData = () => {
                     defaultValue={user.city}
                     className={css.userInfoItemText}
                   />
-                  <button type="submit" className={css.userInfoCheckBtn}>
-                    <Icon id="check" />
+                  <button type="submit" className={css.userInfoItemBtn}>
+                    <img src={checkIcon} alt="check icon" />
                   </button>
                 </div>
               </label>
@@ -296,7 +288,7 @@ const UserData = () => {
                   className={css.userInfoItemBtn}
                   onClick={() => setCityEdit(true)}
                 >
-                  <Icon id="edit" />
+                  <img src={editIcon} alt="edit icon" />
                 </button>
               </div>
             </div>

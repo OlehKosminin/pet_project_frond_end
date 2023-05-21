@@ -1,4 +1,3 @@
-// import baseStyle from "../../shared/components/sass/baseStyle.module.scss";
 import css from "./UserPage.module.scss";
 import UserData from "../UserData/UserData";
 import PetList from "../PetsList/PetsList";

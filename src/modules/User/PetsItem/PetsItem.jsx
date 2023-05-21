@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { deletePet } from "../../../redux/pets/pets-operations";
 
 const PetsItem = ({ pet }) => {
-  const { _id, image, name, birthday, breed, comments } = pet;
+  const { _id, photoURL, name, birthday, breed, comments } = pet;
   const dispatch = useDispatch();
 
   const deletePetItem = () => {
@@ -12,7 +12,7 @@ const PetsItem = ({ pet }) => {
   };
   return (
     <li className={css.petItem}>
-      <img src={image} alt={name} className={css.petPhoto} />
+      <img src={photoURL} alt={name} className={css.petPhoto} />
       <ul className={css.petInfo}>
         <li className={css.petInfoField}>
           <span className={css.petInfoTitle}>Name:&#32;</span>

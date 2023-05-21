@@ -1,3 +1,18 @@
+@font-face {
+    font-family: "Manrope Regular";
+    src: url("../../fonts/Inter-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Manrope Bold";
+    src: url("../../fonts/Manrope-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Inter Regular";
+    src: url("../../fonts/Inter-Regular.ttf");
+}
+
 .sectionNews {
     background: #CCCCCC;
     box-sizing: border-box;
@@ -7,7 +22,7 @@
     margin-top: 45px;
     margin-bottom: 24px;
     text-align: center;
-    font-family: 'Manrope';
+    font-family: 'Manrope Bold';
     font-style: normal;
     font-weight: 700;
     font-size: 48px;
@@ -52,8 +67,12 @@
     border: 0;
     box-sizing: border-box;
 
+    &:focus {
+        padding: 14px 0 13px 20px;
+    }
+
     &::placeholder {
-        font-family: 'Inter';
+        font-family: 'Inter Regular';
         font-style: normal;
         font-weight: 400;
         font-size: 20px;
@@ -80,7 +99,21 @@
 .search__buttonSearchFocus {
     position: absolute;
     top: 10px;
-    right: 30px;
+    right: 51px;
+    border: 0;
+    background: transparent;
+}
+
+
+.search__buttonClear {
+    display: none;
+}
+
+.search__buttonClearFocus {
+    display: block;
+    position: absolute;
+    top: 13px;
+    right: 18px;
     border: 0;
     background: transparent;
 }
@@ -88,24 +121,6 @@
 .search__buttonClearIcon {
     height: 17px;
     width: 17px;
-}
-
-.search__buttonClear {
-    display: none;
-    position: absolute;
-    top: 13px;
-    right: 10px;
-    border: 0;
-    background: transparent;
-}
-
-.search__buttonClearFocus {
-    display: block;
-    position: absolute;
-    top: 13px;
-    right: 10px;
-    border: 0;
-    background: transparent;
 }
 
 // -------------Article news--------------------
@@ -143,11 +158,15 @@
     background: #54ADFF;
     border: 0;
     border-radius: 40px;
-    font-family: 'Manrope';
+    font-family: 'Manrope Regular';
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
     line-height: calc(27 / 20);
     letter-spacing: 0.04em;
-    color: #FFFFFF
+    color: #FFFFFF;
+
+    &:hover {
+        background: linear-gradient(290.46deg, #419EF1 0%, #9BD0FF 107.89%);
+    }
 }
