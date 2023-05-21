@@ -33,6 +33,7 @@ padding: 8px 16px;
 background: $default-blue-color;
 border: none;
 border-radius: 40px;
+color: inherit;
 }
 .buttonCategory:global(.active){
     background: $active-blue-color ;

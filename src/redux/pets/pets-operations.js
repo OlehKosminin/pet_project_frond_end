@@ -19,7 +19,7 @@ export const addPet = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const result = await api.addPet(data);
-      return result;
+      return result.data;
     } catch ({ responce }) {
       return rejectWithValue(responce);
     }

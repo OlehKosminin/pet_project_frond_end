@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
 
 import NotiesCategoryItem from "../NotiesCategotyItem/NotiesCategotyItem";
 
@@ -7,23 +8,35 @@ import NotiesCategoryItem from "../NotiesCategotyItem/NotiesCategotyItem";
 
 import {} from "../../../redux/noties/noties-selector";
 import { fetchAllNotices } from "../../../redux/noties/noties-operations";
-import { async } from "q";
 
-const initialState = {
-  category: "sell",
-  page: 1,
-};
+
+// const initialState = {
+//   category: "sell",
+//   page: 1,
+// };
 
 const NotiesCategoriesList = () => {
+  const { category } = useParams();
+  const [page, setPage] = useState(1);
+  // const [categor, setCategor] = useState(category);
   const notices = useSelector((store) => store.noties.notices);
-  console.log("notices: ", notices);
-  const { state, setState } = useState();
+  
+  // const [ state, setState ] = useState();
   const dispatch = useDispatch();
 
+  
+
+  // useEffect(() => {
+  //   setCategor(category);
+  // },[category])
+
   useEffect(() => {
-    dispatch(fetchAllNotices(initialState));
-  }, [dispatch, state]);
-  const [pets, setPets] = useState([]);
+    //  setCategor(category);
+    dispatch(fetchAllNotices(category, page));
+  }, [dispatch, category, page]);
+  // const [pets, setPets] = useState([]);
+
+
   // const[deletePetId, setDeletePetId]=useState("")
 
   // const { category } = useParams();
@@ -82,7 +95,7 @@ const NotiesCategoriesList = () => {
   //     </div>
   //   </li>
   // ));
-  console.log("LKGJLDFJG;SD");
+ 
   return (
     <>
       <div>
