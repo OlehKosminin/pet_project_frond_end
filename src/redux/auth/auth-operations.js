@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import instance from "../../shared/services/auth";
 import * as api from "../../shared/services/auth";
 
 export const singup = createAsyncThunk(
@@ -63,42 +62,11 @@ export const logout = createAsyncThunk(
 export const updUserInfo = createAsyncThunk(
   "auth/user-upd",
   async (data, { rejectWithValue }) => {
-    console.log("data operation: ", data);
-    const { token, avatar } = data;
     try {
-      const formData = new FormData();
-      formData.append("image", avatar);
-      const header = {
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      };
-      const result = await instance.patch(
-        "api/auth/user-upd",
-        { ...data, avatar },
-        header
-      );
-
-      return result;
+      const result = await api.updUserInfo(data);
+      return result.data;
     } catch ({ responce }) {
       return rejectWithValue(responce);
     }
   }
 );
-// export const updUserInfo = async (data) => {
-//   console.log("data auth: ", data);
-// const { token, avatar } = data;
-
-//   const result = await instance.post(
-//     "api/auth/user-upd",
-//     {
-//       ...data,
-//       avatar: formData,
-//     },
-//     header
-//   );
-
-//   return result;
-// };
