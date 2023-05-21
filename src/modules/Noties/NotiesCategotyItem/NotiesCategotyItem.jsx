@@ -37,10 +37,27 @@ const NotiesCategotyItem = (notices) => {
   //   // console.log(cardId, "cardid");
   // };
   // const { id, animal, text, favorite, category } = items;
-  console.log("fjsdklfjl;");
+
+  const getYear = (birthday) => {
+    // console.log(first)
+    const value = Date.now() - birthday;
+    const date = new Date(value);
+    // const date = dateOll - 1970;
+    const year = date.getFullYear();
+    if (year === 1970) {
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      console.log(month, "mesyaz")
+      return `${month} mth`;
+    }
+    
+    return `${year - 1970} year`;
+    
+};
+
+ 
   const pet = notices.items.map(
     ({
-      // birthday,
+      birthday,
       // breed,
       category,
       comments,
@@ -51,12 +68,13 @@ const NotiesCategotyItem = (notices) => {
       photoUrl,
       // price,
       // public_id,
-      // sex,
+      sex,
       // title,
       _id,
     }) => (
       <li className={css.example_card} key={_id}>
         <div className={css.animal}>
+          <img className={css.photoPet} alt="" src={photoUrl} />
           <p className={css.icon_category}>{category}</p>
           <button
             // className={`${css.favorite} ${
@@ -82,7 +100,7 @@ const NotiesCategotyItem = (notices) => {
             Add pet
           </NavLink>
           {/* <button >Add pet</button> */}
-          {photoUrl}
+
           <ul className={css.animalsDataList}>
             <li className={css.animalsData}>
               <div
@@ -108,13 +126,14 @@ const NotiesCategotyItem = (notices) => {
             <li className={css.animalsData}>
               <p className={css.animalsDataText}>
                 <NoticesCategoryItemSvgSelector id="clock" />
-                gggggg
+                {getYear(birthday)}
+                {/* {birthday} */}
               </p>
             </li>
             <li className={css.animalsData}>
               <p className={css.animalsDataText}>
-                <NoticesCategoryItemSvgSelector id="female" />
-                female
+                <NoticesCategoryItemSvgSelector id={sex} />
+                {sex}
               </p>
             </li>
           </ul>
@@ -126,7 +145,7 @@ const NotiesCategotyItem = (notices) => {
       </li>
     )
   );
-  console.log("flksjdl;fs");
+
   return (
     <>
       {!pet ? (
