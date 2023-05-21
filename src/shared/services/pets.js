@@ -6,7 +6,12 @@ export const getAll = async () => {
 };
 
 export const addPet = async (data) => {
-  const result = await instance.post("/api/user-pets", data);
+  const header = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  const result = await instance.post("api/user-pets", data, header);
   return result;
 };
 

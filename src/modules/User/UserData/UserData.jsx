@@ -8,25 +8,11 @@ import cameraIcon from "../../../assets/image/icons/camera.svg";
 import checkIcon from "../../../assets/image/icons/check.svg";
 import editIcon from "../../../assets/image/icons/edit.svg";
 import { updUserInfo } from "../../../redux/auth/auth-operations";
+import { getCurrentUser } from "../../../redux/user/user-selectors";
 
 const UserData = () => {
+  const user = useSelector(getCurrentUser);
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
-  const { name, email, birthday, phone, city, _id, avatarUrl, avatar } =
-    useSelector((state) => {
-      return state.auth.user;
-    });
-
-  const [user, setUser] = useState({
-    name,
-    email,
-    birthday,
-    phone,
-    city,
-    token,
-    avatar,
-    _id,
-  });
 
   const [nameEdit, setNameEdit] = useState(false);
   const [emailEdit, setEmailEdit] = useState(false);
@@ -34,35 +20,29 @@ const UserData = () => {
   const [phoneEdit, setPhoneEdit] = useState(false);
   const [cityEdit, setCityEdit] = useState(false);
   const [photoEdit, setPhotoEdit] = useState(false);
-
-  const sendInfo = (user) => {
-    console.log("user: ", user);
-    dispatch(updUserInfo(user));
-  };
+  const [photoLoaded, setPhotoLoaded] = useState(false);
 
   const photoPrewiew = (e) => {
     const imageFile = e.target.files[0];
-    setUser({ ...user, avatar: imageFile });
-    changePhoto(imageFile);
-    setPhotoEdit(true);
+    const imageURL = URL.createObjectURL(imageFile);
+    setPhotoLoaded(imageURL);
+    setPhotoEdit(imageFile);
   };
 
-  const changePhoto = (photo) => {
-    sendInfo(photo);
+  const changePhoto = () => {
+    dispatch(updUserInfo({ ...user, avatar: photoEdit }));
     setPhotoEdit(false);
   };
 
   const changeName = (e) => {
     e.preventDefault();
-    setUser({ ...user, name: e.currentTarget.name.value });
-    sendInfo({ ...user, name: e.currentTarget.name.value });
+    dispatch(updUserInfo({ ...user, name: e.currentTarget.name.value }));
     setNameEdit(false);
   };
 
   const changeEmail = (e) => {
     e.preventDefault();
-    setUser({ ...user, email: e.currentTarget.email.value });
-    sendInfo({ ...user, email: e.currentTarget.email.value });
+    dispatch(updUserInfo({ ...user, email: e.currentTarget.email.value }));
     setEmailEdit(false);
   };
 
@@ -83,22 +63,19 @@ const UserData = () => {
 
   const changeBirthday = (e) => {
     const bday = formattedDate(e);
-    setUser({ ...user, birthday: bday });
-    sendInfo({ ...user, birthday: bday });
+    dispatch(updUserInfo({ ...user, birthday: bday }));
     setBirthdayEdit(false);
   };
 
   const changePhone = (e) => {
     e.preventDefault();
-    setUser({ ...user, phone: e.currentTarget.phone.value });
-    sendInfo({ ...user, phone: e.currentTarget.phone.value });
+    dispatch(updUserInfo({ ...user, phone: e.currentTarget.phone.value }));
     setPhoneEdit(false);
   };
 
   const changeCity = (e) => {
     e.preventDefault();
-    setUser({ ...user, city: e.currentTarget.city.value });
-    sendInfo({ ...user, city: e.currentTarget.city.value });
+    dispatch(updUserInfo({ ...user, city: e.currentTarget.city.value }));
     setCityEdit(false);
   };
 
@@ -107,11 +84,7 @@ const UserData = () => {
       <div className={css.userImgWrapper}>
         <img
           className={css.userImg}
-          src={
-            !avatarUrl
-              ? "https://res.cloudinary.com/dpzseqln4/image/upload/v1684607125/user-avatars/yjcbinzs0prjdk2k8qnd.png"
-              : avatarUrl
-          }
+          src={!photoLoaded ? user.avatarUrl : photoLoaded}
           alt="user"
         />
         {!photoEdit ? (

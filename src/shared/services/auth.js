@@ -43,32 +43,13 @@ export const logout = async () => {
 };
 
 export const updUserInfo = async (data) => {
-  const result = await instance.get("/api/auth/user-upd");
+  const header = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  const result = await instance.patch("api/auth/user-upd", data, header);
   return result;
 };
-
-// export const updUserInfo = async (data) => {
-//   console.log("data auth: ", data);
-//   const { token, avatar } = data;
-//   const formData = new FormData();
-//   formData.append("avatar", avatar);
-//   const header = {
-//     headers: {
-//       Accept: "application/json",
-//       Authorization: `Bearer ${token}`,
-//       "Content-Type": "multipart/form-data",
-//     },
-//   };
-//   const result = await instance.patch(
-//     "api/auth/user-upd",
-//     {
-//       ...data,
-//       avatar: formData,
-//     },
-//     header
-//   );
-
-//   return result;
-// };
 
 export default instance;
