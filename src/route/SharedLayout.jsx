@@ -40,9 +40,8 @@ const SharedLayout = () => {
           <Route path="add-pet" element={<AddPetPage />} />
         </Route>
         <Route path="news" element={<NewsPage />} />
-        <Route path="our-frinds" element={<OurFriends />} />
+        <Route path="our-friends" element={<OurFriends />} />
         <Route path="*" element={<NotFoundPage />} />
-
       </Routes>
     </Suspense>
   );
