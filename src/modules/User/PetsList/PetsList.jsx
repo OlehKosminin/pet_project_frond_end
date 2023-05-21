@@ -9,7 +9,6 @@ const PetsList = () => {
   const pets = useSelector(getAllPets);
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("xxx");
     dispatch(getPets());
   }, [dispatch]);
 
