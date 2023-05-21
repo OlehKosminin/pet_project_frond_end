@@ -101,7 +101,7 @@ const NewsPage = () => {
               className={styles.btn__more}
               onClick={loadNews}
             >
-              More...
+              Learn more...
             </button>
           )}
         </div>
