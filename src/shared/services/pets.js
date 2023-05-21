@@ -11,7 +11,7 @@ export const addPet = async (data) => {
       "Content-Type": "multipart/form-data",
     },
   };
-  const result = await instance.post("api/user-pets", data, header);
+  const result = await instance.post("/api/user-pets", data, header);
   return result;
 };
 

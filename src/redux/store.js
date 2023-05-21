@@ -18,6 +18,7 @@ import authReducer from "./auth/auth-slice";
 import { noticesReducer } from "./noties/noties-slice";
 import {friendsReducer} from "../redux/friends/friend-slice";
 import { petsReducer } from "./pets/pets-slice";
+// import { addPetReducer } from "./addPet/addPet-slice";
 
 
 const persistConfig = {
@@ -30,6 +31,7 @@ const persistedAuthReducer = persistReducer(persistConfig, authReducer);
 const persistNotiesReducer = persistReducer(persistConfig, noticesReducer);
 const persistFriendsReduser = persistReducer(persistConfig, friendsReducer);
 const persistPetsReducer = persistReducer(persistConfig, petsReducer);
+// const persistAddPetReducer = persistReducer(persistConfig, addPetReducer);
 
 
 export const store = configureStore({
@@ -38,8 +40,6 @@ export const store = configureStore({
     noties: persistNotiesReducer,
     friends: persistFriendsReduser,
     pets: persistPetsReducer,
-
-    
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
