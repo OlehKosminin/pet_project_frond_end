@@ -25,7 +25,7 @@ function Nav({ handleLinkClick }) {
           to="/notices/sell"
           onClick={handleClick}
         >
-          Notices
+          Find Pet
         </NavLink>
       </li>
       <li className={css.nav_item}>

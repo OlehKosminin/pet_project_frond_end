@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import css from './AuthNav.module.css';
-import { ReactComponent as Paw } from '../../../assets/image/icons/pawprint.svg';
+import { ReactComponent as Paw } from '../../../assets/image/icons/paw.svg';
 
 const isAuth = true;
 
