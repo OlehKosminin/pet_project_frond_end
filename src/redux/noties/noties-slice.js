@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  // addNotices,
+  addNotices,
   // deleteNotice,
   // getNewNotice,
   fetchAllNotices,
@@ -42,6 +42,13 @@ const noticesSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchAllNotices.rejected, (state, action) => {
+        handleReject(state, action);
+      })
+     .addCase(addNotices.fulfilled, (state, { payload }) => {
+        state.notices.push(payload);
+        state.isLoading = false;
+      })
+      .addCase(addNotices.rejected, (state, action) => {
         handleReject(state, action);
       });
     // .addCase(getSingleNotice.fulfilled, (state, { payload }) => {

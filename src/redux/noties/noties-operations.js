@@ -66,10 +66,10 @@ export const getNewNotice = createAsyncThunk(
 );
 export const addNotices = createAsyncThunk(
   "notices/addNotices",
-  async (newNotice, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post(`/notices`, newNotice);
-      return data;
+      const result = await api.addNotice(data);
+      return result.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
