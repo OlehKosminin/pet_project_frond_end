@@ -1,13 +1,14 @@
 import React, { useState, useCallback } from "react";
 import { Formik, Form, Field } from "formik";
-
+import { useDispatch } from "react-redux";
+import { addPet } from "../../../redux/pets/pets-operations";
+// addNoticesPet
+// addUserPet
 import contactForm from "./addMyPet.module.css";
 import style from "../addPetPage.module.scss";
 import { SvgSelector } from "../cvgSelector/SvgSelector";
 
 import avatarInput from "../img/avatarInput.png";
-
-import { addMyPet } from "../petsApi/petsApi";
 
 const AddMyPetInfo = ({ onClick, date }) => {
   const borderStyle = {
@@ -17,7 +18,8 @@ const AddMyPetInfo = ({ onClick, date }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [avatarFile, setAvatarFile] = useState(null);
   const [isBtnSubmit, setIsBtnSubmit] = useState(false);
-  // const [isMyPet, setIsMyPet] = useState(date);
+
+  const dispatch = useDispatch();
 
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
@@ -50,17 +52,16 @@ const AddMyPetInfo = ({ onClick, date }) => {
     try {
       const formData = new FormData();
       if (avatarFile) {
-        formData.append("photoURL", avatarFile);
-      } // change to  "photoURL"
+        formData.append("image", avatarFile);
+      }
       formData.append("comments", values.comments);
       formData.append("name", date.name);
-      formData.append("data", Date.parse(date.birthday));
+      formData.append("birthday", Date.parse(date.birthday));
       formData.append("breed", date.breed);
-      formData.append("category", "your pet");
-      for (let value of formData.values()) {
-        console.log(value);
-      }
-      await addMyPet(formData);
+      // for (let value of formData.values()) {
+      //   console.log(value);
+      // }
+      dispatch(addPet(formData));
       setSubmitting(false);
     } catch (error) {
       console.log(error.message);

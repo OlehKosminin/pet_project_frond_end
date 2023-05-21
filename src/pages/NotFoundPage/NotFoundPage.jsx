@@ -27,7 +27,7 @@ const NotFoundPage = () => {
         <img src={notFoundImage} alt="Not Found" className={styles.image} />
 
         <div className={styles.buttonContainer}>
-          <Link to="/">
+          <Link className={styles.link} to="/">
             <button type="button" className={styles.button}>
               <p className={styles.text}>To main page</p>
               <SvgSelector id="pawprint" />

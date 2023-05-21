@@ -4,8 +4,6 @@ import {
   addToFavorites,
   getFavorite,
   deleteFromFavorite,
-  updateUser,
-  updateAvatar,
   deletePets,
 } from "./user-operations";
 
@@ -86,18 +84,6 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.error = payload;
       })
-      .addCase(updateUser.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(updateUser.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.user = payload;
-        state.error = null;
-      })
-      .addCase(updateUser.rejected, (state, { payload }) => {
-        state.isLoading = false;
-        state.error = payload;
-      })
       .addCase(deletePets.pending, (state) => {
         state.isLoading = true;
       })
@@ -115,17 +101,3 @@ const userSlice = createSlice({
 
 export const userReducer = userSlice.reducer;
 export const { deletePet, deleteFavoriteObj } = userSlice.actions;
-
-// .addCase(updateAvatar.pending, (state) => {
-//   state.isLoading = true;
-// })
-// .addCase(updateAvatar.fulfilled, (state, { payload }) => {
-//   console.log(payload);
-//   state.isLoading = false;
-//   state.user.image = payload.image;
-//   state.error = null;
-// })
-//       .addCase(updateAvatar.rejected, (state) => {
-//   state.isLoading = false;
-//   // state.error = payload;
-// })

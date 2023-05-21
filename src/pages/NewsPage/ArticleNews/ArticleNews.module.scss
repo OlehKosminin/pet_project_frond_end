@@ -1,3 +1,13 @@
+@font-face {
+    font-family: "Manrope Regular";
+    src: url("../../../fonts/Inter-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Manrope Bold";
+    src: url("../../../fonts/Manrope-Bold.ttf");
+}
+
 .news {
     position: relative;
     background: #FFFFFF;
@@ -16,7 +26,7 @@
     }
 
     &:hover {
-        box-shadow: 3px 8px 14px rgba(65, 159, 241, 0.5);
+        box-shadow: 7px 13px 14px rgba(116, 177, 232, 0.24);
     }
 
     @media screen and (min-width: 768px) {
@@ -48,7 +58,7 @@
 }
 
 .news__title {
-    font-family: 'Manrope';
+    font-family: 'Manrope Bold';
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -60,7 +70,7 @@
 }
 
 .news__text {
-    font-family: 'Manrope';
+    font-family: 'Manrope Regular';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -79,7 +89,7 @@
 }
 
 .news__date {
-    font-family: 'Manrope';
+    font-family: 'Manrope Regular';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -88,7 +98,7 @@
 }
 
 .news__readMore {
-    font-family: 'Manrope';
+    font-family: 'Manrope Regular';
     font-style: normal;
     font-weight: 500;
     font-size: 16px;

@@ -78,65 +78,6 @@ export const deleteFromFavorite = createAsyncThunk(
   }
 );
 
-export const updateUser = createAsyncThunk(
-  "user/updateInfoUser",
-  async (data, { rejectWithValue }) => {
-    try {
-      console.log(data);
-      const result = await api.updUserInfo(data);
-      return result;
-    } catch ({ responce }) {
-      return rejectWithValue(responce);
-    }
-  }
-);
-
-// export const updateInfoUser = createAsyncThunk(
-//   'user/updateInfoUser',
-//   async (upDateUser, { rejectWithValue, getState }) => {
-//     try {
-//       const value = getState().auth.accessToken;
-//       if (value === null) {
-//         return rejectWithValue('Unable to patch user');
-//       }
-//       accessToken.set(value);
-
-//       const { data } = await axios.patch('/user/update', upDateUser);
-//       console.log(data);
-//       return data;
-//     } catch (error) {
-//       return rejectWithValue(error);
-//     }
-//   }
-// );
-
-// export const updateAvatar = createAsyncThunk(
-//   "user/updateAvatar",
-//   async (image, { rejectWithValue, getState }) => {
-//     console.log(image);
-
-//     const formData = new FormData();
-//     formData.append("avatar", image);
-
-//     try {
-//       const value = getState().auth.accessToken;
-//       if (value === null) {
-//         return rejectWithValue("Unable to patch user");
-//       }
-//       accessToken.set(value);
-//       const { data } = await axios.patch("/user/avatars", image, {
-//         headers: {
-//           "Content-type": "multipart/form-data",
-//         },
-//       });
-//       console.log(data);
-//       return data;
-//     } catch (error) {
-//       return rejectWithValue(error);
-//     }
-//   }
-// );
-
 export const deletePets = createAsyncThunk(
   "user/deletePets",
   async (id, { rejectWithValue, getState }) => {

@@ -35,7 +35,7 @@
 .example_card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
   width: 100%;
@@ -64,17 +64,27 @@
 }
 
 .animal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   width: 280px;
   height: 288px;
   margin-bottom: 20px;
   background-color: yellow;
+  overflow: hidden;
   @media screen and (min-width: 768px) {
     width: 336px;
   }
   @media screen and (min-width: 1280px) {
     width: 288px;
   }
+}
+.photoPet{
+  width: auto;
+  height: 100%;
+  max-width: initial;
+
 }
 .animalsDataList {
   display: flex;
