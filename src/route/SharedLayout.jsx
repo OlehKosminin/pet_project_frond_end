@@ -42,7 +42,6 @@ const SharedLayout = () => {
         <Route path="news" element={<NewsPage />} />
         <Route path="our-friends" element={<OurFriends />} />
         <Route path="*" element={<NotFoundPage />} />
-
       </Routes>
     </Suspense>
   );
