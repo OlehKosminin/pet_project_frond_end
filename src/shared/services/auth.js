@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:3000/",
+  // baseURL: "http://localhost:3000/",
 
-  // baseURL: "https://pet-project-backend.onrender.com",
+  baseURL: "https://pet-project-backend.onrender.com",
 });
 
 const setToken = (token) => {
@@ -40,6 +40,11 @@ export const logout = async () => {
   const { data } = await instance.post("api/auth/logout");
   setToken();
   return data;
+};
+
+export const updUserInfo = async (data) => {
+  const result = await instance.get("/api/auth/user-upd");
+  return result;
 };
 
 // export const updUserInfo = async (data) => {
