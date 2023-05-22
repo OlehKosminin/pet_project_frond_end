@@ -3,29 +3,57 @@ import { NavLink } from "react-router-dom";
 import { useSwitch } from "../../../hooks/useSwitch";
 
 import ModalNotice from "../../ModalNotice/ModalNotice";
+import ModalApproveAction from "../../User/ModalApproveAction/ModalApproveAction";
 import Modal from "../../../shared/components/Modal/Modal";
 
+import { ReactComponent as TrashSvg } from "../../../assets/image/icons/trash.svg";
 import NoticesCategoryItemSvgSelector from "./NoticesCategoryItemSvgSelector";
 import css from "./notiesCategoriItem.module.scss";
 
 const NotiesCategotyItem = (notices) => {
-  console.log("notices.items: ", notices.items);
-  const { isOpen, open, close } = useSwitch(false);
+  // console.log("notices.items: ", notices.items);
+  const { isOpen, ElName, open, close } = useSwitch(false);
+  const [isLearnMore, setIsLearnMore] = useState(false);
+  const [isDeleteItem, setDeleteItem] = useState(false);
+  const [modalChild, setModalChild] = useState(null);
   // const [expandedLocation, setExpandedLocation] = useState(false);
   const [hoveredCardId, setHoveredCardId] = useState(null);
 
   useEffect(() => {
+    if (ElName === "openLearnMore") {
+      setModalChild(<ModalNotice close={close} />);
+      console.log(modalChild);
+      setIsLearnMore(true);
+    }
+    if (ElName === "deleteItem") {
+      setDeleteItem(true);
+    }
     if (isOpen) {
       document.body.style.overflowY = "hidden";
     }
     return () => {
       document.body.style.overflowY = "auto";
     };
-  }, [isOpen]);
+  }, [isOpen, ElName, setModalChild, setIsLearnMore, setDeleteItem, close]);
 
   // if (!notices.length) {
   //   return;
   // }
+
+  // const modalChoice = () => {
+  //   if (isLearnMore) {
+  //     setmodalChild(<ModalNotice close={close} />);
+  //     return;
+  //   }
+  //   if (isDeleteItem) {
+  //     return <ModalApproveAction close={close} />;
+  //   }
+  // };
+  // const child = modalChoice();
+
+  const hendleClick = (e) => {
+    open(e.currentTarget.name);
+  };
 
   const handleMouseEnter = (id) => {
     setHoveredCardId(id);
@@ -60,7 +88,7 @@ const NotiesCategotyItem = (notices) => {
     const year = date.getFullYear();
     if (year === 1970) {
       const month = String(date.getMonth() + 1).padStart(2, "0");
-      console.log(month, "mesyaz");
+      // console.log(month, "mesyaz");
       return `${month} mth`;
     }
 
@@ -102,11 +130,12 @@ const NotiesCategotyItem = (notices) => {
           </button>
           {/* <button className={css.favorite}>H</button> */}
           <button
-            onClick={() => removePets(_id)}
+            name="deleteItem"
+            onClick={(e) => hendleClick(e)}
             type="button"
             className={css.deletion}
           >
-            <NoticesCategoryItemSvgSelector id="trash" />
+            <TrashSvg name="trash" />
           </button>
           <NavLink className={css.add_pet} to="/add-pet">
             Add pet
@@ -153,7 +182,11 @@ const NotiesCategotyItem = (notices) => {
 
         <p className={css.animal_description}>{comments}</p>
 
-        <button className={css.more_info_btn} onClick={open}>
+        <button
+          className={css.more_info_btn}
+          name="openLearnMore"
+          onClick={(e) => hendleClick(e)}
+        >
           Learn more
         </button>
       </li>
@@ -167,9 +200,10 @@ const NotiesCategotyItem = (notices) => {
       ) : (
         <div>
           <ul className={css.wrapper}> {pet}</ul>
+
           {isOpen && (
             <Modal isOpen={isOpen} close={close}>
-              <ModalNotice close={close} />
+              {modalChild}
             </Modal>
           )}
         </div>
