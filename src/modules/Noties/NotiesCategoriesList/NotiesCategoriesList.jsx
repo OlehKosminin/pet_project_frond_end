@@ -7,7 +7,10 @@ import NotiesCategoryItem from "../NotiesCategotyItem/NotiesCategotyItem";
 // import { deleteNotices } from "../../../shared/services/noties";
 
 import {} from "../../../redux/noties/noties-selector";
-import { fetchAllNotices } from "../../../redux/noties/noties-operations";
+import {
+  fetchAllNotices,
+  fetchOwnNotices,
+} from "../../../redux/noties/noties-operations";
 
 
 // const initialState = {
@@ -16,11 +19,13 @@ import { fetchAllNotices } from "../../../redux/noties/noties-operations";
 // };
 
 const NotiesCategoriesList = () => {
-  const { category } = useParams();
+  const { category} = useParams();
   const [page, setPage] = useState(1);
+  console.log(page, "paginatPage")
   // const [categor, setCategor] = useState(category);
   const notices = useSelector((store) => store.noties.notices);
-  
+  const noticesOwn = useSelector((store) => store.noties.own);
+  console.log("noticesOwn", noticesOwn);
   // const [ state, setState ] = useState();
   const dispatch = useDispatch();
 
@@ -32,8 +37,39 @@ const NotiesCategoriesList = () => {
 
   useEffect(() => {
     //  setCategor(category);
-    dispatch(fetchAllNotices(category, page));
+    if (category === "my-pets") {
+  dispatch(fetchOwnNotices({ page }));
+    }
+    if (category === "favorite") { }
+    if (
+      category === "sell" ||
+      category === "lost found" ||
+      category === "in good hands"
+    ) {
+      dispatch(fetchAllNotices({ category, page }));
+    }
+      
   }, [dispatch, category, page]);
+
+   const loadMore = () => {
+     setPage((prevPage) => prevPage + 1);
+  };
+  // useEffect(() => {
+  //   //  setCategor(category);
+  //   dispatch(fetchOwnNotices({ page }));
+  // }, [dispatch,  page]);
+
+  const renderNotices = () => {
+    if (notices) {
+      return notices;
+    } else if (noticesOwn) {
+      return noticesOwn;
+    } else {
+      return [];
+    }
+  };
+// console.log("switch", renderNotices);
+ 
   // const [pets, setPets] = useState([]);
 
 
@@ -101,6 +137,9 @@ const NotiesCategoriesList = () => {
       <div>
         {/* <ul className={css.wrapper}> */}
         <NotiesCategoryItem items={notices} />
+
+        <button onClick={loadMore}>load more</button>
+        <span>{page}</span>
         {/* </ul> */}
       </div>
     </>
