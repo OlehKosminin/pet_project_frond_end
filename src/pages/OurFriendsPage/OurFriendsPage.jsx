@@ -4,13 +4,12 @@ import OurFriendsList from '../../shared/components/OurFriends/OurFriendsList/Ou
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFriends } from '../../redux/friends/friends-operations';
-import { selectIsisLoaded } from '../../redux/friends/friends-selector';
+import { getIsLoading } from '../../redux/friends/friends-selector';
 import styles from './styles';
 
 function OurFriendsPage() {
   const dispatch = useDispatch();
-
-  const isLoad = useSelector(selectIsisLoaded);
+  const isLoading = useSelector(getIsLoading);
 
   useEffect(() => {
     dispatch(getFriends());
@@ -22,7 +21,7 @@ function OurFriendsPage() {
         <Typography sx={styles.title} variant="h2">
           Our friends
         </Typography>
-        {isLoad ? <OurFriendsList /> : <Loader />}
+        {isLoading ? <OurFriendsList /> : <Loader />}
       </Container>
     </>
   );
