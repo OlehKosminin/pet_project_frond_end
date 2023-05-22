@@ -13,10 +13,10 @@ import {
 } from "./noties-operations";
 
 const noticesInitialState = {
-  notices: [],
+  notices: {result: [], count: 0},
   // oneNotice: null,
-  favorite: [],
-  own: [],
+  favorite: {result: [], count: 0},
+  own: {result: [], count: 0},
   error: null,
   isLoading: false,
 };
@@ -39,7 +39,8 @@ const noticesSlice = createSlice({
       .addCase(fetchAllNotices.fulfilled, (state, { payload }) => {
         console.log("slice payload: ", payload);
         state.isLoading = false;
-        state.notices = payload.result;
+        state.notices.result = payload.result;
+        state.notices.count = payload.resultCount;
         state.error = null;
       })
       .addCase(fetchAllNotices.rejected, (state, action) => {
@@ -47,7 +48,7 @@ const noticesSlice = createSlice({
       })
 
       .addCase(addNotices.fulfilled, (state, { payload }) => {
-        state.notices.push(payload);
+        state.notices.result.push(payload);
         state.isLoading = false;
       })
       .addCase(addNotices.rejected, (state, action) => {
@@ -85,7 +86,8 @@ const noticesSlice = createSlice({
       })
       .addCase(fetchOwnNotices.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.own = payload;
+        state.own.result = payload.result;
+        state.own.count = payload.resultCount;
         state.error = null;
       })
       .addCase(fetchOwnNotices.rejected, (state, action) => {

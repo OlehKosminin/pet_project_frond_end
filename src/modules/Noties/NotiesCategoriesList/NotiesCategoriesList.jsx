@@ -26,6 +26,7 @@ const NotiesCategoriesList = () => {
   const notices = useSelector((store) => store.noties.notices);
   const noticesOwn = useSelector((store) => store.noties.own);
   console.log("noticesOwn", noticesOwn);
+
   // const [ state, setState ] = useState();
   const dispatch = useDispatch();
 
@@ -60,14 +61,10 @@ const NotiesCategoriesList = () => {
   // }, [dispatch,  page]);
 
   const renderNotices = () => {
-    if (notices) {
-      return notices;
-    } else if (noticesOwn) {
-      return noticesOwn;
-    } else {
-      return [];
-    }
-  };
+    if (category === "my-pets") return noticesOwn;
+    if (category === 'favorite') return;
+    return notices
+  }
 // console.log("switch", renderNotices);
  
   // const [pets, setPets] = useState([]);
@@ -136,7 +133,7 @@ const NotiesCategoriesList = () => {
     <>
       <div>
         {/* <ul className={css.wrapper}> */}
-        <NotiesCategoryItem items={notices} />
+        <NotiesCategoryItem items={renderNotices()} />
 
         <button onClick={loadMore}>load more</button>
         <span>{page}</span>
