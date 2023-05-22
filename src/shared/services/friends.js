@@ -1,7 +1,7 @@
 import instance from "./auth";
 
 export const getCurrent = async () => {
-  const { data } = await instance.get("api/getPartnerInfo");
+  const { data } = await instance.get("api/services-sidebar");
   console.log(data)
   return data;
 
