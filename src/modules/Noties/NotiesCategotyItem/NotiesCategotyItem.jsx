@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useSwitch } from "../../../hooks/useSwitch";
 
 import ModalNotice from "../../ModalNotice/ModalNotice";
-import ModalApproveAction from "../../User/ModalApproveAction/ModalApproveAction";
+import ModalApproveAction from "../../../shared/components/ModalApproveAction/ModalApproveAction";
 import Modal from "../../../shared/components/Modal/Modal";
 
 import { ReactComponent as TrashSvg } from "../../../assets/image/icons/trash.svg";
@@ -11,8 +11,10 @@ import NoticesCategoryItemSvgSelector from "./NoticesCategoryItemSvgSelector";
 import css from "./notiesCategoriItem.module.scss";
 import { useSelector } from "react-redux";
 
-const NotiesCategotyItem = (notices) => {
-  console.log("notices.items: ", notices.items);
+const NotiesCategotyItem = ({ items }) => {
+  const { isOpen, ElName, open, close } = useSwitch(false);
+  const [modalChild, setModalChild] = useState(null);
+  // console.log("notices.items: ", notices.items);
   // const [expandedLocation, setExpandedLocation] = useState(false);
   const [hoveredCardId, setHoveredCardId] = useState(null);
   const id_user = useSelector((store) => store.auth.user._id);
@@ -20,11 +22,9 @@ const NotiesCategotyItem = (notices) => {
   useEffect(() => {
     if (ElName === "{openLearnMore}") {
       setModalChild(<ModalNotice close={close} />);
-      setIsLearnMore(true);
     }
     if (ElName === "{deleteItem}") {
       setModalChild(<ModalApproveAction close={close} />);
-      setDeleteItem(true);
     }
     if (isOpen) {
       document.body.style.overflowY = "hidden";
@@ -32,7 +32,7 @@ const NotiesCategotyItem = (notices) => {
     return () => {
       document.body.style.overflowY = "auto";
     };
-  }, [isOpen, setModalChild, setIsLearnMore, setDeleteItem]);
+  }, [isOpen, setModalChild]);
 
   // if (!notices.length) {
   //   return;
@@ -79,21 +79,24 @@ const NotiesCategotyItem = (notices) => {
   // const { id, animal, text, favorite, category } = items;
 
   const getYear = (birthday) => {
-    // console.log(first)
     const value = Date.now() - birthday;
     const date = new Date(value);
     // const date = dateOll - 1970;
     const year = date.getFullYear();
     if (year === 1970) {
       const month = String(date.getMonth() + 1).padStart(2, "0");
-      // console.log(month, "mesyaz");
       return `${month} mth`;
     }
 
     return `${year - 1970} year`;
   };
 
-  const pet = notices.items.map(
+  const changeFavorite = (isAdd) => {
+    if (isAdd) return; //dispatch favorite add
+    if (!isAdd) return; //dispatch favorite remove
+  };
+
+  const pet = items.result.map(
     ({
       birthday,
       // breed,
@@ -130,6 +133,7 @@ const NotiesCategotyItem = (notices) => {
           </button>
           {/* <button className={css.favorite}>H</button> */}
           <button
+            // onClick={() => removePets(_id)}
             name="deleteItem"
             onClick={(e) => handleClick(e)}
             type="button"
