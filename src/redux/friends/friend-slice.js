@@ -12,11 +12,12 @@ const friendsSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(getFriends.pending, (state, action) => {
-        state.isLoaded = false;
+        state.isLoaded = true; //false
       })
       .addCase(getFriends.fulfilled, (state, action) => {
         state.friends = action.payload;
-        state.isLoaded = true;
+        state.isLoaded = false;//true
+        console.log(action, "pizdec")
       })
       .addCase(getFriends.rejected, (state, action) => {
         state.isLoaded = false;

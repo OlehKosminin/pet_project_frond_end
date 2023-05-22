@@ -3,11 +3,13 @@ import { NavLink } from "react-router-dom";
 
 import NoticesCategoryItemSvgSelector from "./NoticesCategoryItemSvgSelector";
 import css from "./notiesCategoriItem.module.scss";
+import {useSelector} from "react-redux";
 
-const NotiesCategotyItem = (notices) => {
-  console.log("notices.items: ", notices.items);
+const NotiesCategotyItem = ({items}) => {
+  console.log("notices: ", items);
   // const [expandedLocation, setExpandedLocation] = useState(false);
   const [hoveredCardId, setHoveredCardId] = useState(null);
+  const id_user = useSelector((store) => store.auth.user._id);
 
   // if (!notices.length) {
   //   return;
@@ -54,8 +56,13 @@ const NotiesCategotyItem = (notices) => {
     
 };
 
+  const changeFavorite = (isAdd) => {
+    if (isAdd) return //dispatch favorite add
+    if (!isAdd) return //dispatch favorite remove
+  }
+
  
-  const pet = notices.items.map(
+  const pet = items.result.map(
     ({
       birthday,
       // breed,
@@ -77,16 +84,17 @@ const NotiesCategotyItem = (notices) => {
           <img className={css.photoPet} alt="" src={photoUrl} />
           <p className={css.icon_category}>{category}</p>
           <button
-            // className={`${css.favorite} ${
-            //   favorite ? css["favorite--active"] : css["favorite--inactive"]
-            // }`}
+          onClick={() => changeFavorite(favorite.includes(id_user))}
             className={css.favorite}
           >
-            {favorite ? (
-              <NoticesCategoryItemSvgSelector id="heart-active" />
-            ) : (
-              <NoticesCategoryItemSvgSelector id="heart" />
-            )}
+            {/*{favorite.includes(id_user) ? (*/}
+            {/*  <NoticesCategoryItemSvgSelector id="heart-active" />*/}
+            {/*) : (*/}
+            {/*  <NoticesCategoryItemSvgSelector id="heart" />*/}
+            {/*)}*/}
+
+              <NoticesCategoryItemSvgSelector id={favorite.includes(id_user) ? "heart-active" : "heart" } />
+
           </button>
           {/* <button className={css.favorite}>H</button> */}
           <button

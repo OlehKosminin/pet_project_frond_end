@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import css from "./Nav.module.css";
+import scss from "./Nav.module.scss";
 
 function Nav({ handleLinkClick }) {
   const handleClick = () => {
@@ -9,28 +9,28 @@ function Nav({ handleLinkClick }) {
   };
 
   return (
-    <ul className={css.nav}>
-      <li className={css.nav_item}>
+    <ul className={scss.nav}>
+      <li className={scss.nav_item}>
         <NavLink
-          className={({ isActive }) => (isActive ? css.active : "")}
+          className={({ isActive }) => (isActive ? scss.active : "")}
           to="/news"
           onClick={handleClick}
         >
           News
         </NavLink>
       </li>
-      <li className={css.nav_item}>
+      <li className={scss.nav_item}>
         <NavLink
-          className={({ isActive }) => (isActive ? css.active : "")}
+          className={({ isActive }) => (isActive ? scss.active : "")}
           to="/notices/sell"
           onClick={handleClick}
         >
           Find Pet
         </NavLink>
       </li>
-      <li className={css.nav_item}>
+      <li className={scss.nav_item}>
         <NavLink
-          className={({ isActive }) => (isActive ? css.active : "")}
+          className={({ isActive }) => (isActive ? scss.active : "")}
           to="/our-friends"
           onClick={handleClick}
         >
