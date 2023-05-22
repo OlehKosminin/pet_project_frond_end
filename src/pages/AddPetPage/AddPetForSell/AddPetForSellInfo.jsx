@@ -16,10 +16,8 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
   const [isBtnSubmit, setIsBtnSubmit] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [avatarFile, setAvatarFile] = useState(null);
-  // const [isMyPet, setIsMyPet] = useState(date);
   const [isColorToggle, setIsColorToggle] = useState("");
   const [isButtonCange, setIsButtonCange] = useState("");
-  // cobst[isValueSex, setIsValueSex] = useState("");
 
   const borderStyle = {
     borderColor: "#f43f5e",
