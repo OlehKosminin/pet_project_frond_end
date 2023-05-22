@@ -14,7 +14,10 @@ const ModalApproveAction = ({ close }) => {
   };
 
   return (
-    <div className={css.modalApproveAction}>
+    <div className={css.modal}>
+      <button type="button" className={css.closeBtn} onClick={close}>
+        <Icon id="cross" />
+      </button>
       <h2 className={css.title}>Already leaving?</h2>
       <div className={css.btnWrapper}>
         <button type="button" className={css.cancelBtn} onClick={close}>
