@@ -59,7 +59,6 @@ const AddMyPetDetails = ({ onClick }) => {
   const handleSubmit = (values, { setSubmitting }) => {
     onClick("toYourPetInfo", values);
     setSubmitting(false);
-    console.log("values", values);
   };
 
   const backClick = useCallback(() => {
@@ -153,7 +152,7 @@ const AddMyPetDetails = ({ onClick }) => {
                   maxDate={new Date()}
                   onChange={(date) => {
                     handleBirthdayChange(setFieldValue, null, yyyymmdd(date));
-                    console.log("yyyymmdd", yyyymmdd(date));
+                    // console.log("yyyymmdd", yyyymmdd(date));
                   }}
                 />
               </div>

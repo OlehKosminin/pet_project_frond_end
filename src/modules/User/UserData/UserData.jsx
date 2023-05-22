@@ -14,6 +14,7 @@ const UserData = () => {
   const user = useSelector(getCurrentUser);
   const dispatch = useDispatch();
 
+
   const [nameEdit, setNameEdit] = useState(false);
   const [emailEdit, setEmailEdit] = useState(false);
   const [birthdayEdit, setBirthdayEdit] = useState(false);

@@ -36,6 +36,7 @@ const petsSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
+
       .addCase(deletePet.pending, (state) => {
         state.isLoading = true;
       })
