@@ -10,7 +10,7 @@ function Logo({ handleLinkClick }) {
     }
   };
   return (
-    <Link to="/main" onClick={handleClick}>
+    <Link to="/" onClick={handleClick}>
       <img className={scss.logo} src={LogoSvg} alt="YourPetLogo" />
     </Link>
   );
