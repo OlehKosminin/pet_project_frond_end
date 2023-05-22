@@ -1,15 +1,4 @@
 @import "../../../index.scss";
-input,
-input:active,
-input:hover,
-input:focus {
-  min-width: 100px;
-  padding: 0;
-  margin: 0;
-  border: none;
-  outline: 0;
-  outline-offset: 0;
-}
 
 button {
   background-color: transparent;
@@ -131,8 +120,7 @@ button {
 }
 
 .userInfoItemTitle {
-  font-family: "Manrope";
-  font-weight: 600;
+  font-family: "Manrope SemiBold";
   font-size: 14px;
   line-height: 1.357;
   letter-spacing: 0.04em;
@@ -168,11 +156,23 @@ button {
 }
 
 .userInfoItemText {
-  font-family: "Manrope";
+  font-family: "Manrope Regular";
   font-size: 12px;
   line-height: 1.333;
   letter-spacing: 0.04em;
   color: $black-color;
+
+  &,
+  &:active,
+  &:hover,
+  &:focus {
+    min-width: 100px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: 0;
+    outline-offset: 0;
+  }
 
   @media screen and (min-width: 768px) {
     font-size: 16px;
