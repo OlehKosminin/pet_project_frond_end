@@ -3,13 +3,25 @@ import UserData from "../UserData/UserData";
 import PetList from "../PetsList/PetsList";
 import { useNavigate } from "react-router-dom";
 import Icon from "../components/Icons";
+import Loader from "../../../shared/components/Loader/Loader";
+import { getPetsIsLoading } from "../../../redux/pets/pets-selector";
+import { getUserLoading } from "../../../redux/auth/auth-selector";
+import { useSelector } from "react-redux";
 
 const User = () => {
   const navigate = useNavigate();
+  const petsLoading = useSelector(getPetsIsLoading);
+  const userLoading = useSelector(getUserLoading);
 
   const handleAddPet = () => {
     navigate("/add-pet");
   };
+
+  const xxx = {
+    qqq: "zxc",
+  };
+  console.log("деструктуризовано:", `${xxx.qqq}`);
+  console.log("не деструктуризовано:", xxx);
   return (
     <div className={css.container}>
       <div>
@@ -26,6 +38,11 @@ const User = () => {
         </div>
         <PetList />
       </div>
+      {(petsLoading || userLoading) && (
+        <div className={css.loader}>
+          <Loader />
+        </div>
+      )}
     </div>
   );
 };
