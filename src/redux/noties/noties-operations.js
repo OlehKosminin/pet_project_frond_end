@@ -5,10 +5,24 @@ import * as api from "../../shared/services/noties";
 
 export const fetchAllNotices = createAsyncThunk(
   "notice/fetch-all",
-  async (data, thunkAPI) => {
+  async ({ category, page },  thunkAPI) => {
+   
     try {
-      const result = await api.getAllNotices(data);
-      console.log(result, "resultOperation");
+      const result = await api.getAllNotices(category, page);
+      
+      return result;
+    } catch ({ response }) {
+      return thunkAPI.rejectWithValue(response.data);
+    }
+  }
+);
+export const fetchOwnNotices = createAsyncThunk(
+  "notice/fetch-own",
+  async ({  page }, thunkAPI) => {
+    console.log(page, "dataOwnPage");
+    try {
+      const result = await api.getOwnNotices(page);
+      console.log("resultOwnOperation", result );
       return result;
     } catch ({ response }) {
       return thunkAPI.rejectWithValue(response.data);
@@ -42,28 +56,28 @@ export const fetchAllNotices = createAsyncThunk(
 //     }
 //   }
 // );
-export const getSingleNotice = createAsyncThunk(
-  "notices/getSingleNotice",
-  async (id, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.get(`/notices/${id}`);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-export const getNewNotice = createAsyncThunk(
-  "notices/getNewNotice",
-  async (newNotice, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.post(`/notices/`, newNotice);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
+// export const getSingleNotice = createAsyncThunk(
+//   "notices/getSingleNotice",
+//   async (id, { rejectWithValue }) => {
+//     try {
+//       const { data } = await axios.get(`/notices/${id}`);
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
+// export const getNewNotice = createAsyncThunk(
+//   "notices/getNewNotice",
+//   async (newNotice, { rejectWithValue }) => {
+//     try {
+//       const { data } = await axios.post(`/notices/`, newNotice);
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
 export const addNotices = createAsyncThunk(
   "notices/addNotices",
   async (data, { rejectWithValue }) => {
@@ -112,30 +126,30 @@ export const getNoticesByQwery = createAsyncThunk(
   }
 );
 // додає оголошення
-export const createNotice = createAsyncThunk(
-  "notices/create",
-  async ({ values, token, image }, thunkAPI) => {
-    try {
-      const formData = new FormData();
-      formData.append("image", image);
-      const header = {
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      };
-      const { data } = await axios.post(
-        "/notices",
-        { ...values, formData },
-        header
-      );
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue();
-    }
-  }
-);
+// export const createNotice = createAsyncThunk(
+//   "notices/create",
+//   async ({ values, token, image }, thunkAPI) => {
+//     try {
+//       const formData = new FormData();
+//       formData.append("image", image);
+//       const header = {
+//         headers: {
+//           Accept: "application/json",
+//           Authorization: `Bearer ${token}`,
+//           "Content-Type": "multipart/form-data",
+//         },
+//       };
+//       const { data } = await axios.post(
+//         "/notices",
+//         { ...values, formData },
+//         header
+//       );
+//       return data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue();
+//     }
+//   }
+// );
 
 export const getNoticesByQweryOwner = createAsyncThunk(
   "notices/getNoticesByQweryOwner",
