@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { getFriends } from './friends-operations';
+import { createSlice } from "@reduxjs/toolkit";
+import { getFriends } from "./friends-operations";
 
 const friendsInitialState = {
   friends: [],
@@ -7,17 +7,17 @@ const friendsInitialState = {
 };
 
 const friendsSlice = createSlice({
-  name: 'friends',
+  name: "friends",
   initialState: friendsInitialState,
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(getFriends.pending, (state, action) => {
         state.isLoaded = true; //false
       })
       .addCase(getFriends.fulfilled, (state, action) => {
+        // console.log("action: ", action.payload);
         state.friends = action.payload;
-        state.isLoaded = false;//true
-        console.log(action, "pizdec")
+        state.isLoaded = false; //true
       })
       .addCase(getFriends.rejected, (state, action) => {
         state.isLoaded = false;
