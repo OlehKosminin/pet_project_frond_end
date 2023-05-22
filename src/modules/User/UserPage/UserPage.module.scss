@@ -25,13 +25,16 @@
   }
 }
 
+.loader {
+  z-index: 999;
+}
+
 .section {
   width: 100%;
 }
 
 .title {
-  font-family: "Manrope";
-  font-weight: 500;
+  font-family: "Manrope Medium";
   font-size: 20px;
   line-height: 1.35;
   align-items: center;
@@ -80,8 +83,7 @@
 }
 
 .btnText {
-  font-family: "Manrope";
-  font-weight: 700;
+  font-family: "Manrope Bold";
   font-size: 16px;
   line-height: 1.375;
   letter-spacing: 0.04em;
