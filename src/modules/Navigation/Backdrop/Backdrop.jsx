@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import css from './Backdrop.module.css';
+import scss from './Backdrop.module.scss';
 import { useSelector } from 'react-redux';
 import AuthNav from '../AuthNav/AuthNav';
 import Nav from '../Nav/Nav';
@@ -33,25 +33,25 @@ const BackdropMenu = ({ isOpen, handleClose }) => {
   return (
     <>
       {isOpen && (
-        <div className={css.backdrop}>
-          <div className={css.menu}>
-            <button className={css.btn} onClick={handleClose}>
-              <CrossSmallIcon id="svg" className={css.crossSmallIcon} />
+        <div className={scss.backdrop}>
+          <div className={scss.menu}>
+            <button className={scss.btn} onClick={handleClose}>
+              <CrossSmallIcon id="svg" className={scss.crossSmallIcon} />
             </button>
             <Logo handleLinkClick={handleLinkClick} />
 
             {isLogIn && !isTablet ? (
-              <div className={css.backdrop_user}>
+              <div className={scss.backdrop_user}>
                 <UserNav handleLinkClick={handleLinkClick} />
               </div>
             ) : null}
             {!isLogIn ? (
-              <div className={css.backdrop_auth}>
+              <div className={scss.backdrop_auth}>
                 <AuthNav handleLinkClick={handleLinkClick} />
               </div>
             ) : null}
 
-            <div className={css.backdrop_nav}>
+            <div className={scss.backdrop_nav}>
               <Nav handleLinkClick={handleLinkClick} />
             </div>
           </div>

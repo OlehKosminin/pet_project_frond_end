@@ -3,7 +3,7 @@ import Nav from './Nav/Nav';
 import UserNav from './UserNav/UserNav';
 import AuthNav from './AuthNav/AuthNav';
 import BurgerMenu from './Burger/Burger';
-import css from './Navigation.module.css';
+import scss from './Navigation.module.scss';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -39,7 +39,7 @@ function Navigation() {
   return (
     <>
       {isMobile ? null : <Nav />}
-      <div className={css.btn_group}>
+      <div className={scss.btn_group}>
         {isLogIn ? <UserNav /> : null}
         {isTablet && !isLogIn ? <AuthNav /> : null}
         {isMobile ? <BurgerMenu /> : null}

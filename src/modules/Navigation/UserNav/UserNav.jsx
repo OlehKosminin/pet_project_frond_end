@@ -2,7 +2,7 @@
 import { React, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import UserLogo from '../../../assets/image/icons/user.svg';
-import css from './UserNav.module.css';
+import scss from './UserNav.module.scss';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { getCurrentUser } from '../../../redux/user/user-operations';
@@ -46,17 +46,17 @@ function UserNav({ handleLinkClick }) {
   };
 
   return (
-    <nav className={css.nav}>
+    <nav className={scss.nav}>
       <ul>
         <li>
           <Link to="/user" onClick={handleClick}>
-            <img className={css.icon} src={UserLogo} alt="UserLogo" />
+            <img className={scss.icon} src={UserLogo} alt="UserLogo" />
             {isMobile ? null : (
-              <span className={css.name}>
+              <span className={scss.name}>
                 {isLogIn ? splitResult() : 'User'}
               </span>
             )}
-            <span className={css.backdrop_name}>
+            <span className={scss.backdrop_name}>
               {isLogIn ? splitResult() : 'User'}
             </span>
           </Link>
