@@ -1,7 +1,9 @@
 import React, { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { Formik, Form, Field } from "formik";
 import contactForm from "./addPetForSell.module.css";
-import style from "../addPetPage.module.scss";
+import style from "../addPetPage.module.css";
 import gender from "./addPetForSellInfo.module.css";
 
 import { useDispatch } from "react-redux";
@@ -23,6 +25,7 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
     borderColor: "#f43f5e",
   };
 
+  const history = useNavigate();
   const dispatch = useDispatch();
 
   const colorToggle = (male) => {
@@ -57,9 +60,24 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
       case !values.price && addr === "sell":
         errors.price = "Price field is required";
         break;
+      case values.price < 0 || (values.price > 100000 && addr === "sell"):
+        errors.price = "Price must be between 0 and 100000";
+        break;
+      // case !values.avatar:
+      //   errors.avatar = "Photo is required";
+      //   break;
 
       case !values.comments:
         errors.comments = "Comments field is required";
+        break;
+      case values.comments.length < 8:
+        errors.comments = "This field must contain at least 8 characters";
+        break;
+      case values.comments.length > 120:
+        errors.comments = "This field should not exceed 20 characters";
+        break;
+      case !avatarFile:
+        errors.avatar = "Photo is required";
         break;
       case !values.sex:
         errors.sex = "Gender field is required";
@@ -97,7 +115,9 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
     } catch (error) {
       console.log(error.message);
     }
-    await onClick("toChoose");
+    // await onClick("toChoose");
+    // await history.push("/user");
+    await history(-1);
   };
 
   return (
@@ -198,7 +218,6 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
                       alt="avatar"
                     />
                   </label>
-
                   <input
                     type="file"
                     id="avatar"
@@ -207,6 +226,12 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
                     onChange={handleAvatarChange}
                     style={{ display: "none" }}
                   />
+                  <div
+                    style={{ padding: 0, textAlign: "center" }}
+                    className={contactForm.error}
+                  >
+                    {isBtnSubmit && errors.avatar && <div>{errors.avatar}</div>}
+                  </div>
                 </div>
               </div>
               <div>
@@ -238,6 +263,8 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
                       type="number"
                       name="price"
                       placeholder="price"
+                      pattern="[0-9]*"
+                      inputMode="numeric"
                       style={
                         isBtnSubmit && errors.price && touched.price
                           ? borderStyle

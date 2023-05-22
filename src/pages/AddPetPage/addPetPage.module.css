@@ -65,7 +65,7 @@
 .downSectionBtn {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 8px;
   margin-top: 137px;
 }
 
@@ -92,10 +92,13 @@
 
   padding-top: 9px;
   padding-bottom: 9px;
+  padding-left: 12px;
+  padding-right: 12px;
 }
-/* .btnCancel:hover {
+.btnCancel:hover {
   outline: 2px solid #54adff;
-} */
+  transition: outline 0.08s ease-in-out;
+}
 
 .btnNext {
   display: flex;
@@ -105,6 +108,11 @@
   color: #fef9f9;
   border: none;
   border-radius: 40px;
+
+  /* background: linear-gradient(to right, #54adff, #cce4fb, #54adff);
+  background-size: 1000% 10%;
+  background-position: left; */
+
   /* padding: 8px 16px; */
   cursor: pointer;
   font-family: "Manrope Regular";
@@ -120,7 +128,11 @@
   width: 248px;
 }
 .btnNext:hover {
-  background-color: #54adff;
+  /* background-position: right; */
+  /* background-color: #54adff; */
+
+  background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+  transition: background-color 0.6s ease-in-out;
   color: #fef9f9;
 }
 
