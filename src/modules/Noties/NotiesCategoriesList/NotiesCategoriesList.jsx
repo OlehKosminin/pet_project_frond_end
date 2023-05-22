@@ -12,25 +12,23 @@ import {
   fetchOwnNotices,
 } from "../../../redux/noties/noties-operations";
 
-
 // const initialState = {
 //   category: "sell",
 //   page: 1,
 // };
 
 const NotiesCategoriesList = () => {
-  const { category} = useParams();
+  const { category } = useParams();
   const [page, setPage] = useState(1);
-  console.log(page, "paginatPage")
+  console.log(page, "paginatPage");
   // const [categor, setCategor] = useState(category);
   const notices = useSelector((store) => store.noties.notices);
+
   const noticesOwn = useSelector((store) => store.noties.own);
   console.log("noticesOwn", noticesOwn);
 
   // const [ state, setState ] = useState();
   const dispatch = useDispatch();
-
-  
 
   // useEffect(() => {
   //   setCategor(category);
@@ -39,9 +37,10 @@ const NotiesCategoriesList = () => {
   useEffect(() => {
     //  setCategor(category);
     if (category === "my-pets") {
-  dispatch(fetchOwnNotices({ page }));
+      dispatch(fetchOwnNotices({ page }));
     }
-    if (category === "favorite") { }
+    if (category === "favorite") {
+    }
     if (
       category === "sell" ||
       category === "lost found" ||
@@ -49,11 +48,10 @@ const NotiesCategoriesList = () => {
     ) {
       dispatch(fetchAllNotices({ category, page }));
     }
-      
   }, [dispatch, category, page]);
 
-   const loadMore = () => {
-     setPage((prevPage) => prevPage + 1);
+  const loadMore = () => {
+    setPage((prevPage) => prevPage + 1);
   };
   // useEffect(() => {
   //   //  setCategor(category);
@@ -62,13 +60,14 @@ const NotiesCategoriesList = () => {
 
   const renderNotices = () => {
     if (category === "my-pets") return noticesOwn;
-    if (category === 'favorite') return;
-    return notices
-  }
-// console.log("switch", renderNotices);
- 
+    if (category === "favorite") return;
+    return notices;
+  };
+  // console.log("switch", renderNotices);
+
   // const [pets, setPets] = useState([]);
 
+  // const [pets, setPets] = useState([]);
 
   // const[deletePetId, setDeletePetId]=useState("")
 
@@ -128,7 +127,7 @@ const NotiesCategoriesList = () => {
   //     </div>
   //   </li>
   // ));
- 
+
   return (
     <>
       <div>

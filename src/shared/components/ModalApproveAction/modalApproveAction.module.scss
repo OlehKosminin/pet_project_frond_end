@@ -1,11 +1,6 @@
 @import "../../../index.scss";
 
-.modal {
-  position: absolute;
-  left: 50%;
-  top: 92px;
-  transform: translate(-50%);
-  height: 287px;
+.modalApproveAction {
   width: 280px;
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
   border-radius: 20px;
@@ -13,20 +8,13 @@
 
   @media screen and (min-width: 768px) {
     top: 148px;
-    height: 300px;
     width: 608px;
   }
 
   @media screen and (min-width: 1280px) {
-    top: 112px;
-    height: 354px;
-    width: 608px;
-  }
-}
+    
+}}
 
-.modalWrapper {
-  position: relative;
-}
 
 .closeBtn {
   margin: 0;
@@ -49,10 +37,10 @@
 }
 
 .title {
-  padding: 0;
-  margin: 0;
-  margin-top: 60px;
-  font-family: "Manrope Medium";
+  padding-top: 60px;
+
+  font-family: "Manrope";
+  font-style: normal;
   font-weight: 500;
   font-size: 36px;
   line-height: 1.361;
@@ -61,12 +49,30 @@
   color: $black-color;
 
   @media screen and (min-width: 1280px) {
-    margin-top: 108px;
+  
   }
 }
 
+.modalText{
+  padding-left: 110px;
+  padding-right: 105px;
+  margin-bottom: 48px;
+
+  font-family: 'Manrope';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 22px;
+text-align: center;
+letter-spacing: -0.01em;
+
+color: #000000;
+
+}
+
 .btnWrapper {
-  margin-top: 48px;
+  padding-bottom: 60px;
+ 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,6 +90,12 @@
   background-color: $default-white-color;
   color: $active-blue-color;
 
+font-family: "Manrope";
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.375;
+  letter-spacing: 0.04em;
+
   &:hover,
   &:focus {
     background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
@@ -91,12 +103,6 @@
   }
 }
 
-.cancelBtnText {
-  font-family: "Manrope Bold";
-  font-size: 16px;
-  line-height: 1.375;
-  letter-spacing: 0.04em;
-}
 
 .actionBtn {
   margin: 0;
@@ -111,6 +117,12 @@
   color: $default-white-color;
   stroke: $default-white-color;
 
+font-family: "Manrope";
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.375;
+  letter-spacing: 0.04em;
+
   &:hover,
   &:focus {
     background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
@@ -118,9 +130,3 @@
   }
 }
 
-.actionBtnText {
-  font-family: "Manrope Bold";
-  font-size: 16px;
-  line-height: 1.375;
-  letter-spacing: 0.04em;
-}
