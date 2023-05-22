@@ -17,11 +17,6 @@ const User = () => {
     navigate("/add-pet");
   };
 
-  const xxx = {
-    qqq: "zxc",
-  };
-  console.log("деструктуризовано:", `${xxx.qqq}`);
-  console.log("не деструктуризовано:", xxx);
   return (
     <div className={css.container}>
       <div>
