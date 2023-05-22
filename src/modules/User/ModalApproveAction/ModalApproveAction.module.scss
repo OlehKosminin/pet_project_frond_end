@@ -1,11 +1,6 @@
 @import "../../../index.scss";
 
-.modal {
-  position: absolute;
-  left: 50%;
-  top: 92px;
-  transform: translate(-50%);
-  height: 287px;
+.modalApproveAction {
   width: 280px;
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
   border-radius: 20px;
@@ -13,16 +8,12 @@
 
   @media screen and (min-width: 768px) {
     top: 148px;
-    height: 300px;
     width: 608px;
   }
 
   @media screen and (min-width: 1280px) {
-    top: 112px;
-    height: 354px;
-    width: 608px;
-  }
-}
+    
+}}
 
 .modalWrapper {
   position: relative;
@@ -49,9 +40,6 @@
 }
 
 .title {
-  padding: 0;
-  margin: 0;
-  margin-top: 60px;
   font-family: "Manrope";
   font-style: normal;
   font-weight: 500;
@@ -62,7 +50,7 @@
   color: $black-color;
 
   @media screen and (min-width: 1280px) {
-    margin-top: 108px;
+  
   }
 }
 

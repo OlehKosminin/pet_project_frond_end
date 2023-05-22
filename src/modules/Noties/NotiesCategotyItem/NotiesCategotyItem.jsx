@@ -20,12 +20,12 @@ const NotiesCategotyItem = (notices) => {
   const [hoveredCardId, setHoveredCardId] = useState(null);
 
   useEffect(() => {
-    if (ElName === "openLearnMore") {
+    if (ElName === "{openLearnMore}") {
       setModalChild(<ModalNotice close={close} />);
-      console.log(modalChild);
       setIsLearnMore(true);
     }
-    if (ElName === "deleteItem") {
+    if (ElName === "{deleteItem}") {
+      setModalChild(<ModalApproveAction close={close} />);
       setDeleteItem(true);
     }
     if (isOpen) {
@@ -34,7 +34,7 @@ const NotiesCategotyItem = (notices) => {
     return () => {
       document.body.style.overflowY = "auto";
     };
-  }, [isOpen, ElName, setModalChild, setIsLearnMore, setDeleteItem, close]);
+  }, [isOpen, setModalChild, setIsLearnMore, setDeleteItem]);
 
   // if (!notices.length) {
   //   return;
@@ -51,7 +51,7 @@ const NotiesCategotyItem = (notices) => {
   // };
   // const child = modalChoice();
 
-  const hendleClick = (e) => {
+  const handleClick = (e) => {
     open(e.currentTarget.name);
   };
 
@@ -131,7 +131,7 @@ const NotiesCategotyItem = (notices) => {
           {/* <button className={css.favorite}>H</button> */}
           <button
             name="deleteItem"
-            onClick={(e) => hendleClick(e)}
+            onClick={(e) => handleClick(e)}
             type="button"
             className={css.deletion}
           >
@@ -185,7 +185,7 @@ const NotiesCategotyItem = (notices) => {
         <button
           className={css.more_info_btn}
           name="openLearnMore"
-          onClick={(e) => hendleClick(e)}
+          onClick={(e) => handleClick(e)}
         >
           Learn more
         </button>
