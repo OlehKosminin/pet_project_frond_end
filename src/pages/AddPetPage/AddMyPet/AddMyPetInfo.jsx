@@ -1,11 +1,12 @@
 import React, { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import { useDispatch } from "react-redux";
 import { addPet } from "../../../redux/pets/pets-operations";
 // addNoticesPet
 // addUserPet
 import contactForm from "./addMyPet.module.css";
-import style from "../addPetPage.module.scss";
+import style from "../addPetPage.module.css";
 import { SvgSelector } from "../cvgSelector/SvgSelector";
 
 import avatarInput from "../img/avatarInput.png";
@@ -19,6 +20,7 @@ const AddMyPetInfo = ({ onClick, date }) => {
   const [avatarFile, setAvatarFile] = useState(null);
   const [isBtnSubmit, setIsBtnSubmit] = useState(false);
 
+  const history = useNavigate();
   const dispatch = useDispatch();
 
   const handleAvatarChange = (e) => {
@@ -42,8 +44,21 @@ const AddMyPetInfo = ({ onClick, date }) => {
 
   const fieldCheck = (values) => {
     const errors = {};
-    if (!values.comments) {
-      errors.comments = "Comments field is required";
+    switch (true) {
+      case !avatarFile:
+        errors.avatar = "Photo is required";
+        break;
+      case !values.comments:
+        errors.comments = "Comments field is required";
+        break;
+      case values.comments.length < 8:
+        errors.comments = "This field must contain at least 8 characters";
+        break;
+      case values.comments.length > 120:
+        errors.comments = "This field should not exceed 20 characters";
+        break;
+      default:
+        break;
     }
     return errors;
   };
@@ -66,7 +81,9 @@ const AddMyPetInfo = ({ onClick, date }) => {
     } catch (error) {
       console.log(error.message);
     }
-    await onClick("toChoose");
+    // await onClick("toChoose");
+    // await history.push("/user");
+    await history(-1);
   };
 
   return (
@@ -82,11 +99,21 @@ const AddMyPetInfo = ({ onClick, date }) => {
               <div className={contactForm.avatarField}>
                 <label htmlFor="avatar" className={contactForm.photoLabel}>
                   <div className={contactForm.divLabel}>Add photo</div>
-                  <img
-                    className={contactForm.avatarImg}
-                    src={imageUrl ? imageUrl : avatarInput}
-                    alt="avatar"
-                  />
+                  <div className={contactForm.imgErrDiv}>
+                    <img
+                      className={contactForm.avatarImg}
+                      src={imageUrl ? imageUrl : avatarInput}
+                      alt="avatar"
+                    />
+                    <div
+                      style={{ padding: 0, textAlign: "center" }}
+                      className={contactForm.error}
+                    >
+                      {isBtnSubmit && errors.avatar && (
+                        <div>{errors.avatar}</div>
+                      )}
+                    </div>
+                  </div>
                 </label>
 
                 <input

@@ -1,5 +1,4 @@
-// '@media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)': `url(${require('../../images/background/bg-mobile@2x.png')}), url(${require('../../images/animal/animal-mobile@2x.png')})`,
-const styled = {
+const styles = {
   animal: {
     height: { mobile: '601px', tablet: '1193px', desktop: '768px' },
     backgroundImage: {
@@ -32,4 +31,4 @@ const styled = {
   },
 };
 
-export default styled;
+export default styles;

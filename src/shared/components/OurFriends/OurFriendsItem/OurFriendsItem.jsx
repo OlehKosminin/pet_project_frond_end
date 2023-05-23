@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Link, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
-import styles from "./friend-item";
+import styles from "./styles";
 
 const OurFriendsItem = ({
   avatar,
@@ -14,12 +14,12 @@ const OurFriendsItem = ({
   email,
   phone,
 }) => {
-  const [display, setDisplay] = useState("none");
+  const [display, setDisplay] = useState('none');
 
-  const days = ["MU", "TU", "WE", "TH", "FR", "SA", "SU"];
+  const days = ['MN', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
 
   const timeArr = time
-    .filter((el) => el.isOpen !== false)
+    .filter(el => el.isOpen !== false)
     .map((el, index) => el.isOpen && { day: days[index], ...el });
 
   return (
@@ -41,7 +41,7 @@ const OurFriendsItem = ({
           <Box
             onMouseLeave={() => {
               setTimeout(() => {
-                setDisplay("none");
+                setDisplay('none');
               }, 300);
             }}
             sx={styles.relative}
@@ -49,7 +49,7 @@ const OurFriendsItem = ({
             <Box
               onMouseEnter={() => {
                 if (time[0]) {
-                  setDisplay("flex");
+                  setDisplay('flex');
                 }
               }}
             >

@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import initialState from "./initialState";
 
 import contactForm from "./addMyPet.module.css";
-import style from "../addPetPage.module.scss";
+import style from "../addPetPage.module.css";
 
 import { SvgSelector } from "../cvgSelector/SvgSelector";
 import { yyyymmdd } from "../utils/formattedDate";
@@ -67,14 +67,28 @@ const AddMyPetDetails = ({ onClick }) => {
 
   const fieldCheck = (values) => {
     const errors = {};
-    if (!values.name) {
-      errors.name = "Enter a pet name";
-    } else if (!values.birthday) {
-      errors.birthday = "Enter a date of birth";
-    } else if (!Date.parse(values.birthday)) {
-      errors.birthday = "You have a mistake in the date of birth";
-    } else if (!values.breed) {
-      errors.breed = "Enter a breed";
+    switch (true) {
+      case !values.name:
+        errors.name = "Name is required";
+        break;
+      case values.name.length < 2 || values.name.length > 16:
+        errors.name = "Name must be between 2 and 16 characters";
+        break;
+
+      case !values.birthday:
+        errors.birthday = "Enter a date of birth";
+        break;
+      case !Date.parse(values.birthday):
+        errors.birthday = "You have a mistake in the date of birth";
+        break;
+      case !values.breed:
+        errors.breed = "Breed is required";
+        break;
+      case values.breed.length < 2 || values.breed.length > 16:
+        errors.breed = "Breed must be between 2 and 16 characters";
+        break;
+      default:
+        break;
     }
 
     return errors;
@@ -126,6 +140,7 @@ const AddMyPetDetails = ({ onClick }) => {
                 name="birthday"
                 value={birthday}
                 onChange={(e) => {
+                  e.preventDefault();
                   handleBirthdayChange(setFieldValue, e, null);
                 }}
                 placeholder={"yyyy-mm-dd"}

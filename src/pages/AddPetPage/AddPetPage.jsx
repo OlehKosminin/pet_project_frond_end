@@ -1,4 +1,4 @@
-import style from "./addPetPage.module.scss";
+import style from "./addPetPage.module.css";
 import styleBtn from "./choosenBtn.module.css";
 
 import { SvgSelector } from "./cvgSelector/SvgSelector";
@@ -214,7 +214,7 @@ const AddPetPage = () => {
         <div className={style.downSectionBtn}>
           <div className={style.wrapper}>
             <Link
-              to={"/notices/:categori"}
+              to={-1}
               onClick={() => setActiveForm("")}
               className={style.btnCancel}
             >

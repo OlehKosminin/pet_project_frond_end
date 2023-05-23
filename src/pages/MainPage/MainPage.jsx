@@ -1,16 +1,14 @@
-import React from 'react';
-import { Container } from '@mui/material';
-import styled from './MainPage.module.scss';
+import React from "react";
+import { Container } from "@mui/material";
+import styles from "./MainPage.module.scss";
 
 function MainPage() {
   return (
     <>
-      <Container className={styled.MainPage}>
-        <h3 className={styled.Title}>
-          Take good care of your small pets
-        </h3>
+      <Container className={styles.mainPage}>
+        <h3 className={styles.title}>Take good care of your small pets</h3>
       </Container>
     </>
   );
 }
-export default MainPage
+export default MainPage;
