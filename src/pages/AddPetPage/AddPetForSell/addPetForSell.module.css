@@ -114,6 +114,8 @@
   height: 182px;
   cursor: pointer;
   border-radius: 40px;
+  margin-right: auto;
+  margin-left: auto;
 }
 .commentsInput {
   /* display: block; */

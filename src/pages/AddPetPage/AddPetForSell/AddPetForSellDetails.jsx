@@ -1,8 +1,8 @@
+import style from "../addPetPage.module.css";
+import contactForm from "./addPetForSell.module.css";
 import React, { useState, useCallback } from "react";
 import { Formik, Form, Field } from "formik";
 import initialState from "./initialState";
-import contactForm from "./addPetForSell.module.css";
-import style from "../addPetPage.module.scss";
 import { SvgSelector } from "../cvgSelector/SvgSelector";
 import { yyyymmdd } from "../utils/formattedDate";
 import DatePicker from "react-datepicker";
@@ -58,16 +58,33 @@ const AddPetForSellDetails = ({ onClick, addr }) => {
 
   const fieldCheck = (values) => {
     const errors = {};
-    if (!values.title) {
-      errors.title = "Enter a title";
-    } else if (!values.name) {
-      errors.name = "Enter a name";
-    } else if (!values.birthday) {
-      errors.birthday = "Enter a date of birth";
-    } else if (!Date.parse(values.birthday)) {
-      errors.birthday = "You have a mistake in the date of birth";
-    } else if (!values.breed) {
-      errors.breed = "Enter a breed";
+    switch (true) {
+      case !values.title:
+        errors.title = "Name is required";
+        break;
+      case values.title.length < 2 || values.title.length > 16:
+        errors.title = "Name must be between 2 and 16 characters";
+        break;
+      case !values.name:
+        errors.name = "Name is required";
+        break;
+      case values.name.length < 2 || values.name.length > 16:
+        errors.name = "Name must be between 2 and 16 characters";
+        break;
+      case !values.birthday:
+        errors.birthday = "Enter a date of birth";
+        break;
+      case !Date.parse(values.birthday):
+        errors.birthday = "You have a mistake in the date of birth";
+        break;
+      case !values.breed:
+        errors.breed = "Breed is required";
+        break;
+      case values.breed.length < 2 || values.breed.length > 16:
+        errors.breed = "Breed must be between 2 and 16 characters";
+        break;
+      default:
+        break;
     }
 
     return errors;

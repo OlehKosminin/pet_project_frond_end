@@ -99,6 +99,12 @@
   cursor: pointer;
   border-radius: 40px;
 }
+.imgErrDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .commentsInput {
   /* display: block; */
   margin-top: 8px;
@@ -110,3 +116,16 @@
   box-sizing: border-box;
   width: 100%;
 }
+/* .Field:hover { */
+/* Убираем эффект ховера */
+/* Примеры способов сброса стилей */
+/* Пустые стили */
+/* background: none; */
+/* color: inherit; */
+/* Сброс до значений по умолчанию */
+/* background: initial; */
+/* color: initial; */
+/* Сброс до значений по умолчанию с помощью ключевого слова 'unset' */
+/* background: unset; */
+/* color: unset; */
+/* } */
