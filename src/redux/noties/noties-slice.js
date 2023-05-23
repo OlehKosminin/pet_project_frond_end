@@ -17,13 +17,13 @@ const noticesInitialState = {
   notices: {result: [], count: 0},
   // oneNotice: null,
   error: null,
-  isLoading: false,
+  isLoading: true,
 };
 const handlePending = (state) => {
   state.isLoading = true;
 };
 const handleReject = (state, action) => {
-  state.notices = [];
+  state.notices = {result: [], count: 0};
   state.isLoading = false;
   state.error = action.payload;
 };
@@ -47,7 +47,6 @@ const noticesSlice = createSlice({
       })
 
       .addCase(addNotices.fulfilled, (state, { payload }) => {
-        state.notices.result.push(payload);
         state.isLoading = false;
       })
       .addCase(addNotices.rejected, (state, action) => {
