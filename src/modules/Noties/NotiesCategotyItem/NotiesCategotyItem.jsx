@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useSwitch } from "../../../hooks/useSwitch";
+
+import { getSingleNotice } from "../../../redux/noties/noties-operations";
 
 import ModalNotice from "../../ModalNotice/ModalNotice";
 import ModalApproveAction from "../../../shared/components/ModalApproveAction/ModalApproveAction";
@@ -9,48 +12,51 @@ import Modal from "../../../shared/components/Modal/Modal";
 import { ReactComponent as TrashSvg } from "../../../assets/image/icons/trash.svg";
 import NoticesCategoryItemSvgSelector from "./NoticesCategoryItemSvgSelector";
 import css from "./notiesCategoriItem.module.scss";
-import { useSelector } from "react-redux";
 
 const NotiesCategotyItem = ({ items }) => {
-  const { isOpen, ElName, open, close } = useSwitch(false);
-  const [modalChild, setModalChild] = useState(null);
-  // console.log("notices.items: ", notices.items);
-  // const [expandedLocation, setExpandedLocation] = useState(false);
+  const { isOpen, itemInfo, open, close } = useSwitch(false);
+  // const [modalChild, setModalChild] = useState(null);
   const [hoveredCardId, setHoveredCardId] = useState(null);
   const id_user = useSelector((store) => store.auth.user._id);
+  const dispatch = useDispatch();
+  const noticeItem = useSelector((store) => store.noties.oneNotice);
+  // console.log("noticesItem: ", noticeItem);
+  // const [expandedLocation, setExpandedLocation] = useState(false);
 
   useEffect(() => {
-    if (ElName === "{openLearnMore}") {
-      setModalChild(<ModalNotice close={close} />);
-    }
-    if (ElName === "{deleteItem}") {
-      setModalChild(<ModalApproveAction close={close} />);
+    if (itemInfo.name === "openLearnMore") {
+      dispatch(getSingleNotice(itemInfo.id));
+      // renderNoticeItemModal();
     }
     if (isOpen) {
       document.body.style.overflowY = "hidden";
     }
+
     return () => {
       document.body.style.overflowY = "auto";
     };
-  }, [isOpen, setModalChild]);
+  }, [isOpen, dispatch]);
 
   // if (!notices.length) {
   //   return;
   // }
 
-  // const modalChoice = () => {
-  //   if (isLearnMore) {
-  //     setmodalChild(<ModalNotice close={close} />);
-  //     return;
-  //   }
-  //   if (isDeleteItem) {
-  //     return <ModalApproveAction close={close} />;
-  //   }
-  // };
-  // const child = modalChoice();
+  const modalChoice = () => {
+    if (itemInfo.name === "openLearnMore") {
+      return <ModalNotice close={close} itemInfo={noticeItem} />;
+    }
+    if (itemInfo.name === "deleteItem") {
+      return <ModalApproveAction close={close} />;
+    }
+  };
 
   const handleClick = (e) => {
-    open(e.currentTarget.name);
+    console.log(e.currentTarget);
+    const itemInfo = {
+      id: e.target.id,
+      name: e.currentTarget.name,
+    };
+    open(itemInfo);
   };
 
   const handleMouseEnter = (id) => {
@@ -110,7 +116,7 @@ const NotiesCategotyItem = ({ items }) => {
       // price,
       // public_id,
       sex,
-      // title,
+      title,
       _id,
     }) => (
       <li className={css.example_card} key={_id}>
@@ -189,6 +195,7 @@ const NotiesCategotyItem = ({ items }) => {
         <button
           className={css.more_info_btn}
           name="openLearnMore"
+          id={_id}
           onClick={(e) => handleClick(e)}
         >
           Learn more
@@ -206,9 +213,7 @@ const NotiesCategotyItem = ({ items }) => {
           <ul className={css.wrapper}> {pet}</ul>
 
           {isOpen && (
-            <Modal isOpen={isOpen} close={close}>
-              {modalChild}
-            </Modal>
+            <Modal isOpen={isOpen} close={close} children={modalChoice()} />
           )}
         </div>
       )}

@@ -6,7 +6,7 @@ import NotiesCategoryItem from "../NotiesCategotyItem/NotiesCategotyItem";
 
 // import { deleteNotices } from "../../../shared/services/noties";
 
-import {} from "../../../redux/noties/noties-selector";
+// import {} from "../../../redux/noties/noties-selector";
 import {
   fetchAllNotices,
   fetchOwnNotices,
@@ -20,12 +20,12 @@ import {
 const NotiesCategoriesList = () => {
   const { category } = useParams();
   const [page, setPage] = useState(1);
-  console.log(page, "paginatPage");
+  // console.log(page, "paginatPage");
   // const [categor, setCategor] = useState(category);
   const notices = useSelector((store) => store.noties.notices);
 
   const noticesOwn = useSelector((store) => store.noties.own);
-  console.log("noticesOwn", noticesOwn);
+  // console.log("noticesOwn", noticesOwn);
 
   // const [ state, setState ] = useState();
   const dispatch = useDispatch();

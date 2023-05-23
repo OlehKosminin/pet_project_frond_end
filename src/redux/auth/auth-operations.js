@@ -2,8 +2,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from "../../shared/services/auth";
 import axios from "axios";
 
-
-
 export const singup = createAsyncThunk(
   "auth/singup",
   async (data, { rejectWithValue }) => {
@@ -73,3 +71,16 @@ export const updUserInfo = createAsyncThunk(
     }
   }
 );
+
+// export const getOwnerInfo = createAsyncThunk(
+//   "auth/getOwnerInfo",
+//   async (id, { rejectWithValue }) => {
+//     try {
+//       const data = await api.getOwnerInfo(id);
+//       console.log(data);
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );

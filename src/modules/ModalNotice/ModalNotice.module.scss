@@ -1,20 +1,4 @@
 @import "../../index.scss";
-@font-face {
-  font-family: "Manrope Regular";
-  src: url("../../fonts/Manrope-Regular.ttf");
-}
-@font-face {
-  font-family:  "Manrope Bold" ;
-  src: url("../../fonts/Manrope-Regular.ttf");
-}
-@font-face {
-  font-family: "Manrope SemiBold";
-  src: url("../../fonts/Manrope-Regular.ttf");
-}
-@font-face {
-  font-family: "Manrope Medium";
-  src: url("../../fonts/Manrope-Regular.ttf");
-}
 
 .modalNotice{
  width: 280px;
@@ -195,7 +179,7 @@ color: $black-color;
 }
 
 .petContact{
-font-family: 'Manrope';
+  font-family: "Manrope Medium";
 font-style: normal;
 font-weight: 500;
 font-size: 12px;
