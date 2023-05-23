@@ -29,6 +29,17 @@ export const fetchOwnNotices = createAsyncThunk(
     }
   }
 );
+export const myAddFavoriteNotices = createAsyncThunk(
+  "notices/favoriteNotices",
+  async (id_notis, { rejectWithValue }) => {
+    try {
+      const result = await api.addFavoriteNotices(id_notis);
+      return result;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 // export const getNoticeByCategory = createAsyncThunk(
 //   "notices/getNoticeByCategory",

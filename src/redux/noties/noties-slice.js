@@ -5,6 +5,7 @@ import {
   // getNewNotice,
   fetchAllNotices,
   fetchOwnNotices,
+  myAddFavoriteNotices,
   // getNoticeByCategory,
   // getNoticesByQwery,
   // getSingleNotice,

@@ -6,7 +6,7 @@ import css from "./notiesCategoriItem.module.scss";
 import {useSelector} from "react-redux";
 
 const NotiesCategotyItem = ({items}) => {
-  console.log("notices: ", items);
+  console.log("itemVse ", items);
   // const [expandedLocation, setExpandedLocation] = useState(false);
   const [hoveredCardId, setHoveredCardId] = useState(null);
   const id_user = useSelector((store) => store.auth.user._id);
@@ -22,6 +22,7 @@ const NotiesCategotyItem = ({items}) => {
   const handleMouseLeave = () => {
     setHoveredCardId(null);
   };
+
 
   // const toggleLocation = (e) => {
   //   console.log(e, "event");
@@ -48,7 +49,7 @@ const NotiesCategotyItem = ({items}) => {
     const year = date.getFullYear();
     if (year === 1970) {
       const month = String(date.getMonth() + 1).padStart(2, "0");
-      console.log(month, "mesyaz")
+      
       return `${month} mth`;
     }
     
@@ -57,9 +58,9 @@ const NotiesCategotyItem = ({items}) => {
 };
 
   const changeFavorite = (isAdd) => {
-    if (isAdd) return //dispatch favorite add
-    if (!isAdd) return //dispatch favorite remove
-  }
+    if (isAdd) return; //dispatch favorite add
+    if (!isAdd) return; //dispatch favorite remove
+  };
 
  
   const pet = items.result.map(

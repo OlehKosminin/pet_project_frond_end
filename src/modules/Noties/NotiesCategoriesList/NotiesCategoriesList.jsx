@@ -26,6 +26,7 @@ const NotiesCategoriesList = () => {
   const notices = useSelector((store) => store.noties.notices);
   const noticesOwn = useSelector((store) => store.noties.own);
   console.log("noticesOwn", noticesOwn);
+  console.log("notices", notices);
 
   // const [ state, setState ] = useState();
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const NotiesCategoriesList = () => {
   useEffect(() => {
     //  setCategor(category);
     if (category === "my-pets") {
-  dispatch(fetchOwnNotices({ page }));
+ dispatch(fetchOwnNotices({ page }));
     }
     if (category === "favorite") { }
     if (
