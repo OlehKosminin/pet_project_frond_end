@@ -11,6 +11,7 @@ import NoticesCategoryItemSvgSelector from "./NoticesCategoryItemSvgSelector";
 import css from "./notiesCategoriItem.module.scss";
 import { useSelector } from "react-redux";
 
+
 const NotiesCategotyItem = ({ items }) => {
   const { isOpen, ElName, open, close } = useSwitch(false);
   const [modalChild, setModalChild] = useState(null);
@@ -61,6 +62,7 @@ const NotiesCategotyItem = ({ items }) => {
     setHoveredCardId(null);
   };
 
+
   // const toggleLocation = (e) => {
   //   console.log(e, "event");
   //   const cardId = items.filter((items) => items.id === e);
@@ -85,6 +87,7 @@ const NotiesCategotyItem = ({ items }) => {
     const year = date.getFullYear();
     if (year === 1970) {
       const month = String(date.getMonth() + 1).padStart(2, "0");
+
       return `${month} mth`;
     }
 

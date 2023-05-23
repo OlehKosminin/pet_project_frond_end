@@ -26,6 +26,7 @@ const NotiesCategoriesList = () => {
 
   const noticesOwn = useSelector((store) => store.noties.own);
   console.log("noticesOwn", noticesOwn);
+  console.log("notices", notices);
 
   // const [ state, setState ] = useState();
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const NotiesCategoriesList = () => {
       dispatch(fetchOwnNotices({ page }));
     }
     if (category === "favorite") {
+
     }
     if (
       category === "sell" ||

@@ -18,6 +18,11 @@ export const getOwnNotices = async ( page = 1, limit = 6) => {
   console.log("dataOwn ", data);
   return data;
 };
+export const addFavoriteNotices = async (id_notis) => {
+  const { data } = await instance.patch(`api/notices/favorite-add/${id_notis}`);
+  console.log("favorite ", data);
+  return data;
+};
 export const deleteNotices = async (id) => {
   await instance.delete(`api/notices/${id}`);
 };
