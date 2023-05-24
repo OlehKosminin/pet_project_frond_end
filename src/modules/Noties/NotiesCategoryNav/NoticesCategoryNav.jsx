@@ -1,4 +1,7 @@
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+// import { getUser } from "../../../redux/user/user-selectors";
+import { getUser } from "../../../redux/auth/auth-selector";
 import css from "./noticesCategoryNav.module.scss";
 
 const NoticesCategoriesNavigation = () => {
@@ -7,7 +10,8 @@ const NoticesCategoriesNavigation = () => {
     //     ? `${css.buttonCategory} ${css.active}`
     //     : css.buttonCategory;
     // };
-    
+    const { token } = useSelector(getUser);
+    console.log(token, "token")
     return (
       <div className={css.wrapper}>
         <div className={css.buttonCategoryWrapper}>
@@ -20,14 +24,14 @@ const NoticesCategoriesNavigation = () => {
           <NavLink className={css.buttonCategory} to="/notices/in good hands">
             in good hands
           </NavLink>
-          <>
+         {token && (<>
             <NavLink className={css.buttonCategory} to="/notices/favorite">
               favorite ads
             </NavLink>
-            <NavLink className={css.buttonCategory} to="/notices/owner">
+            <NavLink className={css.buttonCategory} to="/notices/my-pets">
               my ads
             </NavLink>
-          </>
+          </>)}
         </div>
 
         <button className={css.filter}>Filter</button>

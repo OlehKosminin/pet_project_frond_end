@@ -1,0 +1,108 @@
+@import "../../index.scss";
+
+@font-face {
+  font-family: "Manrope Medium";
+  src: url("../../fonts/Manrope-Regular.ttf");
+}
+@font-face {
+  font-family:  "Manrope Bold" ;
+  src: url("../../fonts/Manrope-Regular.ttf");
+}
+
+
+.modalCongrats{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 280px;
+
+  padding: 68px 0px 60px 0px;
+  
+  @media screen and (min-width: 768px) {
+    padding: 60px 0px  ;
+    width: 608px;
+  }
+  
+  @media screen and (min-width: 1200px) {
+   
+  }
+}
+
+.modalCongratsTitle{
+  font-family: "Manrope Medium";
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 33px;
+
+text-align: center;
+letter-spacing: 0.04em;
+margin-bottom: 24px;
+
+color: #111111;
+
+@media screen and (min-width: 768px) {
+  margin-bottom: 52px;
+
+  font-size: 36px;
+line-height: 49px;
+}
+
+@media screen and (min-width: 1200px) {
+ 
+}
+}
+
+.modalCongratsText{
+  font-family: "Manrope Medium";
+font-weight: 500;
+font-size: 16px;
+line-height: 22px;
+
+text-align: center;
+letter-spacing: 0.04em;
+margin-bottom: 40px;
+
+color: #111111;
+
+@media screen and (min-width: 768px) {
+  margin-bottom: 60px;
+
+  font-size: 24px;
+line-height: 33px;
+}
+
+@media screen and (min-width: 1200px) {
+ 
+}
+}
+
+.modalCongratsBtn{
+  display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+gap: 12px;
+border: none;
+border-radius: 40px;
+
+width: 248px;
+
+padding: 8px 28px;
+
+background: #54ADFF;
+
+font-family:  "Manrope Bold" ;
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 22px;
+
+letter-spacing: 0.04em;
+
+color: #FEF9F9;
+}
+
+.pawprintSvg{
+  fill: #FEF9F9;
+}

@@ -4,7 +4,12 @@ import {
   // deleteNotice,
   // getNewNotice,
   fetchAllNotices,
+<<<<<<< HEAD
   searchNotices,
+=======
+  fetchOwnNotices,
+  myAddFavoriteNotices,
+>>>>>>> main
   // getNoticeByCategory,
   // getNoticesByQwery,
   // getSingleNotice,
@@ -13,18 +18,16 @@ import {
 } from "./noties-operations";
 
 const noticesInitialState = {
-  notices: [],
+  notices: {result: [], count: 0},
   // oneNotice: null,
-  favorite: [],
-  // own: [],
   error: null,
-  isLoading: false,
+  isLoading: true,
 };
 const handlePending = (state) => {
   state.isLoading = true;
 };
 const handleReject = (state, action) => {
-  state.notices = [];
+  state.notices = {result: [], count: 0};
   state.isLoading = false;
   state.error = action.payload;
 };
@@ -39,12 +42,14 @@ const noticesSlice = createSlice({
       .addCase(fetchAllNotices.fulfilled, (state, { payload }) => {
         // console.log("slice payload: ", payload);
         state.isLoading = false;
-        state.notices = payload.result;
+        state.notices.result = payload.result;
+        state.notices.count = payload.resultCount;
         state.error = null;
       })
       .addCase(fetchAllNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
+<<<<<<< HEAD
       .addCase(searchNotices.pending, (state) => {
         handlePending(state);
       })
@@ -59,49 +64,66 @@ const noticesSlice = createSlice({
       })
       .addCase(addNotices.fulfilled, (state, { payload }) => {
         state.notices.push(payload);
+=======
+
+      .addCase(addNotices.fulfilled, (state, { payload }) => {
+>>>>>>> main
         state.isLoading = false;
       })
       .addCase(addNotices.rejected, (state, action) => {
         handleReject(state, action);
+      })
+      // .addCase(deleteNotice.fulfilled, (state, { payload }) => {
+      //   state.notices = state.notices.filter(({ _id }) => _id !== payload);
+      //   state.isLoading = false;
+      // })
+      // .addCase(deleteNotice.rejected, (state, { payload }) => {
+      //   handleReject(state, payload);
+      // })
+      // // додає оголошення
+      // .addCase(createNotice.pending, (state) => {
+      //   handlePending(state);
+      // })
+      // .addCase(createNotice.fulfilled, (state, { payload }) => {
+      //   state.notices.push(payload);
+      //   state.isLoading = false;
+      //   state.error = null;
+      // })
+      // .addCase(createNotice.rejected, (state, { payload }) => {
+      //   handleReject(state, payload);
+      // })
+      // .addCase(getUserNotices.fulfilled, (state, { payload }) => {
+      //   state.isLoading = false;
+      //   state.error = null;
+      //   state.own = payload;
+      // })
+      // .addCase(getUserNotices.rejected, (state, action) => {
+      //   handleReject(state, action);
+      // })
+      .addCase(fetchOwnNotices.pending, (state) => {
+        handlePending(state);
+      })
+      .addCase(fetchOwnNotices.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.notices.result = payload.result;
+        state.notices.count = payload.resultCount;
+        state.error = null;
+      })
+      .addCase(fetchOwnNotices.rejected, (state, action) => {
+        handleReject(state, action);
+      })
+      .addCase(myAddFavoriteNotices.pending, (state) => {
+          handlePending(state);
+        })
+      .addCase(myAddFavoriteNotices.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.notices.result = payload.result;
+        state.notices.count = payload.resultCount;
+        state.error = null;
+      })
+      .addCase(myAddFavoriteNotices.rejected, (state, action) => {
+        handleReject(state, action);
       });
-    // .addCase(deleteNotice.fulfilled, (state, { payload }) => {
-    //   state.notices = state.notices.filter(({ _id }) => _id !== payload);
-    //   state.isLoading = false;
-    // })
-    // .addCase(deleteNotice.rejected, (state, { payload }) => {
-    //   handleReject(state, payload);
-    // })
-    // // додає оголошення
-    // .addCase(createNotice.pending, (state) => {
-    //   handlePending(state);
-    // })
-    // .addCase(createNotice.fulfilled, (state, { payload }) => {
-    //   state.notices.push(payload);
-    //   state.isLoading = false;
-    //   state.error = null;
-    // })
-    // .addCase(createNotice.rejected, (state, { payload }) => {
-    //   handleReject(state, payload);
-    // })
-    // .addCase(getUserNotices.fulfilled, (state, { payload }) => {
-    //   state.isLoading = false;
-    //   state.error = null;
-    //   state.own = payload;
-    // })
-    // .addCase(getUserNotices.rejected, (state, action) => {
-    //   handleReject(state, action);
-    // })
-    // .addCase(getNoticesByQwery.pending, (state) => {
-    //   handlePending(state);
-    // })
-    // .addCase(getNoticesByQwery.fulfilled, (state, { payload }) => {
-    //   state.isLoading = false;
-    //   state.notices = payload;
-    //   state.error = null;
-    // })
-    // .addCase(getNoticesByQwery.rejected, (state, action) => {
-    //   handleReject(state, action);
-    // });
   },
   reducers: {
     clearNotices(state, { payload }) {

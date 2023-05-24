@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
+import { Notify } from "notiflix/build/notiflix-notify-aio";
 import * as api from "../../shared/services/pets";
 
 export const getPets = createAsyncThunk(
@@ -8,8 +8,9 @@ export const getPets = createAsyncThunk(
     try {
       const result = await api.getAll();
       return result;
-    } catch ({ responce }) {
-      return rejectWithValue(responce);
+    } catch (error) {
+      Notify.failure(error.message);
+      return rejectWithValue(error.responce);
     }
   }
 );
@@ -19,9 +20,11 @@ export const addPet = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const result = await api.addPet(data);
+      Notify.success("Your pet successfully added!");
       return result.data;
-    } catch ({ responce }) {
-      return rejectWithValue(responce);
+    } catch (error) {
+      Notify.failure(error.message);
+      return rejectWithValue(error.responce);
     }
   }
 );
@@ -32,9 +35,11 @@ export const deletePet = createAsyncThunk(
     try {
       await api.deletePet(data);
       const result = await api.getAll();
+      Notify.success("Your pet deleted!");
       return result;
-    } catch ({ responce }) {
-      return rejectWithValue(responce);
+    } catch (error) {
+      Notify.failure(error.message);
+      return rejectWithValue(error.responce);
     }
   }
 );

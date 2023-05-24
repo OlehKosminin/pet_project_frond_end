@@ -49,12 +49,12 @@ const authSlice = createSlice({
         store.error = null;
       })
       .addCase(current.fulfilled, (store, { payload }) => {
-        // console.log("payload: ", payload);
         store.loading = false;
         store.user = payload;
         store.isLogin = true;
       })
       .addCase(current.rejected, (store, { payload }) => {
+        store.token = "";
         store.loading = false;
         store.error = payload;
       })

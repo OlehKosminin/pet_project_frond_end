@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { Notify } from "notiflix/build/notiflix-notify-aio";
 import * as api from "../../shared/services/auth";
 import axios from "axios";
-
-
+import { async } from "q";
 
 export const singup = createAsyncThunk(
   "auth/singup",
@@ -67,9 +67,23 @@ export const updUserInfo = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const result = await api.updUserInfo(data);
+      Notify.success("User information successfully changed!");
       return result.data;
-    } catch ({ responce }) {
-      return rejectWithValue(responce);
+    } catch (error) {
+      Notify.failure(error.message);
+      return rejectWithValue(error.responce);
     }
   }
 );
+
+// export const getUserInfo = createAsyncThunk(
+//   "auth/get-user-info",
+//   async ({ _id }, { rejectWithValue }) => {
+//     try {
+//       const data = await api.getUserInfo({ _id });
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error.responce);
+//     }
+//   }
+// );

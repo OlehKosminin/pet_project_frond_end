@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // export const getPets = (state) => state.notices.pets;
 // export const getOneNotice = (state) => state.notices.oneNotice;
 // export const getNoteceIsLoadig = (state) => state.notices.isLoading;
@@ -5,3 +6,9 @@
 // export const getOwnNotices = (state) => state.notices.own;
 
 export const getNotices = (state) => state.noties.notices;
+=======
+export const getPets = (state) => state.notices.pets;
+// export const getOneNotice = (state) => state.notices.oneNotice;
+export const getNoteceIsLoadig = (store) => store.noties.isLoading;
+export const getNotices = (store) => store.noties.notices
+>>>>>>> main

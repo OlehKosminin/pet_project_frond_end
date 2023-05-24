@@ -2,7 +2,6 @@
 
 .petItem {
   position: relative;
-  min-height: 256px;
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
   border-radius: 40px;
   padding: 20px;
@@ -29,8 +28,7 @@
 }
 
 .petInfoTitle {
-  font-family: "Manrope";
-  font-weight: 600;
+  font-family: "Manrope SemiBold";
   font-size: 14px;
   line-height: 1.29;
   letter-spacing: 0.04em;
@@ -42,8 +40,7 @@
 }
 
 .petInfoDescr {
-  font-family: "Manrope";
-  font-weight: 400;
+  font-family: "Manrope Regular";
   font-size: 14px;
   line-height: 1.357;
   letter-spacing: 0.04em;

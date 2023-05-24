@@ -3,12 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 
 import NotiesCategoryItem from "../NotiesCategotyItem/NotiesCategotyItem";
+import {getNoteceIsLoadig, getNotices} from "../../../redux/noties/noties-selector";
+import {fetchAllNotices, fetchOwnNotices} from "../../../redux/noties/noties-operations";
 
 // import { deleteNotices } from "../../../shared/services/noties";
-
-import {} from "../../../redux/noties/noties-selector";
-import { fetchAllNotices } from "../../../redux/noties/noties-operations";
-
 
 // const initialState = {
 //   category: "sell",
@@ -18,24 +16,45 @@ import { fetchAllNotices } from "../../../redux/noties/noties-operations";
 const NotiesCategoriesList = () => {
   const { category } = useParams();
   const [page, setPage] = useState(1);
-  // const [categor, setCategor] = useState(category);
-  const notices = useSelector((store) => store.noties.notices);
-  
+  console.log(page, "paginatPage");
+  const notices = useSelector(getNotices);
+  const isLoadingNotices = useSelector(getNoteceIsLoadig)
+
+  console.log("notices____", notices);
+
   // const [ state, setState ] = useState();
   const dispatch = useDispatch();
 
-  
-
-  // useEffect(() => {
-  //   setCategor(category);
-  // },[category])
-
   useEffect(() => {
-    //  setCategor(category);
-    dispatch(fetchAllNotices(category, page));
+    if (category === "my-pets") {
+      dispatch(fetchOwnNotices({ page }));
+    }
+
+    if (category === "favorite") {
+
+    }
+    if (
+      category === "sell" ||
+      category === "lost found" ||
+      category === "in good hands"
+    ) {
+      dispatch(fetchAllNotices({ category, page }));
+    }
   }, [dispatch, category, page]);
+
+  const loadMore = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
+  // useEffect(() => {
+  //   //  setCategor(category);
+  //   dispatch(fetchOwnNotices({ page }));
+  // }, [dispatch,  page]);
+
+  // console.log("switch", renderNotices);
+
   // const [pets, setPets] = useState([]);
 
+  // const [pets, setPets] = useState([]);
 
   // const[deletePetId, setDeletePetId]=useState("")
 
@@ -95,12 +114,15 @@ const NotiesCategoriesList = () => {
   //     </div>
   //   </li>
   // ));
- 
+
   return (
     <>
       <div>
         {/* <ul className={css.wrapper}> */}
-        <NotiesCategoryItem items={notices} />
+        {isLoadingNotices ? 'LOADING...' : <NotiesCategoryItem items={notices} /> }
+
+        <button onClick={loadMore}>load more</button>
+        <span>{page}</span>
         {/* </ul> */}
       </div>
     </>
