@@ -3,13 +3,10 @@ import {
   addNotices,
   // deleteNotice,
   // getNewNotice,
-  fetchAllNotices,
-<<<<<<< HEAD
   searchNotices,
-=======
+  fetchAllNotices,
   fetchOwnNotices,
   myAddFavoriteNotices,
->>>>>>> main
   // getNoticeByCategory,
   // getNoticesByQwery,
   // getSingleNotice,
@@ -18,7 +15,7 @@ import {
 } from "./noties-operations";
 
 const noticesInitialState = {
-  notices: {result: [], count: 0},
+  notices: { result: [], count: 0 },
   // oneNotice: null,
   error: null,
   isLoading: true,
@@ -27,7 +24,7 @@ const handlePending = (state) => {
   state.isLoading = true;
 };
 const handleReject = (state, action) => {
-  state.notices = {result: [], count: 0};
+  state.notices = { result: [], count: 0 };
   state.isLoading = false;
   state.error = action.payload;
 };
@@ -49,7 +46,6 @@ const noticesSlice = createSlice({
       .addCase(fetchAllNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
-<<<<<<< HEAD
       .addCase(searchNotices.pending, (state) => {
         handlePending(state);
       })
@@ -63,11 +59,6 @@ const noticesSlice = createSlice({
         handleReject(state, action);
       })
       .addCase(addNotices.fulfilled, (state, { payload }) => {
-        state.notices.push(payload);
-=======
-
-      .addCase(addNotices.fulfilled, (state, { payload }) => {
->>>>>>> main
         state.isLoading = false;
       })
       .addCase(addNotices.rejected, (state, action) => {
@@ -113,8 +104,8 @@ const noticesSlice = createSlice({
         handleReject(state, action);
       })
       .addCase(myAddFavoriteNotices.pending, (state) => {
-          handlePending(state);
-        })
+        handlePending(state);
+      })
       .addCase(myAddFavoriteNotices.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.notices.result = payload.result;
