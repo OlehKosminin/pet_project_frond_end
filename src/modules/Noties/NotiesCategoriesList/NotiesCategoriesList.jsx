@@ -3,14 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 
 import NotiesCategoryItem from "../NotiesCategotyItem/NotiesCategotyItem";
-
-// import { deleteNotices } from "../../../shared/services/noties";
-
-// import {} from "../../../redux/noties/noties-selector";
+import {
+  getNoteceIsLoadig,
+  getNotices,
+} from "../../../redux/noties/noties-selector";
 import {
   fetchAllNotices,
   fetchOwnNotices,
 } from "../../../redux/noties/noties-operations";
+
+// import { deleteNotices } from "../../../shared/services/noties";
 
 // const initialState = {
 //   category: "sell",
@@ -20,25 +22,20 @@ import {
 const NotiesCategoriesList = () => {
   const { category } = useParams();
   const [page, setPage] = useState(1);
-  // console.log(page, "paginatPage");
-  // const [categor, setCategor] = useState(category);
-  const notices = useSelector((store) => store.noties.notices);
+  console.log(page, "paginatPage");
+  const notices = useSelector(getNotices);
+  const isLoadingNotices = useSelector(getNoteceIsLoadig);
 
-  const noticesOwn = useSelector((store) => store.noties.own);
-  // console.log("noticesOwn", noticesOwn);
+  console.log("notices____", notices);
 
   // const [ state, setState ] = useState();
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   setCategor(category);
-  // },[category])
-
   useEffect(() => {
-    //  setCategor(category);
     if (category === "my-pets") {
       dispatch(fetchOwnNotices({ page }));
     }
+
     if (category === "favorite") {
     }
     if (
@@ -58,11 +55,6 @@ const NotiesCategoriesList = () => {
   //   dispatch(fetchOwnNotices({ page }));
   // }, [dispatch,  page]);
 
-  const renderNotices = () => {
-    if (category === "my-pets") return noticesOwn;
-    if (category === "favorite") return;
-    return notices;
-  };
   // console.log("switch", renderNotices);
 
   // const [pets, setPets] = useState([]);
@@ -132,7 +124,11 @@ const NotiesCategoriesList = () => {
     <>
       <div>
         {/* <ul className={css.wrapper}> */}
-        <NotiesCategoryItem items={renderNotices()} />
+        {isLoadingNotices ? (
+          "LOADING..."
+        ) : (
+          <NotiesCategoryItem items={notices} />
+        )}
 
         <button onClick={loadMore}>load more</button>
         <span>{page}</span>

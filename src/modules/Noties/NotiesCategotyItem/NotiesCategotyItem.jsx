@@ -14,6 +14,7 @@ import { ReactComponent as TrashSvg } from "../../../assets/image/icons/trash.sv
 import NoticesCategoryItemSvgSelector from "./NoticesCategoryItemSvgSelector";
 import css from "./notiesCategoriItem.module.scss";
 
+
 const NotiesCategotyItem = ({ items }) => {
   const { isOpen, itemInfo, open, close } = useSwitch(false);
   // const [modalChild, setModalChild] = useState(null);
@@ -73,6 +74,7 @@ const NotiesCategotyItem = ({ items }) => {
     setHoveredCardId(null);
   };
 
+
   // const toggleLocation = (e) => {
   //   console.log(e, "event");
   //   const cardId = items.filter((items) => items.id === e);
@@ -97,6 +99,7 @@ const NotiesCategotyItem = ({ items }) => {
     const year = date.getFullYear();
     if (year === 1970) {
       const month = String(date.getMonth() + 1).padStart(2, "0");
+
       return `${month} mth`;
     }
 
@@ -133,12 +136,6 @@ const NotiesCategotyItem = ({ items }) => {
             onClick={() => changeFavorite(favorite.includes(id_user))}
             className={css.favorite}
           >
-            {/*{favorite.includes(id_user) ? (*/}
-            {/*  <NoticesCategoryItemSvgSelector id="heart-active" />*/}
-            {/*) : (*/}
-            {/*  <NoticesCategoryItemSvgSelector id="heart" />*/}
-            {/*)}*/}
-
             <NoticesCategoryItemSvgSelector
               id={favorite.includes(id_user) ? "heart-active" : "heart"}
             />

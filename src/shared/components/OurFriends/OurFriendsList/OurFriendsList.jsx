@@ -1,9 +1,9 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { getFriends } from '../../../../redux/friends/friends-selector';
-import OurFriendsItem from '../OurFriendsItem/OurFriendsItem';
-import styles from './styles';
-import { Container, List } from '@mui/material';
+import React from "react";
+import { useSelector } from "react-redux";
+import { getFriends } from "../../../../redux/friends/friends-selector";
+import OurFriendsItem from "../OurFriendsItem/OurFriendsItem";
+import styles from "./styles";
+import { Container, List } from "@mui/material";
 
 function OurFriendsList() {
   const friends = useSelector(getFriends);
