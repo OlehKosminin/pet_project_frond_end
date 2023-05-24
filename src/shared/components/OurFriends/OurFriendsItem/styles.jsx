@@ -2,7 +2,7 @@ const styles = {
   item: {
     display: 'flex',
     flexDirection: 'column',
-    height: { mobile: '239px', tablet: '275px', desktop: '287px' },
+    height: { mobile: '239px', tablet: '275px', desktop: '320px' },
     width: { mobile: '280px', tablet: '336px', desktop: '394px' },
     p: '16px',
     borderRadius: '40px',
