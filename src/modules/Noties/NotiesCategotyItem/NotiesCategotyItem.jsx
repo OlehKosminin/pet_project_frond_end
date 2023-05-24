@@ -124,12 +124,6 @@ const NotiesCategotyItem = ({ items }) => {
             onClick={() => changeFavorite(favorite.includes(id_user))}
             className={css.favorite}
           >
-            {/*{favorite.includes(id_user) ? (*/}
-            {/*  <NoticesCategoryItemSvgSelector id="heart-active" />*/}
-            {/*) : (*/}
-            {/*  <NoticesCategoryItemSvgSelector id="heart" />*/}
-            {/*)}*/}
-
             <NoticesCategoryItemSvgSelector
               id={favorite.includes(id_user) ? "heart-active" : "heart"}
             />
