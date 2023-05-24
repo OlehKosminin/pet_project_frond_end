@@ -4,7 +4,16 @@ export const getAllNotices = async (category = "sell", page = 1, limit = 6) => {
   const { data } = await instance.get(
     `api/notices/category?category=${category}&page=${page}&limit=${limit}`
   );
+  console.log("data ВАДИМ", data);
+  return data;
+};
 
+export const getNoticesBySearch = async (category, limit, page, search) => {
+  console.log("data services", category, limit, page, search);
+  const { data } = await instance.get(
+    `api/notices/category?page=${page}&limit=${limit}&category=${category}&search=${search}`
+  );
+  console.log("data VLAD", data);
   return data;
 };
 
@@ -23,13 +32,6 @@ export const addFavoriteNotices = async (id_notis) => {
 };
 
 // (category = "sell"), (search = ""), (page = 1), (limit = 6);
-
-export const getNoticesBySearch = async (data) => {
-  const result = await instance.get(
-    `/api/notices/category?page=${data.page}&limit=${data.limit}&category=${data.category}&search=${data.search}`
-  );
-  return result.data;
-};
 
 export const deleteNotices = async (id) => {
   await instance.delete(`api/notices/${id}`);

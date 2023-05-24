@@ -50,9 +50,9 @@ const noticesSlice = createSlice({
         handlePending(state);
       })
       .addCase(searchNotices.fulfilled, (state, { payload }) => {
-        console.log("payload: ", payload);
         state.isLoading = false;
-        state.notices = payload.result;
+        state.notices.result = payload.result;
+        state.notices.count = payload.resultCount;
         state.error = null;
       })
       .addCase(searchNotices.rejected, (state, action) => {
