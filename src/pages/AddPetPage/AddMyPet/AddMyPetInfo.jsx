@@ -1,14 +1,12 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import { useDispatch } from "react-redux";
 import { addPet } from "../../../redux/pets/pets-operations";
-// addNoticesPet
-// addUserPet
-import contactForm from "./addMyPet.module.css";
-import style from "../addPetPage.module.css";
+
+import contactForm from "./addMyPet.module.scss";
+import style from "../addPetPage.module.scss";
 import { SvgSelector } from "../cvgSelector/SvgSelector";
-// import Loader from "../../../shared/components/Loader/Loader";
 import ModalServerError from "../ModalServerError/ModalServerError";
 import { ColorRing } from "react-loader-spinner";
 
@@ -24,7 +22,7 @@ const AddMyPetInfo = ({ onClick, date }) => {
   const [isBtnSubmit, setIsBtnSubmit] = useState(false);
 
   const [isFormSubmitting, setIsFormSubmitting] = useState(true);
-  const [isFetchOk, setIsFetchOk] = useState(false);
+  // const [isFetchOk, setIsFetchOk] = useState(false);
 
   const [isError, setIsError] = useState(false);
   const errorModal = useCallback((data) => {
@@ -56,9 +54,9 @@ const AddMyPetInfo = ({ onClick, date }) => {
   const fieldCheck = (values) => {
     const errors = {};
     switch (true) {
-      // case !avatarFile:
-      //   errors.avatar = "Photo is required";
-      //   break;
+      case !avatarFile:
+        errors.avatar = "Photo is required";
+        break;
       // case !values.comments:
       //   errors.comments = "Comments field is required";
       //   break;
@@ -95,20 +93,11 @@ const AddMyPetInfo = ({ onClick, date }) => {
         }
       });
       setSubmitting(false);
-      setIsFetchOk(true);
+      // setIsFetchOk(true);
     } catch (error) {
       console.log(error.message);
     }
-    // if (isFormSubmitting === true) {
-    //   history(-1);
-    // }
   };
-
-  // useEffect(() => {
-  //   if (isFetchOk) {
-  //     history(-1);
-  //   }
-  // }, [isFetchOk, history]);
 
   return (
     <div className={contactForm.form}>

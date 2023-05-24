@@ -2,9 +2,9 @@ import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Formik, Form, Field } from "formik";
-import contactForm from "./addPetForSell.module.css";
-import style from "../addPetPage.module.css";
-import gender from "./addPetForSellInfo.module.css";
+import contactForm from "./addPetForSell.module.scss";
+import style from "../addPetPage.module.scss";
+import gender from "./addPetForSellInfo.module.scss";
 
 import { useDispatch } from "react-redux";
 import { addNotices } from "../../../redux/noties/noties-operations";
@@ -23,7 +23,7 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
   const [isButtonCange, setIsButtonCange] = useState("");
 
   const [isFormSubmitting, setIsFormSubmitting] = useState(true);
-  const [isFetchOk, setIsFetchOk] = useState(false);
+  // const [isFetchOk, setIsFetchOk] = useState(false);
 
   const [isError, setIsError] = useState(false);
   const errorModal = useCallback((data) => {
@@ -129,7 +129,7 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
 
       setSubmitting(false);
 
-      setIsFetchOk(true);
+      // setIsFetchOk(true);
     } catch (error) {
       setIsFormSubmitting(true);
       console.log("Error ", error.message);

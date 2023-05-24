@@ -1,5 +1,5 @@
-import style from "../addPetPage.module.css";
-import contactForm from "./addPetForSell.module.css";
+import style from "../addPetPage.module.scss";
+import contactForm from "./addPetForSell.module.scss";
 import React, { useState, useCallback } from "react";
 import { Formik, Form, Field } from "formik";
 import initialState from "./initialState";
