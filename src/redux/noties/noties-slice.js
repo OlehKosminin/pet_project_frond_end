@@ -3,8 +3,10 @@ import {
   addNotices,
   // deleteNotice,
   // getNewNotice,
+  searchNotices,
   fetchAllNotices,
   fetchOwnNotices,
+  myAddFavoriteNotices,
   // getNoticeByCategory,
   // getNoticesByQwery,
   // getSingleNotice,
@@ -15,10 +17,8 @@ import {
 const noticesInitialState = {
   notices: { result: [], count: 0 },
   // oneNotice: null,
-  // favorite: { result: [], count: 0 },
-  // own: { result: [], count: 0 },
   error: null,
-  isLoading: false,
+  isLoading: true,
 };
 const handlePending = (state) => {
   state.isLoading = true;
@@ -37,13 +37,25 @@ const noticesSlice = createSlice({
         handlePending(state);
       })
       .addCase(fetchAllNotices.fulfilled, (state, { payload }) => {
-        console.log("slice payload: ", payload);
+        // console.log("slice payload: ", payload);
         state.isLoading = false;
         state.notices.result = payload.result;
         state.notices.count = payload.resultCount;
         state.error = null;
       })
       .addCase(fetchAllNotices.rejected, (state, action) => {
+        handleReject(state, action);
+      })
+      .addCase(searchNotices.pending, (state) => {
+        handlePending(state);
+      })
+      .addCase(searchNotices.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.notices.result = payload.result;
+        state.notices.count = payload.resultCount;
+        state.error = null;
+      })
+      .addCase(searchNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
       .addCase(addNotices.fulfilled, (state, { payload }) => {
@@ -98,11 +110,23 @@ const noticesSlice = createSlice({
       })
       .addCase(fetchOwnNotices.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.own.result = payload.result;
-        state.own.count = payload.resultCount;
+        state.notices.result = payload.result;
+        state.notices.count = payload.resultCount;
         state.error = null;
       })
       .addCase(fetchOwnNotices.rejected, (state, action) => {
+        handleReject(state, action);
+      })
+      .addCase(myAddFavoriteNotices.pending, (state) => {
+        handlePending(state);
+      })
+      .addCase(myAddFavoriteNotices.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.notices.result = payload.result;
+        state.notices.count = payload.resultCount;
+        state.error = null;
+      })
+      .addCase(myAddFavoriteNotices.rejected, (state, action) => {
         handleReject(state, action);
       });
   },

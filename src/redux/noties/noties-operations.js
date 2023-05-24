@@ -5,27 +5,57 @@ import * as api from "../../shared/services/noties";
 
 export const fetchAllNotices = createAsyncThunk(
   "notice/fetch-all",
-  async ({ category, page },  thunkAPI) => {
-   
+  async ({ category, page }, thunkAPI) => {
     try {
       const result = await api.getAllNotices(category, page);
-      
+
       return result;
     } catch ({ response }) {
       return thunkAPI.rejectWithValue(response.data);
     }
   }
 );
+
+export const searchNotices = createAsyncThunk(
+  "notices/search",
+  async ({ category, limit, page, search }, { rejectWithValue }) => {
+    try {
+      console.log("DATA в операции", category, limit, page, search);
+      const result = await api.getNoticesBySearch(
+        category,
+        limit,
+        page,
+        search
+      );
+      console.log("результат операции", result);
+      return result;
+    } catch ({ responce }) {
+      return rejectWithValue(responce);
+    }
+  }
+);
+
 export const fetchOwnNotices = createAsyncThunk(
   "notice/fetch-own",
-  async ({  page }, thunkAPI) => {
+  async ({ page }, thunkAPI) => {
     console.log(page, "dataOwnPage");
     try {
       const result = await api.getOwnNotices(page);
-      console.log("resultOwnOperation", result );
+      console.log("resultOwnOperation", result);
       return result;
     } catch ({ response }) {
       return thunkAPI.rejectWithValue(response.data);
+    }
+  }
+);
+export const myAddFavoriteNotices = createAsyncThunk(
+  "notices/favoriteNotices",
+  async (id_notis, { rejectWithValue }) => {
+    try {
+      const result = await api.addFavoriteNotices(id_notis);
+      return result;
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
   }
 );

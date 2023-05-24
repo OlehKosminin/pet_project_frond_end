@@ -53,4 +53,13 @@ export const updUserInfo = async (data) => {
   return result;
 };
 
+export const getUserInfo = async ({ _id }) => {
+  try {
+    const data = await instance.get("api/auth/current", { _id });
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export default instance;
