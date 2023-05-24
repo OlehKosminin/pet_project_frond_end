@@ -1,10 +1,13 @@
+import AddToFavoriteBtn from "../../shared/components/AddToFavoriteBtn/AddToFavoriteBtn";
+// import Loader from "../../../shared/components/Loader/Loader";
+
 import css from "./ModalNotice.module.scss";
 import defaultNoticeAvatar from "../../assets/image/defaultNoticeAvatar.png";
 
-// import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 
-import { ReactComponent as HeartSvg } from "../../assets/image/icons/heart.svg";
+// import { ReactComponent as HeartSvg } from "../../assets/image/icons/heart.svg";
 
 const getYear = (birthday) => {
   const value = Date.now() - birthday;
@@ -24,7 +27,7 @@ const ModalNotice = ({ close, itemInfo }) => {
   // const ownerInfo = useSelector((store) => store.noties.oneNotice);
 
   console.log(itemInfo);
-  const {
+  let {
     birthday,
     breed,
     category,
@@ -39,9 +42,11 @@ const ModalNotice = ({ close, itemInfo }) => {
     favorite,
   } = itemInfo;
 
-  // useEffect(() => {
-  //   dispatch;
-  // }, []);
+  useEffect(() => {
+    return () => {
+      itemInfo = null;
+    };
+  }, []);
 
   return (
     <div className={css.modalNotice}>
@@ -100,9 +105,7 @@ const ModalNotice = ({ close, itemInfo }) => {
           <p className={css.commentsText}>{comments}</p>
         </article>
         <div className={css.modalNoticeBtns}>
-          <button type="button" className={css.modalNoticeBtnAdd}>
-            Add to <HeartSvg className={css.heartSvg} />
-          </button>
+          <AddToFavoriteBtn />
           <button type="button" className={css.modalNoticeBtnContact}>
             Contact
           </button>

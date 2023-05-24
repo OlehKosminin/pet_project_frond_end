@@ -5,6 +5,7 @@ import { useSwitch } from "../../../hooks/useSwitch";
 
 import { getSingleNotice } from "../../../redux/noties/noties-operations";
 
+import Loader from "../../../shared/components/Loader/Loader";
 import ModalNotice from "../../ModalNotice/ModalNotice";
 import ModalApproveAction from "../../../shared/components/ModalApproveAction/ModalApproveAction";
 import Modal from "../../../shared/components/Modal/Modal";
@@ -19,20 +20,21 @@ const NotiesCategotyItem = ({ items }) => {
   const [hoveredCardId, setHoveredCardId] = useState(null);
   const id_user = useSelector((store) => store.auth.user._id);
   const dispatch = useDispatch();
-  const noticeItem = useSelector((store) => store.noties.oneNotice);
+  let noticeItem = useSelector((store) => store.noties.oneNotice);
   // console.log("noticesItem: ", noticeItem);
   // const [expandedLocation, setExpandedLocation] = useState(false);
 
   useEffect(() => {
-    if (itemInfo.name === "openLearnMore") {
+    if (itemInfo.name === "openLearnMore" && isOpen === true) {
       dispatch(getSingleNotice(itemInfo.id));
-      // renderNoticeItemModal();
     }
     if (isOpen) {
       document.body.style.overflowY = "hidden";
     }
 
     return () => {
+      noticeItem = null;
+      console.log(noticeItem);
       document.body.style.overflowY = "auto";
     };
   }, [isOpen, dispatch]);
@@ -43,7 +45,11 @@ const NotiesCategotyItem = ({ items }) => {
 
   const modalChoice = () => {
     if (itemInfo.name === "openLearnMore") {
-      return <ModalNotice close={close} itemInfo={noticeItem} />;
+      if (noticeItem === null) {
+        return <Loader />;
+      } else {
+        return <ModalNotice close={close} itemInfo={noticeItem} />;
+      }
     }
     if (itemInfo.name === "deleteItem") {
       return <ModalApproveAction close={close} />;
