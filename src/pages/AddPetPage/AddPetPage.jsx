@@ -229,7 +229,9 @@ const AddPetPage = () => {
               className={style.btnNext}
             >
               Next
-              <SvgSelector id="pawprint" />
+              <div style={{ paddingLeft: "15px" }}>
+                <SvgSelector id="pawprint" />
+              </div>
             </button>
           </div>
         </div>

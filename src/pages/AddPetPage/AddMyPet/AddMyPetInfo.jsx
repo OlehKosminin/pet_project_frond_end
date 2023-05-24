@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import { useDispatch } from "react-redux";
@@ -8,6 +8,9 @@ import { addPet } from "../../../redux/pets/pets-operations";
 import contactForm from "./addMyPet.module.css";
 import style from "../addPetPage.module.css";
 import { SvgSelector } from "../cvgSelector/SvgSelector";
+// import Loader from "../../../shared/components/Loader/Loader";
+import ModalServerError from "../ModalServerError/ModalServerError";
+import { ColorRing } from "react-loader-spinner";
 
 import avatarInput from "../img/avatarInput.png";
 
@@ -19,6 +22,14 @@ const AddMyPetInfo = ({ onClick, date }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [avatarFile, setAvatarFile] = useState(null);
   const [isBtnSubmit, setIsBtnSubmit] = useState(false);
+
+  const [isFormSubmitting, setIsFormSubmitting] = useState(true);
+  const [isFetchOk, setIsFetchOk] = useState(false);
+
+  const [isError, setIsError] = useState(false);
+  const errorModal = useCallback((data) => {
+    setIsError(data);
+  }, []);
 
   const history = useNavigate();
   const dispatch = useDispatch();
@@ -45,18 +56,18 @@ const AddMyPetInfo = ({ onClick, date }) => {
   const fieldCheck = (values) => {
     const errors = {};
     switch (true) {
-      case !avatarFile:
-        errors.avatar = "Photo is required";
-        break;
-      case !values.comments:
-        errors.comments = "Comments field is required";
-        break;
-      case values.comments.length < 8:
-        errors.comments = "This field must contain at least 8 characters";
-        break;
-      case values.comments.length > 120:
-        errors.comments = "This field should not exceed 20 characters";
-        break;
+      // case !avatarFile:
+      //   errors.avatar = "Photo is required";
+      //   break;
+      // case !values.comments:
+      //   errors.comments = "Comments field is required";
+      //   break;
+      // case values.comments.length < 8:
+      //   errors.comments = "This field must contain at least 8 characters";
+      //   break;
+      // case values.comments.length > 120:
+      //   errors.comments = "This field should not exceed 20 characters";
+      //   break;
       default:
         break;
     }
@@ -64,6 +75,7 @@ const AddMyPetInfo = ({ onClick, date }) => {
   };
 
   const handleSubmit = async (values, { setSubmitting }) => {
+    setIsFormSubmitting(false);
     try {
       const formData = new FormData();
       if (avatarFile) {
@@ -73,21 +85,34 @@ const AddMyPetInfo = ({ onClick, date }) => {
       formData.append("name", date.name);
       formData.append("birthday", Date.parse(date.birthday));
       formData.append("breed", date.breed);
-      // for (let value of formData.values()) {
-      //   console.log(value);
-      // }
-      dispatch(addPet(formData));
+
+      dispatch(addPet(formData)).then((response) => {
+        if (!response.error) {
+          history(-1);
+        } else {
+          setIsFormSubmitting(true);
+          setIsError(true);
+        }
+      });
       setSubmitting(false);
+      setIsFetchOk(true);
     } catch (error) {
       console.log(error.message);
     }
-    // await onClick("toChoose");
-    // await history.push("/user");
-    await history(-1);
+    // if (isFormSubmitting === true) {
+    //   history(-1);
+    // }
   };
+
+  // useEffect(() => {
+  //   if (isFetchOk) {
+  //     history(-1);
+  //   }
+  // }, [isFetchOk, history]);
 
   return (
     <div className={contactForm.form}>
+      {isError && <ModalServerError close={errorModal} />}
       <Formik
         initialValues={{ comments: "", category: "" }}
         validate={fieldCheck}
@@ -159,6 +184,7 @@ const AddMyPetInfo = ({ onClick, date }) => {
               </div>
               <div className={style.wrapper}>
                 <button
+                  // style={{ padding: "0" }}
                   onClick={() => {
                     setIsBtnSubmit(true);
                   }}
@@ -167,7 +193,27 @@ const AddMyPetInfo = ({ onClick, date }) => {
                   className={style.btnNext}
                 >
                   Done
-                  <SvgSelector id="pawprint" />
+                  {!isFormSubmitting && (
+                    <ColorRing
+                      visible={true}
+                      height="40"
+                      width="40"
+                      ariaLabel="blocks-loading"
+                      wrapperClass="blocks-wrapper"
+                      colors={[
+                        "#FFC107",
+                        "#FDF7F2",
+                        "#00C3AD",
+                        "#00C3AD",
+                        "#F43F5E",
+                      ]}
+                    />
+                  )}
+                  {isFormSubmitting && (
+                    <div style={{ paddingLeft: "15px" }}>
+                      <SvgSelector id="pawprint" />
+                    </div>
+                  )}
                 </button>
               </div>
             </div>

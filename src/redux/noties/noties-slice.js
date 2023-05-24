@@ -13,10 +13,10 @@ import {
 } from "./noties-operations";
 
 const noticesInitialState = {
-  notices: {result: [], count: 0},
+  notices: { result: [], count: 0 },
   // oneNotice: null,
-  favorite: {result: [], count: 0},
-  own: {result: [], count: 0},
+  // favorite: { result: [], count: 0 },
+  // own: { result: [], count: 0 },
   error: null,
   isLoading: false,
 };
@@ -24,7 +24,7 @@ const handlePending = (state) => {
   state.isLoading = true;
 };
 const handleReject = (state, action) => {
-  state.notices = [];
+  state.notices = { result: [], count: 0 };
   state.isLoading = false;
   state.error = action.payload;
 };
@@ -46,14 +46,26 @@ const noticesSlice = createSlice({
       .addCase(fetchAllNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
-
       .addCase(addNotices.fulfilled, (state, { payload }) => {
-        state.notices.result.push(payload);
         state.isLoading = false;
       })
       .addCase(addNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
+      // .addCase(addNotices.pending, (state) => {
+      //   state.isLoading = true;
+      // })
+      // .addCase(addNotices.fulfilled, (state, { payload }) => {
+      //   state.isLoading = false;
+      //   state.error = null;
+      //   state.items.push(payload);
+      // })
+      // .addCase(addNotices.rejected, (state, action) => {
+      //   // handleReject(state, action);
+      //   // state.isLoading = false;
+      //   state.isLoading = false;
+      //   state.error = action.payload;
+      // })
       // .addCase(deleteNotice.fulfilled, (state, { payload }) => {
       //   state.notices = state.notices.filter(({ _id }) => _id !== payload);
       //   state.isLoading = false;
