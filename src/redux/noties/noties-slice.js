@@ -4,6 +4,7 @@ import {
   // deleteNotice,
   // getNewNotice,
   fetchAllNotices,
+  searchNotices,
   // getNoticeByCategory,
   // getNoticesByQwery,
   // getSingleNotice,
@@ -36,7 +37,7 @@ const noticesSlice = createSlice({
         handlePending(state);
       })
       .addCase(fetchAllNotices.fulfilled, (state, { payload }) => {
-        console.log("slice payload: ", payload);
+        // console.log("slice payload: ", payload);
         state.isLoading = false;
         state.notices = payload.result;
         state.error = null;
@@ -44,8 +45,19 @@ const noticesSlice = createSlice({
       .addCase(fetchAllNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
-
-     .addCase(addNotices.fulfilled, (state, { payload }) => {
+      .addCase(searchNotices.pending, (state) => {
+        handlePending(state);
+      })
+      .addCase(searchNotices.fulfilled, (state, { payload }) => {
+        console.log("payload: ", payload);
+        state.isLoading = false;
+        state.notices = payload.result;
+        state.error = null;
+      })
+      .addCase(searchNotices.rejected, (state, action) => {
+        handleReject(state, action);
+      })
+      .addCase(addNotices.fulfilled, (state, { payload }) => {
         state.notices.push(payload);
         state.isLoading = false;
       })

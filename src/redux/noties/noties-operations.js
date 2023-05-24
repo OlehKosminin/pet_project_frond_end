@@ -16,6 +16,20 @@ export const fetchAllNotices = createAsyncThunk(
   }
 );
 
+export const searchNotices = createAsyncThunk(
+  "notices/search",
+  async (data, { rejectWithValue }) => {
+    try {
+      console.log("data операции", data);
+      const result = await api.getNoticesBySearch(data);
+      console.log("результат операции", result);
+      return result;
+    } catch ({ responce }) {
+      return rejectWithValue(responce);
+    }
+  }
+);
+
 // export const getNoticeByCategory = createAsyncThunk(
 //   "notices/getNoticeByCategory",
 //   async ({ category, page = 1, limit = 10 }, { rejectWithValue }) => {
