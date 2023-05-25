@@ -1,5 +1,5 @@
-import style from "./addPetPage.module.css";
-import styleBtn from "./choosenBtn.module.css";
+import style from "./addPetPage.module.scss";
+import styleBtn from "./choosenBtn.module.scss";
 
 import { SvgSelector } from "./cvgSelector/SvgSelector";
 
@@ -229,7 +229,9 @@ const AddPetPage = () => {
               className={style.btnNext}
             >
               Next
-              <SvgSelector id="pawprint" />
+              <div style={{ paddingLeft: "15px" }}>
+                <SvgSelector id="pawprint" />
+              </div>
             </button>
           </div>
         </div>

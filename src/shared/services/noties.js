@@ -42,9 +42,6 @@ export const deleteNotices = async (id) => {
 // };
 
 export const addNotice = async (data) => {
-  for (let value of data.values()) {
-    console.log("formData", value);
-  }
   const header = {
     headers: {
       "Content-Type": "multipart/form-data",

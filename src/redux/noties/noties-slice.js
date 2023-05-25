@@ -64,6 +64,20 @@ const noticesSlice = createSlice({
       .addCase(addNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
+      // .addCase(addNotices.pending, (state) => {
+      //   state.isLoading = true;
+      // })
+      // .addCase(addNotices.fulfilled, (state, { payload }) => {
+      //   state.isLoading = false;
+      //   state.error = null;
+      //   state.items.push(payload);
+      // })
+      // .addCase(addNotices.rejected, (state, action) => {
+      //   // handleReject(state, action);
+      //   // state.isLoading = false;
+      //   state.isLoading = false;
+      //   state.error = action.payload;
+      // })
       // .addCase(deleteNotice.fulfilled, (state, { payload }) => {
       //   state.notices = state.notices.filter(({ _id }) => _id !== payload);
       //   state.isLoading = false;

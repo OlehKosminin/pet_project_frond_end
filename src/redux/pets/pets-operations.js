@@ -23,7 +23,6 @@ export const addPet = createAsyncThunk(
       Notify.success("Your pet successfully added!");
       return result.data;
     } catch (error) {
-      Notify.failure(error.message);
       return rejectWithValue(error.responce);
     }
   }

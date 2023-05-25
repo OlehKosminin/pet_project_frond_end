@@ -1,5 +1,5 @@
-import style from "../addPetPage.module.css";
-import contactForm from "./addPetForSell.module.css";
+import style from "../addPetPage.module.scss";
+import contactForm from "./addPetForSell.module.scss";
 import React, { useState, useCallback } from "react";
 import { Formik, Form, Field } from "formik";
 import initialState from "./initialState";
@@ -60,10 +60,10 @@ const AddPetForSellDetails = ({ onClick, addr }) => {
     const errors = {};
     switch (true) {
       case !values.title:
-        errors.title = "Name is required";
+        errors.title = "Title is required";
         break;
       case values.title.length < 2 || values.title.length > 16:
-        errors.title = "Name must be between 2 and 16 characters";
+        errors.title = "Title must be between 2 and 16 characters";
         break;
       case !values.name:
         errors.name = "Name is required";
@@ -238,7 +238,9 @@ const AddPetForSellDetails = ({ onClick, addr }) => {
                   className={style.btnNext}
                 >
                   Next
-                  <SvgSelector id="pawprint" />
+                  <div style={{ paddingLeft: "15px" }}>
+                    <SvgSelector id="pawprint" />
+                  </div>
                 </button>
               </div>
             </div>
