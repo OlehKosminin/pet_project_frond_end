@@ -56,15 +56,21 @@ const AddPetPage = () => {
   return (
     <div className={style.bodyAddPet}>
       <div
-        className={style.bodyContainer}
-        style={{
-          width:
-            activeForm === "sellPetInfo" ||
-            activeForm === "lostPetInfo" ||
-            activeForm === "goodPetInfo"
-              ? "822px"
-              : "458px",
-        }}
+        className={
+          activeForm === "sellPetInfo" ||
+          activeForm === "lostPetInfo" ||
+          activeForm === "goodPetInfo"
+            ? style.bodyContainerForInfo
+            : style.bodyContainer
+        }
+        // style={{
+        //   width:
+        // activeForm === "sellPetInfo" ||
+        // activeForm === "lostPetInfo" ||
+        // activeForm === "goodPetInfo"
+        //   ? style.bodyContainerForInfo
+        //   : style.bodyContainer,
+        // }}
       >
         <p
           style={{

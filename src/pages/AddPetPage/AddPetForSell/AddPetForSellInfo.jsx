@@ -115,7 +115,9 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
       formData.append("birthday", Date.parse(date.birthday.toString()));
       formData.append("breed", date.breed);
       formData.append("name", date.name);
-      formData.append("price", values.price.toString());
+      if (addr === "sell") {
+        formData.append("price", values.price.toString());
+      }
 
       dispatch(addNotices(formData)).then((response) => {
         if (!response.error) {
@@ -135,7 +137,6 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
       console.log("Error ", error.message);
     }
   };
-
 
   return (
     <div className={contactForm.formCell}>
@@ -228,7 +229,7 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
                 <div className={contactForm.avatarField}>
                   <label htmlFor="avatar" className={contactForm.photoLabel}>
                     <div className={contactForm.divLabel}>
-                      Load the pet’s image:
+                      {/* Load the pet’s image: */}
                     </div>
                     <img
                       className={contactForm.avatarImg}
