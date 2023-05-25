@@ -121,35 +121,22 @@ const noticesSlice = createSlice({
       .addCase(fetchOwnNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
-      .addCase(myAddFavoriteNotices.pending, (state) => {
-        handlePending(state);
-      })
-      .addCase(myAddFavoriteNotices.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.notices.result = payload.result;
-        state.notices.count = payload.resultCount;
-        state.error = null;
-      })
       .addCase(fetchFavoriteNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
-
-      .addCase(myAddFavoriteNotices.pending, (state) => {
-        handlePending(state);
-      })
-      .addCase(myAddFavoriteNotices.fulfilled, (state, action) => {
+      // .addCase(myAddFavoriteNotices.pending, (state) => {
+      //   handlePending(state);
+      // })
+      .addCase(myAddFavoriteNotices.fulfilled, (state) => {
         state.isLoading = false;
-
-        // state.notices.result = payload.result;
-        // state.notices.count = payload.resultCount;
         state.error = null;
       })
       .addCase(myAddFavoriteNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
-      .addCase(removeMyFavoriteNotices.pending, (state) => {
-        state.loading = true;
-      })
+      // .addCase(removeMyFavoriteNotices.pending, (state) => {
+      //   state.loading = true;
+      // })
       .addCase(removeMyFavoriteNotices.fulfilled, (state, { payload }) => {
         state.loading = false;
 
