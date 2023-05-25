@@ -21,7 +21,9 @@ const UserData = () => {
   const [cityEdit, setCityEdit] = useState(false);
   const [photoEdit, setPhotoEdit] = useState(false);
   const [photoLoaded, setPhotoLoaded] = useState(false);
-  const [startDate, setStartDate] = useState(new Date(user.birthday));
+  const [startDate, setStartDate] = useState(
+    user.birthday ? new Date(user.birthday) : null
+  );
 
   const photoPrewiew = (e) => {
     const imageFile = e.target.files[0];
@@ -80,6 +82,7 @@ const UserData = () => {
     dispatch(updUserInfo({ ...user, city: e.currentTarget.city.value }));
     setCityEdit(false);
   };
+
   return (
     <div className={css.userData}>
       <div className={css.userImgWrapper}>
@@ -195,9 +198,8 @@ const UserData = () => {
               <span className={css.userInfoItemTitle}>Birthday:</span>
               <div className={css.userInfoItemData}>
                 <DatePicker
-                  // inline
                   dateFormat="dd.MM.yyyy"
-                  selected={startDate}
+                  selected={startDate ? startDate : null}
                   onChange={(date) => setStartDate(date)}
                   calendarClassName={css.datepicker}
                   peekNextMonth
@@ -219,7 +221,9 @@ const UserData = () => {
             <div className={css.userInfo}>
               <span className={css.userInfoItemTitle}>Birthday:</span>
               <div className={css.userInfoItemData}>
-                <div className={css.userInfoItemText}>{styledBirthday}</div>
+                <div className={css.userInfoItemText}>
+                  {user.birthday ? styledBirthday : null}
+                </div>
                 <button
                   type="button"
                   className={css.userInfoItemBtn}
