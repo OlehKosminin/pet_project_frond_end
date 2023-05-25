@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+
+
 import {
   addNotices,
   // deleteNotice,
@@ -7,6 +9,8 @@ import {
   fetchAllNotices,
   fetchOwnNotices,
   myAddFavoriteNotices,
+  removeMyFavoriteNotices,
+  fetchFavoriteNotices,
   // getNoticeByCategory,
   // getNoticesByQwery,
   // getSingleNotice,
@@ -126,8 +130,38 @@ const noticesSlice = createSlice({
         state.notices.count = payload.resultCount;
         state.error = null;
       })
+      .addCase(fetchFavoriteNotices.rejected, (state, action) => {
+        handleReject(state, action);
+      })
+
+      .addCase(myAddFavoriteNotices.pending, (state) => {
+        handlePending(state);
+      })
+      .addCase(myAddFavoriteNotices.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        // state.notices.result = payload.result;
+        // state.notices.count = payload.resultCount;
+        state.error = null;
+      })
       .addCase(myAddFavoriteNotices.rejected, (state, action) => {
         handleReject(state, action);
+      })
+      .addCase(removeMyFavoriteNotices.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(removeMyFavoriteNotices.fulfilled, (state, { payload }) => {
+        state.loading = false;
+
+        // state.notices.result = state.items.findIndex(
+        //   (item) => item.id === payload
+        // );
+        // state.items.splice(index, 1);
+        state.error = null;
+      })
+      .addCase(removeMyFavoriteNotices.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
       });
   },
   reducers: {

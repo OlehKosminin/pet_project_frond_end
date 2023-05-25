@@ -22,12 +22,25 @@ export const getOwnNotices = async (page = 1, limit = 6) => {
   const { data } = await instance.get(
     `api/notices?page=${page}&limit=${limit}`
   );
-  console.log("dataOwn ", data);
+  
+  return data;
+};
+export const getFavoriteNotices = async (page = 1, limit = 6) => {
+  console.log("getOwnNotices test back", page, limit);
+  const { data } = await instance.get(
+    `api/notices/favorite?page=${page}&limit=${limit}`
+  );
+
   return data;
 };
 export const addFavoriteNotices = async (id_notis) => {
   const { data } = await instance.patch(`api/notices/favorite-add/${id_notis}`);
-  console.log("favorite ", data);
+  
+  return data;
+};
+export const deleteFavoriteNotices = async (id_notis) => {
+  const { data } = await instance.patch(`api/notices/favorite-delete/${id_notis}`);
+  console.log("deletefavorite ", data);
   return data;
 };
 

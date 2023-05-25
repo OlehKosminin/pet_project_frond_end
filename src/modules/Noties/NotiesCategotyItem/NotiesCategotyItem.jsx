@@ -9,16 +9,54 @@ import Modal from "../../../shared/components/Modal/Modal";
 import { ReactComponent as TrashSvg } from "../../../assets/image/icons/trash.svg";
 import NoticesCategoryItemSvgSelector from "./NoticesCategoryItemSvgSelector";
 import css from "./notiesCategoriItem.module.scss";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router";
+
+import {
+  myAddFavoriteNotices,
+  removeMyFavoriteNotices,
+} from "../../../redux/noties/noties-operations";
+import Loader from "../../../shared/components/Loader/Loader";
+
 
 
 const NotiesCategotyItem = ({ items }) => {
+ 
   const { isOpen, ElName, open, close } = useSwitch(false);
   const [modalChild, setModalChild] = useState(null);
   // console.log("notices.items: ", notices.items);
   // const [expandedLocation, setExpandedLocation] = useState(false);
-  const [hoveredCardId, setHoveredCardId] = useState(null);
+  const [hoveredLocationCardId, setHoveredLocationCardId] = useState(null);
+  const dispatch = useDispatch();
+  const { category } = useParams();
+  console.log("categoryparams", category);
   const id_user = useSelector((store) => store.auth.user._id);
+//  const [array, setArray] = useState([]);
+  const ownCategory = () => {
+    if (category === "my-pets") {
+      return Boolean (true);
+    }
+  }
+  
+  console.log("ownCategory", ownCategory());
+  const changeFavorite = (isAdd, _id) => {
+    // const xxx = [...array, _id]
+    // setArray(xxx);
+    if (isAdd) {
+      dispatch(removeMyFavoriteNotices(_id, id_user));
+      return;
+    } //dispatch favorite add
+    dispatch(myAddFavoriteNotices(_id, id_user));
+  };
+
+//  console.log(array, "array");
+//   useEffect(() => {
+//     console.log(array, "array");
+//     setArray(id_user);
+//   }, [changeFavorite]);
+  // const isLoading = useSelector((store) => store.noties.notices.isLoading)
+
+
 
   useEffect(() => {
     if (ElName === "{openLearnMore}") {
@@ -55,13 +93,25 @@ const NotiesCategotyItem = ({ items }) => {
   };
 
   const handleMouseEnter = (id) => {
-    setHoveredCardId(id);
+    setHoveredLocationCardId(id);
   };
 
   const handleMouseLeave = () => {
-    setHoveredCardId(null);
+    setHoveredLocationCardId(null);
+  };
+  const [expandedFavorite, setExpandedFavorite] = useState(false);
+
+  // const toggleFavorite = () => {
+  //   setExpandedFavorite(!expandedFavorite);
+  // };
+  
+  const handleMouseFavoriteEnter = (_id) => {
+    setExpandedFavorite(_id);
   };
 
+  const handleMouseFavoriteLeave = () => {
+    setExpandedFavorite(null);
+  };
 
   // const toggleLocation = (e) => {
   //   console.log(e, "event");
@@ -93,11 +143,7 @@ const NotiesCategotyItem = ({ items }) => {
 
     return `${year - 1970} year`;
   };
-
-  const changeFavorite = (isAdd) => {
-    if (isAdd) return; //dispatch favorite add
-    if (!isAdd) return; //dispatch favorite remove
-  };
+  // useEffect(() => {}, [changeFavorite]);
 
   const pet = items.result.map(
     ({
@@ -121,23 +167,58 @@ const NotiesCategotyItem = ({ items }) => {
           <img className={css.photoPet} alt="" src={photoUrl} />
           <p className={css.icon_category}>{category}</p>
           <button
-            onClick={() => changeFavorite(favorite.includes(id_user))}
+            // onMouseClick={() => {
+            //   if (favorite.includes(id_user)) {
+            //     handleMouseFavoriteLeave("");
+            //     return;
+            //   }
+            //   handleMouseFavoriteEnter(_id);
+
+            // }}
+            // onMouseLeave={() => handleMouseFavoriteLeave("")}
+            // onMouseEnter={()=>toggleFavorite(_id)}
+            // onMouseLeave={()=>toggleFavorite("")}
+            // onClick={() =>  changeFavorite(favorite.includes(id_user))}
+            onClick={() => {
+              const isAdd = favorite.includes(id_user);
+              changeFavorite(isAdd, _id);
+              if (isAdd) {
+                handleMouseFavoriteLeave("");
+                return;
+              }
+              handleMouseFavoriteEnter(_id);
+            }}
+            // onClick={() => changeFavorite(id)}
             className={css.favorite}
           >
             <NoticesCategoryItemSvgSelector
-              id={favorite.includes(id_user) ? "heart-active" : "heart"}
+              // id={expandedFavorite ? "heart-active" : "heart"}
+              id={
+                favorite.includes(id_user) || expandedFavorite === _id
+                  ? "heart-active"
+                  : "heart"
+              }
+              // id={
+              //   favorite.includes(id_user) || array.includes(_id)
+              //     ? "heart-active"
+              //     : "heart"
+              // }
             />
           </button>
           {/* <button className={css.favorite}>H</button> */}
-          <button
-            // onClick={() => removePets(_id)}
-            name="deleteItem"
-            onClick={(e) => handleClick(e)}
-            type="button"
-            className={css.deletion}
-          >
-            <TrashSvg name="trash" />
-          </button>
+          {ownCategory() ? (
+            <button
+              // onClick={() => removePets(_id)}
+              name="deleteItem"
+              onClick={(e) => handleClick(e)}
+              type="button"
+              className={css.deletion}
+            >
+              <TrashSvg name="trash" />
+            </button>
+          ) : (
+            []
+          )}
           <NavLink className={css.add_pet} to="/add-pet">
             Add pet
           </NavLink>
@@ -147,7 +228,7 @@ const NotiesCategotyItem = ({ items }) => {
             <li className={css.animalsData}>
               <div
                 className={`${css.animalsDataText} ${
-                  hoveredCardId === _id ? css.expandedLocation : ""
+                  hoveredLocationCardId === _id ? css.expandedLocation : ""
                 }`}
                 // onMouseEnter={() => toggleLocation(id)}
                 // onMouseLeave={() => toggleLocation("")}
@@ -160,7 +241,7 @@ const NotiesCategotyItem = ({ items }) => {
                     ? `${location.slice(0, 5)}...`
                     : location}
                 </p>
-                {hoveredCardId && (
+                {hoveredLocationCardId && (
                   <p className={css.locationContent}>{location}</p>
                 )}
               </div>
@@ -209,6 +290,7 @@ const NotiesCategotyItem = ({ items }) => {
           )}
         </div>
       )}
+      {/* {isLoading && <Loader />} */}
     </>
   );
 };

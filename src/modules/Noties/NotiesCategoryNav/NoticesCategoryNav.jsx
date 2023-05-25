@@ -11,7 +11,7 @@ const NoticesCategoriesNavigation = () => {
     //     : css.buttonCategory;
     // };
     const { token } = useSelector(getUser);
-    console.log(token, "token")
+   
     return (
       <div className={css.wrapper}>
         <div className={css.buttonCategoryWrapper}>
