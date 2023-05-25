@@ -66,3 +66,9 @@
   color: $bg-color;
   background-color: $active-blue-color;
 }
+
+.btnWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

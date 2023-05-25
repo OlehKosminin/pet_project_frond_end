@@ -9,6 +9,7 @@ import {
 } from "../../../redux/noties/noties-operations";
 import { useDispatch, useSelector } from "react-redux";
 import { getNotices } from "../../../redux/noties/noties-selector";
+import Icon from "./Icons";
 
 const NoticesPagination = () => {
   const { count } = useSelector(getNotices);
@@ -64,12 +65,24 @@ const NoticesPagination = () => {
     dispatch(fetchAllNotices(request));
   };
 
+  const rightArrow = (
+    <div className={css.btnWrapper}>
+      <Icon id="right" />
+    </div>
+  );
+
+  const leftArrow = (
+    <div className={css.btnWrapper}>
+      <Icon id="left" />
+    </div>
+  );
+
   return (
     <div className={css.paginationWrapper}>
       <ReactPaginate
         pageCount={Math.ceil(checkCount())}
-        previousLabel={"<"}
-        nextLabel={">"}
+        previousLabel={leftArrow}
+        nextLabel={rightArrow}
         breakLabel={""}
         containerClassName={css.pagination}
         previousLinkClassName={css.paginationLink}
