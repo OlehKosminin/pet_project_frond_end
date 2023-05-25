@@ -1,52 +1,41 @@
-import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import { useSwitch } from "../../../hooks/useSwitch";
+import {useEffect, useState} from "react";
+import {NavLink} from "react-router-dom";
+import {useSwitch} from "../../../hooks/useSwitch";
 
 import ModalNotice from "../../ModalNotice/ModalNotice";
 import ModalApproveAction from "../../../shared/components/ModalApproveAction/ModalApproveAction";
 import Modal from "../../../shared/components/Modal/Modal";
 
-import { ReactComponent as TrashSvg } from "../../../assets/image/icons/trash.svg";
+import {ReactComponent as TrashSvg} from "../../../assets/image/icons/trash.svg";
 import NoticesCategoryItemSvgSelector from "./NoticesCategoryItemSvgSelector";
 import css from "./notiesCategoriItem.module.scss";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router";
+import {useDispatch, useSelector} from "react-redux";
 
-import {
-  myAddFavoriteNotices,
-  removeMyFavoriteNotices,
-} from "../../../redux/noties/noties-operations";
-import Loader from "../../../shared/components/Loader/Loader";
-
+import {myAddFavoriteNotices, removeMyFavoriteNotices,} from "../../../redux/noties/noties-operations";
 
 
 const NotiesCategotyItem = ({ items }) => {
- 
+  const [copyItems, setCopyItems] = useState(items.result);
   const { isOpen, ElName, open, close } = useSwitch(false);
   const [modalChild, setModalChild] = useState(null);
   // console.log("notices.items: ", notices.items);
   // const [expandedLocation, setExpandedLocation] = useState(false);
   const [hoveredLocationCardId, setHoveredLocationCardId] = useState(null);
   const dispatch = useDispatch();
-  const { category } = useParams();
-  console.log("categoryparams", category);
   const id_user = useSelector((store) => store.auth.user._id);
 //  const [array, setArray] = useState([]);
-  const ownCategory = () => {
-    if (category === "my-pets") {
-      return Boolean (true);
-    }
-  }
-  
-  console.log("ownCategory", ownCategory());
-  const changeFavorite = (isAdd, _id) => {
+
+  const changeFavorite =  (isAdd, _id) => {
     // const xxx = [...array, _id]
     // setArray(xxx);
     if (isAdd) {
-      dispatch(removeMyFavoriteNotices(_id, id_user));
+       dispatch(removeMyFavoriteNotices(_id, id_user));
+      setCopyItems(prev => prev.map(notice => notice._id === _id ? { ...notice, favorite: notice.favorite.filter(ii => ii !== id_user) } : notice))
       return;
     } //dispatch favorite add
-    dispatch(myAddFavoriteNotices(_id, id_user));
+     dispatch(myAddFavoriteNotices(_id, id_user));
+    setCopyItems(prev => prev.map(notice => notice._id === _id ? { ...notice, favorite: [...notice.favorite, id_user] } : notice));
+
   };
 
 //  console.log(array, "array");
@@ -99,19 +88,6 @@ const NotiesCategotyItem = ({ items }) => {
   const handleMouseLeave = () => {
     setHoveredLocationCardId(null);
   };
-  const [expandedFavorite, setExpandedFavorite] = useState(false);
-
-  // const toggleFavorite = () => {
-  //   setExpandedFavorite(!expandedFavorite);
-  // };
-  
-  const handleMouseFavoriteEnter = (_id) => {
-    setExpandedFavorite(_id);
-  };
-
-  const handleMouseFavoriteLeave = () => {
-    setExpandedFavorite(null);
-  };
 
   // const toggleLocation = (e) => {
   //   console.log(e, "event");
@@ -143,9 +119,8 @@ const NotiesCategotyItem = ({ items }) => {
 
     return `${year - 1970} year`;
   };
-  // useEffect(() => {}, [changeFavorite]);
 
-  const pet = items.result.map(
+  const pet = copyItems.map(
     ({
       birthday,
       // breed,
@@ -154,14 +129,16 @@ const NotiesCategotyItem = ({ items }) => {
       favorite,
       location,
       // name,
-      // owner,
+      owner,
       photoUrl,
       // price,
       // public_id,
       sex,
       // title,
       _id,
-    }) => (
+    }) => {
+
+      return (
       <li className={css.example_card} key={_id}>
         <div className={css.animal}>
           <img className={css.photoPet} alt="" src={photoUrl} />
@@ -182,31 +159,25 @@ const NotiesCategotyItem = ({ items }) => {
             onClick={() => {
               const isAdd = favorite.includes(id_user);
               changeFavorite(isAdd, _id);
-              if (isAdd) {
-                handleMouseFavoriteLeave("");
-                return;
-              }
-              handleMouseFavoriteEnter(_id);
+            //   if (!isAdd){
+            //     copyFavorite = [...copyFavorite, id_user];
+            //   }
+            //   if (isAdd) {
+            //     copyFavorite = copyFavorite.filter(item_user => item_user !== id_user);
+            // }
             }}
-            // onClick={() => changeFavorite(id)}
             className={css.favorite}
           >
             <NoticesCategoryItemSvgSelector
-              // id={expandedFavorite ? "heart-active" : "heart"}
               id={
-                favorite.includes(id_user) || expandedFavorite === _id
+                favorite.includes(id_user)
                   ? "heart-active"
                   : "heart"
               }
-              // id={
-              //   favorite.includes(id_user) || array.includes(_id)
-              //     ? "heart-active"
-              //     : "heart"
-              // }
             />
           </button>
           {/* <button className={css.favorite}>H</button> */}
-          {ownCategory() ? (
+          {id_user === owner && (
             <button
               // onClick={() => removePets(_id)}
               name="deleteItem"
@@ -216,8 +187,6 @@ const NotiesCategotyItem = ({ items }) => {
             >
               <TrashSvg name="trash" />
             </button>
-          ) : (
-            []
           )}
           <NavLink className={css.add_pet} to="/add-pet">
             Add pet
@@ -272,7 +241,7 @@ const NotiesCategotyItem = ({ items }) => {
           Learn more
         </button>
       </li>
-    )
+    )}
   );
 
   return (
