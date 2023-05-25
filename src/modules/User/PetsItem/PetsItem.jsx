@@ -7,6 +7,23 @@ const PetsItem = ({ pet }) => {
   const { _id, photoURL, name, birthday, breed, comments } = pet;
   const dispatch = useDispatch();
 
+  const formattedDate = (newDate) => {
+    let date = new Date(Number(newDate));
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    if (day < 10) {
+      day = "0" + day;
+    }
+    if (month < 10) {
+      month = "0" + month;
+    }
+    let formattedDate = day + "." + month + "." + year;
+    return formattedDate;
+  };
+
+  const bday = formattedDate(birthday);
+
   const deletePetItem = () => {
     dispatch(deletePet(_id));
   };
@@ -20,7 +37,7 @@ const PetsItem = ({ pet }) => {
         </li>
         <li className={css.petInfoField}>
           <span className={css.petInfoTitle}>Date of birth:&#32;</span>
-          <span className={css.petInfoDescr}>{birthday}</span>
+          <span className={css.petInfoDescr}>{bday}</span>
         </li>
         <li className={css.petInfoField}>
           <span className={css.petInfoTitle}>Breed:&#32;</span>
