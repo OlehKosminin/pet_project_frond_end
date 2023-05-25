@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSwitch } from "../../../hooks/useSwitch";
 
@@ -9,16 +9,57 @@ import Modal from "../../../shared/components/Modal/Modal";
 import { ReactComponent as TrashSvg } from "../../../assets/image/icons/trash.svg";
 import NoticesCategoryItemSvgSelector from "./NoticesCategoryItemSvgSelector";
 import css from "./notiesCategoriItem.module.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
+import {
+  myAddFavoriteNotices,
+  removeMyFavoriteNotices,
+} from "../../../redux/noties/noties-operations";
 
 const NotiesCategotyItem = ({ items }) => {
+  const [copyItems, setCopyItems] = useState(items.result);
   const { isOpen, ElName, open, close } = useSwitch(false);
   const [modalChild, setModalChild] = useState(null);
   // console.log("notices.items: ", notices.items);
   // const [expandedLocation, setExpandedLocation] = useState(false);
-  const [hoveredCardId, setHoveredCardId] = useState(null);
+  const [hoveredLocationCardId, setHoveredLocationCardId] = useState(null);
+  const dispatch = useDispatch();
   const id_user = useSelector((store) => store.auth.user._id);
+  //  const [array, setArray] = useState([]);
+
+  const changeFavorite = (isAdd, _id) => {
+    // const xxx = [...array, _id]
+    // setArray(xxx);
+    if (isAdd) {
+      dispatch(removeMyFavoriteNotices(_id, id_user));
+      setCopyItems((prev) =>
+        prev.map((notice) =>
+          notice._id === _id
+            ? {
+                ...notice,
+                favorite: notice.favorite.filter((ii) => ii !== id_user),
+              }
+            : notice
+        )
+      );
+      return;
+    } //dispatch favorite add
+    dispatch(myAddFavoriteNotices(_id, id_user));
+    setCopyItems((prev) =>
+      prev.map((notice) =>
+        notice._id === _id
+          ? { ...notice, favorite: [...notice.favorite, id_user] }
+          : notice
+      )
+    );
+  };
+
+  //  console.log(array, "array");
+  //   useEffect(() => {
+  //     console.log(array, "array");
+  //     setArray(id_user);
+  //   }, [changeFavorite]);
+  // const isLoading = useSelector((store) => store.noties.notices.isLoading)
 
   useEffect(() => {
     if (ElName === "{openLearnMore}") {
@@ -55,13 +96,12 @@ const NotiesCategotyItem = ({ items }) => {
   };
 
   const handleMouseEnter = (id) => {
-    setHoveredCardId(id);
+    setHoveredLocationCardId(id);
   };
 
   const handleMouseLeave = () => {
-    setHoveredCardId(null);
+    setHoveredLocationCardId(null);
   };
-
 
   // const toggleLocation = (e) => {
   //   console.log(e, "event");
@@ -94,12 +134,7 @@ const NotiesCategotyItem = ({ items }) => {
     return `${year - 1970} year`;
   };
 
-  const changeFavorite = (isAdd) => {
-    if (isAdd) return; //dispatch favorite add
-    if (!isAdd) return; //dispatch favorite remove
-  };
-
-  const pet = items.result.map(
+  const pet = copyItems.map(
     ({
       birthday,
       // breed,
@@ -108,90 +143,115 @@ const NotiesCategotyItem = ({ items }) => {
       favorite,
       location,
       // name,
-      // owner,
+      owner,
       photoUrl,
       // price,
       // public_id,
       sex,
       // title,
       _id,
-    }) => (
-      <li className={css.example_card} key={_id}>
-        <div className={css.animal}>
-          <img className={css.photoPet} alt="" src={photoUrl} />
-          <p className={css.icon_category}>{category}</p>
-          <button
-            onClick={() => changeFavorite(favorite.includes(id_user))}
-            className={css.favorite}
-          >
-            <NoticesCategoryItemSvgSelector
-              id={favorite.includes(id_user) ? "heart-active" : "heart"}
-            />
-          </button>
-          {/* <button className={css.favorite}>H</button> */}
-          <button
-            // onClick={() => removePets(_id)}
-            name="deleteItem"
-            onClick={(e) => handleClick(e)}
-            type="button"
-            className={css.deletion}
-          >
-            <TrashSvg name="trash" />
-          </button>
-          <NavLink className={css.add_pet} to="/add-pet">
-            Add pet
-          </NavLink>
-          {/* <button >Add pet</button> */}
+    }) => {
+      return (
+        <li className={css.example_card} key={_id}>
+          <div className={css.animal}>
+            <img className={css.photoPet} alt="" src={photoUrl} />
+            <p className={css.icon_category}>{category}</p>
+            <button
+              // onMouseClick={() => {
+              //   if (favorite.includes(id_user)) {
+              //     handleMouseFavoriteLeave("");
+              //     return;
+              //   }
+              //   handleMouseFavoriteEnter(_id);
 
-          <ul className={css.animalsDataList}>
-            <li className={css.animalsData}>
-              <div
-                className={`${css.animalsDataText} ${
-                  hoveredCardId === _id ? css.expandedLocation : ""
-                }`}
-                // onMouseEnter={() => toggleLocation(id)}
-                // onMouseLeave={() => toggleLocation("")}
-                onMouseEnter={() => handleMouseEnter(_id)}
-                onMouseLeave={handleMouseLeave}
+              // }}
+              // onMouseLeave={() => handleMouseFavoriteLeave("")}
+              // onMouseEnter={()=>toggleFavorite(_id)}
+              // onMouseLeave={()=>toggleFavorite("")}
+              // onClick={() =>  changeFavorite(favorite.includes(id_user))}
+              onClick={() => {
+                const isAdd = favorite.includes(id_user);
+                changeFavorite(isAdd, _id);
+                //   if (!isAdd){
+                //     copyFavorite = [...copyFavorite, id_user];
+                //   }
+                //   if (isAdd) {
+                //     copyFavorite = copyFavorite.filter(item_user => item_user !== id_user);
+                // }
+              }}
+              className={css.favorite}
+            >
+              <NoticesCategoryItemSvgSelector
+                id={favorite.includes(id_user) ? "heart-active" : "heart"}
+              />
+            </button>
+            {/* <button className={css.favorite}>H</button> */}
+            {id_user === owner && (
+              <button
+                // onClick={() => removePets(_id)}
+                name="deleteItem"
+                onClick={(e) => handleClick(e)}
+                type="button"
+                className={css.deletion}
               >
-                <p className={css.locationTitle} title={location}>
-                  <NoticesCategoryItemSvgSelector id="location" />
-                  {location.length > 5
-                    ? `${location.slice(0, 5)}...`
-                    : location}
+                <TrashSvg name="trash" />
+              </button>
+            )}
+            <NavLink className={css.add_pet} to="/add-pet">
+              Add pet
+            </NavLink>
+            {/* <button >Add pet</button> */}
+
+            <ul className={css.animalsDataList}>
+              <li className={css.animalsData}>
+                <div
+                  className={`${css.animalsDataText} ${
+                    hoveredLocationCardId === _id ? css.expandedLocation : ""
+                  }`}
+                  // onMouseEnter={() => toggleLocation(id)}
+                  // onMouseLeave={() => toggleLocation("")}
+                  onMouseEnter={() => handleMouseEnter(_id)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <p className={css.locationTitle} title={location}>
+                    <NoticesCategoryItemSvgSelector id="location" />
+                    {location.length > 5
+                      ? `${location.slice(0, 5)}...`
+                      : location}
+                  </p>
+                  {hoveredLocationCardId && (
+                    <p className={css.locationContent}>{location}</p>
+                  )}
+                </div>
+              </li>
+              <li className={css.animalsData}>
+                <p className={css.animalsDataText}>
+                  <NoticesCategoryItemSvgSelector id="clock" />
+                  {getYear(birthday)}
+                  {/* {birthday} */}
                 </p>
-                {hoveredCardId && (
-                  <p className={css.locationContent}>{location}</p>
-                )}
-              </div>
-            </li>
-            <li className={css.animalsData}>
-              <p className={css.animalsDataText}>
-                <NoticesCategoryItemSvgSelector id="clock" />
-                {getYear(birthday)}
-                {/* {birthday} */}
-              </p>
-            </li>
-            <li className={css.animalsData}>
-              <p className={css.animalsDataText}>
-                <NoticesCategoryItemSvgSelector id={sex} />
-                {sex}
-              </p>
-            </li>
-          </ul>
-        </div>
+              </li>
+              <li className={css.animalsData}>
+                <p className={css.animalsDataText}>
+                  <NoticesCategoryItemSvgSelector id={sex} />
+                  {sex}
+                </p>
+              </li>
+            </ul>
+          </div>
 
-        <p className={css.animal_description}>{comments}</p>
+          <p className={css.animal_description}>{comments}</p>
 
-        <button
-          className={css.more_info_btn}
-          name="openLearnMore"
-          onClick={(e) => handleClick(e)}
-        >
-          Learn more
-        </button>
-      </li>
-    )
+          <button
+            className={css.more_info_btn}
+            name="openLearnMore"
+            onClick={(e) => handleClick(e)}
+          >
+            Learn more
+          </button>
+        </li>
+      );
+    }
   );
 
   return (
@@ -209,6 +269,7 @@ const NotiesCategotyItem = ({ items }) => {
           )}
         </div>
       )}
+      {/* {isLoading && <Loader />} */}
     </>
   );
 };

@@ -1,0 +1,74 @@
+@import "../../../index.scss";
+
+.paginationWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination {
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  justify-content: center;
+  display: inline-flex;
+  flex-direction: row;
+  // width: 280px;
+  height: 52px;
+  gap: 7px;
+  padding-left: 12px;
+  padding-right: 12px;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  border-radius: 45px;
+
+  @media screen and (min-width: 768px) {
+    // width: 310px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-top: 9px;
+  }
+}
+
+.paginationLink {
+  display: flex;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid $active-blue-color;
+  cursor: pointer;
+  font-family: "Inter Regular";
+  font-size: 16px;
+  line-height: 0.94;
+  color: $active-blue-color;
+
+  &:hover,
+  &:focus {
+    scale: 1.1;
+  }
+}
+
+.paginationActiveLink {
+  display: flex;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid $active-blue-color;
+  font-family: "Inter Regular";
+  font-size: 16px;
+  line-height: 0.94;
+  color: $bg-color;
+  background-color: $active-blue-color;
+}
+
+.btnWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
