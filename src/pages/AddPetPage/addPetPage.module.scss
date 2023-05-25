@@ -4,9 +4,9 @@
 }
 
 .bodyContainer {
-  width: 458px;
-  height: 648px;
-  margin-top: 40px;
+  width: 280px;
+  height: 496px;
+  margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
   /* background-color: teal; */
@@ -14,6 +14,11 @@
   border-radius: 40px;
   /* padding-left: 32px; */
   /* outline: 2px solid teal; */
+  @media screen and (min-width: 768px) {
+    // width: 458px;
+    height: 648px;
+    margin-top: 40px;
+  }
 }
 
 .font {
@@ -21,52 +26,84 @@
   font-family: "Manrope Regular";
   /* font-style: normal; */
   font-weight: 500;
-  font-size: 28px;
-  line-height: 38px;
+  font-size: 20px;
+  line-height: 27px;
   letter-spacing: 0.04em;
   color: #111111;
   padding-top: 20px;
-  margin-left: 32px;
+  margin-left: 40px;
+  @media screen and (min-width: 768px) {
+    font-size: 28px;
+    line-height: 38px;
+    margin-left: 32px;
+  }
 }
 .choosenUl {
   padding: 0;
   margin: 0;
   display: flex;
   list-style: none;
-  gap: 16px;
-  justify-content: center;
-
+  gap: 12px;
+  justify-content: flex-start;
   font-family: "Manrope Regular";
-  /* font-style: normal; */
   font-weight: 500;
-  font-size: 16px;
-  line-height: 26px;
+  margin-left: 28px;
+  padding-top: 24px;
+  font-size: 10px;
+  line-height: 14px;
+  // padding-bottom: 12px;
+
+  @media screen and (min-width: 768px) {
+    gap: 16px;
+    font-size: 16px;
+    line-height: 26px;
+    justify-content: center;
+    margin-left: 0;
+  }
 }
 
 .choosenUnderline {
-  width: 120px;
+  margin-top: 12px;
+  width: 80px;
   height: 8px;
   background-color: #54adff;
   border-radius: 8px;
+  @media screen and (min-width: 768px) {
+    width: 120px;
+  }
 }
 
 .ChoosenBtnContainer {
-  margin-left: 32px;
-  margin-top: 40px;
+  margin-left: 28px;
+  margin-top: 24px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: left;
   /* padding: 8px 16px; */
-  gap: 8px;
+  gap: 12px;
+  @media screen and (min-width: 768px) {
+    margin-left: 32px;
+    margin-top: 40px;
+  }
 }
 
 /* Buttons styles */
 .downSectionBtn {
   display: flex;
+  flex-direction: column-reverse;
   justify-content: center;
+  align-items: center;
   gap: 8px;
-  margin-top: 137px;
+  margin-top: 91px;
+  margin-left: 10px;
+  margin-right: 160px;
+  @media screen and (min-width: 768px) {
+    margin-top: 137px;
+    margin-left: 0px;
+    margin-right: 0px;
+    flex-direction: row;
+  }
 }
 
 .wrapper {
@@ -123,8 +160,9 @@
   letter-spacing: 0.04em;
   gap: 10px;
 
-  padding-top: 9px;
-  padding-bottom: 9px;
+  /* padding-top: 9px;
+  padding-bottom: 9px; */
+  height: 40px;
   width: 248px;
 }
 .btnNext:hover {

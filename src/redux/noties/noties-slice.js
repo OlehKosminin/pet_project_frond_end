@@ -5,6 +5,7 @@ import {
   addNotices,
   // deleteNotice,
   // getNewNotice,
+  searchNotices,
   fetchAllNotices,
   fetchOwnNotices,
   myAddFavoriteNotices,
@@ -18,7 +19,7 @@ import {
 } from "./noties-operations";
 
 const noticesInitialState = {
-  notices: {result: [], count: 0},
+  notices: { result: [], count: 0 },
   // oneNotice: null,
   error: null,
   isLoading: true,
@@ -27,7 +28,7 @@ const handlePending = (state) => {
   state.isLoading = true;
 };
 const handleReject = (state, action) => {
-  state.notices = {result: [], count: 0};
+  state.notices = { result: [], count: 0 };
   state.isLoading = false;
   state.error = action.payload;
 };
@@ -40,7 +41,7 @@ const noticesSlice = createSlice({
         handlePending(state);
       })
       .addCase(fetchAllNotices.fulfilled, (state, { payload }) => {
-        console.log("slice payload: ", payload);
+        // console.log("slice payload: ", payload);
         state.isLoading = false;
         state.notices.result = payload.result;
         state.notices.count = payload.resultCount;
@@ -49,13 +50,38 @@ const noticesSlice = createSlice({
       .addCase(fetchAllNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
-
+      .addCase(searchNotices.pending, (state) => {
+        handlePending(state);
+      })
+      .addCase(searchNotices.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.notices.result = payload.result;
+        state.notices.count = payload.resultCount;
+        state.error = null;
+      })
+      .addCase(searchNotices.rejected, (state, action) => {
+        handleReject(state, action);
+      })
       .addCase(addNotices.fulfilled, (state, { payload }) => {
         state.isLoading = false;
       })
       .addCase(addNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
+      // .addCase(addNotices.pending, (state) => {
+      //   state.isLoading = true;
+      // })
+      // .addCase(addNotices.fulfilled, (state, { payload }) => {
+      //   state.isLoading = false;
+      //   state.error = null;
+      //   state.items.push(payload);
+      // })
+      // .addCase(addNotices.rejected, (state, action) => {
+      //   // handleReject(state, action);
+      //   // state.isLoading = false;
+      //   state.isLoading = false;
+      //   state.error = action.payload;
+      // })
       // .addCase(deleteNotice.fulfilled, (state, { payload }) => {
       //   state.notices = state.notices.filter(({ _id }) => _id !== payload);
       //   state.isLoading = false;
@@ -95,11 +121,10 @@ const noticesSlice = createSlice({
       .addCase(fetchOwnNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
-      .addCase(fetchFavoriteNotices.pending, (state) => {
+      .addCase(myAddFavoriteNotices.pending, (state) => {
         handlePending(state);
       })
-      .addCase(fetchFavoriteNotices.fulfilled, (state, { payload }) => {
-        console.log("slice payload: ", payload);
+      .addCase(myAddFavoriteNotices.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.notices.result = payload.result;
         state.notices.count = payload.resultCount;
