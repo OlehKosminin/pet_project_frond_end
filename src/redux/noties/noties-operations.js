@@ -15,12 +15,33 @@ export const fetchAllNotices = createAsyncThunk(
     }
   }
 );
+
+export const searchNotices = createAsyncThunk(
+  "notices/search",
+  async ({ category, limit, page, search }, { rejectWithValue }) => {
+    try {
+      console.log("DATA в операции", category, limit, page, search);
+      const result = await api.getNoticesBySearch(
+        category,
+        limit,
+        page,
+        search
+      );
+      console.log("результат операции", result);
+      return result;
+    } catch ({ responce }) {
+      return rejectWithValue(responce);
+    }
+  }
+);
+
 export const fetchOwnNotices = createAsyncThunk(
   "notice/fetch-own",
   async ({ page }, thunkAPI) => {
     console.log(page, "dataOwnPage");
     try {
       const result = await api.getOwnNotices(page);
+      console.log("resultOwnOperation", result);
       return result;
     } catch ({ response }) {
       return thunkAPI.rejectWithValue(response.data);

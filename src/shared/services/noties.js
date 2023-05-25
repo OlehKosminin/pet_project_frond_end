@@ -21,6 +21,9 @@ export const addFavoriteNotices = async (id_notis) => {
   console.log("favorite ", data);
   return data;
 };
+
+// (category = "sell"), (search = ""), (page = 1), (limit = 6);
+
 export const deleteNotices = async (id) => {
   await instance.delete(`api/notices/${id}`);
 };
@@ -41,12 +44,3 @@ export const addNotice = async (data) => {
   const result = await instance.post("api/notices", data, header);
   return result;
 };
-
-export const getSingleNotice = async (id) => {
-  const { data } = await instance.get(`api/notices/${id}`);
-  return data;
-};
-
-// export const deleteNotices = async (id) => {
-//   await instance.delete(`api/notices/${id}`);
-// };

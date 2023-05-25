@@ -3,6 +3,7 @@ import {
   addNotices,
   // deleteNotice,
   // getNewNotice,
+  searchNotices,
   fetchAllNotices,
   fetchOwnNotices,
   myAddFavoriteNotices,
@@ -36,7 +37,7 @@ const noticesSlice = createSlice({
         handlePending(state);
       })
       .addCase(fetchAllNotices.fulfilled, (state, { payload }) => {
-        console.log("slice payload: ", payload);
+        // console.log("slice payload: ", payload);
         state.isLoading = false;
         state.notices.result = payload.result;
         state.notices.count = payload.resultCount;
@@ -45,7 +46,18 @@ const noticesSlice = createSlice({
       .addCase(fetchAllNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
-
+      .addCase(searchNotices.pending, (state) => {
+        handlePending(state);
+      })
+      .addCase(searchNotices.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.notices.result = payload.result;
+        state.notices.count = payload.resultCount;
+        state.error = null;
+      })
+      .addCase(searchNotices.rejected, (state, action) => {
+        handleReject(state, action);
+      })
       .addCase(addNotices.fulfilled, (state, { payload }) => {
         state.isLoading = false;
       })
