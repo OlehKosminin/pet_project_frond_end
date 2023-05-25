@@ -48,11 +48,35 @@ export const fetchOwnNotices = createAsyncThunk(
     }
   }
 );
+export const fetchFavoriteNotices = createAsyncThunk(
+  "notice/fetchFavoriteNotices",
+  async ({ page }, thunkAPI) => {
+    console.log(page, "dataFavoriteNotices");
+    try {
+      const result = await api.getFavoriteNotices(page);
+      console.log("resultFavoriteNotices", result);
+      return result;
+    } catch ({ response }) {
+      return thunkAPI.rejectWithValue(response.data);
+    }
+  }
+);
 export const myAddFavoriteNotices = createAsyncThunk(
-  "notices/favoriteNotices",
+  "notices/addFavoriteNotices",
   async (id_notis, { rejectWithValue }) => {
     try {
       const result = await api.addFavoriteNotices(id_notis);
+      return result;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const removeMyFavoriteNotices = createAsyncThunk(
+  "notices/deleteFavoriteNotices",
+  async (id_notis, { rejectWithValue }) => {
+    try {
+      const result = await api.deleteFavoriteNotices(id_notis);
       return result;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -86,18 +110,17 @@ export const myAddFavoriteNotices = createAsyncThunk(
 //     }
 //   }
 // );
-export const getSingleNotice = createAsyncThunk(
-  "notices/getSingleNotice",
-  async (id, { rejectWithValue }) => {
-    try {
-      const data = await api.getSingleNotice(id);
-      console.log(data);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
+// export const getSingleNotice = createAsyncThunk(
+//   "notices/getSingleNotice",
+//   async (id, { rejectWithValue }) => {
+//     try {
+//       const { data } = await axios.get(`/notices/${id}`);
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
 // export const getNewNotice = createAsyncThunk(
 //   "notices/getNewNotice",
 //   async (newNotice, { rejectWithValue }) => {
@@ -203,6 +226,20 @@ export const getNoticesByQweryFavorite = createAsyncThunk(
       const { data } = await axios.get(
         `notices/favorite?title=${query}&page=${page}&limit=${limit}`
       );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// Modal
+export const getSingleNotice = createAsyncThunk(
+  "notices/getSingleNotice",
+  async (id, { rejectWithValue }) => {
+    try {
+      const data = await api.getSingleNotice(id);
+      // console.log("operations:", data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);

@@ -22,11 +22,11 @@ import {
 const NotiesCategoriesList = () => {
   const { category } = useParams();
   const [page, setPage] = useState(1);
-  console.log(page, "paginatPage");
+  // console.log(page, "paginatPage");
   const notices = useSelector(getNotices);
   const isLoadingNotices = useSelector(getNoteceIsLoadig);
 
-  console.log("notices____", notices);
+  // console.log("notices____", notices);
 
   // const [ state, setState ] = useState();
   const dispatch = useDispatch();

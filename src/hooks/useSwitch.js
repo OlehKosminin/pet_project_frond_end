@@ -9,7 +9,6 @@ export const useSwitch = (initialState = false) => {
     setIsOpen(true);
   };
   const close = () => setIsOpen(false);
-  // const toggle = () => setIsOpen((isOpen) => !isOpen);
 
   return { isOpen, itemInfo, open, close };
 };

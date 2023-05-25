@@ -16,7 +16,7 @@ import {
 
 const noticesInitialState = {
   notices: { result: [], count: 0 },
-  // oneNotice: null,
+  oneNotice: null,
   error: null,
   isLoading: true,
 };
@@ -76,9 +76,10 @@ const noticesSlice = createSlice({
         handlePending(state);
       })
       .addCase(getSingleNotice.fulfilled, (state, { payload }) => {
+        console.log("isFulfilled");
         state.isLoading = false;
         state.oneNotice = payload.result;
-        // console.log("payload:", state.oneNotice);
+        // console.log("slice:", state.oneNotice);
         state.error = null;
       })
       .addCase(getSingleNotice.rejected, (state, action) => {

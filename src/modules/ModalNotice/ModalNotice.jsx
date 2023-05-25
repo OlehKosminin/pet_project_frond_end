@@ -4,15 +4,9 @@ import AddToFavoriteBtn from "../../shared/components/AddToFavoriteBtn/AddToFavo
 import css from "./ModalNotice.module.scss";
 import defaultNoticeAvatar from "../../assets/image/defaultNoticeAvatar.png";
 
-import { useState, useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-
-// import { ReactComponent as HeartSvg } from "../../assets/image/icons/heart.svg";
-
 const getYear = (birthday) => {
   const value = Date.now() - birthday;
   const date = new Date(value);
-  // const date = dateOll - 1970;
   const year = date.getFullYear();
   if (year === 1970) {
     const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -23,11 +17,7 @@ const getYear = (birthday) => {
 };
 
 const ModalNotice = ({ close, itemInfo }) => {
-  // const dispatch = useDispatch();
-  // const ownerInfo = useSelector((store) => store.noties.oneNotice);
-
-  console.log(itemInfo);
-  let {
+  const {
     birthday,
     breed,
     category,
@@ -41,12 +31,6 @@ const ModalNotice = ({ close, itemInfo }) => {
     owner,
     favorite,
   } = itemInfo;
-
-  useEffect(() => {
-    return () => {
-      itemInfo = null;
-    };
-  }, []);
 
   return (
     <div className={css.modalNotice}>
