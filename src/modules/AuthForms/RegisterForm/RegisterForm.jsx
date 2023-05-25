@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Formik, Form } from "formik";
+import { Notify } from "notiflix";
 
 import { TextField, IconButton, Box } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -10,6 +11,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { blue } from "@mui/material/colors";
 
 import Title from "../../../shared/components/Title/Title";
+import { getLoading } from "../../../redux/auth/auth-selector";
 
 import styles from "../../../shared/components/sass/authForm.module.scss";
 import { registerSchema } from "../../../shared/components/YupSchemas/authSchemas";
@@ -30,6 +32,7 @@ export const RegisterForm = () => {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleClickShowConfirmPassword = () =>
     setShowConfirmPassword((show) => !show);
+  const isLoading = useSelector(getLoading);
 
   const dispatch = useDispatch();
 
@@ -41,7 +44,7 @@ export const RegisterForm = () => {
     };
 
     if (data.name.trim() === "") {
-      throw alert("Name must fill out");
+      throw Notify.failure("Name must fill out");
     }
 
     dispatch(singup(data));
@@ -53,14 +56,7 @@ export const RegisterForm = () => {
       onSubmit={onSubmit}
       validationSchema={registerSchema}
     >
-      {({
-        values,
-        errors,
-        touched,
-        handleSubmit,
-        handleChange,
-        handleReset,
-      }) => (
+      {({ values, errors, touched, handleSubmit, handleChange }) => (
         <Form className={styles.form} onSubmit={handleSubmit}>
           <Title text="Registration" />
           <Box
@@ -272,7 +268,11 @@ export const RegisterForm = () => {
             />
           </Box>
           <div className={styles.buttonContainer}>
-            <button type="submit" className={styles.button}>
+            <button
+              type="submit"
+              className={styles.button}
+              disabled={isLoading}
+            >
               Registration
             </button>
           </div>
