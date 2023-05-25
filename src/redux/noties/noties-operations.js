@@ -29,11 +29,35 @@ export const fetchOwnNotices = createAsyncThunk(
     }
   }
 );
+export const fetchFavoriteNotices = createAsyncThunk(
+  "notice/fetchFavoriteNotices",
+  async ({ page }, thunkAPI) => {
+    console.log(page, "dataFavoriteNotices");
+    try {
+      const result = await api.getFavoriteNotices(page);
+      console.log("resultFavoriteNotices", result);
+      return result;
+    } catch ({ response }) {
+      return thunkAPI.rejectWithValue(response.data);
+    }
+  }
+);
 export const myAddFavoriteNotices = createAsyncThunk(
-  "notices/favoriteNotices",
-  async (id_notis, { rejectWithValue }) => {
+  "notices/addFavoriteNotices",
+  async (id_notis,  { rejectWithValue }) => {
     try {
       const result = await api.addFavoriteNotices(id_notis);
+      return result;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const removeMyFavoriteNotices = createAsyncThunk(
+  "notices/deleteFavoriteNotices",
+  async (id_notis, { rejectWithValue }) => {
+    try {
+      const result = await api.deleteFavoriteNotices(id_notis);
       return result;
     } catch (error) {
       return rejectWithValue(error.message);
