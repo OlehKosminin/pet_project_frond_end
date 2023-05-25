@@ -121,6 +121,16 @@ const noticesSlice = createSlice({
       .addCase(fetchOwnNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
+      .addCase(fetchFavoriteNotices.pending, (state) => {
+        handlePending(state);
+      })
+      .addCase(fetchFavoriteNotices.fulfilled, (state, { payload }) => {
+        
+        state.isLoading = false;
+        state.notices.result = payload.result;
+        state.notices.count = payload.resultCount;
+        state.error = null;
+      })
       .addCase(fetchFavoriteNotices.rejected, (state, action) => {
         handleReject(state, action);
       })

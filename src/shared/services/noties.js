@@ -1,6 +1,6 @@
 import instance from "./auth";
 
-export const getAllNotices = async (category = "sell", page = 1, limit = 6) => {
+export const getAllNotices = async (category = "sell", page = 1, limit = 12) => {
   const { data } = await instance.get(
     `api/notices/category?category=${category}&page=${page}&limit=${limit}`
   );
@@ -8,7 +8,7 @@ export const getAllNotices = async (category = "sell", page = 1, limit = 6) => {
   return data;
 };
 
-export const getNoticesBySearch = async (category, limit, page, search) => {
+export const getNoticesBySearch = async (category, limit=12, page=1, search) => {
   console.log("data services", category, limit, page, search);
   const { data } = await instance.get(
     `api/notices/category?page=${page}&limit=${limit}&category=${category}&search=${search}`
@@ -17,7 +17,7 @@ export const getNoticesBySearch = async (category, limit, page, search) => {
   return data;
 };
 
-export const getOwnNotices = async (page = 1, limit = 6) => {
+export const getOwnNotices = async (page = 1, limit = 12) => {
   console.log("getOwnNotices test back", page, limit);
   const { data } = await instance.get(
     `api/notices?page=${page}&limit=${limit}`
@@ -25,7 +25,7 @@ export const getOwnNotices = async (page = 1, limit = 6) => {
   
   return data;
 };
-export const getFavoriteNotices = async (page = 1, limit = 6) => {
+export const getFavoriteNotices = async (page = 1, limit = 12) => {
   console.log("getOwnNotices test back", page, limit);
   const { data } = await instance.get(
     `api/notices/favorite?page=${page}&limit=${limit}`
