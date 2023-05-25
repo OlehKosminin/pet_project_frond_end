@@ -134,14 +134,8 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
       setIsFormSubmitting(true);
       console.log("Error ", error.message);
     }
-    // await history(-1);
   };
 
-  // useEffect(() => {
-  //   if (isFetchOk) {
-  //     history(-1);
-  //   }
-  // }, [isFetchOk, history]);
 
   return (
     <div className={contactForm.formCell}>

@@ -54,188 +54,190 @@ const AddPetPage = () => {
   };
 
   return (
-    <div
-      className={style.bodyContainer}
-      style={{
-        width:
-          activeForm === "sellPetInfo" ||
-          activeForm === "lostPetInfo" ||
-          activeForm === "goodPetInfo"
-            ? "822px"
-            : "458px",
-      }}
-    >
-      <p
+    <div className={style.bodyAddPet}>
+      <div
+        className={style.bodyContainer}
         style={{
-          textAlign:
+          width:
             activeForm === "sellPetInfo" ||
             activeForm === "lostPetInfo" ||
             activeForm === "goodPetInfo"
-              ? "center"
-              : "left",
-          marginLeft:
-            activeForm === "sellPetInfo" ||
-            activeForm === "lostPetInfo" ||
-            activeForm === "goodPetInfo"
-              ? "0"
-              : "",
+              ? "822px"
+              : "458px",
         }}
-        className={style.font}
       >
-        {activeTitle(activeForm)}
-      </p>
-      <ul className={style.choosenUl}>
-        <li className={style.choosenLi}>
-          <p
-            style={{
-              color: activeColor(activeForm, 1),
-            }}
-          >
-            Choose option
-          </p>
-          <div
-            className={style.choosenUnderline}
-            style={{
-              backgroundColor: activeColor(activeForm, 1),
-            }}
-          ></div>
-        </li>
-
-        <li className={style.choosenLi}>
-          <p
-            style={{
-              color: activeColor(activeForm, 2),
-            }}
-          >
-            Personal details
-          </p>
-          <div
-            style={{
-              backgroundColor: activeColor(activeForm, 2),
-            }}
-            className={style.choosenUnderline}
-          ></div>
-        </li>
-
-        <li className={style.choosenLi}>
-          <p
-            style={{
-              color: activeColor(activeForm, 3),
-            }}
-          >
-            More info
-          </p>
-          <div
-            style={{
-              backgroundColor: activeColor(activeForm, 3),
-            }}
-            className={style.choosenUnderline}
-          ></div>
-        </li>
-      </ul>
-
-      {activeForm === "" && (
-        <div className={style.ChoosenBtnContainer}>
-          <div className={styleBtn.wrapper}>
-            <button
-              onClick={() => handleClick("yourPet")}
-              className={
-                isBg === "yourPet" ? styleBtn.btnChecked : styleBtn.btn
-              }
+        <p
+          style={{
+            textAlign:
+              activeForm === "sellPetInfo" ||
+              activeForm === "lostPetInfo" ||
+              activeForm === "goodPetInfo"
+                ? "center"
+                : "left",
+            marginLeft:
+              activeForm === "sellPetInfo" ||
+              activeForm === "lostPetInfo" ||
+              activeForm === "goodPetInfo"
+                ? "0"
+                : "",
+          }}
+          className={style.font}
+        >
+          {activeTitle(activeForm)}
+        </p>
+        <ul className={style.choosenUl}>
+          <li className={style.choosenLi}>
+            <p
+              style={{
+                color: activeColor(activeForm, 1),
+              }}
             >
-              your pet
-            </button>
-          </div>
+              Choose option
+            </p>
+            <div
+              className={style.choosenUnderline}
+              style={{
+                backgroundColor: activeColor(activeForm, 1),
+              }}
+            ></div>
+          </li>
 
-          <div className={styleBtn.wrapper}>
-            <button
-              onClick={() => handleClick("sell")}
-              className={isBg === "sell" ? styleBtn.btnChecked : styleBtn.btn}
+          <li className={style.choosenLi}>
+            <p
+              style={{
+                color: activeColor(activeForm, 2),
+              }}
             >
-              sell
-            </button>
-          </div>
+              Personal details
+            </p>
+            <div
+              style={{
+                backgroundColor: activeColor(activeForm, 2),
+              }}
+              className={style.choosenUnderline}
+            ></div>
+          </li>
 
-          <div className={styleBtn.wrapper}>
-            <button
-              onClick={() => handleClick("lost")}
-              className={isBg === "lost" ? styleBtn.btnChecked : styleBtn.btn}
+          <li className={style.choosenLi}>
+            <p
+              style={{
+                color: activeColor(activeForm, 3),
+              }}
             >
-              lost/found
-            </button>
+              More info
+            </p>
+            <div
+              style={{
+                backgroundColor: activeColor(activeForm, 3),
+              }}
+              className={style.choosenUnderline}
+            ></div>
+          </li>
+        </ul>
+
+        {activeForm === "" && (
+          <div className={style.ChoosenBtnContainer}>
+            <div className={styleBtn.wrapper}>
+              <button
+                onClick={() => handleClick("yourPet")}
+                className={
+                  isBg === "yourPet" ? styleBtn.btnChecked : styleBtn.btn
+                }
+              >
+                your pet
+              </button>
+            </div>
+
+            <div className={styleBtn.wrapper}>
+              <button
+                onClick={() => handleClick("sell")}
+                className={isBg === "sell" ? styleBtn.btnChecked : styleBtn.btn}
+              >
+                sell
+              </button>
+            </div>
+
+            <div className={styleBtn.wrapper}>
+              <button
+                onClick={() => handleClick("lost")}
+                className={isBg === "lost" ? styleBtn.btnChecked : styleBtn.btn}
+              >
+                lost/found
+              </button>
+            </div>
+
+            <div className={styleBtn.wrapper}>
+              <button
+                onClick={() => handleClick("good")}
+                className={isBg === "good" ? styleBtn.btnChecked : styleBtn.btn}
+              >
+                in good hands
+              </button>
+            </div>
           </div>
+        )}
 
-          <div className={styleBtn.wrapper}>
-            <button
-              onClick={() => handleClick("good")}
-              className={isBg === "good" ? styleBtn.btnChecked : styleBtn.btn}
-            >
-              in good hands
-            </button>
+        {activeForm === "yourPet" && <AddMyPetDetails onClick={backClick} />}
+        {activeForm === "yourPetInfo" && (
+          <AddMyPetInfo onClick={backClick} date={date} />
+        )}
+
+        {activeForm === "sell" && (
+          <AddPetForSellDetails onClick={backClick} addr={"toForSellInfo"} />
+        )}
+        {activeForm === "sellPetInfo" && (
+          <AddPetForSellInfo onClick={backClick} date={date} addr={"sell"} />
+        )}
+
+        {activeForm === "lost" && (
+          <AddPetForSellDetails onClick={backClick} addr={"toLostInfo"} />
+        )}
+        {activeForm === "lostPetInfo" && (
+          <AddPetForSellInfo
+            onClick={backClick}
+            date={date}
+            addr={"lost/found"}
+          />
+        )}
+
+        {activeForm === "good" && (
+          <AddPetForSellDetails onClick={backClick} addr={"toGoodInfo"} />
+        )}
+        {activeForm === "goodPetInfo" && (
+          <AddPetForSellInfo
+            onClick={backClick}
+            date={date}
+            addr={"in good hands"}
+          />
+        )}
+
+        {activeForm === "" && (
+          <div className={style.downSectionBtn}>
+            <div className={style.wrapper}>
+              <Link
+                to={-1}
+                onClick={() => setActiveForm("")}
+                className={style.btnCancel}
+              >
+                <SvgSelector id="arrowLeft" />
+                {/* Back */}
+                Cancel
+              </Link>
+            </div>
+            <div className={style.wrapper}>
+              <button
+                onClick={() => setActiveForm(isBg)}
+                className={style.btnNext}
+              >
+                Next
+                <div style={{ paddingLeft: "15px" }}>
+                  <SvgSelector id="pawprint" />
+                </div>
+              </button>
+            </div>
           </div>
-        </div>
-      )}
-
-      {activeForm === "yourPet" && <AddMyPetDetails onClick={backClick} />}
-      {activeForm === "yourPetInfo" && (
-        <AddMyPetInfo onClick={backClick} date={date} />
-      )}
-
-      {activeForm === "sell" && (
-        <AddPetForSellDetails onClick={backClick} addr={"toForSellInfo"} />
-      )}
-      {activeForm === "sellPetInfo" && (
-        <AddPetForSellInfo onClick={backClick} date={date} addr={"sell"} />
-      )}
-
-      {activeForm === "lost" && (
-        <AddPetForSellDetails onClick={backClick} addr={"toLostInfo"} />
-      )}
-      {activeForm === "lostPetInfo" && (
-        <AddPetForSellInfo
-          onClick={backClick}
-          date={date}
-          addr={"lost/found"}
-        />
-      )}
-
-      {activeForm === "good" && (
-        <AddPetForSellDetails onClick={backClick} addr={"toGoodInfo"} />
-      )}
-      {activeForm === "goodPetInfo" && (
-        <AddPetForSellInfo
-          onClick={backClick}
-          date={date}
-          addr={"in good hands"}
-        />
-      )}
-
-      {activeForm === "" && (
-        <div className={style.downSectionBtn}>
-          <div className={style.wrapper}>
-            <Link
-              to={-1}
-              onClick={() => setActiveForm("")}
-              className={style.btnCancel}
-            >
-              <SvgSelector id="arrowLeft" />
-              {/* Back */}
-              Cancel
-            </Link>
-          </div>
-          <div className={style.wrapper}>
-            <button
-              onClick={() => setActiveForm(isBg)}
-              className={style.btnNext}
-            >
-              Next
-              <div style={{ paddingLeft: "15px" }}>
-                <SvgSelector id="pawprint" />
-              </div>
-            </button>
-          </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
