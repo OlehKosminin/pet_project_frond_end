@@ -2,9 +2,16 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 
+import NoticesPagination from "../NoticesPagination/NoticesPagination";
 import NotiesCategoryItem from "../NotiesCategotyItem/NotiesCategotyItem";
-import {getNoteceIsLoadig, getNotices} from "../../../redux/noties/noties-selector";
-import {fetchAllNotices, fetchOwnNotices} from "../../../redux/noties/noties-operations";
+import {
+  getNoteceIsLoadig,
+  getNotices,
+} from "../../../redux/noties/noties-selector";
+import {
+  fetchAllNotices,
+  fetchOwnNotices,
+} from "../../../redux/noties/noties-operations";
 
 // import { deleteNotices } from "../../../shared/services/noties";
 
@@ -18,7 +25,7 @@ const NotiesCategoriesList = () => {
   const [page, setPage] = useState(1);
   console.log(page, "paginatPage");
   const notices = useSelector(getNotices);
-  const isLoadingNotices = useSelector(getNoteceIsLoadig)
+  const isLoadingNotices = useSelector(getNoteceIsLoadig);
 
   console.log("notices____", notices);
 
@@ -31,7 +38,6 @@ const NotiesCategoriesList = () => {
     }
 
     if (category === "favorite") {
-
     }
     if (
       category === "sell" ||
@@ -119,11 +125,16 @@ const NotiesCategoriesList = () => {
     <>
       <div>
         {/* <ul className={css.wrapper}> */}
-        {isLoadingNotices ? 'LOADING...' : <NotiesCategoryItem items={notices} /> }
+        {isLoadingNotices ? (
+          "LOADING..."
+        ) : (
+          <NotiesCategoryItem items={notices} />
+        )}
 
         <button onClick={loadMore}>load more</button>
         <span>{page}</span>
         {/* </ul> */}
+        <NoticesPagination />
       </div>
     </>
     // <div className={css.container}>
