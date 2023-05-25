@@ -4,14 +4,21 @@
 }
 
 .genderSection {
-  padding-bottom: 20px;
+  padding-bottom: 0;
+  @media screen and (min-width: 768px) {
+    padding-bottom: 20px;
+  }
 }
 .genderLabel {
   font-family: "Manrope Regular";
   /* font-style: normal; */
   font-weight: 500;
-  font-size: 20px;
-  line-height: 26px;
+  font-size: 14px;
+  line-height: 19px;
+  @media screen and (min-width: 768px) {
+    font-size: 20px;
+    line-height: 26px;
+  }
 }
 .genderBtnDiv {
   display: flex;
