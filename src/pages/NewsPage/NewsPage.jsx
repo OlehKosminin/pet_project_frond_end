@@ -50,7 +50,7 @@ const NewsPage = () => {
 
   return (
     <section className={baseStyles.sectionNews}>
-      <div className={baseStyles.container}>
+      <div className={styles.container}>
         <h1 className={styles.namePage}>News</h1>
         <div className={styles.containerSearch}>
           <form className={styles.search__form} onSubmit={getSearchNews}>
