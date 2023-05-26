@@ -16,7 +16,8 @@ const getYear = (birthday) => {
   return `${year - 1970} year`;
 };
 
-const ModalNotice = ({ close, itemInfo, favoriteSwitch }) => {
+const ModalNotice = ({ close, itemInfo, favoriteSwitch, owner }) => {
+  // console.log("item info:", itemInfo);
   const {
     birthday,
     breed,
@@ -28,9 +29,11 @@ const ModalNotice = ({ close, itemInfo, favoriteSwitch }) => {
     price,
     sex,
     title,
-    owner,
     favorite,
   } = itemInfo;
+  const { email, phone } = owner;
+  const ownerEmail = `mailto:${email}`;
+  const ownerPhone = `tel:${phone}`;
 
   return (
     <div className={css.modalNotice}>
@@ -75,14 +78,14 @@ const ModalNotice = ({ close, itemInfo, favoriteSwitch }) => {
             </li>
             <li className={css.petInfoListItem}>
               <span className={css.petInfoListItemTitle}>Email:</span>
-              <a href="mailto:user@mail.com" className={css.petContact}>
-                user@mail.com
+              <a href={ownerEmail} className={css.petContact}>
+                {email}
               </a>
             </li>
             <li className={css.petInfoListItem}>
               <span className={css.petInfoListItemTitle}>Phone:</span>
-              <a href="tel:+380971234567" className={css.petContact}>
-                +380971234567
+              <a href={ownerPhone} className={css.petContact}>
+                {phone}
               </a>
             </li>
           </ul>

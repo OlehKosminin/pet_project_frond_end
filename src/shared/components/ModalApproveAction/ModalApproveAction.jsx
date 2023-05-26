@@ -4,15 +4,15 @@ import { ReactComponent as TrashSvg } from "../../../assets/image/icons/trash1.s
 
 import css from "./modalApproveAction.module.scss";
 
-const ModalApproveAction = ({ ModalApproveAction, close, title }) => {
-  const handleApproveClick = () => {
-    ModalApproveAction();
+const ModalApproveAction = ({ close, deleteItem, itemInfo }) => {
+  const { _id, title } = itemInfo;
+
+  console.log(deleteItem);
+
+  const handleApproveClick = (_id) => {
+    deleteItem(_id);
     close();
   };
-  const dispatch = useDispatch();
-   const noticesDelete = (_id) => {
-     dispatch(deleteNotice(_id));
-   };
 
   return (
     <div>
@@ -28,7 +28,7 @@ const ModalApproveAction = ({ ModalApproveAction, close, title }) => {
           <button className={css.cancelBtn} onClick={close}>
             Cancel
           </button>
-          <button className={css.actionBtn} onClick={noticesDelete}>
+          <button className={css.actionBtn} onClick={handleApproveClick(_id)}>
             Yes
             <TrashSvg className={css.TrashSvg} />
           </button>
