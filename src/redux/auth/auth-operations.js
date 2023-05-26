@@ -38,7 +38,7 @@ export const current = createAsyncThunk(
       const data = await api.getCurrent(auth.token);
       return data;
     } catch (error) {
-      thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error);
     }
   },
   {
@@ -56,7 +56,7 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     const data = await api.logout();
     return data;
   } catch (error) {
-    thunkAPI.rejectWithValue(error);
+    return thunkAPI.rejectWithValue(error);
   }
 });
 

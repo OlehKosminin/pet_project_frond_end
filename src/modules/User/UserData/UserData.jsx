@@ -202,6 +202,7 @@ const UserData = () => {
                   selected={startDate ? startDate : null}
                   onChange={(date) => setStartDate(date)}
                   calendarClassName={css.datepicker}
+                  maxDate={new Date()}
                   peekNextMonth
                   showMonthDropdown
                   showYearDropdown
