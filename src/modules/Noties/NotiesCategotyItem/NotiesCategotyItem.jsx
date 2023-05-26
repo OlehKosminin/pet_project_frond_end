@@ -8,6 +8,7 @@ import Loader from "../../../shared/components/Loader/Loader";
 import ModalNotice from "../../ModalNotice/ModalNotice";
 import ModalApproveAction from "../../../shared/components/ModalApproveAction/ModalApproveAction";
 import Modal from "../../../shared/components/Modal/Modal";
+import { getUserInfo } from "../../../shared/services/auth";
 
 import { ReactComponent as TrashSvg } from "../../../assets/image/icons/trash.svg";
 import NoticesCategoryItemSvgSelector from "./NoticesCategoryItemSvgSelector";
@@ -60,6 +61,8 @@ const NotiesCategotyItem = ({ items }) => {
   };
   const learnMoreInfo = async ({ id, name }) => {
     const { result } = await getSingleNotice(id);
+    const data = await getUserInfo(result.owner);
+    console.log("data user: ", data);
     if (name === "openLearnMore") {
       setModalChild(
         <ModalNotice

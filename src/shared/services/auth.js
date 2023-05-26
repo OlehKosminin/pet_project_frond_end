@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const instance = axios.create({
-  // baseURL: "http://localhost:3000/",
+  baseURL: "http://localhost:3000/",
 
-  baseURL: "https://pet-project-backend.onrender.com",
+  // baseURL: "https://pet-project-backend.onrender.com",
 });
 
 const setToken = (token) => {
@@ -52,18 +52,9 @@ export const updUserInfo = async (data) => {
   return result;
 };
 
-export const getUserInfo = async ({ _id }) => {
+export const getUserInfo = async (_id) => {
   try {
-    const data = await instance.get("api/auth/current", { _id });
-    return data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const getUserInfoById = async (id) => {
-  try {
-    const data = await instance.get("api/auth/current", id);
+    const data = await instance.get(`/api/auth/user-info/${_id}`, _id);
     return data;
   } catch (error) {
     throw error;
