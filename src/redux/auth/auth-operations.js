@@ -13,7 +13,7 @@ export const singup = createAsyncThunk(
     } catch (error) {
       thunkAPI.rejectWithValue(error);
 
-      return Notiflix.Notify.failure("Something is wrong");
+      return Notiflix.Notify.failure(error.response.data.message);
     }
   }
 );
