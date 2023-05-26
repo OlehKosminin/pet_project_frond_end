@@ -70,9 +70,11 @@ color: $black-color;
 .priceWrapper{
   position: absolute;
 margin-left: 8px;
-margin-top: 240px;
+ margin-top:180px;
+
 
 @media screen and (min-width: 768px) {
+ margin-top: 240px;
   margin-left: 0px;
   }
 }
