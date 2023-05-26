@@ -193,7 +193,6 @@ const NotiesCategotyItem = ({ items }) => {
                 onClick={() => noticesDelete(_id)}
                 name="deleteItem"
                 // onClick={(e) => handleClick(e)}
-                // id={_id}
                 type="button"
                 className={css.deletion}
               >
