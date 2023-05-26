@@ -3,23 +3,24 @@
   src: url("../../../fonts/Manrope-Regular.ttf");
 }
 .form {
-  /* display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; */
-  width: 394px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // width: 394px;
   margin-top: 16px;
   margin-left: auto;
   margin-right: auto;
 }
 .formCell {
-  /* display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   /* width: 394px; */
+
   margin-top: 16px;
-  margin-left: 24px;
+  // margin-left: 24px;
   // margin-right: auto;
   @media screen and (min-width: 768px) {
     margin-left: auto;
@@ -124,18 +125,29 @@
 .avatarField {
   display: block;
   align-items: center;
+  @media screen and (min-width: 768px) {
+    display: block;
+    align-items: center;
+  }
 }
 .photoLabel {
-  /* display: flex;
-  align-items: center; */
+  display: flex;
+  align-items: center;
   font-family: "Manrope Regular";
   /* font-style: normal; */
   font-weight: 500;
   font-size: 14px;
   line-height: 19px;
   @media screen and (min-width: 768px) {
+    display: block;
     font-size: 20px;
     line-height: 26px;
+  }
+}
+.photoLabel::before {
+  content: "Add photo";
+  @media screen and (min-width: 768px) {
+    content: "Load the pet’s image:";
   }
 }
 .divLabel {
