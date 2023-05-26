@@ -34,7 +34,7 @@ const NoticesCategoriesNavigation = () => {
           </>)}
         </div>
 
-        <button className={css.filter}>Filter</button>
+        {/* <button className={css.filter}>Filter</button> */}
         <NavLink className={css.addPet} to="/add-pet">
           Add Pet
         </NavLink>

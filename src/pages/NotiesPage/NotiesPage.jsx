@@ -30,7 +30,7 @@ function NoticesPage() {
       <div className={css.title}>Find your favorite pet</div>
       <NoticesSearch className={css.input} onSearch={handleSearch} />
       <NoticesCategoriesNav />
-      <NoticesCategoriesList />;
+      <NoticesCategoriesList />
     </div>
   );
 
