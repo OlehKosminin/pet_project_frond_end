@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Formik, Form } from "formik";
 
@@ -10,6 +10,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { blue } from "@mui/material/colors";
 
 import Title from "../../../shared/components/Title/Title";
+import { getLoading } from "../../../redux/auth/auth-selector";
 
 import styles from "../../../shared/components/sass/authForm.module.scss";
 import { loginSchema } from "../../../shared/components/YupSchemas/authSchemas";
@@ -25,6 +26,7 @@ export const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const isLoading = useSelector(getLoading);
 
   const dispatch = useDispatch();
 
@@ -170,7 +172,11 @@ export const LoginForm = () => {
             />
           </Box>
           <div className={styles.buttonContainer}>
-            <button type="submit" className={styles.button}>
+            <button
+              type="submit"
+              className={styles.button}
+              disabled={isLoading}
+            >
               Login
             </button>
           </div>
