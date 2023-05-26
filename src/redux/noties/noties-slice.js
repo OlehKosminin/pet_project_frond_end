@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 import {
   addNotices,
   deleteNotice,
@@ -94,7 +93,7 @@ const noticesSlice = createSlice({
       })
       .addCase(deleteNotice.rejected, (state, { payload }) => {
         handleReject(state, payload);
-
+      })
       .addCase(getSingleNotice.pending, (state) => {
         handlePending(state);
       })

@@ -55,9 +55,9 @@ const NotiesCategotyItem = ({ items }) => {
     );
   };
 
-    const noticesDelete = (_id) => {
-       dispatch(deleteNotice(_id));
-     };
+  const noticesDelete = (_id) => {
+    dispatch(deleteNotice(_id));
+  };
   const learnMoreInfo = async ({ id, name }) => {
     const { result } = await getSingleNotice(id);
     if (name === "openLearnMore") {
@@ -76,7 +76,6 @@ const NotiesCategotyItem = ({ items }) => {
     // setOwner(user);
     open(true);
   };
-
 
   //  console.log(array, "array");
   //   useEffect(() => {
@@ -193,8 +192,8 @@ const NotiesCategotyItem = ({ items }) => {
               <button
                 onClick={() => noticesDelete(_id)}
                 name="deleteItem"
-                onClick={(e) => handleClick(e)}
-                id={_id}
+                // onClick={(e) => handleClick(e)}
+                // id={_id}
                 type="button"
                 className={css.deletion}
               >
