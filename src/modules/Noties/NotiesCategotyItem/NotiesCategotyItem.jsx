@@ -8,6 +8,7 @@ import Loader from "../../../shared/components/Loader/Loader";
 import ModalNotice from "../../ModalNotice/ModalNotice";
 import ModalApproveAction from "../../../shared/components/ModalApproveAction/ModalApproveAction";
 import Modal from "../../../shared/components/Modal/Modal";
+import { getUserInfo } from "../../../shared/services/auth";
 
 import { ReactComponent as TrashSvg } from "../../../assets/image/icons/trash.svg";
 import NoticesCategoryItemSvgSelector from "./NoticesCategoryItemSvgSelector";
@@ -23,7 +24,6 @@ const NotiesCategotyItem = ({ items }) => {
   const [copyItems, setCopyItems] = useState(items.result);
   const { isOpen, open, close } = useSwitch(false);
   const [modalChild, setModalChild] = useState(<Loader />);
-  
   const [hoveredLocationCardId, setHoveredLocationCardId] = useState(null);
   const dispatch = useDispatch();
   const id_user = useSelector((store) => store.auth.user._id);
@@ -56,10 +56,14 @@ const NotiesCategotyItem = ({ items }) => {
 
   const noticesDelete = (_id) => {
     dispatch(deleteNotice(_id));
+    setCopyItems(prev => prev.filter(i => i._id !== _id));
   };
+
   const learnMoreInfo = async ({ id, name }) => {
     console.log("id v learn mo", id)
     const { result } = await getSingleNotice(id);
+    const data = await getUserInfo(result.owner);
+    console.log("data user: ", data);
     if (name === "openLearnMore") {
       setModalChild(
         <ModalNotice
@@ -83,9 +87,6 @@ const NotiesCategotyItem = ({ items }) => {
     // setOwner(user);
     open(true);
   };
-
-  
-
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflowY = "hidden";
@@ -110,9 +111,6 @@ const NotiesCategotyItem = ({ items }) => {
   const handleMouseLeave = () => {
     setHoveredLocationCardId(null);
   };
-
- 
-
   const getYear = (birthday) => {
     const value = Date.now() - birthday;
     const date = new Date(value);
@@ -139,7 +137,6 @@ const NotiesCategotyItem = ({ items }) => {
       owner,
       photoUrl,
       // price,
-      // public_id,
       sex,
       title,
       _id,
@@ -149,7 +146,7 @@ const NotiesCategotyItem = ({ items }) => {
           <div className={css.animal}>
             <img
               className={css.photoPet}
-              alt=""
+              alt="Pet's photo"
               width="384"
               height="288"
               src={photoUrl}
@@ -161,7 +158,6 @@ const NotiesCategotyItem = ({ items }) => {
               onClick={() => {
                 const isAdd = favorite.includes(id_user);
                 changeFavorite(isAdd, _id);
-             
               }}
               className={css.favorite}
             >
@@ -169,13 +165,14 @@ const NotiesCategotyItem = ({ items }) => {
                 id={favorite.includes(id_user) ? "heart-active" : "heart"}
               />
             </button>
-           
             {id_user === owner && (
               <button
                 // onClick={() => noticesDelete(_id)}
                 name="deleteItem"
+
                 onClick={(e) => handleClick(e)}
                 id={_id}
+
                 type="button"
                 className={css.deletion}
               >
@@ -185,7 +182,6 @@ const NotiesCategotyItem = ({ items }) => {
             <NavLink className={css.add_pet} to="/add-pet">
               Add pet
             </NavLink>
-            {/* <button >Add pet</button> */}
 
             <ul className={css.animalsDataList}>
               <li className={css.animalsData}>
@@ -211,7 +207,6 @@ const NotiesCategotyItem = ({ items }) => {
                 <p className={css.animalsDataText}>
                   <NoticesCategoryItemSvgSelector id="clock" />
                   {getYear(birthday)}
-                 
                 </p>
               </li>
               <li className={css.animalsData}>

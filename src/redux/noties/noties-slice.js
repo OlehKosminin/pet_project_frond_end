@@ -1,20 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 
 import {
   addNotices,
   deleteNotice,
-  // getNewNotice,
-  searchNotices,
   fetchAllNotices,
+  fetchFavoriteNotices,
   fetchOwnNotices,
+  getSingleNotice,
   myAddFavoriteNotices,
   removeMyFavoriteNotices,
-  fetchFavoriteNotices,
-  // getNoticeByCategory,
-  // getNoticesByQwery,
-  getSingleNotice,
-  // createNotice,
-  // getUserNotices,
+  searchNotices,
 } from "./noties-operations";
 
 const noticesInitialState = {
@@ -86,10 +81,6 @@ const noticesSlice = createSlice({
       })
       .addCase(deleteNotice.fulfilled, (state, { payload }) => {
         state.loading = false;
-        const index = state.notices.result.findIndex(
-          (item) => item.id === payload
-        );
-        state.notices.result.splice(index, 1);
       })
       .addCase(deleteNotice.rejected, (state, { payload }) => {
         handleReject(state, payload);

@@ -14,7 +14,7 @@ const ModalApproveAction = ({ close }) => {
   };
 
   return (
-    <div className={css.modal}>
+    <div className={css.modalUser}>
       <button type="button" className={css.closeBtn} onClick={close}>
         <Icon id="cross" />
       </button>
