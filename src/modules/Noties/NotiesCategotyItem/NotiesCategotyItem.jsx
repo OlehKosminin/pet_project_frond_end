@@ -23,14 +23,13 @@ const NotiesCategotyItem = ({ items }) => {
   const [copyItems, setCopyItems] = useState(items.result);
   const { isOpen, open, close } = useSwitch(false);
   const [modalChild, setModalChild] = useState(<Loader />);
-  // const [expandedLocation, setExpandedLocation] = useState(false);
+  
   const [hoveredLocationCardId, setHoveredLocationCardId] = useState(null);
   const dispatch = useDispatch();
   const id_user = useSelector((store) => store.auth.user._id);
 
   const changeFavorite = (isAdd, _id) => {
-    // const xxx = [...array, _id]
-    // setArray(xxx);
+    
     if (isAdd) {
       dispatch(removeMyFavoriteNotices(_id, id_user));
       setCopyItems((prev) =>
@@ -59,6 +58,7 @@ const NotiesCategotyItem = ({ items }) => {
     dispatch(deleteNotice(_id));
   };
   const learnMoreInfo = async ({ id, name }) => {
+    console.log("id v learn mo", id)
     const { result } = await getSingleNotice(id);
     if (name === "openLearnMore") {
       setModalChild(
@@ -70,19 +70,21 @@ const NotiesCategotyItem = ({ items }) => {
       );
     }
     if (name === "deleteItem") {
-      setModalChild(<ModalApproveAction itemInfo={result} close={close} />);
+      setModalChild(
+        <ModalApproveAction
+          itemInfo={result}
+          close={close}
+          id={id}
+          deleteNotice={noticesDelete}
+        />
+      );
     }
     // setNotice(data);
     // setOwner(user);
     open(true);
   };
 
-  //  console.log(array, "array");
-  //   useEffect(() => {
-  //     console.log(array, "array");
-  //     setArray(id_user);
-  //   }, [changeFavorite]);
-  // const isLoading = useSelector((store) => store.noties.notices.isLoading)
+  
 
   useEffect(() => {
     if (isOpen) {
@@ -109,22 +111,7 @@ const NotiesCategotyItem = ({ items }) => {
     setHoveredLocationCardId(null);
   };
 
-  // const toggleLocation = (e) => {
-  //   console.log(e, "event");
-  //   const cardId = items.filter((items) => items.id === e);
-  //   console.log(cardId, "cardid")
-  //   if(cardId){setExpandedLocation(!expandedLocation);}
-  //   // setExpandedLocation(!expandedLocation);
-  //   // const cardId = items.map(({ id }) => {
-  //   //   return id;
-
-  //   // })
-  //   //  if (e === cardId) {
-  //   //    setExpandedLocation(!expandedLocation);
-  //   //  }
-  //   // console.log(cardId, "cardid");
-  // };
-  // const { id, animal, text, favorite, category } = items;
+ 
 
   const getYear = (birthday) => {
     const value = Date.now() - birthday;
@@ -145,7 +132,7 @@ const NotiesCategotyItem = ({ items }) => {
       birthday,
       // breed,
       category,
-      comments,
+      // comments,
       favorite,
       location,
       // name,
@@ -154,7 +141,7 @@ const NotiesCategotyItem = ({ items }) => {
       // price,
       // public_id,
       sex,
-      // title,
+      title,
       _id,
     }) => {
       return (
@@ -174,12 +161,7 @@ const NotiesCategotyItem = ({ items }) => {
               onClick={() => {
                 const isAdd = favorite.includes(id_user);
                 changeFavorite(isAdd, _id);
-                //   if (!isAdd){
-                //     copyFavorite = [...copyFavorite, id_user];
-                //   }
-                //   if (isAdd) {
-                //     copyFavorite = copyFavorite.filter(item_user => item_user !== id_user);
-                // }
+             
               }}
               className={css.favorite}
             >
@@ -187,12 +169,13 @@ const NotiesCategotyItem = ({ items }) => {
                 id={favorite.includes(id_user) ? "heart-active" : "heart"}
               />
             </button>
-            {/* <button className={css.favorite}>H</button> */}
+           
             {id_user === owner && (
               <button
-                onClick={() => noticesDelete(_id)}
+                // onClick={() => noticesDelete(_id)}
                 name="deleteItem"
-                // onClick={(e) => handleClick(e)}
+                onClick={(e) => handleClick(e)}
+                id={_id}
                 type="button"
                 className={css.deletion}
               >
@@ -210,8 +193,6 @@ const NotiesCategotyItem = ({ items }) => {
                   className={`${css.animalsDataText} ${
                     hoveredLocationCardId === _id ? css.expandedLocation : ""
                   }`}
-                  // onMouseEnter={() => toggleLocation(id)}
-                  // onMouseLeave={() => toggleLocation("")}
                   onMouseEnter={() => handleMouseEnter(_id)}
                   onMouseLeave={handleMouseLeave}
                 >
@@ -230,7 +211,7 @@ const NotiesCategotyItem = ({ items }) => {
                 <p className={css.animalsDataText}>
                   <NoticesCategoryItemSvgSelector id="clock" />
                   {getYear(birthday)}
-                  {/* {birthday} */}
+                 
                 </p>
               </li>
               <li className={css.animalsData}>
@@ -242,7 +223,7 @@ const NotiesCategotyItem = ({ items }) => {
             </ul>
           </div>
 
-          <p className={css.animal_description}>{comments}</p>
+          <p className={css.animal_description}>{title}</p>
 
           <button
             className={css.more_info_btn}

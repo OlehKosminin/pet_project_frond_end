@@ -4,20 +4,26 @@ import { ReactComponent as TrashSvg } from "../../../assets/image/icons/trash1.s
 
 import css from "./modalApproveAction.module.scss";
 
-const ModalApproveAction = ({ ModalApproveAction, close, title }) => {
+const ModalApproveAction = ({ itemInfo, close, deleteNotice, id }) => {
+  console.log("id v modal", id)
+   const {
+    
+     title,
+     
+   } = itemInfo;
   const handleApproveClick = () => {
-    ModalApproveAction();
+    deleteNotice(id);
     close();
   };
   const dispatch = useDispatch();
-   const noticesDelete = (_id) => {
-     dispatch(deleteNotice(_id));
-   };
+  const noticesDelete = (_id) => {
+    dispatch(deleteNotice(_id));
+  };
 
   return (
     <div>
       <div className={css.modalApproveAction}>
-        <h2 className={css.title}>Delete adverstiment?</h2>
+        <h2 className={css.title}>Delete advertisement?</h2>
         <p className={css.modalText}>
           Are you sure you want to delete
           <span className={css.itemName}>{title}</span>?
@@ -28,7 +34,7 @@ const ModalApproveAction = ({ ModalApproveAction, close, title }) => {
           <button className={css.cancelBtn} onClick={close}>
             Cancel
           </button>
-          <button className={css.actionBtn} onClick={noticesDelete}>
+          <button className={css.actionBtn} onClick={handleApproveClick}>
             Yes
             <TrashSvg className={css.TrashSvg} />
           </button>
