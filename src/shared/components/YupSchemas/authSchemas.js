@@ -1,12 +1,14 @@
 import * as yup from "yup";
 
 const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/;
+const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 export const registerSchema = yup.object().shape({
   name: yup.string().required("Please enter a name"),
   email: yup
     .string()
     .email("Please enter a valid email")
+    .matches(emailRegexp)
     .required("Please enter a valid email"),
   password: yup
     .string()
