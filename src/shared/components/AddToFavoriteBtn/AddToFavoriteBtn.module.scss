@@ -1,0 +1,41 @@
+@import "../../../index.scss";
+
+.btnAdd{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 256px;
+  padding: 9px 20px;
+  gap: 8px;  
+  
+  background: #54ADFF;
+  border-radius: 40px;
+  border: none;
+
+font-family: "Manrope Bold";
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 22px;
+
+letter-spacing: 0.04em;
+
+color: $bg-color;
+
+@media screen and (min-width: 768px) {
+  width: 129px;
+  
+ 
+}
+
+@media screen and (min-width: 1200px) {
+ 
+}
+}
+
+.heartSvg{
+  width: 18px;
+  height: 16px;
+  }

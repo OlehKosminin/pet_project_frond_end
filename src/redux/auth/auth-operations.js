@@ -1,43 +1,44 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Notify } from "notiflix/build/notiflix-notify-aio";
 import * as api from "../../shared/services/auth";
-import axios from "axios";
-import { async } from "q";
+import Notiflix from "notiflix";
 
 export const singup = createAsyncThunk(
-  "auth/singup",
-  async (data, { rejectWithValue }) => {
+  "auth/signup",
+  async (data, thunkAPI) => {
     try {
       const result = await api.singup(data);
-      console.log("result: ", result);
+
       return result;
-    } catch ({ responce }) {
-      return rejectWithValue(responce);
+    } catch (error) {
+      thunkAPI.rejectWithValue(error);
+
+      return Notiflix.Notify.failure("Something is wrong");
     }
   }
 );
 
-export const login = createAsyncThunk(
-  "auth/login",
-  async (data, { rejectWithValue }) => {
-    try {
-      const result = await api.login(data);
-      return result;
-    } catch ({ responce }) {
-      return rejectWithValue(responce);
-    }
+export const login = createAsyncThunk("auth/login", async (data, thunkAPI) => {
+  try {
+    const result = await api.login(data);
+
+    return result;
+  } catch (error) {
+    thunkAPI.rejectWithValue(error);
+
+    return Notiflix.Notify.failure("Email and/or password is wrong");
   }
-);
+});
 
 export const current = createAsyncThunk(
   "auth/current",
-  async (_, { rejectWithValue, getState }) => {
+  async (_, thunkAPI) => {
     try {
-      const { auth } = getState();
+      const { auth } = thunkAPI.getState();
       const data = await api.getCurrent(auth.token);
       return data;
-    } catch ({ responce }) {
-      return rejectWithValue(responce);
+    } catch (error) {
+      thunkAPI.rejectWithValue(error);
     }
   },
   {
@@ -50,17 +51,14 @@ export const current = createAsyncThunk(
   }
 );
 
-export const logout = createAsyncThunk(
-  "auth/logout",
-  async (_, { rejectWithValue }) => {
-    try {
-      const data = await api.logout();
-      return data;
-    } catch ({ responce }) {
-      return rejectWithValue(responce);
-    }
+export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+  try {
+    const data = await api.logout();
+    return data;
+  } catch (error) {
+    thunkAPI.rejectWithValue(error);
   }
-);
+});
 
 export const updUserInfo = createAsyncThunk(
   "auth/user-upd",
@@ -75,15 +73,3 @@ export const updUserInfo = createAsyncThunk(
     }
   }
 );
-
-// export const getUserInfo = createAsyncThunk(
-//   "auth/get-user-info",
-//   async ({ _id }, { rejectWithValue }) => {
-//     try {
-//       const data = await api.getUserInfo({ _id });
-//       return data;
-//     } catch (error) {
-//       return rejectWithValue(error.responce);
-//     }
-//   }
-// );

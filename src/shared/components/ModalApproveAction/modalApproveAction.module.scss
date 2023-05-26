@@ -38,14 +38,15 @@
 
 .title {
   padding-top: 60px;
+  margin-bottom: 40px;
 
-  font-family: "Manrope";
+  font-family: "Manrope Medium";
   font-style: normal;
-  font-weight: 500;
-  font-size: 36px;
-  line-height: 1.361;
+font-weight: 700;
+font-size: 28px;
+line-height: 38px;
+letter-spacing: -0.01em;
   text-align: center;
-  letter-spacing: 0.04em;
   color: $black-color;
 
   @media screen and (min-width: 1280px) {
@@ -58,16 +59,27 @@
   padding-right: 105px;
   margin-bottom: 48px;
 
-  font-family: 'Manrope';
+  font-family: "Manrope Medium";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  letter-spacing: -0.01em;
+
+  color: $black-color;
+
+}
+.itemName{
+  font-family: 'Manrope bold';
 font-style: normal;
-font-weight: 500;
+font-weight: 700;
 font-size: 16px;
 line-height: 22px;
 text-align: center;
 letter-spacing: -0.01em;
 
-color: #000000;
-
+color: $black-color;
 }
 
 .btnWrapper {
@@ -80,8 +92,8 @@ color: #000000;
 }
 
 .cancelBtn {
-  margin: 0;
-  padding: 9px 16px;
+  width: 129px;
+  padding: 8px 20px;
   border: 1px solid $active-blue-color;
   border-radius: 40px;
   display: flex;
@@ -90,7 +102,7 @@ color: #000000;
   background-color: $default-white-color;
   color: $active-blue-color;
 
-font-family: "Manrope";
+font-family: "Manrope bold";
   font-weight: 700;
   font-size: 16px;
   line-height: 1.375;
@@ -105,6 +117,7 @@ font-family: "Manrope";
 
 
 .actionBtn {
+  width: 129px;
   margin: 0;
   padding: 9px 16px;
   border: none;
@@ -117,7 +130,7 @@ font-family: "Manrope";
   color: $default-white-color;
   stroke: $default-white-color;
 
-font-family: "Manrope";
+  font-family: "Manrope bold";
   font-weight: 700;
   font-size: 16px;
   line-height: 1.375;

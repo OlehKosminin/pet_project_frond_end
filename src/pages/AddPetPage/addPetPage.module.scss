@@ -2,10 +2,24 @@
   font-family: "Manrope Regular";
   src: url("../../fonts/Manrope-Regular.ttf");
 }
+.bodyAddPet {
+  background-image: url("./img/bgDesktop.png");
+  // text-align: center;
+  background-position: center;
+  // width: 100%;
+  // height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  // background-clip: content-box; /* или content-box */
+}
+.bodyAddPet > * {
+  background-image: none;
+}
 
 .bodyContainer {
-  width: 280px;
-  height: 496px;
+  background-color: #fff;
+  width: 320px;
+  // height: 600px;
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
@@ -15,9 +29,31 @@
   /* padding-left: 32px; */
   /* outline: 2px solid teal; */
   @media screen and (min-width: 768px) {
-    // width: 458px;
+    width: 458px;
+    // height: 648px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.bodyContainerForInfo {
+  background-color: #fff;
+  width: 320px;
+  height: 790px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  /* background-color: teal; */
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  border-radius: 40px;
+  /* padding-left: 32px; */
+  /* outline: 2px solid teal; */
+  @media screen and (min-width: 768px) {
+    width: 822px;
     height: 648px;
     margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -96,13 +132,15 @@
   align-items: center;
   gap: 8px;
   margin-top: 91px;
-  margin-left: 10px;
-  margin-right: 160px;
+  // margin-left: auto;
+  // margin-right: auto;
+  padding-bottom: 16px;
   @media screen and (min-width: 768px) {
     margin-top: 137px;
     margin-left: 0px;
     margin-right: 0px;
     flex-direction: row;
+    padding-bottom: 24px;
   }
 }
 
@@ -131,6 +169,7 @@
   padding-bottom: 9px;
   padding-left: 12px;
   padding-right: 12px;
+  // margin-bottom: 16px;
 }
 .btnCancel:hover {
   outline: 2px solid #54adff;
@@ -173,11 +212,3 @@
   transition: background-color 0.6s ease-in-out;
   color: #fef9f9;
 }
-
-/* Buttons styles/ */
-/* background: linear-gradient(to right, #cce4fb, #54adff); 
-  background-size: 200% 100%; 
-  background-position: left bottom; 
-  transition: background-position 0.3s ease-in-out; */
-
-/* background-position: right bottom; */
