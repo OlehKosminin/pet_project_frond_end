@@ -148,24 +148,24 @@ export const deleteNotice = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     console.log(id);
     try {
-      await axios.delete(`notices/${id}`);
+      await api.deleteNotices(id);
       return id;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
-export const getUserNotices = createAsyncThunk(
-  "notices/getUserNotices",
-  async (_, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.get(`notices/user`);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
+// export const getUserNotices = createAsyncThunk(
+//   "notices/getUserNotices",
+//   async (_, { rejectWithValue }) => {
+//     try {
+//       const { data } = await axios.get(`notices/user`);
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
 export const getNoticesByQwery = createAsyncThunk(
   "notices/getNoticesByQwery",
   async ({ query, category, page = 1, limit = 0 }, { rejectWithValue }) => {

@@ -189,8 +189,11 @@
 .locationContent {
   position: absolute;
   z-index: 100;
+  min-width: 80px;
+  text-align: center;
+  bottom: calc(100% + 5px);
   
-  top: 100%;
+  
   left: 0;
   background-color: $active-blue-color;
   color: #111111;

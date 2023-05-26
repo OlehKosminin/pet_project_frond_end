@@ -8,6 +8,7 @@ import {
   fetchAllNotices,
   fetchOwnNotices,
   fetchFavoriteNotices,
+  deleteNotice,
 } from "../../../redux/noties/noties-operations";
 import { myAddFavoriteNotices } from "../../../redux/noties/noties-operations";
 
@@ -31,19 +32,9 @@ const NotiesCategoriesList = () => {
 
   // const [ state, setState ] = useState();
   const dispatch = useDispatch();
-  // const id_user = useSelector((store) => store.auth.user._id);
+ 
 
-  // const isLoading = useSelector((store) => store.noties.notices.isLoading)
 
-  // const changeFavorite = (isAdd, _id) => {
-  //   console.log("onclick", isAdd);
-  //   console.log("onclick id", _id);
-  //   if (isAdd) {
-  //     dispatch();
-  //     return;
-  //   } //dispatch favorite add
-  //   dispatch(myAddFavoriteNotices(_id));
-  // };
 
   useEffect(() => {
     if (category === "my-pets") {
@@ -61,6 +52,8 @@ const NotiesCategoriesList = () => {
       dispatch(fetchAllNotices({ category, page }));
     }
   }, [dispatch, category, page]);
+
+
 
   const loadMore = () => {
     setPage((prevPage) => prevPage + 1);

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import {
   addNotices,
-  // deleteNotice,
+  deleteNotice,
   // getNewNotice,
   searchNotices,
   fetchAllNotices,
@@ -82,13 +82,26 @@ const noticesSlice = createSlice({
       //   state.isLoading = false;
       //   state.error = action.payload;
       // })
+      .addCase(deleteNotice.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteNotice.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        const index = state.notices.result.findIndex(
+          (item) => item.id === payload
+        );
+        state.notices.result.splice(index, 1);
+      })
       // .addCase(deleteNotice.fulfilled, (state, { payload }) => {
-      //   state.notices = state.notices.filter(({ _id }) => _id !== payload);
+      //   console.log("delete", payload);
+      //   state.notices.result = state.notices.result.filter(
+      //     ({ _id }) => _id !== payload
+      //   );
       //   state.isLoading = false;
       // })
-      // .addCase(deleteNotice.rejected, (state, { payload }) => {
-      //   handleReject(state, payload);
-      // })
+      .addCase(deleteNotice.rejected, (state, { payload }) => {
+        handleReject(state, payload);
+      })
       // // додає оголошення
       // .addCase(createNotice.pending, (state) => {
       //   handlePending(state);
@@ -125,7 +138,6 @@ const noticesSlice = createSlice({
         handlePending(state);
       })
       .addCase(fetchFavoriteNotices.fulfilled, (state, { payload }) => {
-        
         state.isLoading = false;
         state.notices.result = payload.result;
         state.notices.count = payload.resultCount;
@@ -134,9 +146,7 @@ const noticesSlice = createSlice({
       .addCase(fetchFavoriteNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
-      // .addCase(myAddFavoriteNotices.pending, (state) => {
-      //   handlePending(state);
-      // })
+
       .addCase(myAddFavoriteNotices.fulfilled, (state) => {
         state.isLoading = false;
         state.error = null;
@@ -144,16 +154,10 @@ const noticesSlice = createSlice({
       .addCase(myAddFavoriteNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
-      // .addCase(removeMyFavoriteNotices.pending, (state) => {
-      //   state.loading = true;
-      // })
+
       .addCase(removeMyFavoriteNotices.fulfilled, (state, { payload }) => {
         state.loading = false;
 
-        // state.notices.result = state.items.findIndex(
-        //   (item) => item.id === payload
-        // );
-        // state.items.splice(index, 1);
         state.error = null;
       })
       .addCase(removeMyFavoriteNotices.rejected, (state, { payload }) => {
