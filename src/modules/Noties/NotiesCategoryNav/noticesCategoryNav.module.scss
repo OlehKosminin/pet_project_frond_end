@@ -5,7 +5,7 @@
     margin-top: 43px;
     margin-bottom: 42px;
     display: flex;
-    // justify-content: space-between;
+    justify-content: space-between;
     
 }
 .buttonCategoryWrapper{
@@ -62,6 +62,7 @@ border-radius: 40px;
 .addPet{
     
      @media screen and (max-width: 767px) {
+      
        position: absolute;
     width: 1px;
     height: 1px;

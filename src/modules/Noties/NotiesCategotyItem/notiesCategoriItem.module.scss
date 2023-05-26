@@ -171,7 +171,7 @@
   height: 28px;
   background-color: $default-blue-color;
   border-radius: 16px;
-  font-family: "Manrope";
+  // font-family: "Manrope";
   font-style: normal;
   font-weight: 600;
   font-size: 12px;
@@ -231,12 +231,12 @@
   align-items: center;
   padding: 11px 17px;
   position: absolute;
-  width: 126px;
+  min-width: 126px;
   height: 32px;
   left: 0px;
   top: 16px;
 
-  font-family: "Manrope";
+  // font-family: "Manrope";
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -295,7 +295,7 @@
   align-items: center;
   justify-content: center;
 
-  font-family: "Manrope";
+  // font-family: "Manrope";
   font-style: normal;
   font-weight: 600;
   font-size: 12px;
@@ -326,7 +326,7 @@
   margin-bottom: 20px;
   padding-left: 20px;
 
-  font-family: "Manrope";
+  // font-family: "Manrope";
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
@@ -343,11 +343,11 @@
   margin-left: 16px;
   margin-bottom: 20px;
   margin-right: 16px;
-  padding-right: 78px;
+  padding-right: 75px;
   padding-bottom: 8px;
-  padding-left: 78px;
+  padding-left: 75px;
   padding-top: 8px;
-  font-family: "Manrope";
+  // font-family: "Manrope";
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
