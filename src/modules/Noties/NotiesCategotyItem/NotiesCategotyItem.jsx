@@ -114,7 +114,7 @@ const NotiesCategotyItem = ({ items }) => {
     if (year === 1970) {
       const month = String(date.getMonth() + 1).padStart(2, "0");
 
-      return `${month} mth`;
+      return `${month} mo`;
     }
 
     return `${year - 1970} year`;
@@ -141,7 +141,7 @@ const NotiesCategotyItem = ({ items }) => {
           <div className={css.animal}>
             <img
               className={css.photoPet}
-              alt="Pet's photo"
+              alt="Pet's"
               width="384"
               height="288"
               src={photoUrl}
@@ -181,12 +181,11 @@ const NotiesCategotyItem = ({ items }) => {
                   className={`${css.animalsDataText} ${
                     hoveredLocationCardId === _id ? css.expandedLocation : ""
                   }`}
-                  // onMouseEnter={() => toggleLocation(id)}
-                  // onMouseLeave={() => toggleLocation("")}
+                  
                   onMouseEnter={() => handleMouseEnter(_id)}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <p className={css.locationTitle} title={location}>
+                  <p className={css.locationTitle} >
                     <NoticesCategoryItemSvgSelector id="location" />
                     {location.length > 5
                       ? `${location.slice(0, 5)}...`
