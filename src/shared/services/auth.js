@@ -7,7 +7,6 @@ const instance = axios.create({
 });
 
 const setToken = (token) => {
-  
   if (token) {
     return (instance.defaults.headers.authorization = `Bearer ${token}`);
   }
@@ -56,6 +55,15 @@ export const updUserInfo = async (data) => {
 export const getUserInfo = async ({ _id }) => {
   try {
     const data = await instance.get("api/auth/current", { _id });
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getUserInfoById = async (id) => {
+  try {
+    const data = await instance.get("api/auth/current", id);
     return data;
   } catch (error) {
     throw error;

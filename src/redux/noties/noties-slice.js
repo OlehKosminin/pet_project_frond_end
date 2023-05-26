@@ -13,14 +13,14 @@ import {
   fetchFavoriteNotices,
   // getNoticeByCategory,
   // getNoticesByQwery,
-  // getSingleNotice,
+  getSingleNotice,
   // createNotice,
   // getUserNotices,
 } from "./noties-operations";
 
 const noticesInitialState = {
   notices: { result: [], count: 0 },
-  // oneNotice: null,
+  oneNotice: null,
   error: null,
   isLoading: true,
 };
@@ -89,6 +89,20 @@ const noticesSlice = createSlice({
       // .addCase(deleteNotice.rejected, (state, { payload }) => {
       //   handleReject(state, payload);
       // })
+
+      .addCase(getSingleNotice.pending, (state) => {
+        handlePending(state);
+      })
+      .addCase(getSingleNotice.fulfilled, (state, { payload }) => {
+        console.log("isFulfilled");
+        state.isLoading = false;
+        state.oneNotice = payload.result;
+        // console.log("slice:", state.oneNotice);
+        state.error = null;
+      })
+      .addCase(getSingleNotice.rejected, (state, action) => {
+        handleReject(state, action);
+      })
       // // додає оголошення
       // .addCase(createNotice.pending, (state) => {
       //   handlePending(state);

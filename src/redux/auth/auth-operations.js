@@ -73,15 +73,3 @@ export const updUserInfo = createAsyncThunk(
     }
   }
 );
-
-// export const getUserInfo = createAsyncThunk(
-//   "auth/get-user-info",
-//   async ({ _id }, { rejectWithValue }) => {
-//     try {
-//       const data = await api.getUserInfo({ _id });
-//       return data;
-//     } catch (error) {
-//       return rejectWithValue(error.responce);
-//     }
-//   }
-// );

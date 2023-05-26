@@ -1,20 +1,4 @@
 @import "../../index.scss";
-@font-face {
-  font-family: "Manrope Regular";
-  src: url("../../fonts/Manrope-Regular.ttf");
-}
-@font-face {
-  font-family:  "Manrope Bold" ;
-  src: url("../../fonts/Manrope-Regular.ttf");
-}
-@font-face {
-  font-family: "Manrope SemiBold";
-  src: url("../../fonts/Manrope-Regular.ttf");
-}
-@font-face {
-  font-family: "Manrope Medium";
-  src: url("../../fonts/Manrope-Regular.ttf");
-}
 
 .modalNotice{
  width: 280px;
@@ -62,9 +46,6 @@ margin-top: 16px;
   margin-left: 0px;
   }
   
-  @media screen and (min-width: 1200px) {
-   
-  }
 }
 
 .categoryFlag{
@@ -86,6 +67,33 @@ line-height: 19px;
 
 color: $black-color;
 }
+.priceWrapper{
+  position: absolute;
+margin-left: 8px;
+margin-top: 240px;
+
+@media screen and (min-width: 768px) {
+  margin-left: 0px;
+  }
+}
+.priceFlag{display: flex;
+  align-items: center;
+    position: relative;
+    top: -85%;
+  
+    width: 114px;
+    padding: 6px 0px 7px 12px;
+    background: #CCE4FB;;
+  border-radius:  0 40px 40px 0  ;
+  
+  font-family: "Manrope Medium";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  
+  color: $black-color;
+  }
 
 .noticeAvatarImg{
 align-items: center;
@@ -195,7 +203,7 @@ color: $black-color;
 }
 
 .petContact{
-font-family: 'Manrope';
+  font-family: "Manrope Medium";
 font-style: normal;
 font-weight: 500;
 font-size: 12px;
@@ -327,50 +335,42 @@ border-radius: 40px;
 }
 }
 
-.modalNoticeBtnAdd{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+// .modalNoticeBtnAdd{
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+//   align-items: center;
 
-  width: 256px;
-  padding: 9px 20px;
-  gap: 8px;  
+//   width: 256px;
+//   padding: 9px 20px;
+//   gap: 8px;  
   
-  background: #54ADFF;
-  border-radius: 40px;
-  border: none;
+//   background: #54ADFF;
+//   border-radius: 40px;
+//   border: none;
 
-font-family: "Manrope Bold";
-font-style: normal;
-font-weight: 700;
-font-size: 16px;
-line-height: 22px;
+// font-family: "Manrope Bold";
+// font-style: normal;
+// font-weight: 700;
+// font-size: 16px;
+// line-height: 22px;
 
-letter-spacing: 0.04em;
+// letter-spacing: 0.04em;
 
-color: $bg-color;
+// color: $bg-color;
 
-@media screen and (min-width: 768px) {
-  width: 129px;
+// @media screen and (min-width: 768px) {
+//   width: 129px;
   
  
-}
+// }
 
-@media screen and (min-width: 1200px) {
+// @media screen and (min-width: 1200px) {
  
-}
-}
+// }
+// }
 
-.heartSvg{
-width: 18px;
-height: 16px;
-}
-
-@media screen and (min-width: 768px) {
- 
-}
-
-@media screen and (min-width: 1200px) {
- 
-}
+// .heartSvg{
+// width: 18px;
+// height: 16px;
+// }
