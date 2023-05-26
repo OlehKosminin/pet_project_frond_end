@@ -26,10 +26,10 @@ const NoticesCategoriesNavigation = () => {
           </NavLink>
          {token && (<>
             <NavLink className={css.buttonCategory} to="/notices/favorite">
-              favorite ads
+              favorite adds
             </NavLink>
             <NavLink className={css.buttonCategory} to="/notices/my-pets">
-              my ads
+              my adds
             </NavLink>
           </>)}
         </div>
