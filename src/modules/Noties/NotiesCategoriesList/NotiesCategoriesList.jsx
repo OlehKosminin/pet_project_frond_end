@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 
+import NoticesPagination from "../NoticesPagination/NoticesPagination";
 import NotiesCategoryItem from "../NotiesCategotyItem/NotiesCategotyItem";
+import Loader from "../../../shared/components/Loader/Loader";
+
 import {
   getNoteceIsLoadig,
   getNotices,
@@ -10,7 +13,9 @@ import {
 import {
   fetchAllNotices,
   fetchOwnNotices,
+  fetchFavoriteNotices,
 } from "../../../redux/noties/noties-operations";
+import { myAddFavoriteNotices } from "../../../redux/noties/noties-operations";
 
 // import { deleteNotices } from "../../../shared/services/noties";
 
@@ -30,6 +35,19 @@ const NotiesCategoriesList = () => {
 
   // const [ state, setState ] = useState();
   const dispatch = useDispatch();
+  // const id_user = useSelector((store) => store.auth.user._id);
+
+  // const isLoading = useSelector((store) => store.noties.notices.isLoading)
+
+  // const changeFavorite = (isAdd, _id) => {
+  //   console.log("onclick", isAdd);
+  //   console.log("onclick id", _id);
+  //   if (isAdd) {
+  //     dispatch();
+  //     return;
+  //   } //dispatch favorite add
+  //   dispatch(myAddFavoriteNotices(_id));
+  // };
 
   useEffect(() => {
     if (category === "my-pets") {
@@ -37,6 +55,7 @@ const NotiesCategoriesList = () => {
     }
 
     if (category === "favorite") {
+      dispatch(fetchFavoriteNotices({ page }));
     }
     if (
       category === "sell" ||
@@ -123,21 +142,13 @@ const NotiesCategoriesList = () => {
   return (
     <>
       <div>
-        {/* <ul className={css.wrapper}> */}
-        {isLoadingNotices ? (
-          "LOADING..."
-        ) : (
-          <NotiesCategoryItem items={notices} />
-        )}
+        {isLoadingNotices ? <Loader /> : <NotiesCategoryItem items={notices} />}
 
         <button onClick={loadMore}>load more</button>
         <span>{page}</span>
-        {/* </ul> */}
+        <NoticesPagination />
       </div>
     </>
-    // <div className={css.container}>
-    //   <ul className={css.wrapper}>{pets}</ul>
-    // </div>
   );
 };
 

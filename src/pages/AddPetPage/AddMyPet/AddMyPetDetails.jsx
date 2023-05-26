@@ -7,8 +7,8 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import initialState from "./initialState";
 
-import contactForm from "./addMyPet.module.css";
-import style from "../addPetPage.module.css";
+import contactForm from "./addMyPet.module.scss";
+import style from "../addPetPage.module.scss";
 
 import { SvgSelector } from "../cvgSelector/SvgSelector";
 import { yyyymmdd } from "../utils/formattedDate";
@@ -18,9 +18,7 @@ const AddMyPetDetails = ({ onClick }) => {
     borderColor: "#f43f5e",
   };
 
-  // const [dataString, setDataString] = useState("");
   const [isBtnSubmit, setIsBtnSubmit] = useState(false);
-  // const [isFocused, setIsFocused] = useState(false);
 
   const [birthday, setBirthday] = useState("");
   const handleBirthdayChange = (setFieldValue, e, d) => {
@@ -52,9 +50,6 @@ const AddMyPetDetails = ({ onClick }) => {
       inputElement.focus();
     }
   };
-  // const handleParentBlur = () => {
-  //   setIsFocused(false);
-  // };
 
   const handleSubmit = (values, { setSubmitting }) => {
     onClick("toYourPetInfo", values);
@@ -129,7 +124,6 @@ const AddMyPetDetails = ({ onClick }) => {
               }
               tabIndex="0"
               onFocus={handleParentFocus}
-              // onBlur={handleParentBlur}
               className={contactForm.dataDiv}
             >
               <Field
@@ -167,7 +161,6 @@ const AddMyPetDetails = ({ onClick }) => {
                   maxDate={new Date()}
                   onChange={(date) => {
                     handleBirthdayChange(setFieldValue, null, yyyymmdd(date));
-                    // console.log("yyyymmdd", yyyymmdd(date));
                   }}
                 />
               </div>
@@ -185,7 +178,6 @@ const AddMyPetDetails = ({ onClick }) => {
               type="text"
               name="breed"
               placeholder="pet breed"
-              //   styles={{ marginBottom: '20' }}
               style={
                 isBtnSubmit && errors.breed && touched.breed ? borderStyle : {}
               }
@@ -215,10 +207,11 @@ const AddMyPetDetails = ({ onClick }) => {
                   type="submit"
                   disabled={isSubmitting}
                   className={style.btnNext}
-                  // onClick={forwardClick}
                 >
                   Next
-                  <SvgSelector id="pawprint" />
+                  <div style={{ paddingLeft: "15px" }}>
+                    <SvgSelector id="pawprint" />
+                  </div>
                 </button>
               </div>
             </div>

@@ -16,7 +16,7 @@ const getYear = (birthday) => {
   return `${year - 1970} year`;
 };
 
-const ModalNotice = ({ close, itemInfo }) => {
+const ModalNotice = ({ close, itemInfo, favoriteSwitch }) => {
   const {
     birthday,
     breed,
@@ -38,6 +38,11 @@ const ModalNotice = ({ close, itemInfo }) => {
         <div className={css.flagWrapper}>
           <span className={css.categoryFlag}>{category}</span>
         </div>
+        {category === "sell" && (
+          <div className={css.priceWrapper}>
+            <span className={css.priceFlag}>{price}</span>
+          </div>
+        )}
         <img
           src={photoUrl || defaultNoticeAvatar}
           alt="avatar"
@@ -89,7 +94,7 @@ const ModalNotice = ({ close, itemInfo }) => {
           <p className={css.commentsText}>{comments}</p>
         </article>
         <div className={css.modalNoticeBtns}>
-          <AddToFavoriteBtn />
+          <AddToFavoriteBtn onClick={favoriteSwitch()} />
           <button type="button" className={css.modalNoticeBtnContact}>
             Contact
           </button>

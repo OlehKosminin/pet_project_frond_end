@@ -46,9 +46,6 @@ margin-top: 16px;
   margin-left: 0px;
   }
   
-  @media screen and (min-width: 1200px) {
-   
-  }
 }
 
 .categoryFlag{
@@ -70,6 +67,33 @@ line-height: 19px;
 
 color: $black-color;
 }
+.priceWrapper{
+  position: absolute;
+margin-left: 8px;
+margin-top: 240px;
+
+@media screen and (min-width: 768px) {
+  margin-left: 0px;
+  }
+}
+.priceFlag{display: flex;
+  align-items: center;
+    position: relative;
+    top: -85%;
+  
+    width: 114px;
+    padding: 6px 0px 7px 12px;
+    background: #CCE4FB;;
+  border-radius:  0 40px 40px 0  ;
+  
+  font-family: "Manrope Medium";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  
+  color: $black-color;
+  }
 
 .noticeAvatarImg{
 align-items: center;

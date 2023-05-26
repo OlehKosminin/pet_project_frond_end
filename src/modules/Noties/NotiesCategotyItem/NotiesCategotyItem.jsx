@@ -25,11 +25,7 @@ const NotiesCategotyItem = ({ items }) => {
   // const [expandedLocation, setExpandedLocation] = useState(false);
   const [hoveredLocationCardId, setHoveredLocationCardId] = useState(null);
   const dispatch = useDispatch();
-  // const isLoadingNotices = useSelector(getNoteceIsLoadig);
-  // const noticeItem = useSelector((store) => store.noties.oneNotice);
   const id_user = useSelector((store) => store.auth.user._id);
-  //  const [array, setArray] = useState([]);
-  // console.log("noticesItem: ", noticeItem);
 
   const changeFavorite = (isAdd, _id) => {
     // const xxx = [...array, _id]
@@ -61,10 +57,16 @@ const NotiesCategotyItem = ({ items }) => {
   const learnMoreInfo = async ({ id, name }) => {
     const { result } = await getSingleNotice(id);
     if (name === "openLearnMore") {
-      setModalChild(<ModalNotice itemInfo={result} />);
+      setModalChild(
+        <ModalNotice
+          itemInfo={result}
+          favoriteSwitch={changeFavorite}
+          close={close}
+        />
+      );
     }
     if (name === "deleteItem") {
-      setModalChild(<ModalApproveAction itemInfo={result} />);
+      setModalChild(<ModalApproveAction itemInfo={result} close={close} />);
     }
     // setNotice(data);
     // setOwner(user);
@@ -271,6 +273,7 @@ const NotiesCategotyItem = ({ items }) => {
           )}
         </div>
       )}
+      {/* {isLoading && <Loader />} */}
     </>
   );
 };

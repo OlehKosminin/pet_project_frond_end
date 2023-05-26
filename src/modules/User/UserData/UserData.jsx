@@ -14,7 +14,6 @@ const UserData = () => {
   const user = useSelector(getCurrentUser);
   const dispatch = useDispatch();
 
-
   const [nameEdit, setNameEdit] = useState(false);
   const [emailEdit, setEmailEdit] = useState(false);
   const [birthdayEdit, setBirthdayEdit] = useState(false);
@@ -22,6 +21,9 @@ const UserData = () => {
   const [cityEdit, setCityEdit] = useState(false);
   const [photoEdit, setPhotoEdit] = useState(false);
   const [photoLoaded, setPhotoLoaded] = useState(false);
+  const [startDate, setStartDate] = useState(
+    user.birthday ? new Date(user.birthday) : null
+  );
 
   const photoPrewiew = (e) => {
     const imageFile = e.target.files[0];
@@ -62,9 +64,10 @@ const UserData = () => {
     return formattedDate;
   };
 
-  const changeBirthday = (e) => {
-    const bday = formattedDate(e);
-    dispatch(updUserInfo({ ...user, birthday: bday }));
+  const styledBirthday = formattedDate(startDate);
+
+  const changeBirthday = () => {
+    dispatch(updUserInfo({ ...user, birthday: startDate }));
     setBirthdayEdit(false);
   };
 
@@ -195,15 +198,20 @@ const UserData = () => {
               <span className={css.userInfoItemTitle}>Birthday:</span>
               <div className={css.userInfoItemData}>
                 <DatePicker
-                  inline
                   dateFormat="dd.MM.yyyy"
-                  onChange={changeBirthday}
+                  selected={startDate ? startDate : null}
+                  onChange={(date) => setStartDate(date)}
                   calendarClassName={css.datepicker}
+                  peekNextMonth
+                  showMonthDropdown
+                  showYearDropdown
+                  dropdownMode="select"
+                  className={css.userInfoDate}
                 />
                 <button
-                  type="button"
+                  type="submit"
                   className={css.userInfoItemBtn}
-                  onClick={() => setBirthdayEdit(false)}
+                  onClick={changeBirthday}
                 >
                   <img src={checkIcon} alt="check icon" />
                 </button>
@@ -213,7 +221,9 @@ const UserData = () => {
             <div className={css.userInfo}>
               <span className={css.userInfoItemTitle}>Birthday:</span>
               <div className={css.userInfoItemData}>
-                <div className={css.userInfoItemText}>{user.birthday}</div>
+                <div className={css.userInfoItemText}>
+                  {user.birthday ? styledBirthday : null}
+                </div>
                 <button
                   type="button"
                   className={css.userInfoItemBtn}

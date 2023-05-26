@@ -220,4 +220,20 @@ button {
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 99;
+  border: none;
+}
+
+.userInfoDate {
+  font-family: "Manrope Regular";
+  font-size: 12px;
+  line-height: 1.333;
+  letter-spacing: 0.04em;
+  color: $black-color;
+
+  border: none;
+
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    line-height: 1.375;
+  }
 }

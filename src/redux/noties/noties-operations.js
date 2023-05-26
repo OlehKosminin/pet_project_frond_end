@@ -62,7 +62,7 @@ export const fetchFavoriteNotices = createAsyncThunk(
   }
 );
 export const myAddFavoriteNotices = createAsyncThunk(
-  "notices/addFavoriteNotices",
+  "notices/favoriteNotices",
   async (id_notis, { rejectWithValue }) => {
     try {
       const result = await api.addFavoriteNotices(id_notis);

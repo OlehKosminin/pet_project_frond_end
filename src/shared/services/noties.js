@@ -75,9 +75,8 @@ export const addNotice = async (data) => {
   return result;
 };
 
+// Modal
 export const getSingleNotice = async (id) => {
-  // console.log(id);
   const { data } = await instance.get(`api/notices/${id}`);
-  console.log("SingleData:", data);
   return data;
 };

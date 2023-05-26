@@ -2,15 +2,18 @@ import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Formik, Form, Field } from "formik";
-import contactForm from "./addPetForSell.module.css";
-import style from "../addPetPage.module.css";
-import gender from "./addPetForSellInfo.module.css";
+import contactForm from "./addPetForSell.module.scss";
+import style from "../addPetPage.module.scss";
+import gender from "./addPetForSellInfo.module.scss";
 
 import { useDispatch } from "react-redux";
 import { addNotices } from "../../../redux/noties/noties-operations";
 
 import { SvgSelector } from "../cvgSelector/SvgSelector";
 import avatarInput from "../img/avatarInput.png";
+import ModalServerError from "../ModalServerError/ModalServerError";
+
+import { ColorRing } from "react-loader-spinner";
 
 const AddPetForSellInfo = ({ onClick, date, addr }) => {
   const [isBtnSubmit, setIsBtnSubmit] = useState(false);
@@ -18,6 +21,14 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
   const [avatarFile, setAvatarFile] = useState(null);
   const [isColorToggle, setIsColorToggle] = useState("");
   const [isButtonCange, setIsButtonCange] = useState("");
+
+  const [isFormSubmitting, setIsFormSubmitting] = useState(true);
+  // const [isFetchOk, setIsFetchOk] = useState(false);
+
+  const [isError, setIsError] = useState(false);
+  const errorModal = useCallback((data) => {
+    setIsError(data);
+  }, []);
 
   const borderStyle = {
     borderColor: "#f43f5e",
@@ -61,10 +72,6 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
       case values.price < 0 || (values.price > 100000 && addr === "sell"):
         errors.price = "Price must be between 0 and 100000";
         break;
-      // case !values.avatar:
-      //   errors.avatar = "Photo is required";
-      //   break;
-
       case !values.comments:
         errors.comments = "Comments field is required";
         break;
@@ -95,8 +102,10 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
   };
 
   const handleSubmit = async (values, { setSubmitting }) => {
+    setIsFormSubmitting(false);
     try {
       const formData = new FormData();
+
       formData.append("sex", values.sex);
       formData.append("location", values.location);
       formData.append("comments", values.comments);
@@ -108,18 +117,35 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
       formData.append("name", date.name);
       formData.append("price", values.price.toString());
 
-      dispatch(addNotices(formData));
+      dispatch(addNotices(formData)).then((response) => {
+        if (!response.error) {
+          history(-1);
+        } else {
+          // Обработка других статусов ответа сервера
+          setIsFormSubmitting(true);
+          setIsError(true);
+        }
+      });
+
       setSubmitting(false);
+
+      // setIsFetchOk(true);
     } catch (error) {
-      console.log(error.message);
+      setIsFormSubmitting(true);
+      console.log("Error ", error.message);
     }
-    // await onClick("toChoose");
-    // await history.push("/user");
-    await history(-1);
+    // await history(-1);
   };
+
+  // useEffect(() => {
+  //   if (isFetchOk) {
+  //     history(-1);
+  //   }
+  // }, [isFetchOk, history]);
 
   return (
     <div className={contactForm.formCell}>
+      {isError && <ModalServerError close={errorModal} />}
       <Formik
         initialValues={{
           location: "",
@@ -250,9 +276,6 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
                     <div>{errors.location}</div>
                   )}
                 </div>
-                {/* {addr === "cell" && (
-                  <div style={{ height: "40px", paddingBottom: "40px" }}></div>
-                )} */}
                 {addr === "sell" && (
                   <>
                     <label className={contactForm.label}>Price</label>
@@ -319,7 +342,27 @@ const AddPetForSellInfo = ({ onClick, date, addr }) => {
                   className={style.btnNext}
                 >
                   Done
-                  <SvgSelector id="pawprint" />
+                  {!isFormSubmitting && (
+                    <ColorRing
+                      visible={true}
+                      height="40"
+                      width="40"
+                      ariaLabel="blocks-loading"
+                      wrapperClass="blocks-wrapper"
+                      colors={[
+                        "#FFC107",
+                        "#FDF7F2",
+                        "#00C3AD",
+                        "#00C3AD",
+                        "#F43F5E",
+                      ]}
+                    />
+                  )}
+                  {isFormSubmitting && (
+                    <div style={{ paddingLeft: "15px" }}>
+                      <SvgSelector id="pawprint" />
+                    </div>
+                  )}
                 </button>
               </div>
             </div>
