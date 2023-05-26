@@ -1,3 +1,5 @@
+import { useDispatch } from "react-redux";
+import { deleteNotice } from "../../../redux/noties/noties-operations";
 import { ReactComponent as TrashSvg } from "../../../assets/image/icons/trash1.svg";
 
 import css from "./modalApproveAction.module.scss";
@@ -7,6 +9,10 @@ const ModalApproveAction = ({ ModalApproveAction, close, title }) => {
     ModalApproveAction();
     close();
   };
+  const dispatch = useDispatch();
+   const noticesDelete = (_id) => {
+     dispatch(deleteNotice(_id));
+   };
 
   return (
     <div>
@@ -22,7 +28,7 @@ const ModalApproveAction = ({ ModalApproveAction, close, title }) => {
           <button className={css.cancelBtn} onClick={close}>
             Cancel
           </button>
-          <button className={css.actionBtn} onClick={handleApproveClick}>
+          <button className={css.actionBtn} onClick={noticesDelete}>
             Yes
             <TrashSvg className={css.TrashSvg} />
           </button>

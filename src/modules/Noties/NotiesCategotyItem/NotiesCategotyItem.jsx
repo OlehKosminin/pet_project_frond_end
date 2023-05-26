@@ -16,6 +16,7 @@ import css from "./notiesCategoriItem.module.scss";
 import {
   myAddFavoriteNotices,
   removeMyFavoriteNotices,
+  deleteNotice,
 } from "../../../redux/noties/noties-operations";
 
 const NotiesCategotyItem = ({ items }) => {
@@ -54,6 +55,9 @@ const NotiesCategotyItem = ({ items }) => {
     );
   };
 
+    const noticesDelete = (_id) => {
+       dispatch(deleteNotice(_id));
+     };
   const learnMoreInfo = async ({ id, name }) => {
     const { result } = await getSingleNotice(id);
     if (name === "openLearnMore") {
@@ -72,6 +76,7 @@ const NotiesCategotyItem = ({ items }) => {
     // setOwner(user);
     open(true);
   };
+
 
   //  console.log(array, "array");
   //   useEffect(() => {
@@ -156,21 +161,17 @@ const NotiesCategotyItem = ({ items }) => {
       return (
         <li className={css.example_card} key={_id}>
           <div className={css.animal}>
-            <img className={css.photoPet} alt="" src={photoUrl} />
+            <img
+              className={css.photoPet}
+              alt=""
+              width="384"
+              height="288"
+              src={photoUrl}
+            />
             <p className={css.icon_category}>{category}</p>
             <button
-              // onMouseClick={() => {
-              //   if (favorite.includes(id_user)) {
-              //     handleMouseFavoriteLeave("");
-              //     return;
-              //   }
-              //   handleMouseFavoriteEnter(_id);
-
-              // }}
-              // onMouseLeave={() => handleMouseFavoriteLeave("")}
-              // onMouseEnter={()=>toggleFavorite(_id)}
-              // onMouseLeave={()=>toggleFavorite("")}
-              // onClick={() =>  changeFavorite(favorite.includes(id_user))}
+              type="button"
+              name="favorite"
               onClick={() => {
                 const isAdd = favorite.includes(id_user);
                 changeFavorite(isAdd, _id);
@@ -190,7 +191,7 @@ const NotiesCategotyItem = ({ items }) => {
             {/* <button className={css.favorite}>H</button> */}
             {id_user === owner && (
               <button
-                // onClick={() => removePets(_id)}
+                onClick={() => noticesDelete(_id)}
                 name="deleteItem"
                 onClick={(e) => handleClick(e)}
                 id={_id}
@@ -248,6 +249,7 @@ const NotiesCategotyItem = ({ items }) => {
           <button
             className={css.more_info_btn}
             name="openLearnMore"
+            type="button"
             onClick={(e) => handleClick(e)}
             id={_id}
           >
