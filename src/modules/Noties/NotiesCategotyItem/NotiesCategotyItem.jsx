@@ -2,13 +2,17 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getSingleNotice } from "../../../shared/services/noties";
+import { getUserInfo } from "../../../shared/services/auth";
+import {
+  getSingleNotice,
+  deleteNotices,
+} from "../../../shared/services/noties";
 import { useSwitch } from "../../../hooks/useSwitch";
+
 import Loader from "../../../shared/components/Loader/Loader";
 import ModalNotice from "../../ModalNotice/ModalNotice";
 import ModalApproveAction from "../../../shared/components/ModalApproveAction/ModalApproveAction";
 import Modal from "../../../shared/components/Modal/Modal";
-import { getUserInfo } from "../../../shared/services/auth";
 
 import { ReactComponent as TrashSvg } from "../../../assets/image/icons/trash.svg";
 import NoticesCategoryItemSvgSelector from "./NoticesCategoryItemSvgSelector";
@@ -19,6 +23,7 @@ import {
   removeMyFavoriteNotices,
   deleteNotice,
 } from "../../../redux/noties/noties-operations";
+import { async } from "q";
 
 const NotiesCategotyItem = ({ items }) => {
   const [copyItems, setCopyItems] = useState(items.result);
@@ -55,18 +60,24 @@ const NotiesCategotyItem = ({ items }) => {
     );
   };
 
-  const noticesDelete = (_id) => {
-    dispatch(deleteNotice(_id));
-    setCopyItems(prev => prev.filter(i => i._id !== _id));
+  const noticesDelete = async (_id) => {
+    // dispatch(deleteNotice(_id));
+    await deleteNotices(_id);
+
+//   const noticesDelete = (_id) => {
+//     dispatch(deleteNotice(_id));
+//     setCopyItems(prev => prev.filter(i => i._id !== _id));
+
   };
 
   const learnMoreInfo = async ({ id, name }) => {
     const { result } = await getSingleNotice(id);
-    const data = await getUserInfo(result.owner);
-    console.log("data user: ", data);
+    const { data } = await getUserInfo(result.owner);
+    // console.log("data user: ", data);
     if (name === "openLearnMore") {
       setModalChild(
         <ModalNotice
+          owner={data}
           itemInfo={result}
           favoriteSwitch={changeFavorite}
           close={close}
@@ -74,10 +85,14 @@ const NotiesCategotyItem = ({ items }) => {
       );
     }
     if (name === "deleteItem") {
-      setModalChild(<ModalApproveAction itemInfo={result} close={close} />);
+      setModalChild(
+        <ModalApproveAction
+          itemInfo={result}
+          close={close}
+          deleteItem={noticesDelete}
+        />
+      );
     }
-    // setNotice(data);
-    // setOwner(user);
     open(true);
   };
 
@@ -163,8 +178,9 @@ const NotiesCategotyItem = ({ items }) => {
 
             {id_user === owner && (
               <button
-                onClick={() => noticesDelete(_id)}
                 name="deleteItem"
+                onClick={(e) => handleClick(e)}
+                id={_id}
                 type="button"
                 className={css.deletion}
               >
