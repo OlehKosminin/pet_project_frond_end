@@ -4,15 +4,19 @@ import { useParams } from "react-router";
 
 import NoticesPagination from "../NoticesPagination/NoticesPagination";
 import NotiesCategoryItem from "../NotiesCategotyItem/NotiesCategotyItem";
+import Loader from "../../../shared/components/Loader/Loader";
 
-import {getNoteceIsLoadig, getNotices} from "../../../redux/noties/noties-selector";
+import {
+  getNoteceIsLoadig,
+  getNotices,
+} from "../../../redux/noties/noties-selector";
 import {
   fetchAllNotices,
   fetchOwnNotices,
   fetchFavoriteNotices,
+  deleteNotice,
 } from "../../../redux/noties/noties-operations";
 import { myAddFavoriteNotices } from "../../../redux/noties/noties-operations";
-
 
 // import { deleteNotices } from "../../../shared/services/noties";
 
@@ -21,32 +25,20 @@ import { myAddFavoriteNotices } from "../../../redux/noties/noties-operations";
 //   page: 1,
 // };
 
-
-
 const NotiesCategoriesList = () => {
   const { category } = useParams();
   const [page, setPage] = useState(1);
-  console.log(page, "paginatPage");
+  // console.log(page, "paginatPage");
   const notices = useSelector(getNotices);
   const isLoadingNotices = useSelector(getNoteceIsLoadig);
 
-  console.log("notices____", notices);
+  // console.log("notices____", notices);
 
   // const [ state, setState ] = useState();
   const dispatch = useDispatch();
-  // const id_user = useSelector((store) => store.auth.user._id);
+ 
 
-  // const isLoading = useSelector((store) => store.noties.notices.isLoading)
 
-  // const changeFavorite = (isAdd, _id) => {
-  //   console.log("onclick", isAdd);
-  //   console.log("onclick id", _id);
-  //   if (isAdd) {
-  //     dispatch();
-  //     return;
-  //   } //dispatch favorite add
-  //   dispatch(myAddFavoriteNotices(_id));
-  // };
 
   useEffect(() => {
     if (category === "my-pets") {
@@ -54,8 +46,7 @@ const NotiesCategoriesList = () => {
     }
 
     if (category === "favorite") {
-      dispatch(fetchFavoriteNotices({page}));
-
+      dispatch(fetchFavoriteNotices({ page }));
     }
     if (
       category === "sell" ||
@@ -65,6 +56,8 @@ const NotiesCategoriesList = () => {
       dispatch(fetchAllNotices({ category, page }));
     }
   }, [dispatch, category, page]);
+
+
 
   const loadMore = () => {
     setPage((prevPage) => prevPage + 1);
@@ -142,14 +135,7 @@ const NotiesCategoriesList = () => {
   return (
     <>
       <div>
-        {isLoadingNotices ? (
-          "LOADING..."
-        ) : (
-
-          <NotiesCategoryItem
-            items={notices}
-          />
-        )}
+        {isLoadingNotices ? <Loader /> : <NotiesCategoryItem items={notices} />}
 
         <button onClick={loadMore}>load more</button>
         <span>{page}</span>

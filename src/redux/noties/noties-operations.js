@@ -62,8 +62,8 @@ export const fetchFavoriteNotices = createAsyncThunk(
   }
 );
 export const myAddFavoriteNotices = createAsyncThunk(
-  "notices/addFavoriteNotices",
-  async (id_notis,  { rejectWithValue }) => {
+  "notices/favoriteNotices",
+  async (id_notis, { rejectWithValue }) => {
     try {
       const result = await api.addFavoriteNotices(id_notis);
       return result;
@@ -148,24 +148,24 @@ export const deleteNotice = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     console.log(id);
     try {
-      await axios.delete(`notices/${id}`);
+      await api.deleteNotices(id);
       return id;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
-export const getUserNotices = createAsyncThunk(
-  "notices/getUserNotices",
-  async (_, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.get(`notices/user`);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
+// export const getUserNotices = createAsyncThunk(
+//   "notices/getUserNotices",
+//   async (_, { rejectWithValue }) => {
+//     try {
+//       const { data } = await axios.get(`notices/user`);
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
 export const getNoticesByQwery = createAsyncThunk(
   "notices/getNoticesByQwery",
   async ({ query, category, page = 1, limit = 0 }, { rejectWithValue }) => {
@@ -226,6 +226,20 @@ export const getNoticesByQweryFavorite = createAsyncThunk(
       const { data } = await axios.get(
         `notices/favorite?title=${query}&page=${page}&limit=${limit}`
       );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// Modal
+export const getSingleNotice = createAsyncThunk(
+  "notices/getSingleNotice",
+  async (id, { rejectWithValue }) => {
+    try {
+      const data = await api.getSingleNotice(id);
+      // console.log("operations:", data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);

@@ -2,14 +2,12 @@ import { useState } from "react";
 
 export const useSwitch = (initialState = false) => {
   const [isOpen, setIsOpen] = useState(initialState);
-  const [ElName, setElName] = useState("");
-
-  const open = (name) => {
-    setElName(`{${name}}`);
+  const [itemInfo, setItemInfo] = useState({});
+  const open = (itemInfo) => {
+    setItemInfo(itemInfo);
     setIsOpen(true);
   };
   const close = () => setIsOpen(false);
-  // const toggle = () => setIsOpen((isOpen) => !isOpen);
 
-  return { isOpen, ElName, open, close };
+  return { isOpen, itemInfo, open, close };
 };
