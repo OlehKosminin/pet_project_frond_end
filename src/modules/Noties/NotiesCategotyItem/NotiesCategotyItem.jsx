@@ -24,7 +24,6 @@ const NotiesCategotyItem = ({ items }) => {
   const [copyItems, setCopyItems] = useState(items.result);
   const { isOpen, open, close } = useSwitch(false);
   const [modalChild, setModalChild] = useState(<Loader />);
-  // const [expandedLocation, setExpandedLocation] = useState(false);
   const [hoveredLocationCardId, setHoveredLocationCardId] = useState(null);
   const dispatch = useDispatch();
   const id_user = useSelector((store) => store.auth.user._id);
@@ -58,7 +57,9 @@ const NotiesCategotyItem = ({ items }) => {
 
   const noticesDelete = (_id) => {
     dispatch(deleteNotice(_id));
+    setCopyItems(prev => prev.filter(i => i._id !== _id));
   };
+
   const learnMoreInfo = async ({ id, name }) => {
     const { result } = await getSingleNotice(id);
     const data = await getUserInfo(result.owner);
@@ -79,13 +80,6 @@ const NotiesCategotyItem = ({ items }) => {
     // setOwner(user);
     open(true);
   };
-
-  //  console.log(array, "array");
-  //   useEffect(() => {
-  //     console.log(array, "array");
-  //     setArray(id_user);
-  //   }, [changeFavorite]);
-  // const isLoading = useSelector((store) => store.noties.notices.isLoading)
 
   useEffect(() => {
     if (isOpen) {
@@ -112,23 +106,6 @@ const NotiesCategotyItem = ({ items }) => {
     setHoveredLocationCardId(null);
   };
 
-  // const toggleLocation = (e) => {
-  //   console.log(e, "event");
-  //   const cardId = items.filter((items) => items.id === e);
-  //   console.log(cardId, "cardid")
-  //   if(cardId){setExpandedLocation(!expandedLocation);}
-  //   // setExpandedLocation(!expandedLocation);
-  //   // const cardId = items.map(({ id }) => {
-  //   //   return id;
-
-  //   // })
-  //   //  if (e === cardId) {
-  //   //    setExpandedLocation(!expandedLocation);
-  //   //  }
-  //   // console.log(cardId, "cardid");
-  // };
-  // const { id, animal, text, favorite, category } = items;
-
   const getYear = (birthday) => {
     const value = Date.now() - birthday;
     const date = new Date(value);
@@ -148,16 +125,15 @@ const NotiesCategotyItem = ({ items }) => {
       birthday,
       // breed,
       category,
-      comments,
+      // comments,
       favorite,
       location,
       // name,
       owner,
       photoUrl,
       // price,
-      // public_id,
       sex,
-      // title,
+      title,
       _id,
     }) => {
       return (
@@ -165,7 +141,7 @@ const NotiesCategotyItem = ({ items }) => {
           <div className={css.animal}>
             <img
               className={css.photoPet}
-              alt=""
+              alt="Pet's photo"
               width="384"
               height="288"
               src={photoUrl}
@@ -177,12 +153,6 @@ const NotiesCategotyItem = ({ items }) => {
               onClick={() => {
                 const isAdd = favorite.includes(id_user);
                 changeFavorite(isAdd, _id);
-                //   if (!isAdd){
-                //     copyFavorite = [...copyFavorite, id_user];
-                //   }
-                //   if (isAdd) {
-                //     copyFavorite = copyFavorite.filter(item_user => item_user !== id_user);
-                // }
               }}
               className={css.favorite}
             >
@@ -190,12 +160,11 @@ const NotiesCategotyItem = ({ items }) => {
                 id={favorite.includes(id_user) ? "heart-active" : "heart"}
               />
             </button>
-            {/* <button className={css.favorite}>H</button> */}
+
             {id_user === owner && (
               <button
                 onClick={() => noticesDelete(_id)}
                 name="deleteItem"
-                // onClick={(e) => handleClick(e)}
                 type="button"
                 className={css.deletion}
               >
@@ -205,7 +174,6 @@ const NotiesCategotyItem = ({ items }) => {
             <NavLink className={css.add_pet} to="/add-pet">
               Add pet
             </NavLink>
-            {/* <button >Add pet</button> */}
 
             <ul className={css.animalsDataList}>
               <li className={css.animalsData}>
@@ -233,7 +201,6 @@ const NotiesCategotyItem = ({ items }) => {
                 <p className={css.animalsDataText}>
                   <NoticesCategoryItemSvgSelector id="clock" />
                   {getYear(birthday)}
-                  {/* {birthday} */}
                 </p>
               </li>
               <li className={css.animalsData}>
@@ -245,7 +212,7 @@ const NotiesCategotyItem = ({ items }) => {
             </ul>
           </div>
 
-          <p className={css.animal_description}>{comments}</p>
+          <p className={css.animal_description}>{title}</p>
 
           <button
             className={css.more_info_btn}
