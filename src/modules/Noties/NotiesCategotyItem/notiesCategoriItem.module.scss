@@ -1,5 +1,5 @@
 @import "../../../utils/variable.scss";
-// @import"../../../utils/base.scss";
+@import"../../../utils/base.scss";
 // .example_card{
 //     display: block;
 // }
@@ -12,30 +12,30 @@
   column-gap: 32px;
 }
 
-.container {
-  max-width: 320px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
+// .container {
+//   max-width: 320px;
+//   margin-left: auto;
+//   margin-right: auto;
+//   padding-left: 20px;
+//   padding-right: 20px;
 
 
-  @media screen and (min-width: 768px) {
-    max-width: 768px;
-    padding-left: 32px;
-    padding-right: 32px;
-  }
+//   @media screen and (min-width: 768px) {
+//     max-width: 768px;
+//     padding-left: 32px;
+//     padding-right: 32px;
+//   }
 
-  @media screen and (min-width: 1280px) {
-    max-width: 1280px;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-}
+//   @media screen and (min-width: 1280px) {
+//     max-width: 1280px;
+//     padding-left: 16px;
+//     padding-right: 16px;
+//   }
+// }
 .example_card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
   width: 100%;
@@ -64,17 +64,27 @@
 }
 
 .animal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   width: 280px;
   height: 288px;
   margin-bottom: 20px;
-  background-color: yellow;
+  background-color: white;
+  overflow: hidden;
   @media screen and (min-width: 768px) {
     width: 336px;
   }
   @media screen and (min-width: 1280px) {
     width: 288px;
   }
+}
+.photoPet{
+  width: auto;
+  height: 100%;
+  max-width: initial;
+
 }
 .animalsDataList {
   display: flex;
@@ -105,6 +115,12 @@
 //     border-radius: 16px;
 
 // }
+// .notiesCategoriItem_locationTitle__Eecu9[title] {
+//    background-color: $active-blue-color;
+//   color: #111111;
+//   padding: 2px 4px;
+//   border-radius: 16px;
+// }
 .animalsDataText {
     box-sizing: border-box;
   display: flex;
@@ -117,7 +133,7 @@
   height: 28px;
   background-color: $default-blue-color;
   border-radius: 16px;
-  font-family: "Manrope";
+  // font-family: "Manrope";
   font-style: normal;
   font-weight: 600;
   font-size: 12px;
@@ -130,6 +146,84 @@
 
   color: #111111;
 }
+// [title] {
+//    background-color: $active-blue-color;
+//   color: #111111;
+//   padding: 2px 4px;
+//   border-radius: 16px;
+// }
+
+.expandedLocation {
+  position: relative;
+}
+
+.locationTitle {
+  position: relative;
+  z-index: 1;
+   box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 4px;
+  gap: 4px;
+  width: 80px;
+  height: 28px;
+  background-color: $default-blue-color;
+  border-radius: 16px;
+  // font-family: "Manrope";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+
+  /* Черный */
+
+  color: #111111;
+  cursor: pointer;
+}
+
+.locationContent {
+  position: absolute;
+  z-index: 100;
+  min-width: 80px;
+  text-align: center;
+  bottom: calc(100% + 5px);
+  
+  
+  left: 0;
+  background-color: $active-blue-color;
+  color: #111111;
+  padding: 8px 12px;
+  border-radius: 16px;
+  display: none;
+}
+
+.expandedLocation .locationContent {
+  display: block;
+}
+// .locationTitle:global([title]) {
+//    background-color: $active-blue-color;
+//   color: #111111;
+//   padding: 2px 4px;
+//   border-radius: 16px;
+// }
+// .animalsDataText:hover {
+//   overflow: visible; 
+// //   padding: 2px 4px;
+// //   background-color: $active-blue-color;
+//   white-space: normal; 
+// }
+// .expandedLocation {
+// //   position: absolute;
+// //   z-index: 999;
+//   background-color: $active-blue-color; 
+//   color: white; 
+//   padding: 2px 4px;
+// }
 .icon_category {
   display: flex;
   box-sizing: border-box;
@@ -137,12 +231,12 @@
   align-items: center;
   padding: 11px 17px;
   position: absolute;
-  width: 126px;
+  min-width: 126px;
   height: 32px;
   left: 0px;
   top: 16px;
 
-  font-family: "Manrope";
+  // font-family: "Manrope";
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -158,15 +252,15 @@
   height: 40px;
   left: 228px;
   top: 12px;
-//   background: $default-blue-color;
+  background: $default-blue-color;
   border-radius: 50px;
   border: none;
-  &.favorite--active{
-background: $active-blue-color;
-  }
-   &.favorite--inactive{
-    background: $default-blue-color;
-  }
+//   &.favorite--active{
+// background: $active-blue-color;
+//   }
+//    &.favorite--inactive{
+//     background: $default-blue-color;
+//   }
   @media screen and (min-width: 768px) {
     left: 284px;
   }
@@ -196,8 +290,12 @@ background: $active-blue-color;
   height: 80px;
   left: 200px;
   top: 148px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 
-  font-family: "Manrope";
+  // font-family: "Manrope";
   font-style: normal;
   font-weight: 600;
   font-size: 12px;
@@ -228,7 +326,7 @@ background: $active-blue-color;
   margin-bottom: 20px;
   padding-left: 20px;
 
-  font-family: "Manrope";
+  // font-family: "Manrope";
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
@@ -245,11 +343,11 @@ background: $active-blue-color;
   margin-left: 16px;
   margin-bottom: 20px;
   margin-right: 16px;
-  padding-right: 78px;
+  padding-right: 75px;
   padding-bottom: 8px;
-  padding-left: 78px;
+  padding-left: 75px;
   padding-top: 8px;
-  font-family: "Manrope";
+  // font-family: "Manrope";
   font-style: normal;
   font-weight: 600;
   font-size: 16px;

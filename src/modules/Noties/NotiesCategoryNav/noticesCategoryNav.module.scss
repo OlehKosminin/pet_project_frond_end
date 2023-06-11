@@ -1,0 +1,98 @@
+@import "../../../utils/base.scss";
+@import "../../../utils/variable.scss";
+
+.wrapper{
+    margin-top: 43px;
+    margin-bottom: 42px;
+    display: flex;
+    justify-content: space-between;
+    
+}
+.buttonCategoryWrapper{
+display: flex;
+// flex-direction: row;
+// justify-content: center;
+text-align: center;
+flex-wrap: wrap;
+gap: 8px;
+max-width: 200px;
+  @media screen and (min-width: 768px) {
+    max-width: 350px;
+  }
+  @media screen and (min-width: 1280px) {
+    max-width: 640px;
+  }
+}
+.buttonCategory{
+display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+padding: 8px 16px;
+
+background: $default-blue-color;
+border: none;
+border-radius: 40px;
+color: inherit;
+}
+.buttonCategory:global(.active){
+    background: $active-blue-color ;
+}
+.filter{
+    margin-left: auto;
+    margin-right: 16px;
+    display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 8px 20px;
+gap: 8px;
+width: 152px;
+height: 40px;
+font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 22px;
+letter-spacing: 0.04em;
+color: $active-blue-color;
+border: 2px solid $active-blue-color;
+border-radius: 40px;
+}
+.addPet{
+    
+     @media screen and (max-width: 767px) {
+      
+       position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+  }
+     @media screen and (min-width: 768px) {
+     display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+   box-sizing: border-box;
+padding: 8px 20px;
+font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 22px;
+letter-spacing: 0.04em;
+color: $default-white-color;
+
+background: $active-blue-color;
+border: none;
+border-radius: 40px;
+  }
+   
+}

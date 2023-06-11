@@ -1,0 +1,55 @@
+@font-face {
+  font-family: "Manrope Regular";
+  src: url("../../../fonts/Manrope-Regular.ttf");
+}
+
+.genderSection {
+  padding-bottom: 0;
+  @media screen and (min-width: 768px) {
+    padding-bottom: 20px;
+  }
+}
+.genderLabel {
+  font-family: "Manrope Regular";
+  /* font-style: normal; */
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  @media screen and (min-width: 768px) {
+    font-size: 20px;
+    line-height: 26px;
+  }
+}
+.genderBtnDiv {
+  display: flex;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+.genderBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  /* color: #54adff; */
+  color: #888888;
+  border: 1px solid;
+  border-color: #fff;
+  border-radius: 40px;
+  /* padding: 8px 16px; */
+  cursor: pointer;
+  font-family: "Manrope Regular";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+  gap: 10px;
+
+  /* padding-top: 9px;
+  padding-bottom: 9px; */
+}
+.genderBtn:hover {
+  color: #54adff;
+  /* border: 1px solid; */
+  /* border-color: #54adff; */
+}

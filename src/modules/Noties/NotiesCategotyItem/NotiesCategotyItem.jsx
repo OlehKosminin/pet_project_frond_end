@@ -1,161 +1,266 @@
-import css from "./notiesCategoriItem.module.scss"
+import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
+import { getUserInfo } from "../../../shared/services/auth";
+import {
+  getSingleNotice,
+  deleteNotices,
+} from "../../../shared/services/noties";
+import { useSwitch } from "../../../hooks/useSwitch";
 
-const NotiesCategotyItem = ({removePets, items}) => {
-  console.log(items)
-  // const { id, animal, text, favorite, category } = items;
-const pet = items.map(({ id, animal, text, favorite, category} ) => (
-  <li className={css.example_card} key={id}>
-    <div>
-      <div className={css.animal}>
-        <p className={css.icon_category}>{category}</p>
-        <button
-          className={`${css.favorite} ${
-            favorite ? css["favorite--active"] : css["favorite--inactive"]
-          }`}
-        >
-          H
-        </button>
-        {/* <button className={css.favorite}>H</button> */}
-        <button onClick={()=>removePets(id)} type="button" className={css.deletion}>K</button>
-        <button className={css.add_pet}>Add pet</button>
-        {animal}
-        <ul className={css.animalsDataList}>
-          <li className={css.animalsData}>
-            <p className={css.animalsDataText}>Kropiv</p>
-          </li>
-          <li className={css.animalsData}>
-            <p className={css.animalsDataText}>ear gggggg</p>
-          </li>
-          <li className={css.animalsData}>
-            <p className={css.animalsDataText}>female gg</p>
-          </li>
-        </ul>
-      </div>
+import Loader from "../../../shared/components/Loader/Loader";
+import ModalNotice from "../../ModalNotice/ModalNotice";
+import ModalApproveAction from "../../../shared/components/ModalApproveAction/ModalApproveAction";
+import Modal from "../../../shared/components/Modal/Modal";
 
-      <p className={css.animal_description}>{text}</p>
+import { ReactComponent as TrashSvg } from "../../../assets/image/icons/trash.svg";
+import NoticesCategoryItemSvgSelector from "./NoticesCategoryItemSvgSelector";
+import css from "./notiesCategoriItem.module.scss";
 
-      <button className={css.more_info_btn}>Learn more</button>
-    </div>
-  </li>
-));
+import {
+  myAddFavoriteNotices,
+  removeMyFavoriteNotices,
+  deleteNotice,
+} from "../../../redux/noties/noties-operations";
+import { async } from "q";
+
+const NotiesCategotyItem = ({ items }) => {
+  const [copyItems, setCopyItems] = useState(items.result);
+  const { isOpen, open, close } = useSwitch(false);
+  const [modalChild, setModalChild] = useState(<Loader />);
+  const [hoveredLocationCardId, setHoveredLocationCardId] = useState(null);
+  const dispatch = useDispatch();
+  const id_user = useSelector((store) => store.auth.user._id);
+
+  const changeFavorite = (isAdd, _id) => {
+    // const xxx = [...array, _id]
+    // setArray(xxx);
+    if (isAdd) {
+      dispatch(removeMyFavoriteNotices(_id, id_user));
+      setCopyItems((prev) =>
+        prev.map((notice) =>
+          notice._id === _id
+            ? {
+                ...notice,
+                favorite: notice.favorite.filter((ii) => ii !== id_user),
+              }
+            : notice
+        )
+      );
+      return;
+    } //dispatch favorite add
+    dispatch(myAddFavoriteNotices(_id, id_user));
+    setCopyItems((prev) =>
+      prev.map((notice) =>
+        notice._id === _id
+          ? { ...notice, favorite: [...notice.favorite, id_user] }
+          : notice
+      )
+    );
+  };
+
+  const noticesDelete = async (_id) => {
+    // dispatch(deleteNotice(_id));
+    await deleteNotices(_id);
+
+//   const noticesDelete = (_id) => {
+//     dispatch(deleteNotice(_id));
+//     setCopyItems(prev => prev.filter(i => i._id !== _id));
+
+  };
+
+  const learnMoreInfo = async ({ id, name }) => {
+    const { result } = await getSingleNotice(id);
+    const { data } = await getUserInfo(result.owner);
+    // console.log("data user: ", data);
+    if (name === "openLearnMore") {
+      setModalChild(
+        <ModalNotice
+          owner={data}
+          itemInfo={result}
+          favoriteSwitch={changeFavorite}
+          close={close}
+        />
+      );
+    }
+    if (name === "deleteItem") {
+      setModalChild(
+        <ModalApproveAction
+          itemInfo={result}
+          close={close}
+          deleteItem={noticesDelete}
+        />
+      );
+    }
+    open(true);
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflowY = "hidden";
+    }
+
+    return () => {
+      document.body.style.overflowY = "auto";
+    };
+  });
+
+  const handleClick = (e) => {
+    learnMoreInfo({
+      id: e.target.id,
+      name: e.currentTarget.name,
+    });
+  };
+
+  const handleMouseEnter = (id) => {
+    setHoveredLocationCardId(id);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredLocationCardId(null);
+  };
+
+  const getYear = (birthday) => {
+    const value = Date.now() - birthday;
+    const date = new Date(value);
+    // const date = dateOll - 1970;
+    const year = date.getFullYear();
+    if (year === 1970) {
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+
+      return `${month} mo`;
+    }
+
+    return `${year - 1970} year`;
+  };
+
+  const pet = copyItems.map(
+    ({
+      birthday,
+      // breed,
+      category,
+      // comments,
+      favorite,
+      location,
+      // name,
+      owner,
+      photoUrl,
+      // price,
+      sex,
+      title,
+      _id,
+    }) => {
+      return (
+        <li className={css.example_card} key={_id}>
+          <div className={css.animal}>
+            <img
+              className={css.photoPet}
+              alt="Pet's"
+              width="384"
+              height="288"
+              src={photoUrl}
+            />
+            <p className={css.icon_category}>{category}</p>
+            <button
+              type="button"
+              name="favorite"
+              onClick={() => {
+                const isAdd = favorite.includes(id_user);
+                changeFavorite(isAdd, _id);
+              }}
+              className={css.favorite}
+            >
+              <NoticesCategoryItemSvgSelector
+                id={favorite.includes(id_user) ? "heart-active" : "heart"}
+              />
+            </button>
+
+            {id_user === owner && (
+              <button
+                name="deleteItem"
+                onClick={(e) => handleClick(e)}
+                id={_id}
+                type="button"
+                className={css.deletion}
+              >
+                <TrashSvg name="trash" />
+              </button>
+            )}
+            <NavLink className={css.add_pet} to="/add-pet">
+              Add pet
+            </NavLink>
+
+            <ul className={css.animalsDataList}>
+              <li className={css.animalsData}>
+                <div
+                  className={`${css.animalsDataText} ${
+                    hoveredLocationCardId === _id ? css.expandedLocation : ""
+                  }`}
+                  
+                  onMouseEnter={() => handleMouseEnter(_id)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <p className={css.locationTitle} >
+                    <NoticesCategoryItemSvgSelector id="location" />
+                    {location.length > 5
+                      ? `${location.slice(0, 5)}...`
+                      : location}
+                  </p>
+                  {hoveredLocationCardId && (
+                    <p className={css.locationContent}>{location}</p>
+                  )}
+                </div>
+              </li>
+              <li className={css.animalsData}>
+                <p className={css.animalsDataText}>
+                  <NoticesCategoryItemSvgSelector id="clock" />
+                  {getYear(birthday)}
+                </p>
+              </li>
+              <li className={css.animalsData}>
+                <p className={css.animalsDataText}>
+                  <NoticesCategoryItemSvgSelector id={sex} />
+                  {sex}
+                </p>
+              </li>
+            </ul>
+          </div>
+
+          <p className={css.animal_description}>{title}</p>
+
+          <button
+            className={css.more_info_btn}
+            name="openLearnMore"
+            type="button"
+            onClick={(e) => handleClick(e)}
+            id={_id}
+          >
+            Learn more
+          </button>
+        </li>
+      );
+    }
+  );
 
   return (
-    <div>
-      <ul className={css.wrapper}> {pet}</ul>
-    </div>
+    <>
+      {!pet ? (
+        <div></div>
+      ) : (
+        <div>
+          <ul className={css.wrapper}> {pet}</ul>
+
+          {isOpen && (
+            <Modal isOpen={isOpen} close={close}>
+              {modalChild}
+            </Modal>
+          )}
+        </div>
+      )}
+      {/* {isLoading && <Loader />} */}
+    </>
   );
 };
 
 export default NotiesCategotyItem;
-
-// const dataToRender =
-//   categoryName === "favorite"
-//     ? favoriteAds
-//     : categoryName === "owner"
-//     ? ownNotices
-//     : notices.notices;
-// useEffect(() => {
-//   if (categoryName === "favorite") {
-//     dispatch(getFavorite());
-//   } else if (categoryName === "owner") {
-//     dispatch(getUserNotices());
-//   } else {
-//     dispatch(getNoticeByCategory({ category: categoryName }));
-//   }
-//   return () => dispatch(clearNotices([]));
-// }, [dispatch, categoryName]);
-
-// const dataToRender =
-//   categoryName === "favorite"
-//     ? favoriteAds
-//     : categoryName === "owner"
-//     ? ownNotices
-//       : notices.notices;
-    
-// import React, { useEffect, useState } from "react";
-// import { NavigationContainer } from "@react-navigation/native";
-
-// import { useRoute } from "../router";
-
-// import { useSelector, useDispatch } from "react-redux";
-
-// import { authStateChangeuser } from "../redux/auth/authOperations";
-
-// const Main = () => {
-//   const [user, setUser] = useState(null);
-//   const { stateChange } = useSelector((state) => state.auth);
-//   console.log(stateChange);
-//   const dispatch = useDispatch();
-
-//   const routing = useRoute(stateChange);
-
-//   useEffect(() => {
-//     dispatch(authStateChangeuser());
-//   }, []);
-
-//   return <NavigationContainer>{routing}</NavigationContainer>;
-// };
-
-// export default Main;
-// import { initializeApp } from "firebase/app";
-// import { getAuth } from "firebase/auth";
-// import { getStorage } from "firebase/storage";
-// import { getFirestore } from "firebase/firestore";
-
-// const firebaseConfig = {
-//   apiKey: "AIzaSyC7vKyfr5KcfnlXyWcaJbtf_mCa9bNHn2Y",
-//   authDomain: "native-greed.firebaseapp.com",
-//   projectId: "native-greed",
-//   storageBucket: "native-greed.appspot.com",
-//   messagingSenderId: "89972788640",
-//   appId: "1:89972788640:web:33dca94589fb3d9c4568c5",
-//   measurementId: "G-07NSNYR6BJ"
-// };
-
-// const app = initializeApp(firebaseConfig);
-// export default app;
-// export const auth = getAuth(app);
-// export const db = getFirestore(app);
-// export const storage = getStorage(app);
-// Олександр Бондарчук — Вчера, в 23:58
-// $accent-yelow-color
-// Олександр Бондарчук — Сегодня, в 0:09
-// export default styled;
-// Олександр Бондарчук — Сегодня, в 21:49
-// function NoticesPage() {
-//   const { categoryName } = useParams();
-//   const notices = useSelector(getNotices);
-//   const isLoading = useSelector(getNoteceIsLoadig);
-//   const favoriteNotices = useSelector(getFavorites);
-//   const favoriteAds = favoriteNotices?.user?.favorite || [];
-//   const ownNotices = useSelector(getOwnNotices);
-//   const dispatch = useDispatch();
-
-//   const [query, setQuery] = useState("");
-
-//   useEffect(() => {
-//     if (categoryName === 'favorite') {
-//       dispatch(getFavorite());
-//     } else if (categoryName === 'owner') {
-//       dispatch(getUserNotices());
-//     } else {
-//       dispatch(getNoticeByCategory({ category: categoryName }));
-//     }
-//     return () => dispatch(clearNotices([]));
-//   }, [dispatch, categoryName]);
-
-//   const dataToRender =
-//     categoryName === 'favorite'
-//       ? favoriteAds
-//       : categoryName === 'owner'
-//       ? ownNotices
-//         : notices.notices;
-
-//   const handleSearch = (newQuery) => {
-//   setQuery(newQuery);
-// };
-
-//   const handleClearQuery = () => {
-//     setQuery("");
-//   };

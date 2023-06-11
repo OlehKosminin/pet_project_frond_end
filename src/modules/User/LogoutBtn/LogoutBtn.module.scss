@@ -1,0 +1,43 @@
+@import "../../../index.scss";
+
+.wrapper {
+  width: 100%;
+  margin-left: 5px;
+  margin-top: 9px;
+
+  @media screen and (min-width: 768px) {
+    margin-top: 1px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-top: 9px;
+  }
+}
+
+.btn {
+  margin: 0;
+  padding: 0, 16;
+  stroke: $active-blue-color;
+  color: $grey-color;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 40px;
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+    color: $default-white-color;
+    stroke: $default-white-color;
+  }
+}
+
+.text {
+  font-family: "Manrope Medium";
+  font-style: normal;
+  font-size: 16px;
+  line-height: 1.375;
+  letter-spacing: 0.04em;
+  padding-left: 16px;
+}

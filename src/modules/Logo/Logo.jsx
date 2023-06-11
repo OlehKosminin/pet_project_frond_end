@@ -1,20 +1,19 @@
 import React from 'react';
-import { ReactComponent as Logotype } from '../../assets/image/logo/logo.svg';
-import useMatchMedia from '../../hooks/useMatchMedia';
-import { Link, SvgIcon } from '@mui/material';
-import { NavLink as Routerlink } from 'react-router-dom';
+import  LogoSvg  from '../../assets/image/logo/logo.svg';
+import { Link } from 'react-router-dom';
+import scss from './Logo.module.scss';
 
-function Logo() {
-  const { isMobile } = useMatchMedia();
-
+function Logo({ handleLinkClick }) {
+  const handleClick = () => {
+    if (handleLinkClick) {
+      handleLinkClick();
+    }
+  };
   return (
-    <Link href="/" component={Routerlink} to="/">
-      {isMobile ? (
-        <SvgIcon component={Logotype} inheritViewBox sx={{ width: 116 }} />
-      ) : (
-        <SvgIcon component={Logotype} inheritViewBox sx={{ width: 162 }} />
-      )}
+    <Link to="/" onClick={handleClick}>
+      <img className={scss.logo} src={LogoSvg} alt="YourPetLogo" />
     </Link>
   );
 }
+
 export default Logo;

@@ -1,69 +1,54 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { getFriends } from './petsOperation';
-import { createPet} from './petsOperation';
-
-const userInitialState = {
-  user: {},
-  pets: {},
-};
-
-function UserFulfilled(state, { payload }) {
-  console.log(payload);
-  state.user = payload.user;
-  state.error = null;
-}
-const friendsSlice = createSlice({
-  name: 'user',
-  initialState: userInitialState,
-  extraReducers: builder => {
-    builder
-      .addCase(getFriends.fulfilled, UserFulfilled)
-      .addCase(getFriends.rejected, (state, { payload }) => {
-        state.error = payload;
-      });
-  },
-});
+import { createSlice } from "@reduxjs/toolkit";
+import { getPets, addPet, deletePet } from "./pets-operations";
 
 const petsInitialState = {
-  pets: [],
-  error: null,
+  items: [],
   isLoading: false,
-};
-
-const handlePending = state => {
-  state.isLoading = true;
-};
-
-const handleReject = (state, { payload }) => {
-  state.pets = [];
-  state.isLoading = false;
-  state.error = payload;
+  error: null,
 };
 
 const petsSlice = createSlice({
-  name: 'pets',
+  name: "pets",
   initialState: petsInitialState,
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-      .addCase(createPet.pending, state => {
-        handlePending(state);
+      .addCase(getPets.pending, (state) => {
+        state.isLoading = true;
       })
-      .addCase(createPet.fulfilled, (state, { payload }) => {
-        state.pets.push(payload);
+      .addCase(getPets.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.items = action.payload;
+      })
+      .addCase(getPets.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(addPet.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addPet.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.items.push(action.payload.pet);
+      })
+      .addCase(addPet.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+
+      .addCase(deletePet.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deletePet.fulfilled, (state, action) => {
+        state.items = action.payload;
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(createPet.rejected, (state, { payload }) => {
-        handleReject(state, payload);
+      .addCase(deletePet.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       });
   },
-  reducers: {
-    clearPets(state, { payload }) {
-      state.pets = [];
-    },
-  },
 });
-
 export const petsReducer = petsSlice.reducer;
-export const { clearPets } = petsSlice.actions;
-export const friendsReducer = friendsSlice.reducer;

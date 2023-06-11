@@ -1,0 +1,37 @@
+.wrapper {
+  display: inline-block;
+}
+.btn {
+  /* background-color: #cce4fb; */
+  color: #54adff;
+  border: none;
+  border-radius: 40px;
+  padding: 8px 16px;
+  transition: color 0.4s ease;
+
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 19px;
+  transition: background-color 0.5s ease;
+
+  background: linear-gradient(to right, #cce4fb, #54adff);
+  background-size: 1000% 10%;
+  background-position: left;
+  transition: background-position 0.3s ease-in-out;
+}
+.btn:hover {
+  /* background-color: #54adff; */
+  color: #fef9f9;
+  background-position: right;
+  transition: color 0.4s ease;
+}
+.btnChecked {
+  background-color: #54adff;
+  color: #fef9f9;
+  border: none;
+  border-radius: 40px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 19px;
+}

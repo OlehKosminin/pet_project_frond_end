@@ -1,0 +1,239 @@
+@import "../../../index.scss";
+
+button {
+  background-color: transparent;
+}
+
+.userData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $default-white-color;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  border-radius: 20px;
+  margin-top: 18px;
+  padding-top: 20px;
+  padding-bottom: 25px;
+  padding-left: 8px;
+  padding-right: 8px;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding-bottom: 21px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 395px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    flex-direction: column;
+    margin-top: 24px;
+  }
+}
+
+.userImgWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.userImg {
+  width: 182px;
+  height: 182px;
+  border-radius: 40px;
+}
+
+.btnWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+
+  gap: 11px;
+}
+.photoInputWrapper {
+  height: 24px;
+  width: 24px;
+}
+
+.cameraIcon {
+  width: 254px;
+  height: 24px;
+  border-radius: 50%;
+  stroke: $active-blue-color;
+}
+
+.photoInputBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.photoInput {
+  width: 100%;
+  opacity: 0;
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.userImgBtn {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.userInfoList {
+  width: 100%;
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  @media screen and (min-width: 768px) {
+    margin-top: 0;
+    min-width: 355px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-top: 30px;
+    width: 100%;
+  }
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userInfoItemTitle {
+  font-family: "Manrope SemiBold";
+  font-size: 14px;
+  line-height: 1.357;
+  letter-spacing: 0.04em;
+  color: $black-color;
+
+  @media screen and (min-width: 768px) {
+    font-size: 18px;
+    line-height: 1.389;
+  }
+}
+
+.userInfoItemData {
+  position: relative;
+  box-sizing: border-box;
+  height: 28px;
+  width: 190px;
+  border: 1px solid $active-blue-color;
+  border-radius: 20px;
+  display: flex;
+  padding: 4px 12px;
+  align-items: center;
+  justify-content: space-between;
+
+  @media screen and (min-width: 768px) {
+    height: 32px;
+    width: 255px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    height: 32px;
+    width: 255px;
+  }
+}
+
+.userInfoItemText {
+  font-family: "Manrope Regular";
+  font-size: 12px;
+  line-height: 1.333;
+  letter-spacing: 0.04em;
+  color: $black-color;
+
+  &,
+  &:active,
+  &:hover,
+  &:focus {
+    min-width: 100px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: 0;
+    outline-offset: 0;
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    line-height: 1.375;
+  }
+}
+
+.userInfoItemBtn {
+  border: none;
+  border-color: transparent;
+  padding: 0;
+  margin: 0;
+  width: 24px;
+  height: 24px;
+  fill: $active-blue-color;
+  border-radius: 50%;
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+    fill: $default-white-color;
+  }
+}
+
+.userInfoCheckBtn {
+  border: none;
+  border-color: transparent;
+  padding: 0;
+  margin: 0;
+  width: 24px;
+  height: 24px;
+  stroke: $green-color;
+  border-radius: 50%;
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+    stroke: $default-white-color;
+  }
+}
+
+.datepicker {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99;
+  border: none;
+}
+
+.userInfoDate {
+  font-family: "Manrope Regular";
+  font-size: 12px;
+  line-height: 1.333;
+  letter-spacing: 0.04em;
+  color: $black-color;
+
+  border: none;
+
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    line-height: 1.375;
+  }
+}

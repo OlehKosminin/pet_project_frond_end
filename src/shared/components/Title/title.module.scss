@@ -1,0 +1,20 @@
+@import "../../../utils/fonts.scss";
+
+.title {
+  font-family: "Manrope Medium";
+
+  text-align: center;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.38;
+  letter-spacing: 0.04em;
+  margin-bottom: 40px;
+  color: #111111;
+}
+
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: 36px;
+    line-height: 1.36;
+  }
+}

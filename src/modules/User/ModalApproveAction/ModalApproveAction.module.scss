@@ -1,0 +1,126 @@
+@import "../../../index.scss";
+
+.modalUser {
+  position: absolute;
+  left: 50%;
+  // top: 92px;
+  transform: translate(-50%, -50%);
+  height: 287px;
+  width: 280px;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  border-radius: 20px;
+  background-color: $default-white-color;
+
+  @media screen and (min-width: 768px) {
+    // top: 148px;
+    height: 300px;
+    width: 608px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    // top: 112px;
+    height: 354px;
+    width: 608px;
+  }
+}
+
+.modalWrapper {
+  position: relative;
+}
+
+.closeBtn {
+  margin: 0;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  stroke: $active-blue-color;
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+    stroke: $default-white-color;
+  }
+}
+
+.title {
+  padding: 0;
+  margin: 0;
+  margin-top: 60px;
+  font-family: "Manrope Medium";
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 1.361;
+  text-align: center;
+  letter-spacing: 0.04em;
+  color: $black-color;
+
+  @media screen and (min-width: 1280px) {
+    margin-top: 108px;
+  }
+}
+
+.btnWrapper {
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 17px;
+}
+
+.cancelBtn {
+  margin: 0;
+  padding: 9px 16px;
+  border: 1px solid $active-blue-color;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $default-white-color;
+  color: $active-blue-color;
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+    color: $default-white-color;
+  }
+}
+
+.cancelBtnText {
+  font-family: "Manrope Bold";
+  font-size: 16px;
+  line-height: 1.375;
+  letter-spacing: 0.04em;
+}
+
+.actionBtn {
+  margin: 0;
+  padding: 9px 16px;
+  border: none;
+  border-radius: 40px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  background-color: $active-blue-color;
+  color: $default-white-color;
+  stroke: $default-white-color;
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+    color: $default-white-color;
+  }
+}
+
+.actionBtnText {
+  font-family: "Manrope Bold";
+  font-size: 16px;
+  line-height: 1.375;
+  letter-spacing: 0.04em;
+}

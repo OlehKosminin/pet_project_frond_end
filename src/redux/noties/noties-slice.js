@@ -1,30 +1,28 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
+
 import {
   addNotices,
   deleteNotice,
-  getNewNotice,
-  getNoticeByCategory,
-  getNoticesByQwery,
+  fetchAllNotices,
+  fetchFavoriteNotices,
+  fetchOwnNotices,
   getSingleNotice,
-  createNotice,
-  getUserNotices,
+  myAddFavoriteNotices,
+  removeMyFavoriteNotices,
+  searchNotices,
 } from "./noties-operations";
 
 const noticesInitialState = {
-  notices: [],
-  user: {},
-  pets: [],
+  notices: { result: [], count: 0 },
   oneNotice: null,
-  favorite: [],
-  own: [],
   error: null,
-  isLoading: false,
+  isLoading: true,
 };
 const handlePending = (state) => {
   state.isLoading = true;
 };
 const handleReject = (state, action) => {
-  state.notices = [];
+  state.notices = { result: [], count: 0 };
   state.isLoading = false;
   state.error = action.payload;
 };
@@ -33,76 +31,134 @@ const noticesSlice = createSlice({
   initialState: noticesInitialState,
   extraReducers: (builder) => {
     builder
-      .addCase(getNoticeByCategory.pending, (state) => {
+      .addCase(fetchAllNotices.pending, (state) => {
         handlePending(state);
       })
-      .addCase(getNoticeByCategory.fulfilled, (state, { payload }) => {
+      .addCase(fetchAllNotices.fulfilled, (state, { payload }) => {
+        // console.log("slice payload: ", payload);
         state.isLoading = false;
-        state.notices = payload;
+        state.notices.result = payload.result;
+        state.notices.count = payload.resultCount;
         state.error = null;
       })
-      .addCase(getNoticeByCategory.rejected, (state, action) => {
+      .addCase(fetchAllNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
-      .addCase(getSingleNotice.fulfilled, (state, { payload }) => {
-        state.oneNotice = payload;
+      .addCase(searchNotices.pending, (state) => {
+        handlePending(state);
+      })
+      .addCase(searchNotices.fulfilled, (state, { payload }) => {
         state.isLoading = false;
+        state.notices.result = payload.result;
+        state.notices.count = payload.resultCount;
         state.error = null;
       })
-      .addCase(getSingleNotice.rejected, (state, action) => {
-        handleReject(state, action);
-      })
-      .addCase(getNewNotice.fulfilled, (state, { payload }) => {
-        state.notices.push(payload);
-        state.isLoading = false;
-      })
-      .addCase(getNewNotice.rejected, (state, action) => {
+      .addCase(searchNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
       .addCase(addNotices.fulfilled, (state, { payload }) => {
-        state.notices.push(payload);
         state.isLoading = false;
       })
       .addCase(addNotices.rejected, (state, action) => {
         handleReject(state, action);
       })
+      // .addCase(addNotices.pending, (state) => {
+      //   state.isLoading = true;
+      // })
+      // .addCase(addNotices.fulfilled, (state, { payload }) => {
+      //   state.isLoading = false;
+      //   state.error = null;
+      //   state.items.push(payload);
+      // })
+      // .addCase(addNotices.rejected, (state, action) => {
+      //   // handleReject(state, action);
+      //   // state.isLoading = false;
+      //   state.isLoading = false;
+      //   state.error = action.payload;
+      // })
+      .addCase(deleteNotice.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(deleteNotice.fulfilled, (state, { payload }) => {
-        state.notices = state.notices.filter(({ _id }) => _id !== payload);
-        state.isLoading = false;
+        state.loading = false;
       })
       .addCase(deleteNotice.rejected, (state, { payload }) => {
         handleReject(state, payload);
       })
-      // додає оголошення
-      .addCase(createNotice.pending, (state) => {
+      .addCase(getSingleNotice.pending, (state) => {
         handlePending(state);
       })
-      .addCase(createNotice.fulfilled, (state, { payload }) => {
-        state.notices.push(payload);
+      .addCase(getSingleNotice.fulfilled, (state, { payload }) => {
+        console.log("isFulfilled");
         state.isLoading = false;
+        state.oneNotice = payload.result;
+        // console.log("slice:", state.oneNotice);
         state.error = null;
       })
-      .addCase(createNotice.rejected, (state, { payload }) => {
-        handleReject(state, payload);
-      })
-      .addCase(getUserNotices.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.error = null;
-        state.own = payload;
-      })
-      .addCase(getUserNotices.rejected, (state, action) => {
+      .addCase(getSingleNotice.rejected, (state, action) => {
         handleReject(state, action);
       })
-      .addCase(getNoticesByQwery.pending, (state) => {
+      // // додає оголошення
+      // .addCase(createNotice.pending, (state) => {
+      //   handlePending(state);
+      // })
+      // .addCase(createNotice.fulfilled, (state, { payload }) => {
+      //   state.notices.push(payload);
+      //   state.isLoading = false;
+      //   state.error = null;
+      // })
+      // .addCase(createNotice.rejected, (state, { payload }) => {
+      //   handleReject(state, payload);
+      // })
+      // .addCase(getUserNotices.fulfilled, (state, { payload }) => {
+      //   state.isLoading = false;
+      //   state.error = null;
+      //   state.own = payload;
+      // })
+      // .addCase(getUserNotices.rejected, (state, action) => {
+      //   handleReject(state, action);
+      // })
+      .addCase(fetchOwnNotices.pending, (state) => {
         handlePending(state);
       })
-      .addCase(getNoticesByQwery.fulfilled, (state, { payload }) => {
+      .addCase(fetchOwnNotices.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.notices = payload;
+        state.notices.result = payload.result;
+        state.notices.count = payload.resultCount;
         state.error = null;
       })
-      .addCase(getNoticesByQwery.rejected, (state, action) => {
+      .addCase(fetchOwnNotices.rejected, (state, action) => {
         handleReject(state, action);
+      })
+      .addCase(fetchFavoriteNotices.pending, (state) => {
+        handlePending(state);
+      })
+      .addCase(fetchFavoriteNotices.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.notices.result = payload.result;
+        state.notices.count = payload.resultCount;
+        state.error = null;
+      })
+      .addCase(fetchFavoriteNotices.rejected, (state, action) => {
+        handleReject(state, action);
+      })
+
+      .addCase(myAddFavoriteNotices.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(myAddFavoriteNotices.rejected, (state, action) => {
+        handleReject(state, action);
+      })
+
+      .addCase(removeMyFavoriteNotices.fulfilled, (state, { payload }) => {
+        state.loading = false;
+
+        state.error = null;
+      })
+      .addCase(removeMyFavoriteNotices.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
       });
   },
   reducers: {

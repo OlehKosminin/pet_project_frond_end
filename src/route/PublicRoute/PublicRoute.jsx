@@ -1,17 +1,17 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { getAuth } from "../../redux/auth/auth-selectors";
+import { getIsLoggedIn } from "../../redux/auth/auth-selector";
 
 const PublicRoute = () => {
-  const { isLogin, token } = useSelector(getAuth);
+  const { isLogin, token } = useSelector(getIsLoggedIn);
 
   if (!isLogin && token) {
     return <p>...Loading</p>;
   }
 
   if (isLogin) {
-    return <Navigate to="/my-books" />;
+    return <Navigate to="/user" />;
   }
 
   return <Outlet />;

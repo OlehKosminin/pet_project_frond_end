@@ -1,2 +1,2 @@
-export const userPets = state => state.user.pets;
-export const user = state => state.user.user;
+export const getAllPets = (store) => store.pets.items;
+export const getPetsIsLoading = (store) => store.pets.isLoading;

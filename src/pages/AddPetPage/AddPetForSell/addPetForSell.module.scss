@@ -1,0 +1,187 @@
+@font-face {
+  font-family: "Manrope Regular";
+  src: url("../../../fonts/Manrope-Regular.ttf");
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // width: 394px;
+  margin-top: 16px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.formCell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* width: 394px; */
+
+  margin-top: 16px;
+  // margin-left: 24px;
+  // margin-right: auto;
+  @media screen and (min-width: 768px) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.container {
+  display: block;
+  /* align-items: center; */
+  // justify-content: center;
+  // gap: 79px;
+  padding-bottom: 20px;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    gap: 79px;
+    padding-bottom: 60px;
+  }
+}
+
+.label {
+  font-family: "Manrope Regular";
+  /* font-style: normal; */
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  @media screen and (min-width: 768px) {
+    font-size: 20px;
+    line-height: 26px;
+  }
+}
+
+.input {
+  display: block;
+  margin-top: 4px;
+  /* margin-bottom: 24px; */
+  padding: 12px 16px;
+  border: 1px solid #54adff;
+  border-radius: 40px;
+  box-sizing: border-box;
+  width: 264px;
+  @media screen and (min-width: 768px) {
+    width: 395px;
+    margin-top: 8px;
+  }
+}
+.dataDiv {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 4px;
+  /* margin-bottom: 24px; */
+  /* padding: 12px 16px; */
+  border: 1px solid #54adff;
+  border-radius: 40px;
+  box-sizing: border-box;
+  width: 264px;
+  @media screen and (min-width: 768px) {
+    width: 100%;
+    // padding: 12px 16px;
+    margin-top: 8px;
+  }
+}
+.dataDiv:focus-within {
+  outline: 2px solid black;
+  border: 1px solid #fff;
+}
+
+.dataInput {
+  outline: none;
+  padding: 12px 16px;
+  /* border: 1px solid #54adff; */
+  border: none;
+  /* outline: 1px solid; */
+  border-radius: 40px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.dataPicker {
+  padding-right: 10px;
+}
+
+.error {
+  height: 20px;
+  color: #f43f5e;
+  bottom: 80px;
+  padding-left: 16px;
+
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 14px;
+  @media screen and (min-width: 768px) {
+    height: 24px;
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
+
+.avatarField {
+  display: block;
+  align-items: center;
+  @media screen and (min-width: 768px) {
+    display: block;
+    align-items: center;
+  }
+}
+.photoLabel {
+  display: flex;
+  align-items: center;
+  font-family: "Manrope Regular";
+  /* font-style: normal; */
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  @media screen and (min-width: 768px) {
+    display: block;
+    font-size: 20px;
+    line-height: 26px;
+  }
+}
+.photoLabel::before {
+  content: "Add photo";
+  @media screen and (min-width: 768px) {
+    content: "Load the pet’s image:";
+  }
+}
+.divLabel {
+  /* padding-right: 33px; */
+  padding-bottom: 12px;
+}
+.avatarImg {
+  width: 112px;
+  height: 112px;
+  cursor: pointer;
+  border-radius: 20px;
+  // margin-right: auto;
+  margin-left: 24px;
+  @media screen and (min-width: 768px) {
+    width: 182px;
+    height: 182px;
+    border-radius: 40px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+.commentsInput {
+  display: block;
+  margin-top: 4px;
+  /* margin-bottom: 24px; */
+  padding: 12px 16px;
+  /* height: 79; */
+  border: 1px solid #54adff;
+  border-radius: 20px;
+  box-sizing: border-box;
+  width: 264px;
+  @media screen and (min-width: 768px) {
+    margin-top: 8px;
+    border-radius: 20px;
+    width: 100%;
+  }
+}

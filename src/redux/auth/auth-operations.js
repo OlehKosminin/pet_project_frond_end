@@ -1,91 +1,75 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { getCurrentUser } from '../user/user-operations';
-import { toast } from 'react-toastify';
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { Notify } from "notiflix/build/notiflix-notify-aio";
+import * as api from "../../shared/services/auth";
+import Notiflix from "notiflix";
 
-axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
+export const singup = createAsyncThunk(
+  "auth/signup",
+  async (data, thunkAPI) => {
+    try {
+      const result = await api.singup(data);
 
-export const accessToken = {
-  set(accessToken) {
-    axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+      return result;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error);
+
+      return Notiflix.Notify.failure(error.response.data.message);
+    }
+  }
+);
+
+export const login = createAsyncThunk("auth/login", async (data, thunkAPI) => {
+  try {
+    const result = await api.login(data);
+
+    return result;
+  } catch (error) {
+    thunkAPI.rejectWithValue(error);
+
+    return Notiflix.Notify.failure("Email and/or password is wrong");
+  }
+});
+
+export const current = createAsyncThunk(
+  "auth/current",
+  async (_, thunkAPI) => {
+    try {
+      const { auth } = thunkAPI.getState();
+      const data = await api.getCurrent(auth.token);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   },
-  unset() {
-    axios.defaults.headers.common.Authorization = '';
-  },
-};
-
-export const register = createAsyncThunk(
-  'auth/register',
-  async (credentials, { rejectWithValue, dispatch }) => {
-    try {
-      await axios.post('auth/register', credentials);
-      const { email, password } = credentials;
-      await dispatch(
-        login({
-          email,
-          password,
-        })
-      );
-    } catch (error) {
-      toast.error('Missing or not valid field password or email');
-      return rejectWithValue(error.message);
-    }
+  {
+    condition: (_, { getState }) => {
+      const { auth } = getState();
+      if (!auth.token) {
+        return false;
+      }
+    },
   }
 );
 
-export const login = createAsyncThunk(
-  'auth/login',
-  async (credentials, { rejectWithValue, dispatch }) => {
-    try {
-      const { data } = await axios.post('auth/login', credentials);
-      accessToken.set(data.accessToken);
-      dispatch(getCurrentUser());
-      return data;
-    } catch (error) {
-      toast.error('Missing or not valid field password');
-      return rejectWithValue(error.message);
-    }
+export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+  try {
+    const data = await api.logout();
+    return data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
   }
-);
+});
 
-export const loginWithGoogle = createAsyncThunk(
-  'auth/loginWithGoogle',
-  async (credentials, { rejectWithValue }) => {
+export const updUserInfo = createAsyncThunk(
+  "auth/user-upd",
+  async (data, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post('auth/google', credentials);
-      accessToken.set(data.accessToken);
-      return data;
+      const result = await api.updUserInfo(data);
+      Notify.success("User information successfully changed!");
+      return result.data;
     } catch (error) {
-      toast.error('Missing or not valid field password');
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const logout = createAsyncThunk(
-  'auth/logout',
-  async (_, { rejectWithValue, getState }) => {
-    try {
-      const value = getState().auth.accessToken;
-      accessToken.set(value);
-      await axios.post('auth/logout');
-      accessToken.unset();
-    } catch (error) {
-      toast.error(error.response.data);
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const refreshToken = createAsyncThunk(
-  'auth/refresh',
-  async (credentials, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.get('auth/refresh', credentials);
-      accessToken.set(data.accessToken);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
+      Notify.failure(error.message);
+      return rejectWithValue(error.responce);
     }
   }
 );

@@ -1,0 +1,71 @@
+@import "../../../utils/fonts.scss";
+
+.form {
+  width: 280px;
+  margin: 0 auto;
+  padding: 40px 12px;
+  border-radius: 20px;
+  background-color: #ffffff;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+}
+
+@media screen and (min-width: 768px) {
+  .form {
+    width: 608px;
+    padding: 60px 75px;
+    border-radius: 40px;
+  }
+}
+
+.questionText {
+  font-family: "Manrope Regular";
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.33;
+  text-align: center;
+  letter-spacing: 0.04em;
+  color: #888888;
+}
+
+.loginLink {
+  display: inline-block;
+  color: #54adff;
+}
+
+.buttonContainer {
+  margin-top: 80px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+@media screen and (min-width: 768px) {
+  .buttonContainer {
+    margin-top: 60px;
+    margin-bottom: 20px;
+  }
+}
+
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 28px;
+  width: 100%;
+  height: 48px;
+  font-size: 20px;
+  font-family: "Manrope SemiBold";
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border: 2px solid #54adff;
+  border-radius: 40px;
+  color: #ffffff;
+  background-color: #54adff;
+}
+
+.button:hover {
+  background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+  color: #ffffff;
+  cursor: pointer;
+}

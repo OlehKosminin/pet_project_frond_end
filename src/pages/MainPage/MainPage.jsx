@@ -1,6 +1,6 @@
-import React from 'react';
-import { Container } from '@mui/material';
-import styled from './MainPage.module.scss';
+import React from "react";
+import { Container } from "@mui/material";
+import styles from "./MainPage.module.scss";
 
 function MainPage() {
   return (
@@ -13,4 +13,4 @@ function MainPage() {
     </>
   );
 }
-export default MainPage
+export default MainPage;

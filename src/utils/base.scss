@@ -43,6 +43,7 @@ img {
 }
 
 .container {
+  box-sizing: content-box;
   max-width: 280px;
   margin-left: auto;
   margin-right: auto;
@@ -50,26 +51,18 @@ img {
   padding-right: 20px;
 
   @media screen and (min-width: 768px) {
+    box-sizing: border-box;
     max-width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
   }
 
-  @media screen and (min-width: 1200px) {
-    max-width: 1200px;
+  @media screen and (min-width: 1280px) {
+    max-width: 1280px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }
-
-// .hidden {
-//   position: absolute;
-//   width: 1px;
-//   height: 1px;
-//   margin: -1px;
-//   border: 0;
-//   padding: 0;
-//   white-space: nowrap;
-//   clip-path: inset(100%);
-//   clip: rect(0 0 0 0);
-//   overflow: hidden;
-// }
 
 .ModalContainer {
   padding: 40px;
@@ -79,13 +72,13 @@ img {
   align-items: center;
 }
 
-// .BttonsWrapper {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   gap: 20px;
-// }
+.BttonsWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
 
 // .container {
 //   padding-left: 15px;

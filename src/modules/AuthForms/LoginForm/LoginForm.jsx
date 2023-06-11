@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Formik, Form } from "formik";
 
@@ -9,10 +9,13 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import ClearIcon from "@mui/icons-material/Clear";
 import { blue } from "@mui/material/colors";
 
-import styles from "./login-form.module.scss";
+import Title from "../../../shared/components/Title/Title";
+import { getLoading } from "../../../redux/auth/auth-selector";
+
+import styles from "../../../shared/components/sass/authForm.module.scss";
 import { loginSchema } from "../../../shared/components/YupSchemas/authSchemas";
 
-import { login } from "../../../shared/services/auth";
+import { login } from "../../../redux/auth/auth-operations";
 
 const data = {
   email: "",
@@ -23,13 +26,14 @@ export const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const isLoading = useSelector(getLoading);
 
   const dispatch = useDispatch();
 
   const onSubmit = ({ email, password }) => {
     const data = {
-      email: email,
-      password: password,
+      email,
+      password,
     };
 
     dispatch(login(data));
@@ -49,15 +53,11 @@ export const LoginForm = () => {
         handleChange,
         handleReset,
       }) => (
-        <Form
-          className={styles.form}
-          onSubmit={handleSubmit}
-          autoComplete="off"
-        >
-          <h2 className={styles.title}>Login</h2>
+        <Form className={styles.form} onSubmit={handleSubmit}>
+          <Title text="Login" />
           <Box
             sx={{
-              marginBottom: "10px",
+              marginBottom: "32px",
               display: "flex",
               alignItems: "flex-end",
             }}
@@ -67,13 +67,17 @@ export const LoginForm = () => {
               id="email"
               type="email"
               label="Email"
-              size="small"
+              size="medium"
               fullWidth
               sx={{
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
                     borderRadius: 40,
                     border: `1px solid #54ADFF`,
+                  },
+                  "& input": {
+                    fontSize: "16px",
+                    color: "#888888",
                   },
                 },
               }}
@@ -103,13 +107,19 @@ export const LoginForm = () => {
               }}
               onChange={handleChange}
               value={values.email}
-              error={touched.email && errors.email}
+              error={touched.email && Boolean(errors.email)}
               helperText={touched.email && errors.email}
+              FormHelperTextProps={{
+                sx: {
+                  position: "absolute",
+                  bottom: -20,
+                  left: 0,
+                },
+              }}
             />
           </Box>
           <Box
             sx={{
-              marginBottom: "10px",
               display: "flex",
               alignItems: "flex-end",
             }}
@@ -118,13 +128,17 @@ export const LoginForm = () => {
               name="password"
               type={showPassword ? "text" : "password"}
               label="Password"
-              size="small"
+              size="medium"
               fullWidth
               sx={{
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
                     borderRadius: 40,
                     border: `1px solid #54ADFF`,
+                  },
+                  "& input": {
+                    fontSize: "16px",
+                    color: "#888888",
                   },
                 },
               }}
@@ -148,17 +162,21 @@ export const LoginForm = () => {
               value={values.password}
               error={touched.password && Boolean(errors.password)}
               helperText={touched.password && errors.password}
+              FormHelperTextProps={{
+                sx: {
+                  position: "absolute",
+                  bottom: -20,
+                  left: 0,
+                },
+              }}
             />
           </Box>
-          <Box
-            sx={{
-              marginBottom: "10px",
-              display: "flex",
-              alignItems: "flex-end",
-            }}
-          ></Box>
           <div className={styles.buttonContainer}>
-            <button type="submit" className={styles.button}>
+            <button
+              type="submit"
+              className={styles.button}
+              disabled={isLoading}
+            >
               Login
             </button>
           </div>

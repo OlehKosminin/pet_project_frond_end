@@ -1,0 +1,145 @@
+@import "../../../index.scss";
+
+.modalApproveAction {
+  width: 280px;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  border-radius: 20px;
+  background-color: $default-white-color;
+
+  @media screen and (min-width: 768px) {
+    top: 148px;
+    width: 608px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    
+}}
+
+
+.closeBtn {
+  margin: 0;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  stroke: $active-blue-color;
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+    stroke: $default-white-color;
+  }
+}
+
+.title {
+  padding-top: 60px;
+  margin-bottom: 40px;
+
+  font-family: "Manrope Medium";
+  font-style: normal;
+font-weight: 700;
+font-size: 28px;
+line-height: 38px;
+letter-spacing: -0.01em;
+  text-align: center;
+  color: $black-color;
+
+  @media screen and (min-width: 1280px) {
+  
+  }
+}
+
+.modalText{
+  padding-left: 110px;
+  padding-right: 105px;
+  margin-bottom: 48px;
+
+  font-family: "Manrope Medium";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  letter-spacing: -0.01em;
+
+  color: $black-color;
+
+}
+.itemName{
+  font-family: 'Manrope bold';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 22px;
+text-align: center;
+letter-spacing: -0.01em;
+
+color: $black-color;
+}
+
+.btnWrapper {
+  padding-bottom: 60px;
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 17px;
+}
+
+.cancelBtn {
+  width: 129px;
+  padding: 8px 20px;
+  border: 1px solid $active-blue-color;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $default-white-color;
+  color: $active-blue-color;
+
+font-family: "Manrope bold";
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.375;
+  letter-spacing: 0.04em;
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+    color: $default-white-color;
+  }
+}
+
+
+.actionBtn {
+  width: 129px;
+  margin: 0;
+  padding: 9px 16px;
+  border: none;
+  border-radius: 40px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  background-color: $active-blue-color;
+  color: $default-white-color;
+  stroke: $default-white-color;
+
+  font-family: "Manrope bold";
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.375;
+  letter-spacing: 0.04em;
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+    color: $default-white-color;
+  }
+}
+
