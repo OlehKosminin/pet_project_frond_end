@@ -5,8 +5,8 @@ import styled from './MainPage.module.scss';
 function MainPage() {
   return (
     <>
-      <Container className={styled.MainPage}>
-        <h3 className={styled.Title}>
+      <Container className={styled.mainPage}>
+        <h3 className={styled.title}>
           Take good care of your small pets
         </h3>
       </Container>
