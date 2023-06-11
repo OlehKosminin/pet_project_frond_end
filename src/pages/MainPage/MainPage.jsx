@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "@mui/material";
-import styles from "./MainPage.module.scss";
+import styled from "./MainPage.module.scss";
 
 function MainPage() {
   return (
