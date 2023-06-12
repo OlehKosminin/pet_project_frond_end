@@ -1,5 +1,6 @@
-import { NavLink } from "react-router-dom";
-import scss from "./Nav.module.scss";
+import { NavLink } from 'react-router-dom';
+import scss from './Nav.module.scss';
+
 
 function Nav({ handleLinkClick }) {
   const handleClick = () => {
@@ -12,7 +13,7 @@ function Nav({ handleLinkClick }) {
     <ul className={scss.nav}>
       <li className={scss.nav_item}>
         <NavLink
-          className={({ isActive }) => (isActive ? scss.active : "")}
+          className={({ isActive }) => (isActive ? scss.active : '')}
           to="/news"
           onClick={handleClick}
         >
@@ -21,7 +22,7 @@ function Nav({ handleLinkClick }) {
       </li>
       <li className={scss.nav_item}>
         <NavLink
-          className={({ isActive }) => (isActive ? scss.active : "")}
+          className={({ isActive }) => (isActive ? scss.active : '')}
           to="/notices/sell"
           onClick={handleClick}
         >
@@ -30,8 +31,9 @@ function Nav({ handleLinkClick }) {
       </li>
       <li className={scss.nav_item}>
         <NavLink
-          className={({ isActive }) => (isActive ? scss.active : "")}
-          to="/our-friends"
+          className={({ isActive }) => (isActive ? scss.active : '')}
+          to="/friends"
+
           onClick={handleClick}
         >
           Our Friends
